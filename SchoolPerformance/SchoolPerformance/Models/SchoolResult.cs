@@ -50,7 +50,7 @@ namespace SchoolPerformance.Models
         [Display(Name = "Percentage of Non-Disadvataged pupils achieving grade 9-5 in English and Maths")]
         public double PTNOTFSM6CLA1ABASICS_95 { get; set; }
 
-
+        public School School { get; set; }
 
     }
 }

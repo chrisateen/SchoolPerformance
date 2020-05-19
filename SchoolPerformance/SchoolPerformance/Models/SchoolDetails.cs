@@ -34,5 +34,7 @@ namespace SchoolPerformance.Models
 
         [Display(Name = "Religious Character of the School")]
         public string RELCHAR { get; set; }
+
+        public School School { get; set; }
     }
 }

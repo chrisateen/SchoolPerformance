@@ -16,5 +16,14 @@ namespace SchoolPerformance.Models
 
         [Display(Name = "School Name")]
         public string SCHNAME { get; set; }
+
+        //Each school have 1 school detail such as address
+        public SchoolDetails SchoolDetails { get; set; }
+
+        //Each school have multiple contextual data - 1 for each academic year
+        public ICollection<SchoolContextual> SchoolContextuals { get; set; }
+
+        //Each school have multiple results data - 1 for each academic year
+        public ICollection<SchoolResult> SchoolResults { get; set; }
     }
 }
