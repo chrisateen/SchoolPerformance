@@ -23,6 +23,10 @@ namespace SchoolPerformance.Models
             modelBuilder.Entity<School>()
                 .HasKey(c => new { c.URN });
 
+            //Specify primary key in SchoolDetails
+            modelBuilder.Entity<SchoolDetails>()
+                .HasKey(c => new { c.URN });
+
             //Specify that there is a composite keys in SchoolResult and SchoolContextual
             modelBuilder.Entity<SchoolResult>()
                 .HasKey(c => new { c.URN, c.ACADEMICYEAR});
