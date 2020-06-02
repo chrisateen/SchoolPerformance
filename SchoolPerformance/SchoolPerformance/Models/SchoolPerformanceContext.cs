@@ -10,7 +10,6 @@ namespace SchoolPerformance.Models
     {
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
-
         }
 
         public virtual DbSet<School> School { get; set; }
@@ -20,6 +19,10 @@ namespace SchoolPerformance.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Specify primary key in School
+            modelBuilder.Entity<School>()
+                .HasKey(c => new { c.URN });
+
             //Specify that there is a composite keys in SchoolResult and SchoolContextual
             modelBuilder.Entity<SchoolResult>()
                 .HasKey(c => new { c.URN, c.ACADEMICYEAR});
