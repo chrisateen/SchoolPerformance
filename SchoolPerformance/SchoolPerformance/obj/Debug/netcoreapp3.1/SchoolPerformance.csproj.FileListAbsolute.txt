@@ -46,6 +46,19 @@ C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\Schoo
 C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Azure.Storage.Common.dll
 C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Azure.Storage.Files.Shares.dll
 C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Azure.Storage.Queues.dll
-C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Connected Services\AzureStorage1\ConnectedService.json
 C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Azure.Identity.dll
 C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Azure.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\SchoolPerformance.deps.json
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\SchoolPerformance.runtimeconfig.json
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\SchoolPerformance.runtimeconfig.dev.json
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\SchoolPerformance.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\SchoolPerformance.pdb
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.pdb
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\no_ot\Google Drive\Bbk Computer Science\Project\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolPerformance.Models;
+using Microsoft.Extensions.Azure;
 
 namespace SchoolPerformance
 {
@@ -22,6 +23,11 @@ namespace SchoolPerformance
             services.AddDbContextPool<SchoolPerformanceContext>(options =>
                     options.UseSqlServer(
                                 _configuration.GetConnectionString("SchoolPerformanceDb")));
+
+            //services.AddAzureClients(builder =>
+            //{
+            //    builder.AddBlobServiceClient(_configuration["ConnectionStrings:SchoolPerformanceDb"]);
+            //});
 
         }
 
