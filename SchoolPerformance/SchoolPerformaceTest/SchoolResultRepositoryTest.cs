@@ -2,8 +2,6 @@ using SchoolPerformance.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Microsoft.EntityFrameworkCore;
 using SchoolPerformance.Repository;
 
 namespace SchoolPerformaceTest
@@ -24,8 +22,11 @@ namespace SchoolPerformaceTest
             //Arange
             var connection = new InMemorySqliteConnection();
             _context = connection._context;
-            _repository = connection._repository;
+            
+            //Create the repository class that will be tested
+            _repository = new SchoolResultRepository<School>(_context); ;
 
+            //Mock data
             _schools = new List<School>
             {
                 new School { URN = 1, LAESTAB = 1,SCHNAME = "Test 1" },
@@ -49,9 +50,11 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void getAllIncludesMultipleDbSet()
         {
-            
             //Assert   
             var schoolLst = _repository.GetAll(x => x.OrderBy(n => n.SCHNAME), x => x.SchoolResults);
+            
+            //Count number of results for all schools in test database 
+            //to see if school results objects was included in the list
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             Assert.AreEqual(_schoolResults.Count(), resultCount);
