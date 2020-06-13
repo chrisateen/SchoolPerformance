@@ -15,13 +15,13 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets all records from a DbSet.
         /// </summary>
-        IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                 params Expression<Func<T, object>>[] includes);
 
-        IEnumerable<T> Get();
+        public IEnumerable<T> Get();
         
 
-        IEnumerable<T> Get(
+        public IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             params Expression<Func<T, object>>[] includes);
