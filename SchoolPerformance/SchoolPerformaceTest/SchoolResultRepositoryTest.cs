@@ -112,7 +112,7 @@ namespace SchoolPerformaceTest
             Assert.AreEqual(_schools.Where(x => x.SCHNAME == "Test 2").Count(), schoolLst);
         }
 
-        //Tests Get method and GetAll method returns the expected records
+        //Tests Get method returns the expected records
         //when a filter condition is specifed
         //and another DbSet is added
         [TestMethod]
@@ -120,11 +120,9 @@ namespace SchoolPerformaceTest
         {
             //Assert
 
-            //Checks the number of records retrieved by the Get method with a school name of test 2
-            //equals to the number of records in mock with a school name of test 2
             var schoolLst = _repository.Get(x => x.SCHNAME == "Test 2",null,x => x.SchoolResults);
 
-            //Count number of results for all schools in test database 
+            //Count number of results for school name test 2 in the test database 
             //to see if school results objects was included in the list
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
