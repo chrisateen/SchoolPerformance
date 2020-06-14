@@ -15,10 +15,12 @@ namespace SchoolPerformance.Repository
     public class SchoolResultRepository<T> : ISchoolResultRepository<T> where T : class
     {
         private SchoolPerformanceContext _context;
+        private DbSet<T> _dbSet;
 
         public SchoolResultRepository(SchoolPerformanceContext context)
         {
             _context = context;
+            _dbSet = _context.Set<T>();
         }
 
         public SchoolResultRepository()
@@ -28,19 +30,18 @@ namespace SchoolPerformance.Repository
 
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
         {
-            DbSet<T> dbSet = _context.Set<T>();
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query = _dbSet;
 
             //Checks if we have other DbSets to include/merge into our query
             if (includes.Length > 0)
             {
                 foreach (var include in includes)
                 {
-                    query = dbSet.Include(include);
+                    query = _dbSet.Include(include);
                 }
             }
 
-            //Order the query if there is an orderby condition
+            //Include an orderBy query if there is an orderby condition
             if (orderBy != null)
             {
                 query = orderBy(query);
@@ -52,25 +53,21 @@ namespace SchoolPerformance.Repository
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
         {
-            DbSet<T> dbSet = _context.Set<T>();
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query = _dbSet;
 
             //Checks if we have other DbSets to include/merge into our query
             if (includes.Length > 0)
             {
                 foreach (var include in includes)
                 {
-                    query = dbSet.Include(include);
+                    query = _dbSet.Include(include);
                 }
             }
 
-            //Filter the query if there is a filter condition
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
+            //Include filter condition in the query
+            query = AddFilterQuery(query, filter);
 
-            //Order the query if there is an orderby condition
+            //Include an orderBy query if there is an orderby condition
             if (orderBy != null)
             {
                 query = orderBy(query);
@@ -81,10 +78,9 @@ namespace SchoolPerformance.Repository
 
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
-            DbSet<T> dbSet = _context.Set<T>();
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query = _dbSet;
 
-            //Order the query if there is an orderby condition
+            //Include an orderBy query if there is an orderby condition
             if (orderBy != null)
             {
                 query = orderBy(query);
@@ -95,22 +91,35 @@ namespace SchoolPerformance.Repository
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
-            DbSet<T> dbSet = _context.Set<T>();
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query = _dbSet;
 
-            //Filter the query if there is a filter condition
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
+            //Include filter condition in the query
+            query = AddFilterQuery(query, filter);
 
-            //Order the query if there is an orderby condition
+            //Include an orderBy query if there is an orderby condition
             if (orderBy != null)
             {
                 query = orderBy(query);
             }
 
             return query.ToList();
+        }
+
+        /// <summary>
+        /// Include a filter condition in a query
+        /// </summary>
+        /// <param name="query">Query in which a filter condition will be added to the query</param>
+        /// <param name="filter">Filter condition</param>
+        /// <returns></returns>
+        private IQueryable<T> AddFilterQuery(IQueryable<T> query, Expression<Func<T, bool>> filter = null)
+        {
+            //Filter the query if there is a filter condition
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query;
         }
     }
 }
