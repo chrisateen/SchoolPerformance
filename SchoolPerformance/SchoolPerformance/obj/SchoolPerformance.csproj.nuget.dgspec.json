@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\no_ot\\Documents\\CSharp\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {}
+    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {}
   },
   "projects": {
-    "C:\\Users\\no_ot\\Documents\\CSharp\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
+    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\no_ot\\Documents\\CSharp\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "projectUniqueName": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
         "projectName": "SchoolPerformance",
-        "projectPath": "C:\\Users\\no_ot\\Documents\\CSharp\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
-        "packagesPath": "C:\\Users\\no_ot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\no_ot\\Documents\\CSharp\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
+        "projectPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "packagesPath": "C:\\Users\\christine\\.nuget\\packages\\",
+        "outputPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\no_ot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\christine\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
