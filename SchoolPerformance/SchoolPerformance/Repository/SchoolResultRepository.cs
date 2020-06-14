@@ -26,7 +26,7 @@ namespace SchoolPerformance.Repository
             _context = new SchoolPerformanceContext();
         }
 
-        public IEnumerable<T> Get()
+        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,12 @@ namespace SchoolPerformance.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
+        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
             throw new NotImplementedException();
         }
