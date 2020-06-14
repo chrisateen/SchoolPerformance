@@ -1,11 +1,13 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SchoolPerformance.Models;
-using SchoolPerformance.Repository;
 using System;
 
 namespace SchoolPerformaceTest
 {
+    /// <summary>
+    /// Creates connection to sqlite database for testing
+    /// </summary>
     public class InMemorySqliteConnection : IDisposable
     {
         private readonly string _connectionString = "DataSource=:memory:";
@@ -15,7 +17,7 @@ namespace SchoolPerformaceTest
 
         public InMemorySqliteConnection()
         {
-            //Creates an open a connection to the sqlite Db
+            //Creates and open a connection to the sqlite Db
             _connection = new SqliteConnection(_connectionString);
             _connection.Open();
 

@@ -47,6 +47,7 @@ namespace SchoolPerformaceTest
             _context.SaveChanges();
         }
 
+        //Tests getAll() method when including extra dbSets
         [TestMethod]
         public void getAllIncludesMultipleDbSet()
         {
