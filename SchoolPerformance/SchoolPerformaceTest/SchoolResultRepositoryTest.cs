@@ -47,27 +47,26 @@ namespace SchoolPerformaceTest
             _context.SaveChanges();
         }
 
+        //Tests Get method and GetAll method returns the expected records
         [TestMethod] 
         public void GetAllRecordsFromADbset()
         {
             //Assert   
 
-            //Get all records using GetAll method
             var schoolLst = _repository.GetAll();
             Assert.AreEqual(_schools.Count(), schoolLst.Count());
 
-            //Get all records using Get method
             schoolLst = _repository.Get();
             Assert.AreEqual(_schools.Count(), schoolLst.Count());
         }
 
-       
+        //Tests Get method and GetAll method returns the expected records
+        //when another DbSet is included
         [TestMethod]
         public void GetAllRecordsFromMultipleDbset()
         {
             //Assert   
 
-            //Use GetAll method to get records 
             var schoolLst = _repository.GetAll(null, x => x.SchoolResults);
             
             //Count number of results for all schools in test database 
@@ -76,13 +75,14 @@ namespace SchoolPerformaceTest
 
             Assert.AreEqual(_schoolResults.Count(), resultCount);
 
-            //Use Get method to get records 
             schoolLst = _repository.Get(null, null, x => x.SchoolResults);
             resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             Assert.AreEqual(_schoolResults.Count(), resultCount);
         }
 
+        //Tests when orderBy parameter is used with Get method and GetAll method
+        //it returns the data in order
         [TestMethod]
         public void GetAllRecordsFromADbsetinOrder()
         {
@@ -101,7 +101,34 @@ namespace SchoolPerformaceTest
             Assert.AreEqual(_schools.OrderBy(n => n.SCHNAME).First().SCHNAME, school);
         }
 
+        //Tests Get method and GetAll method returns the expected records
+        //when a filter condition is specifed
+        [TestMethod]
+        public void FilterRecordsFromADbset()
+        {
+            //Assert
 
+            var schoolLst = _repository.Get(x => x.SCHNAME == "Test 2").Count();
+            Assert.AreEqual(_schools.Where(x => x.SCHNAME == "Test 2").Count(), schoolLst);
+        }
 
+        //Tests Get method and GetAll method returns the expected records
+        //when a filter condition is specifed
+        //and another DbSet is added
+        [TestMethod]
+        public void FilterRecordsFromADbsetWithMultipleDbsetIncluded()
+        {
+            //Assert
+
+            //Checks the number of records retrieved by the Get method with a school name of test 2
+            //equals to the number of records in mock with a school name of test 2
+            var schoolLst = _repository.Get(x => x.SCHNAME == "Test 2",null,x => x.SchoolResults);
+
+            //Count number of results for all schools in test database 
+            //to see if school results objects was included in the list
+            var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
+
+            Assert.AreEqual(_schoolResults.Where(x => x.School.SCHNAME == "Test 2").Count(), resultCount);
+        }
     }
 }
