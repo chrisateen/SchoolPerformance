@@ -11,7 +11,8 @@ namespace SchoolPerformaceTest
     {
         private SchoolPerformanceContext _context;
 
-        private ISchoolResultRepository<School> _repository;
+        private ISchoolResultRepository<School> _repositorySchool;
+        private ISchoolResultRepository<SchoolResult> _repositorySchoolResult;
 
         private List<School> _schools;
         private List<SchoolResult> _schoolResults;
@@ -24,7 +25,8 @@ namespace SchoolPerformaceTest
             _context = connection._context;
             
             //Create the repository class that will be tested
-            _repository = new SchoolResultRepository<School>(_context); ;
+            _repositorySchool = new SchoolResultRepository<School>(_context);
+            _repositorySchoolResult = new SchoolResultRepository<SchoolResult>(_context); ;
 
             //Mock data
             _schools = new List<School>
@@ -53,10 +55,10 @@ namespace SchoolPerformaceTest
         {
             //Assert   
 
-            var schoolLst = _repository.GetAll();
+            var schoolLst = _repositorySchool.GetAll();
             Assert.AreEqual(_schools.Count(), schoolLst.Count());
 
-            schoolLst = _repository.Get();
+            schoolLst = _repositorySchool.Get();
             Assert.AreEqual(_schools.Count(), schoolLst.Count());
         }
 
@@ -67,7 +69,7 @@ namespace SchoolPerformaceTest
         {
             //Assert   
 
-            var schoolLst = _repository.GetAll(null, x => x.SchoolResults);
+            var schoolLst = _repositorySchool.GetAll(null, x => x.SchoolResults);
             
             //Count number of results for all schools in test database 
             //to see if school results objects was included in the list
@@ -75,7 +77,7 @@ namespace SchoolPerformaceTest
 
             Assert.AreEqual(_schoolResults.Count(), resultCount);
 
-            schoolLst = _repository.Get(null, null, x => x.SchoolResults);
+            schoolLst = _repositorySchool.Get(null, null, x => x.SchoolResults);
             resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             Assert.AreEqual(_schoolResults.Count(), resultCount);
@@ -89,27 +91,45 @@ namespace SchoolPerformaceTest
             //Assert   
 
             //Gets the first school name in school using GetAll method when school is ordered by name
-            var school = _repository.GetAll(x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
+            var school = _repositorySchool.GetAll(x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
 
             //Checks the first school name is the same as the first name in _school
             //when _school ordered by name
             Assert.AreEqual(_schools.OrderBy(n => n.SCHNAME).First().SCHNAME, school);
 
             //Gets the first school name in school using Get method when school is ordered by name
-            school = _repository.Get(null,x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
+            school = _repositorySchool.Get(null,x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
 
             Assert.AreEqual(_schools.OrderBy(n => n.SCHNAME).First().SCHNAME, school);
         }
 
-        //Tests Get method and GetAll method returns the expected records
+        //Tests Get method returns the expected records
         //when a filter condition is specifed
         [TestMethod]
         public void FilterRecordsFromADbset()
         {
             //Assert
 
-            var schoolLst = _repository.Get(x => x.SCHNAME == "Test 2").Count();
+            var schoolLst = _repositorySchool.Get(x => x.SCHNAME == "Test 2").Count();
             Assert.AreEqual(_schools.Where(x => x.SCHNAME == "Test 2").Count(), schoolLst);
+        }
+
+        //Tests Get method returns the expected records
+        //when a filter condition is specifed
+        //and returns data in order when orderBy is specifed
+        [TestMethod]
+        public void FilterRecordsFromADbsetAndOrder()
+        {
+            //Assert
+
+            //Gets the first school name in school using Get method
+            //when data is filtered by PTL2BASICS_94 above 0.6 and ordered by PTL2BASICS_94
+            var school = _repositorySchoolResult.Get(x => x.PTL2BASICS_94 >= 0.60, x => x.OrderBy(n => n.PTL2BASICS_94))
+                                                .First().School.SCHNAME;
+
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.PTL2BASICS_94 >= 0.60).OrderBy(n => n.PTL2BASICS_94).First().School.SCHNAME, 
+                school);
         }
 
         //Tests Get method returns the expected records
@@ -120,13 +140,14 @@ namespace SchoolPerformaceTest
         {
             //Assert
 
-            var schoolLst = _repository.Get(x => x.SCHNAME == "Test 2",null,x => x.SchoolResults);
+            var schoolLst = _repositorySchool.Get(x => x.SCHNAME == "Test 2",null,x => x.SchoolResults);
 
             //Count number of results for school name test 2 in the test database 
             //to see if school results objects was included in the list
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             Assert.AreEqual(_schoolResults.Where(x => x.School.SCHNAME == "Test 2").Count(), resultCount);
+            
         }
     }
 }
