@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IrHUFFyJg5M8Z6eyF8PaIT/RCXzTrmEq9+Af/hrDENKYmBPDhM/sF7/gvbEUk06GZF/LRVBon8gQZTG4nIFgmQ==",
+  "dgSpecHash": "YysvzyA5yPjd2ZtUL5VPH0gd+E13U5wfVmy2HqFoRtfJJLvNgNU1KiRAkBevPdHriz6l18Kxla/moEetoVHgmQ==",
   "success": true,
   "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
   "expectedPackageFiles": [
@@ -27,7 +27,7 @@
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.5\\microsoft.entityframeworkcore.relational.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\3.1.5\\microsoft.entityframeworkcore.sqlite.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\3.1.5\\microsoft.entityframeworkcore.sqlite.core.3.1.5.nupkg.sha512",
-    "C:\\Users\\christine\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.4\\microsoft.entityframeworkcore.sqlserver.3.1.4.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.5\\microsoft.entityframeworkcore.sqlserver.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.azure\\1.0.0\\microsoft.extensions.azure.1.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.5\\microsoft.extensions.caching.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.5\\microsoft.extensions.caching.memory.3.1.5.nupkg.sha512",

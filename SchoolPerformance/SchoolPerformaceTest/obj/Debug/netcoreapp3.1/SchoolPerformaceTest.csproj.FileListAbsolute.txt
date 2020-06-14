@@ -444,7 +444,6 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\SchoolPerformance.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\SchoolPerformance.pdb
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csprojAssemblyReference.cache
-D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.CoreCompileInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.AssemblyInfoInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.AssemblyInfo.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.CopyComplete
