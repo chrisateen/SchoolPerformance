@@ -53,6 +53,7 @@ namespace SchoolPerformance.Models
                 .HasMany<SchoolResult>(s => s.SchoolResults)
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
