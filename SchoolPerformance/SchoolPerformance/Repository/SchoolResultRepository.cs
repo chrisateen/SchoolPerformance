@@ -32,20 +32,11 @@ namespace SchoolPerformance.Repository
         {
             IQueryable<T> query = _dbSet;
 
-            //Checks if we have other DbSets to include/merge into our query
-            if (includes.Length > 0)
-            {
-                foreach (var include in includes)
-                {
-                    query = _dbSet.Include(include);
-                }
-            }
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
 
             //Include an orderBy query if there is an orderby condition
-            if (orderBy != null)
-            {
-                query = orderBy(query);
-            }
+            query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
 
@@ -55,23 +46,13 @@ namespace SchoolPerformance.Repository
         {
             IQueryable<T> query = _dbSet;
 
-            //Checks if we have other DbSets to include/merge into our query
-            if (includes.Length > 0)
-            {
-                foreach (var include in includes)
-                {
-                    query = _dbSet.Include(include);
-                }
-            }
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
 
-            //Include filter condition in the query
+            //Include filter and order by condition in the query
             query = AddFilterQuery(query, filter);
 
-            //Include an orderBy query if there is an orderby condition
-            if (orderBy != null)
-            {
-                query = orderBy(query);
-            }
+            query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
         }
@@ -81,10 +62,7 @@ namespace SchoolPerformance.Repository
             IQueryable<T> query = _dbSet;
 
             //Include an orderBy query if there is an orderby condition
-            if (orderBy != null)
-            {
-                query = orderBy(query);
-            }
+            query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
         }
@@ -93,14 +71,10 @@ namespace SchoolPerformance.Repository
         {
             IQueryable<T> query = _dbSet;
 
-            //Include filter condition in the query
+            //Include filter and order by condition in the query
             query = AddFilterQuery(query, filter);
 
-            //Include an orderBy query if there is an orderby condition
-            if (orderBy != null)
-            {
-                query = orderBy(query);
-            }
+            query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
         }
@@ -108,15 +82,43 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Include a filter condition in a query
         /// </summary>
-        /// <param name="query">Query in which a filter condition will be added to the query</param>
-        /// <param name="filter">Filter condition</param>
-        /// <returns></returns>
         private IQueryable<T> AddFilterQuery(IQueryable<T> query, Expression<Func<T, bool>> filter = null)
         {
             //Filter the query if there is a filter condition
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+
+            return query;
+        }
+
+        /// <summary>
+        /// Include an order condition in a query 
+        /// </summary>
+        private IQueryable<T> AddOrderQuery(IQueryable<T> query, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            //Include an orderBy query if there is an orderby condition
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return query;
+        }
+
+        /// <summary>
+        /// Include other DbSets in a query
+        /// </summary>
+        private IQueryable<T> AddDbSets(IQueryable<T> query, params Expression<Func<T, object>>[] includes)
+        {
+            //Checks if we have other DbSets to include/merge into our query
+            if (includes.Length > 0)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
             }
 
             return query;
