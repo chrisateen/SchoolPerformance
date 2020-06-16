@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace LoadData
+namespace LoadDataTest
 {
     public class SchoolResultMap : ClassMap<SchoolResult>
     {

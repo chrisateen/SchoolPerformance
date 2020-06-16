@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fEMYR6HfB91CeSGd1jsnMc6fADAxYYpQK04saiRxjNDoSHVm5bgKG1auYdrQOPqAuOOI/mGl4rTTNbeQ2HseVw==",
+  "dgSpecHash": "DyV5W0E4Cfx+21rEBR+tHKli8m5Bg6nNM6DyKLI8ziNFMmLz6CJhXMGyo8phFTWZLMCxYl/sUoYIYQrrjBdHbg==",
   "success": true,
-  "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\LoadData\\LoadData.csproj",
+  "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\LoadData\\LoadDataTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\christine\\.nuget\\packages\\azure.core\\1.0.0\\azure.core.1.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\azure.identity\\1.0.0\\azure.identity.1.0.0.nupkg.sha512",
@@ -35,7 +35,6 @@
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.identity.client\\4.1.0\\microsoft.identity.client.4.1.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "C:\\Users\\christine\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1000\\microsoft.office.interop.excel.15.0.4795.1000.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
@@ -107,16 +106,5 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Office.Interop.Excel 15.0.4795.1000' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.Office.Interop.Excel",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }

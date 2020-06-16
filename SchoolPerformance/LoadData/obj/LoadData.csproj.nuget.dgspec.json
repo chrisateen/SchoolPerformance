@@ -48,10 +48,6 @@
             "CsvHelper": {
               "target": "Package",
               "version": "[15.0.5, )"
-            },
-            "Microsoft.Office.Interop.Excel": {
-              "target": "Package",
-              "version": "[15.0.4795.1000, )"
             }
           },
           "imports": [
@@ -125,7 +121,17 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[15.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.5, )"
             },

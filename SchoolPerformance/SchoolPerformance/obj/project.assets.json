@@ -88,6 +88,18 @@
           "lib/netstandard2.0/Azure.Storage.Queues.dll": {}
         }
       },
+      "CsvHelper/15.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -1552,6 +1564,26 @@
         "azure.storage.queues.nuspec",
         "lib/netstandard2.0/Azure.Storage.Queues.dll",
         "lib/netstandard2.0/Azure.Storage.Queues.xml"
+      ]
+    },
+    "CsvHelper/15.0.5": {
+      "sha512": "HPoE5nASoFXqoXKSi5yEBam7TzDrtC8WESA4xq53JtPKV8Mm+IKRuN+FJyMoJg1Whv/NG4JiCUs9yUcaSY/ziQ==",
+      "type": "package",
+      "path": "csvhelper/15.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.15.0.5.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -5485,7 +5517,9 @@
       "Azure.Storage.Blobs >= 12.0.0",
       "Azure.Storage.Files.Shares >= 12.0.0-preview.5",
       "Azure.Storage.Queues >= 12.0.0",
+      "CsvHelper >= 15.0.5",
       "Microsoft.EntityFrameworkCore >= 3.1.5",
+      "Microsoft.EntityFrameworkCore.Design >= 3.1.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.5",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.5",
       "Microsoft.Extensions.Azure >= 1.0.0",
@@ -5545,7 +5579,17 @@
             "target": "Package",
             "version": "[12.0.0, )"
           },
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[15.0.5, )"
+          },
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[3.1.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[3.1.5, )"
           },

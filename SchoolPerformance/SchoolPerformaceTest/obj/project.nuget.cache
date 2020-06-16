@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YysvzyA5yPjd2ZtUL5VPH0gd+E13U5wfVmy2HqFoRtfJJLvNgNU1KiRAkBevPdHriz6l18Kxla/moEetoVHgmQ==",
+  "dgSpecHash": "ZTijVyJeqi+OUSzHWYedKDD54uxh8UgiOFgoWEfve59fG7v2R9h52Ujq762ZrS5KUppuE/CumUxJbJ4OYFOTqQ==",
   "success": true,
   "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\christine\\.nuget\\packages\\azure.storage.queues\\12.0.0\\azure.storage.queues.12.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\coverlet.collector\\1.0.1\\coverlet.collector.1.0.1.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\csvhelper\\15.0.5\\csvhelper.15.0.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

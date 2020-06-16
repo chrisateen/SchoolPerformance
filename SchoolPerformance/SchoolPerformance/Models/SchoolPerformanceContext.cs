@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoadData;
 
 namespace SchoolPerformance.Models
 {
@@ -11,8 +12,6 @@ namespace SchoolPerformance.Models
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
         }
-
-        public SchoolPerformanceContext() { }
 
         public virtual DbSet<School> School { get; set; }
         public virtual DbSet<SchoolContextual> SchoolContextual { get; set; }
@@ -54,10 +53,13 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
+            modelBuilder.Seed("test");
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
         }
 
     }

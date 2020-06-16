@@ -53,7 +53,6 @@ D:\SchoolPerformance\SchoolPerformance\LoadData\bin\Debug\netcoreapp3.1\LoadData
 D:\SchoolPerformance\SchoolPerformance\LoadData\bin\Debug\netcoreapp3.1\LoadData.runtimeconfig.dev.json
 D:\SchoolPerformance\SchoolPerformance\LoadData\bin\Debug\netcoreapp3.1\LoadData.dll
 D:\SchoolPerformance\SchoolPerformance\LoadData\bin\Debug\netcoreapp3.1\LoadData.pdb
-D:\SchoolPerformance\SchoolPerformance\LoadData\bin\Debug\netcoreapp3.1\Microsoft.Office.Interop.Excel.dll
 D:\SchoolPerformance\SchoolPerformance\LoadData\obj\Debug\netcoreapp3.1\LoadData.dll
 D:\SchoolPerformance\SchoolPerformance\LoadData\obj\Debug\netcoreapp3.1\LoadData.pdb
 D:\SchoolPerformance\SchoolPerformance\LoadData\obj\Debug\netcoreapp3.1\LoadData.genruntimeconfig.cache

@@ -7,7 +7,7 @@ using CsvHelper;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 
-namespace LoadData
+namespace LoadDataTest
 {
     public class ImportCSV
     {

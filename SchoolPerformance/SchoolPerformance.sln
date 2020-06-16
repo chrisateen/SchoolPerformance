@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPerformance", "School
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPerformaceTest", "SchoolPerformaceTest\SchoolPerformaceTest.csproj", "{B545D427-6794-47EF-86A9-E470F6F8062B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadData", "LoadData\LoadData.csproj", "{6E2A3F14-A806-41EA-B2EA-414997B5EAE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadDataTest", "LoadData\LoadDataTest.csproj", "{6E2A3F14-A806-41EA-B2EA-414997B5EAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

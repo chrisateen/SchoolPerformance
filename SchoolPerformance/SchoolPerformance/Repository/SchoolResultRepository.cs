@@ -23,11 +23,6 @@ namespace SchoolPerformance.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public SchoolResultRepository()
-        {
-            _context = new SchoolPerformanceContext();
-        }
-
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;

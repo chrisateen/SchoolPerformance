@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ng2ixqU1v+I5vHgUBh5+9r/YMVdcvNHoGbEP8NZIxE8+Y4ELrNkhxTLINj0LJaZ/d3QTtCKL5XGTmYU3bh7vxQ==",
+  "dgSpecHash": "AdYBFdE6PNpyWMPZGbsegBmFl5KrFzc+n6OfTxjX1H9zihe36HLXYKdeT+7jQjYC3Ktv2Syumm/Q0twhMWtmKQ==",
   "success": true,
   "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\christine\\.nuget\\packages\\azure.storage.common\\12.0.0\\azure.storage.common.12.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\azure.storage.files.shares\\12.0.0-preview.5\\azure.storage.files.shares.12.0.0-preview.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\azure.storage.queues\\12.0.0\\azure.storage.queues.12.0.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\csvhelper\\15.0.5\\csvhelper.15.0.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -6,10 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200615235811_SeedTest1.cs" />
+    <Compile Remove="Migrations\20200615235811_SeedTest1.Designer.cs" />
+    <Compile Remove="Migrations\20200615235931_SeedTest1.cs" />
+    <Compile Remove="Migrations\20200615235931_SeedTest1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.0.0" />
     <PackageReference Include="Azure.Storage.Files.Shares" Version="12.0.0-preview.5" />
     <PackageReference Include="Azure.Storage.Queues" Version="12.0.0" />
+    <PackageReference Include="CsvHelper" Version="15.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
