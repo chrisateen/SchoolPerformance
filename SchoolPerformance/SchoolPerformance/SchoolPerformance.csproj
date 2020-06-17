@@ -10,6 +10,14 @@
     <Compile Remove="Migrations\20200615235811_SeedTest1.Designer.cs" />
     <Compile Remove="Migrations\20200615235931_SeedTest1.cs" />
     <Compile Remove="Migrations\20200615235931_SeedTest1.Designer.cs" />
+    <Compile Remove="Migrations\20200617221835_test.cs" />
+    <Compile Remove="Migrations\20200617221835_test.Designer.cs" />
+    <Compile Remove="Migrations\20200617222010_test.cs" />
+    <Compile Remove="Migrations\20200617222010_test.Designer.cs" />
+    <Compile Remove="Migrations\20200617222203_test.cs" />
+    <Compile Remove="Migrations\20200617222203_test.Designer.cs" />
+    <Compile Remove="Migrations\20200617223416_test.cs" />
+    <Compile Remove="Migrations\20200617223416_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,8 +11,14 @@ namespace LoadDataTest
 
         public static void Seed(this ModelBuilder modelBuilder, string fileLocation)
         {
-            var data = GetData<School>("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
-            modelBuilder.Entity<School>().HasData(data);
+            //var data = GetData<School>("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
+
+            var modelType = Type.GetType("SchoolPerformance.Models.School,SchoolPerformance");
+            var getDataMethod = Type.GetType("LoadDataTest.ModelBuilderExtensions").GetMethod("GetData");
+            var genericM = getDataMethod.MakeGenericMethod(modelType);
+            var data = genericM.Invoke(null, new object[] { "C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv" });
+
+            //modelBuilder.Entity<School>().HasData(data);
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace SchoolPerformance.Models
     public class School
     {
         [Display(Name="Unique Reference Number")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int URN { get; set; }
 
         [Display(Name = "DfE Number")]
