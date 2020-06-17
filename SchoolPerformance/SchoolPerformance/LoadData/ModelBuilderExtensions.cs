@@ -16,35 +16,30 @@ namespace LoadData
         public static void Seed(this ModelBuilder modelBuilder)
         {
             _modelBuilder = modelBuilder;
-            addData("test", "Test");
-            //foreach (KeyValuePair<string, string> kvp in _dataLocations)
-            //{
-            //    addData(kvp.Key,kvp.Value);
-            //}
+            _dataLocations.Add("School", "C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
+            foreach (KeyValuePair<string, string> kvp in _dataLocations)
+            {
+                addData(kvp.Key, kvp.Value);
+            }
         }
 
         public static void addData(string modelName, string fileLocation)
         {
-            var modelType = Type.GetType("SchoolPerformance.Models.School,SchoolPerformance");
+            var import = new ImportCSV(fileLocation);
 
-            var getDataMethod = Type.GetType("LoadData.ImportCSV").GetMethod("GetDataFromCSV");
-            var genericM = getDataMethod.MakeGenericMethod(modelType);
-            var import = new ImportCSV("C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
-            var data = genericM.Invoke(import,null);
+            if (modelName == "School")
+            {
+                
+                var data = import.GetDataFromCSV<School>();
+                
+                _modelBuilder.Entity<School>().HasData(data);
 
-            var data2 = ((IEnumerable)data).Cast<object>();
+            }
 
-
-
-            //_modelBuilder.Entity<School>().HasData(data2);
-
-            var modelEntity = _modelBuilder.GetType().GetMethod("Entity");
-            var modelEntityM = modelEntity.MakeGenericMethod(modelType);
-
-            var test = _modelBuilder.Entity<School>();
-
-            //modelEntityM.Invoke(_modelBuilder);
-
+            else
+            {
+                throw new ArgumentException("Model name does not exist");
+            }
 
         }
 

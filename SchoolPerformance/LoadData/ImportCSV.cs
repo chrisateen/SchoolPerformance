@@ -25,6 +25,7 @@ namespace LoadDataTest
             using (_csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 RegisterMap();
+                _csv.Configuration.ShouldSkipRecord = row => row[18] == "1";
                 var data = _csv.GetRecords<M>().ToList();
                 
                return data;

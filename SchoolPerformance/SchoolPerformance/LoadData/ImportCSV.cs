@@ -28,22 +28,18 @@ namespace LoadData
                 if (modelName == "School")
                 {
                     _csv.Configuration.RegisterClassMap<SchoolMap>();
+                    _csv.Configuration.ShouldSkipRecord = row => row[18] == "1";
                     var data = _csv.GetRecords<School>().ToList();
-
-                    return (IEnumerable<M>)data;
-                }
-
-                if (modelName == "SchoolResult")
-                {
-                    _csv.Configuration.RegisterClassMap<SchoolResultMap>();
-                    var data = _csv.GetRecords<SchoolResult>().ToList();
 
                     return (IEnumerable<M>)data;
                 }
 
                 else
                 {
-                    throw new ArgumentException("File type does not exist");
+                    _csv.Configuration.RegisterClassMap<SchoolResultMap>();
+                    var data = _csv.GetRecords<SchoolResult>().ToList();
+
+                    return (IEnumerable<M>)data;
                 }
             }
 
