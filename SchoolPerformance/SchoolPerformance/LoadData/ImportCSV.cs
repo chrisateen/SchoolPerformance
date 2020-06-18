@@ -37,6 +37,9 @@ namespace LoadData
                 else
                 {
                     _csv.Configuration.RegisterClassMap<SchoolResultMap>();
+                    _csv.Configuration.MissingFieldFound = null;
+                    //Gets rid of bad data
+                    _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
                     var data = _csv.GetRecords<SchoolResult>().ToList();
 
                     return (IEnumerable<M>)data;

@@ -20,10 +20,10 @@ namespace LoadDataTest
         {
             //var data = ModelBuilderExtensions.GetData<School>("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
 
-            ImportCSV importCSV = new ImportCSV("C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
-            var data = importCSV.GetDataFromCSV(new School());
+            ImportCSV importCSV = new ImportCSV("C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
+            IEnumerable<SchoolResult> data = importCSV.GetDataFromCSV(new SchoolResult());
 
-            Console.WriteLine(data.Count());
+            Console.WriteLine(data.Where(x=>x.URN != 0).Count());
 
 
 

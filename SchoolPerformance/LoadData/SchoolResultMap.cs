@@ -11,10 +11,12 @@ namespace LoadDataTest
     {
         public SchoolResultMap()
         {
-            Map(m => m.URN);
-            Map(m => m.ATT8SCR);
-            Map(m => m.ATT8SCR_FSM6CLA1A);
+            Map(m => m.URN).TypeConverter<NullIntConverter>();
+            Map(m => m.ATT8SCR).TypeConverter<NullConverter>();
+            Map(m => m.ATT8SCR_FSM6CLA1A).TypeConverter<NullConverter>();
 
         }
+
+
     }
 }

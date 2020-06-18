@@ -10,8 +10,7 @@ namespace SchoolPerformance.Migrations
                 name: "School",
                 columns: table => new
                 {
-                    URN = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    URN = table.Column<int>(nullable: false),
                     LAESTAB = table.Column<int>(nullable: false),
                     SCHNAME = table.Column<string>(nullable: true)
                 },
@@ -26,13 +25,13 @@ namespace SchoolPerformance.Migrations
                 {
                     URN = table.Column<int>(nullable: false),
                     ACADEMICYEAR = table.Column<int>(nullable: false),
-                    NOR = table.Column<int>(nullable: false),
-                    PNORG = table.Column<double>(nullable: false),
-                    PSENELSE = table.Column<double>(nullable: false),
-                    PSENELK = table.Column<double>(nullable: false),
-                    PNUMEAL = table.Column<double>(nullable: false),
-                    PNUMFSMEVER = table.Column<double>(nullable: false),
-                    PTFSM6CLA1A = table.Column<double>(nullable: false)
+                    NOR = table.Column<int>(nullable: true),
+                    PNORG = table.Column<double>(nullable: true),
+                    PSENELSE = table.Column<double>(nullable: true),
+                    PSENELK = table.Column<double>(nullable: true),
+                    PNUMEAL = table.Column<double>(nullable: true),
+                    PNUMFSMEVER = table.Column<double>(nullable: true),
+                    PTFSM6CLA1A = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,18 +75,18 @@ namespace SchoolPerformance.Migrations
                 {
                     URN = table.Column<int>(nullable: false),
                     ACADEMICYEAR = table.Column<int>(nullable: false),
-                    ATT8SCR = table.Column<double>(nullable: false),
-                    ATT8SCR_FSM6CLA1A = table.Column<double>(nullable: false),
-                    ATT8SCR_NFSM6CLA1A = table.Column<double>(nullable: false),
-                    P8MEA = table.Column<double>(nullable: false),
-                    P8MEA_FSM6CLA1A = table.Column<double>(nullable: false),
-                    P8MEA_NFSM6CLA1A = table.Column<double>(nullable: false),
-                    PTL2BASICS_94 = table.Column<double>(nullable: false),
-                    PTFSM6CLA1ABASICS_94 = table.Column<double>(nullable: false),
-                    PTNOTFSM6CLA1ABASICS_94 = table.Column<double>(nullable: false),
-                    PTL2BASICS_95 = table.Column<double>(nullable: false),
-                    PTFSM6CLA1ABASICS_95 = table.Column<double>(nullable: false),
-                    PTNOTFSM6CLA1ABASICS_95 = table.Column<double>(nullable: false)
+                    ATT8SCR = table.Column<double>(nullable: true),
+                    ATT8SCR_FSM6CLA1A = table.Column<double>(nullable: true),
+                    ATT8SCR_NFSM6CLA1A = table.Column<double>(nullable: true),
+                    P8MEA = table.Column<double>(nullable: true),
+                    P8MEA_FSM6CLA1A = table.Column<double>(nullable: true),
+                    P8MEA_NFSM6CLA1A = table.Column<double>(nullable: true),
+                    PTL2BASICS_94 = table.Column<double>(nullable: true),
+                    PTFSM6CLA1ABASICS_94 = table.Column<double>(nullable: true),
+                    PTNOTFSM6CLA1ABASICS_94 = table.Column<double>(nullable: true),
+                    PTL2BASICS_95 = table.Column<double>(nullable: true),
+                    PTFSM6CLA1ABASICS_95 = table.Column<double>(nullable: true),
+                    PTNOTFSM6CLA1ABASICS_95 = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {

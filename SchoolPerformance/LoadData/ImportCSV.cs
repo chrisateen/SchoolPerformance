@@ -6,6 +6,7 @@ using System.IO;
 using CsvHelper;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
+using CsvHelper.Configuration;
 
 namespace LoadDataTest
 {
@@ -25,7 +26,8 @@ namespace LoadDataTest
             using (_csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 RegisterMap();
-                _csv.Configuration.ShouldSkipRecord = row => row[18] == "1";
+                //Gets rid of bad data
+                _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
                 var data = _csv.GetRecords<M>().ToList();
                 
                return data;
@@ -37,6 +39,9 @@ namespace LoadDataTest
         {
             _csv.Configuration.RegisterClassMap<SchoolMap>();
             _csv.Configuration.RegisterClassMap<SchoolResultMap>();
+            _csv.Configuration.HeaderValidated = null;
+            _csv.Configuration.MissingFieldFound = null;
+            _csv.Configuration.IgnoreBlankLines = true;
         }
 
     }

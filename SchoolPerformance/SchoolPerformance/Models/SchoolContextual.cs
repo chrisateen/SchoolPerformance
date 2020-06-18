@@ -15,25 +15,25 @@ namespace SchoolPerformance.Models
         public int ACADEMICYEAR { get; set; }
 
         [Display(Name = "Number of Pupils")]
-        public int NOR { get; set; }
+        public int? NOR { get; set; }
 
         [Display(Name = "Percentage of Female Pupils")]
-        public double PNORG { get; set; }
+        public double? PNORG { get; set; }
 
         [Display(Name = "Percentage of SEN Pupils with an EHC plan")]
-        public double PSENELSE { get; set; }
+        public double? PSENELSE { get; set; }
 
         [Display(Name = "Percentage of Pupils with SEN support")]
-        public double PSENELK { get; set; }
+        public double? PSENELK { get; set; }
 
         [Display(Name = "Percentage of EAL Pupils")]
-        public double PNUMEAL { get; set; }
+        public double? PNUMEAL { get; set; }
 
         [Display(Name = "Percentage of FSM6 Pupils")]
-        public double PNUMFSMEVER { get; set; }
+        public double? PNUMFSMEVER { get; set; }
 
         [Display(Name = "Percentage of Disadvataged Pupils at the end of KS4")]
-        public double PTFSM6CLA1A { get; set; }
+        public double? PTFSM6CLA1A { get; set; }
 
         public School School { get; set; }
     }
