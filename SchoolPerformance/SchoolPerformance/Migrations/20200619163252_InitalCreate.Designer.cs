@@ -10,7 +10,7 @@ using SchoolPerformance.Models;
 namespace SchoolPerformance.Migrations
 {
     [DbContext(typeof(SchoolPerformanceContext))]
-    [Migration("20200619161100_InitalCreate")]
+    [Migration("20200619163252_InitalCreate")]
     partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,9 +30,6 @@ namespace SchoolPerformance.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("LA")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LAESTAB")
                         .HasColumnType("int");
 
                     b.Property<string>("SCHNAME")

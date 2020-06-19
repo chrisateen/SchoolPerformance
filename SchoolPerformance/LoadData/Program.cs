@@ -28,7 +28,7 @@ namespace LoadDataTest
 
             foreach(var d in data)
             {
-                Console.WriteLine(d.LAESTAB);
+                Console.WriteLine($"{d.LAESTAB} , {d.URN}");
             }
 
 

@@ -27,6 +27,8 @@ namespace SchoolPerformance.Models
             modelBuilder.Entity<School>()
                 .HasKey(c => new { c.URN });
 
+            //modelBuilder.Entity<School>().Ignore(c => c.LAESTAB);
+
             //Specify primary key in SchoolDetails
             modelBuilder.Entity<SchoolDetails>()
                 .HasKey(c => new { c.URN });

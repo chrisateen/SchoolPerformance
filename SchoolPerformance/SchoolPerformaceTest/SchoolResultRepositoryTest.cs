@@ -31,8 +31,8 @@ namespace SchoolPerformaceTest
             //Mock data
             _schools = new List<School>
             {
-                new School { URN = 2, LAESTAB = 2,SCHNAME = "Test 1" },
-                new School { URN = 1, LAESTAB = 1,SCHNAME = "Test 2" }
+                new School { URN = 2, SCHNAME = "Test 1" },
+                new School { URN = 1, SCHNAME = "Test 2" }
             };
 
             _schoolResults = new List<SchoolResult>

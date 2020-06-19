@@ -17,16 +17,14 @@ namespace SchoolPerformance.Models
 
         public int ESTAB { get; set; }
 
-        private int laestab;
-
         [Display(Name = "DfE Number")]
-        public int LAESTAB 
-        { 
-            get 
+        [NotMapped]
+        public int LAESTAB
+        {
+            get
             {
-                return this.laestab;
+                return int.Parse(this.LA + "" + this.ESTAB);
             }
-            set { this.laestab = int.Parse(this.LA + "" + this.ESTAB); }
         }
 
         [Display(Name = "School Name")]

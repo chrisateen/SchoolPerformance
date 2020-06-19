@@ -111,7 +111,6 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csprojAssemblyReference.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.AssemblyInfoInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.AssemblyInfo.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.RazorTargetAssemblyInfo.cache

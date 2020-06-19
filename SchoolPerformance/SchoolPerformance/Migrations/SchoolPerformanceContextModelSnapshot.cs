@@ -30,9 +30,6 @@ namespace SchoolPerformance.Migrations
                     b.Property<int>("LA")
                         .HasColumnType("int");
 
-                    b.Property<int>("LAESTAB")
-                        .HasColumnType("int");
-
                     b.Property<string>("SCHNAME")
                         .HasColumnType("nvarchar(max)");
 

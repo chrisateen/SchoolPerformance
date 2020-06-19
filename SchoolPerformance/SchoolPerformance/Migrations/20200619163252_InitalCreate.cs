@@ -13,7 +13,6 @@ namespace SchoolPerformance.Migrations
                     URN = table.Column<int>(nullable: false),
                     LA = table.Column<int>(nullable: false),
                     ESTAB = table.Column<int>(nullable: false),
-                    LAESTAB = table.Column<int>(nullable: false),
                     SCHNAME = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
