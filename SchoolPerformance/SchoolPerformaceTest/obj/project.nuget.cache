@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZTijVyJeqi+OUSzHWYedKDD54uxh8UgiOFgoWEfve59fG7v2R9h52Ujq762ZrS5KUppuE/CumUxJbJ4OYFOTqQ==",
+  "dgSpecHash": "sOxdxN4AEAt2JpfdrH6cvpA3eWIoVqpqzhWo6UvsU9YpXP3tlT+bGM2OPXX+Lb7RPx4dLuhreC8EgiJ+oieEsA==",
   "success": true,
   "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
   "expectedPackageFiles": [
@@ -35,9 +35,15 @@
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.5\\microsoft.extensions.configuration.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.5\\microsoft.extensions.configuration.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.5\\microsoft.extensions.configuration.binder.3.1.5.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\3.0.0\\microsoft.extensions.configuration.fileextensions.3.0.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration.json\\3.0.0\\microsoft.extensions.configuration.json.3.0.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.configuration.usersecrets\\3.0.0\\microsoft.extensions.configuration.usersecrets.3.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.5\\microsoft.extensions.dependencyinjection.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.5\\microsoft.extensions.dependencyinjection.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.dependencymodel\\3.1.5\\microsoft.extensions.dependencymodel.3.1.5.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.0.0\\microsoft.extensions.fileproviders.abstractions.3.0.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\3.0.0\\microsoft.extensions.fileproviders.physical.3.0.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\3.0.0\\microsoft.extensions.filesystemglobbing.3.0.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.logging\\3.1.5\\microsoft.extensions.logging.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.5\\microsoft.extensions.logging.abstractions.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.extensions.options\\3.1.5\\microsoft.extensions.options.3.1.5.nupkg.sha512",

@@ -13,8 +13,21 @@ namespace SchoolPerformance.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int URN { get; set; }
 
+        public int LA { get; set; }
+
+        public int ESTAB { get; set; }
+
+        private int laestab;
+
         [Display(Name = "DfE Number")]
-        public int LAESTAB { get; set; }
+        public int LAESTAB 
+        { 
+            get 
+            {
+                return this.laestab;
+            }
+            set { this.laestab = int.Parse(this.LA + "" + this.ESTAB); }
+        }
 
         [Display(Name = "School Name")]
         public string SCHNAME { get; set; }

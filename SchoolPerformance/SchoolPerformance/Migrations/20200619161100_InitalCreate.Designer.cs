@@ -10,8 +10,8 @@ using SchoolPerformance.Models;
 namespace SchoolPerformance.Migrations
 {
     [DbContext(typeof(SchoolPerformanceContext))]
-    [Migration("20200618205830_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200619161100_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,12 @@ namespace SchoolPerformance.Migrations
             modelBuilder.Entity("SchoolPerformance.Models.School", b =>
                 {
                     b.Property<int>("URN")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ESTAB")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LA")
                         .HasColumnType("int");
 
                     b.Property<int>("LAESTAB")

@@ -11,9 +11,10 @@ namespace LoadDataTest
     {
         public SchoolMap()
         {
-            Map(m => m.URN);
-            Map(m => m.LAESTAB);
-            Map(m => m.SCHNAME);
+            Map(m => m.URN).TypeConverter<NullIntConverter>();
+            Map(m => m.LA).Name("LEA").TypeConverter<NullIntConverter>();
+            Map(m => m.ESTAB).TypeConverter<NullIntConverter>();
+            Map(m => m.SCHNAME).TypeConverter<NullStringConverter>();
 
         }
     }

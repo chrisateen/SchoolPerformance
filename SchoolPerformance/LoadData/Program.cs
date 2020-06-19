@@ -20,11 +20,16 @@ namespace LoadDataTest
         {
             //var data = ModelBuilderExtensions.GetData<School>("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
 
-            ImportCSV importCSV = new ImportCSV("C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
-            IEnumerable<SchoolResult> data = importCSV.GetDataFromCSV(new SchoolResult());
+            ImportCSV importCSV = new ImportCSV("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
+            IEnumerable<School> data = importCSV.GetDataFromCSV(new School());
 
             Console.WriteLine(data.Where(x=>x.URN != 0).Count());
+            data = data.Take(5);
 
+            foreach(var d in data)
+            {
+                Console.WriteLine(d.LAESTAB);
+            }
 
 
 

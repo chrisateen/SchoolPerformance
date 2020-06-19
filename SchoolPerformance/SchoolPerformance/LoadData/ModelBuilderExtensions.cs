@@ -16,8 +16,8 @@ namespace LoadData
         public static void Seed(this ModelBuilder modelBuilder)
         {
             _modelBuilder = modelBuilder;
-            _dataLocations.Add("SchoolResult", "C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
-            _dataLocations.Add("School", "C:\\Users\\no_ot\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
+            //_dataLocations.Add("SchoolResult", "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
+            _dataLocations.Add("School", "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
             foreach (KeyValuePair<string, string> kvp in _dataLocations)
             {
                 addData(kvp.Key, kvp.Value);
@@ -32,6 +32,7 @@ namespace LoadData
             {
 
                 IEnumerable<School> data = import.GetDataFromCSV<School>();
+                data = data.Where(x => x.URN != 0);
                 _modelBuilder.Entity<School>().HasData(data);
 
             }
@@ -49,12 +50,6 @@ namespace LoadData
             {
                 throw new ArgumentException("Model name does not exist");
             }
-
-        }
-
-        //Used to get school information from results file as we only want schools that exist
-        public static void getSchool(string filelocation)
-        {
 
         }
 

@@ -24,6 +24,12 @@ namespace SchoolPerformance.Migrations
                     b.Property<int>("URN")
                         .HasColumnType("int");
 
+                    b.Property<int>("ESTAB")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LA")
+                        .HasColumnType("int");
+
                     b.Property<int>("LAESTAB")
                         .HasColumnType("int");
 

@@ -56,7 +56,7 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
-           modelBuilder.Seed();
+           //modelBuilder.Seed();
 
         }
 

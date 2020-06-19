@@ -2,7 +2,7 @@
 
 namespace SchoolPerformance.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,6 +11,8 @@ namespace SchoolPerformance.Migrations
                 columns: table => new
                 {
                     URN = table.Column<int>(nullable: false),
+                    LA = table.Column<int>(nullable: false),
+                    ESTAB = table.Column<int>(nullable: false),
                     LAESTAB = table.Column<int>(nullable: false),
                     SCHNAME = table.Column<string>(nullable: true)
                 },

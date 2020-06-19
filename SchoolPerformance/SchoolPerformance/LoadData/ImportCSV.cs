@@ -28,7 +28,11 @@ namespace LoadData
                 if (modelName == "School")
                 {
                     _csv.Configuration.RegisterClassMap<SchoolMap>();
-                    _csv.Configuration.ShouldSkipRecord = row => row[18] == "1";
+                    _csv.Configuration.MissingFieldFound = null;
+
+                    //Gets rid of bad data
+                    _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
+
                     var data = _csv.GetRecords<School>().ToList();
 
                     return (IEnumerable<M>)data;
