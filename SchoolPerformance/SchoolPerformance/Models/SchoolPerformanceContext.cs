@@ -56,7 +56,8 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
-          // modelBuilder.Seed();
+            //Get data from csv files to load into the database
+            modelBuilder.Seed();
 
         }
 

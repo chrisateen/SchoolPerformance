@@ -38,7 +38,7 @@ namespace LoadData
                     return (IEnumerable<M>)data;
                 }
 
-                else
+                if (modelName == "SchoolResult")
                 {
                     _csv.Configuration.RegisterClassMap<SchoolResultMap>();
                     _csv.Configuration.MissingFieldFound = null;
@@ -47,6 +47,20 @@ namespace LoadData
                     var data = _csv.GetRecords<SchoolResult>().ToList();
 
                     return (IEnumerable<M>)data;
+                }
+
+                if (modelName == "SchoolDetails")
+                {
+                    _csv.Configuration.RegisterClassMap<SchoolDetailsMap>();
+                    _csv.Configuration.MissingFieldFound = null;
+                    var data = _csv.GetRecords<SchoolDetails>().ToList();
+
+                    return (IEnumerable<M>)data;
+                }
+
+                else
+                {
+                    throw new ArgumentException($"Model name does not exist");
                 }
             }
 

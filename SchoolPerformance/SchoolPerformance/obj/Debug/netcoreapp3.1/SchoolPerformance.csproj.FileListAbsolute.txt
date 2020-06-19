@@ -188,3 +188,4 @@ C:\Users\no_ot\Documents\CSharp\SchoolPerformance\SchoolPerformance\SchoolPerfor
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\CsvHelper.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csproj.CoreCompileInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
+D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csprojAssemblyReference.cache
