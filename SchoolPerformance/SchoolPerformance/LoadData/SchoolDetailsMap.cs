@@ -13,6 +13,10 @@ namespace LoadData
         {
             Map(m => m.URN);
             Map(m => m.STREET);
+            Map(m => m.LOCALITY);
+            Map(m => m.ADDRESS3);
+            Map(m => m.TOWN);
+            Map(m => m.POSTCODE);
 
 
         }
