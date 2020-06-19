@@ -12,7 +12,7 @@ namespace SchoolPerformance.Models
         public int URN { get; set; }
 
         [Display(Name = "Street")]
-        public int STREET { get; set; }
+        public string STREET { get; set; }
 
         [Display(Name = "Locality")]
         public string LOCALITY { get; set; }

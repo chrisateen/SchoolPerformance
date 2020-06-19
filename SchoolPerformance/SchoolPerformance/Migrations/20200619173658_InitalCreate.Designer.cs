@@ -10,7 +10,7 @@ using SchoolPerformance.Models;
 namespace SchoolPerformance.Migrations
 {
     [DbContext(typeof(SchoolPerformanceContext))]
-    [Migration("20200619163252_InitalCreate")]
+    [Migration("20200619173658_InitalCreate")]
     partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,8 +97,8 @@ namespace SchoolPerformance.Migrations
                     b.Property<string>("SCHOOLTYPE")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("STREET")
-                        .HasColumnType("int");
+                    b.Property<string>("STREET")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TOWN")
                         .HasColumnType("nvarchar(max)");

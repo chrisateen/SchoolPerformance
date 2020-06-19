@@ -21,17 +21,16 @@ namespace LoadDataTest
             //var data = ModelBuilderExtensions.GetData<School>("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
 
             ImportCSV importCSV = new ImportCSV("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
-            IEnumerable<School> data = importCSV.GetDataFromCSV(new School());
+            IEnumerable<School> dataSchool = importCSV.GetDataFromCSV(new School()).Where(x => x.URN != 0);
 
-            Console.WriteLine(data.Where(x=>x.URN != 0).Count());
-            data = data.Take(5);
+            var urn = dataSchool.Select(x => x.URN);
 
-            foreach(var d in data)
-            {
-                Console.WriteLine($"{d.LAESTAB} , {d.URN}");
-            }
+            importCSV = new ImportCSV("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
+            IEnumerable<SchoolDetails> dataDetails = importCSV.GetDataFromCSV(new SchoolDetails()).Where(x => urn.Contains(x.URN));
 
+            Console.WriteLine(dataSchool.Count());
 
+            Console.WriteLine(dataDetails.Count());
 
         }
 

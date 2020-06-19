@@ -95,8 +95,8 @@ namespace SchoolPerformance.Migrations
                     b.Property<string>("SCHOOLTYPE")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("STREET")
-                        .HasColumnType("int");
+                    b.Property<string>("STREET")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TOWN")
                         .HasColumnType("nvarchar(max)");

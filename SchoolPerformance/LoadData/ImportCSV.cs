@@ -39,6 +39,7 @@ namespace LoadDataTest
         {
             _csv.Configuration.RegisterClassMap<SchoolMap>();
             _csv.Configuration.RegisterClassMap<SchoolResultMap>();
+            _csv.Configuration.RegisterClassMap<SchoolDetailsMap>();
             _csv.Configuration.HeaderValidated = null;
             _csv.Configuration.MissingFieldFound = null;
             _csv.Configuration.IgnoreBlankLines = true;

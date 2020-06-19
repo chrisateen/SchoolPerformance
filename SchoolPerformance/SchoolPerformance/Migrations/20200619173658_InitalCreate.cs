@@ -50,7 +50,7 @@ namespace SchoolPerformance.Migrations
                 columns: table => new
                 {
                     URN = table.Column<int>(nullable: false),
-                    STREET = table.Column<int>(nullable: false),
+                    STREET = table.Column<string>(nullable: true),
                     LOCALITY = table.Column<string>(nullable: true),
                     ADDRESS3 = table.Column<string>(nullable: true),
                     TOWN = table.Column<string>(nullable: true),

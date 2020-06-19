@@ -30,14 +30,13 @@ namespace LoadData
 
             if (modelName == "School")
             {
-
                 IEnumerable<School> data = import.GetDataFromCSV<School>();
                 data = data.Where(x => x.URN != 0);
                 _modelBuilder.Entity<School>().HasData(data);
 
             }
 
-            if (modelName == "SchoolResult")
+            else if (modelName == "SchoolResult")
             {
 
                 IEnumerable<SchoolResult> data = import.GetDataFromCSV<SchoolResult>();
@@ -48,7 +47,7 @@ namespace LoadData
 
             else
             {
-                throw new ArgumentException("Model name does not exist");
+                throw new ArgumentException($"Model name does not exist");
             }
 
         }
