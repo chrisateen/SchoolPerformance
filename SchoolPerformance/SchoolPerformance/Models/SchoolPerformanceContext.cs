@@ -12,7 +12,11 @@ namespace SchoolPerformance.Models
 {
     public class SchoolPerformanceContext : DbContext
     {
-        DbContextOptions<SchoolPerformanceContext> _options;
+        private DbContextOptions<SchoolPerformanceContext> _options;
+
+        //Field added to help test modelbuilder seed method
+        public ModelBuilder _modelBuilder;
+
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
             _options = options;
@@ -60,6 +64,8 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
+            _modelBuilder = modelBuilder;
+
             //Checks to make sure that we are not using a SQLite test database
             //Only want to seed data if a sqlserver connection is being used
             var sqlServerOptionsExtension =_options.FindExtension<SqlServerOptionsExtension>();
@@ -73,13 +79,6 @@ namespace SchoolPerformance.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        }
-
-        private static bool IsInTestMode()
-        {
-            string testAssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
-            return AppDomain.CurrentDomain.GetAssemblies()
-            .Any(a => a.FullName.StartsWith(testAssemblyName));
         }
 
     }
