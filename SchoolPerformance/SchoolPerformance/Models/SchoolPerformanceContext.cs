@@ -5,13 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using LoadData;
 using System.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 namespace SchoolPerformance.Models
 {
     public class SchoolPerformanceContext : DbContext
     {
+        DbContextOptions<SchoolPerformanceContext> _options;
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
+            _options = options;
         }
 
 
@@ -56,13 +60,26 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
-            //Get data from csv files to load into the database
-            modelBuilder.Seed();
+            //Checks to make sure that we are not using a SQLite test database
+            //Only want to seed data if a sqlserver connection is being used
+            var sqlServerOptionsExtension =_options.FindExtension<SqlServerOptionsExtension>();
+            if (sqlServerOptionsExtension != null)
+            {
+                modelBuilder.Seed();
+            }
+
 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+        }
+
+        private static bool IsInTestMode()
+        {
+            string testAssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
+            return AppDomain.CurrentDomain.GetAssemblies()
+            .Any(a => a.FullName.StartsWith(testAssemblyName));
         }
 
     }
