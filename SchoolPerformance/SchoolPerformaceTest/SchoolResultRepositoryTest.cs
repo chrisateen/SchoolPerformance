@@ -26,7 +26,7 @@ namespace SchoolPerformaceTest
             
             //Create the repository class that will be tested
             _repositorySchool = new SchoolResultRepository<School>(_context);
-            _repositorySchoolResult = new SchoolResultRepository<SchoolResult>(_context); ;
+            _repositorySchoolResult = new SchoolResultRepository<SchoolResult>(_context);
 
             //Mock data
             _schools = new List<School>

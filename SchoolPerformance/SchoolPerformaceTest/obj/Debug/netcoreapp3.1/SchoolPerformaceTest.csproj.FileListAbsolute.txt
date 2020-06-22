@@ -453,3 +453,5 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.CoreCompileInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\CsvHelper.dll
 C:\Users\no_ot\Documents\CSharp\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.Properties.Resources.resources
+D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.GenerateResource.cache

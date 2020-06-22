@@ -27,6 +27,7 @@ namespace SchoolPerformaceTest
                     .Options;
             _context = new SchoolPerformanceContext(options);
 
+           
             //// Drop the database if it exists
             if (_context != null)
             {
