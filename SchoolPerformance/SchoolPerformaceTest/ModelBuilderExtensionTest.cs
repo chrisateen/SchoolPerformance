@@ -16,18 +16,10 @@ namespace SchoolPerformaceTest
     public class ModelBuilderExtensionTest
     {
         public SchoolPerformanceContext _context;
-        //public IConfiguration _configuration;
 
         [TestInitialize]
         public void Setup()
         {
-            //_configuration = new ConfigurationBuilder()
-            //                        .AddJsonFile("appsettings.json", optional: true)
-            //                        .AddUserSecrets<ModelBuilderExtensionTest>()
-            //                        .Build();
-            //var connectionString = _configuration.GetConnectionString("SchoolPerformanceDb");
-            //var options = new DbContextOptionsBuilder<SchoolPerformanceContext>().UseSqlServer(connectionString).Options;
-
             var connection = new InMemorySqliteConnection();
             _context = connection._context;
 
