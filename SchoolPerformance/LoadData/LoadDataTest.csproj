@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SchoolPerformaceTest\SchoolPerformaceTest.csproj" />
     <ProjectReference Include="..\SchoolPerformance\SchoolPerformance.csproj" />
   </ItemGroup>
 
