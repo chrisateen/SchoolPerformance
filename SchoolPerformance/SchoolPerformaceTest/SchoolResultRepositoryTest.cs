@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace SchoolPerformaceTest
 {
@@ -29,21 +30,12 @@ namespace SchoolPerformaceTest
             _repositorySchoolResult = new SchoolResultRepository<SchoolResult>(_context);
 
             //Mock data
-            _schools = new List<School>
-            {
-                new School { URN = 2, SCHNAME = "Test 1" },
-                new School { URN = 1, SCHNAME = "Test 2" }
-            };
+            SetData();
 
-            _schoolResults = new List<SchoolResult>
-            {
-                new SchoolResult { URN = 2, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.5 },
-                new SchoolResult{ URN = 2, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.51 },
-                new SchoolResult { URN = 1, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.62 },
-                new SchoolResult { URN = 1, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.68 }
-            };
+            //Remove existing seeded data
+            ClearSeedData();
 
-            //Act    
+            //Act
             _schools.ForEach(x => _context.School.Add(x));
             _schoolResults.ForEach(x => _context.SchoolResult.Add(x));
             _context.SaveChanges();
@@ -148,6 +140,36 @@ namespace SchoolPerformaceTest
 
             Assert.AreEqual(_schoolResults.Where(x => x.School.SCHNAME == "Test 2").Count(), resultCount);
             
+        }
+
+        //Create mock data
+        [Ignore]
+        public void SetData()
+        {
+            _schools = new List<School>
+            {
+                new School { URN = 2, SCHNAME = "Test 1" },
+                new School { URN = 1, SCHNAME = "Test 2" }
+            };
+
+            _schoolResults = new List<SchoolResult>
+            {
+                new SchoolResult { URN = 2, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.5 },
+                new SchoolResult{ URN = 2, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.51 },
+                new SchoolResult { URN = 1, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.62 },
+                new SchoolResult { URN = 1, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.68 }
+            };
+        }
+
+        //Any data that is seeded in the OnModelCreating method is removed
+        [Ignore]
+        public void ClearSeedData()
+        {
+            _context.Database.ExecuteSqlRaw("DELETE FROM SchoolResult");
+            _context.Database.ExecuteSqlRaw("DELETE FROM SchoolContextual");
+            _context.Database.ExecuteSqlRaw("DELETE FROM SchoolDetails");
+            _context.Database.ExecuteSqlRaw("DELETE FROM School");
+            _context.SaveChanges();
         }
     }
 }
