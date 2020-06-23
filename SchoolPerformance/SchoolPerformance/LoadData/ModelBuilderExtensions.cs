@@ -18,14 +18,14 @@ namespace LoadData
         {
             _modelBuilder = modelBuilder;
             addSchool("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
-  
-            //_dataLocations.Add("SchoolResult", "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
-            //_dataLocations.Add("SchoolDetails", "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv");
 
-            //foreach (KeyValuePair<string, string> kvp in _dataLocations)
-            //{
-            //    addData(kvp.Key, kvp.Value);
-            //}
+            _dataLocations["SchoolResult"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv";
+            _dataLocations["SchoolDetails"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv";
+
+            foreach (KeyValuePair<string, string> kvp in _dataLocations)
+            {
+                addData(kvp.Key, kvp.Value);
+            }
         }
 
         public static void addSchool(string fileLocation)
