@@ -17,6 +17,7 @@ namespace SchoolPerformaceTest
     {
         public SchoolPerformanceContext _context;
 
+        //Arrange
         [TestInitialize]
         public void Setup()
         {
@@ -30,7 +31,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ContextSeededWithSchoolRecords()
         {
-
+            //Act and Assert
             Assert.AreNotEqual(0,_context.School.Count());
         }
 
@@ -38,7 +39,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ContextSeededWithSchoolContextualRecords()
         {
-
+            //Act and Assert
             Assert.AreNotEqual(0,_context.SchoolContextual.Count());
         }
 
@@ -46,6 +47,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ContextSeededWithSchoolDetailsRecords()
         {
+            //Act and Assert
             Assert.AreNotEqual(0,_context.SchoolDetails.Count());
 
         }
@@ -54,7 +56,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ContextSeededWithSchoolResultsRecords()
         {
-
+            //Act and Assert
             Assert.AreNotEqual(0,_context.SchoolResult.Count());
         }
 
@@ -63,6 +65,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void SeededRecordsDoesNotHaveZeroURN()
         {
+            //Act and Assert
             Assert.AreEqual(0, _context.School.Where(x => x.URN == 0).Count());
             Assert.AreEqual(0, _context.SchoolContextual.Where(x => x.URN == 0).Count());
             Assert.AreEqual(0, _context.SchoolDetails.Where(x => x.URN == 0).Count());
@@ -75,6 +78,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void SeededRecordsContainsAcademicYear()
         {
+            //Act and Assert
             Assert.AreEqual(0, _context.SchoolContextual.Where(x => x.ACADEMICYEAR == 0).Count());
             Assert.AreEqual(0, _context.SchoolResult.Where(x => x.ACADEMICYEAR == 0).Count());
         }
@@ -84,6 +88,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void AllSchoolsInSchoolEntityHaveResultsData()
         {
+            //Act and Assert
             Assert.AreEqual(0, _context.School.Where(x => x.SchoolResults == null).Count());
             Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School == null).Count());
         }
@@ -93,6 +98,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void AllSchoolsInSchoolContextualEntityHaveResultsData()
         {
+            //Act and Assert
             Assert.AreEqual(0, _context.SchoolContextual.Where(x => x.School.SchoolResults == null).Count());
             Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School.SchoolContextuals == null).Count());
         }
@@ -102,6 +108,7 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void AllSchoolsInSchoolDetailsEntityHaveResultsData()
         {
+            //Act and Assert
             Assert.AreEqual(0, _context.SchoolDetails.Where(x => x.School.SchoolResults == null).Count());
             Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School.SchoolDetails == null).Count());
         }
