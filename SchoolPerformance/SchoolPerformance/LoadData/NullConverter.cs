@@ -21,8 +21,23 @@ namespace LoadData
 
     }
 
-
     public class NullIntConverter : Int32Converter
+    {
+        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+        {
+            if (text == "NE" || text == "NP" || text == "SUPP" || String.IsNullOrEmpty(text))
+            {
+                return null;
+            }
+
+            return base.ConvertFromString(text, row, memberMapData);
+        }
+
+    }
+
+
+
+    public class NullURNAndLAESTABConverter : Int32Converter
     {
         public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
         {
