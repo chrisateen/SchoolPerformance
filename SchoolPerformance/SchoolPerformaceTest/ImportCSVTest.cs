@@ -291,9 +291,9 @@ namespace SchoolPerformaceTest
                     PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = 0.35},
                 new { URN = 3, ATT8SCR = "SUPP", ATT8SCR_FSM6CLA1A = "NE", ATT8SCR_NFSM6CLA1A = "NP",
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = 0.35},
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = "NA", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = "NA", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = "NA", PTNOTFSM6CLA1ABASICS_95 = 0.35},
                 new { URN = 1, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
@@ -380,7 +380,9 @@ namespace SchoolPerformaceTest
                 new { URN = "", NOR = "", PNORG = "", PSENELSE = "",
                     PSENELK = "", PNUMEAL = "", PNUMFSMEVER = "", PTFSM6CLA1A = "" },
                 new { URN = 3, NOR = 900, PNORG = 0.52, PSENELSE = "",
-                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = "", PTFSM6CLA1A = "" }
+                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = "", PTFSM6CLA1A = "" },
+                new { URN = 4, NOR = "NA", PNORG = "NA", PSENELSE = "NA",
+                    PSENELK = "NA", PNUMEAL = "NA", PNUMFSMEVER = "NA", PTFSM6CLA1A = "NA" }
             };
         }
 
