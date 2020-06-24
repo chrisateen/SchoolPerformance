@@ -11,9 +11,9 @@ namespace LoadData
     {
         public SchoolMap()
         {
-            Map(m => m.URN).TypeConverter<NullIntConverter>();
-            Map(m => m.LA).Name("LEA").TypeConverter<NullIntConverter>();
-            Map(m => m.ESTAB).TypeConverter<NullIntConverter>();
+            Map(m => m.URN).TypeConverter<NullURNAndLAESTABConverter>();
+            Map(m => m.LA).Name("LEA").TypeConverter<NullURNAndLAESTABConverter>();
+            Map(m => m.ESTAB).TypeConverter<NullURNAndLAESTABConverter>();
             Map(m => m.SCHNAME).TypeConverter<NullStringConverter>();
 
         }

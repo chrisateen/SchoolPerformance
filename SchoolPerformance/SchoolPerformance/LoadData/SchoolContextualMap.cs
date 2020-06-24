@@ -7,13 +7,13 @@ using System.Text;
 
 namespace LoadData
 {
-    public class SchoolResultMap : ClassMap<SchoolResult>
+    public class SchoolContextualMap : ClassMap<SchoolContextual>
     {
-        public SchoolResultMap()
+        public SchoolContextualMap()
         {
             Map(m => m.URN).TypeConverter<NullURNAndLAESTABConverter>();
-            Map(m => m.ATT8SCR).TypeConverter<NullDoubleConverter>();
-            Map(m => m.ATT8SCR_FSM6CLA1A).TypeConverter<NullDoubleConverter>();
+            Map(m => m.NOR).TypeConverter<NullIntConverter>();
+
 
         }
     }
