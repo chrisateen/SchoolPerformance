@@ -14,6 +14,9 @@ namespace SchoolPerformance.Models
         [Display(Name = "Academic Year")]
         public int ACADEMICYEAR { get; set; }
 
+        [Display(Name = "Percentage of Disadvataged Pupils at the end of KS4")]
+        public double? PTFSM6CLA1A { get; set; }
+
         [Display(Name = "Attainment 8 Score")]
         public double? ATT8SCR { get; set; }
 

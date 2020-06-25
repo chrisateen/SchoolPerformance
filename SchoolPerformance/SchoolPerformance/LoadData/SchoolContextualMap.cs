@@ -18,7 +18,6 @@ namespace LoadData
             Map(m => m.PSENELK).TypeConverter<NullDoubleConverter>();
             Map(m => m.PNUMEAL).TypeConverter<NullDoubleConverter>();
             Map(m => m.PNUMFSMEVER).TypeConverter<NullDoubleConverter>();
-            Map(m => m.PTFSM6CLA1A).TypeConverter<NullDoubleConverter>();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace LoadData
         public SchoolResultMap()
         {
             Map(m => m.URN).TypeConverter<NullURNAndLAESTABConverter>();
+            Map(m => m.PTFSM6CLA1A).TypeConverter<NullDoubleConverter>();
             Map(m => m.ATT8SCR).TypeConverter<NullDoubleConverter>();
             Map(m => m.ATT8SCR_FSM6CLA1A).TypeConverter<NullDoubleConverter>();
             Map(m => m.ATT8SCR_NFSM6CLA1A).TypeConverter<NullDoubleConverter>();

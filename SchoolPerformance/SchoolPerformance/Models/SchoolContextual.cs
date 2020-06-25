@@ -32,9 +32,6 @@ namespace SchoolPerformance.Models
         [Display(Name = "Percentage of FSM6 Pupils")]
         public double? PNUMFSMEVER { get; set; }
 
-        [Display(Name = "Percentage of Disadvataged Pupils at the end of KS4")]
-        public double? PTFSM6CLA1A { get; set; }
-
         public School School { get; set; }
     }
 }
