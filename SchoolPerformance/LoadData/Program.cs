@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using SchoolPerformaceTest;
 using LoadData;
 using CsvHelper.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace LoadDataTest
 {
@@ -43,7 +44,6 @@ namespace LoadDataTest
             var converter = new NullDoubleConverter();
             var t = converter.ConvertFromString("0.00", null, new MemberMapData(null));
             Console.WriteLine(t);
-
         }
 
 

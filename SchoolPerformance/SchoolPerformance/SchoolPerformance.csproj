@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20200619164133_test.Designer.cs" />
     <Compile Remove="Migrations\20200619164246_test.cs" />
     <Compile Remove="Migrations\20200619164246_test.Designer.cs" />
+    <Compile Remove="Migrations\20200619173658_InitalCreate.cs" />
+    <Compile Remove="Migrations\20200619173658_InitalCreate.Designer.cs" />
     <Compile Remove="Migrations\20200619180401_test.cs" />
     <Compile Remove="Migrations\20200619180401_test.Designer.cs" />
     <Compile Remove="Migrations\20200619180922_test.cs" />

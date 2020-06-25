@@ -21,6 +21,7 @@ namespace LoadData
 
             _dataLocations["SchoolResult"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv";
             _dataLocations["SchoolDetails"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv";
+            _dataLocations["SchoolContextual"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_census.csv";
 
             foreach (KeyValuePair<string, string> kvp in _dataLocations)
             {
@@ -73,6 +74,20 @@ namespace LoadData
                 data = data.Where(x => _urnList.Contains(x.URN));
                 
                 _modelBuilder.Entity<SchoolDetails>().HasData(data);
+            }
+
+
+            else if (modelName == "SchoolContextual")
+            {
+                IEnumerable<SchoolContextual> data = import.GetDataFromCSV<SchoolContextual>();
+
+                //Only get data where a school has a result/in the result data
+                data = data.Where(x => _urnList.Contains(x.URN));
+
+                //Academic year to be assigned to each data
+                data.ToList().ForEach(x => x.ACADEMICYEAR = 2019);
+
+                _modelBuilder.Entity<SchoolContextual>().HasData(data);
             }
 
             else

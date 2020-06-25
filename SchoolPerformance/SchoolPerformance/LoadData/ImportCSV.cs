@@ -84,6 +84,10 @@ namespace LoadData
                         //No exception should be thrown if there are missing data for a field
                         _csv.Configuration.MissingFieldFound = null;
 
+                        //Exclude any national data from being loaded
+                        //This is where URN value is NAT
+                        _csv.Configuration.ShouldSkipRecord = row => row[0] == "NAT";
+
                         var data = _csv.GetRecords<SchoolContextual>().ToList();
 
                         return (IEnumerable<M>)data;
