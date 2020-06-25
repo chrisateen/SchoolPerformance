@@ -110,5 +110,19 @@ namespace SchoolPerformaceTest
             //Assert
             Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
         }
+
+        //Tests NullDoubleConverter converts LOWCOV values to null
+        [TestMethod]
+        public void NullDoubleConverterConvertsLOWCOV()
+        {
+            //Arrange
+            var converter = new NullDoubleConverter();
+
+            //Act
+            var num = "LOWCOV";
+
+            //Assert
+            Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
     }
 }
