@@ -64,9 +64,6 @@ namespace SchoolPerformance.Migrations
                     b.Property<double?>("PSENELSE")
                         .HasColumnType("float");
 
-                    b.Property<double?>("PTFSM6CLA1A")
-                        .HasColumnType("float");
-
                     b.HasKey("URN", "ACADEMICYEAR");
 
                     b.ToTable("SchoolContextual");
@@ -130,6 +127,9 @@ namespace SchoolPerformance.Migrations
                         .HasColumnType("float");
 
                     b.Property<double?>("P8MEA_NFSM6CLA1A")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("PTFSM6CLA1A")
                         .HasColumnType("float");
 
                     b.Property<double?>("PTFSM6CLA1ABASICS_94")

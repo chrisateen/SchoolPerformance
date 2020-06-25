@@ -10,8 +10,8 @@ using SchoolPerformance.Models;
 namespace SchoolPerformance.Migrations
 {
     [DbContext(typeof(SchoolPerformanceContext))]
-    [Migration("20200619173658_InitalCreate")]
-    partial class InitalCreate
+    [Migration("20200625215632_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,9 +64,6 @@ namespace SchoolPerformance.Migrations
                         .HasColumnType("float");
 
                     b.Property<double?>("PSENELSE")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PTFSM6CLA1A")
                         .HasColumnType("float");
 
                     b.HasKey("URN", "ACADEMICYEAR");
@@ -132,6 +129,9 @@ namespace SchoolPerformance.Migrations
                         .HasColumnType("float");
 
                     b.Property<double?>("P8MEA_NFSM6CLA1A")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("PTFSM6CLA1A")
                         .HasColumnType("float");
 
                     b.Property<double?>("PTFSM6CLA1ABASICS_94")

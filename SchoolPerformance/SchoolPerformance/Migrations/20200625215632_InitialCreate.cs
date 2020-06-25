@@ -2,7 +2,7 @@
 
 namespace SchoolPerformance.Migrations
 {
-    public partial class InitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,8 +31,7 @@ namespace SchoolPerformance.Migrations
                     PSENELSE = table.Column<double>(nullable: true),
                     PSENELK = table.Column<double>(nullable: true),
                     PNUMEAL = table.Column<double>(nullable: true),
-                    PNUMFSMEVER = table.Column<double>(nullable: true),
-                    PTFSM6CLA1A = table.Column<double>(nullable: true)
+                    PNUMFSMEVER = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,6 +75,7 @@ namespace SchoolPerformance.Migrations
                 {
                     URN = table.Column<int>(nullable: false),
                     ACADEMICYEAR = table.Column<int>(nullable: false),
+                    PTFSM6CLA1A = table.Column<double>(nullable: true),
                     ATT8SCR = table.Column<double>(nullable: true),
                     ATT8SCR_FSM6CLA1A = table.Column<double>(nullable: true),
                     ATT8SCR_NFSM6CLA1A = table.Column<double>(nullable: true),
