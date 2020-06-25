@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using SchoolPerformaceTest;
 using LoadData;
+using CsvHelper.Configuration;
 
 namespace LoadDataTest
 {
@@ -34,10 +35,14 @@ namespace LoadDataTest
 
             //Console.WriteLine(dataDetails.Count());
 
-            var connection = new InMemorySqliteConnection();
-            SchoolPerformanceContext context = connection._context;
+            //var connection = new InMemorySqliteConnection();
+            //SchoolPerformanceContext context = connection._context;
 
-            Console.WriteLine(context.School.Count());
+            //Console.WriteLine(context.School.Count());
+
+            var converter = new NullDoubleConverter();
+            var t = converter.ConvertFromString("0.00", null, new MemberMapData(null));
+            Console.WriteLine(t);
 
         }
 
