@@ -240,6 +240,21 @@ namespace SchoolPerformaceTest
             Assert.AreEqual(_data["SchoolContextualTestExtraFields"].Count(), data.Count());
         }
 
+        //Test ImportCSV class excludes URN with value of NAT (i.e national data)
+        //when loading SchoolContextual data
+        [TestMethod]
+        public void ImportSchoolContextualDataExcludesNATData()
+        {
+            //Arrange
+            var import = new ImportCSV("SchoolContextualTestSkipRecords.csv");
+
+            //Act
+            var data = import.GetDataFromCSV<SchoolContextual>();
+
+            //Assert
+            Assert.AreEqual(_data["SchoolContextualTestSkipRecords"].Count() - 1, data.Count());
+        }
+
         //Tests that when a class other than the models for this project is supplied
         //an exception is thrown
         [TestMethod]
@@ -440,6 +455,16 @@ namespace SchoolPerformaceTest
                     PSENELK = "", PNUMEAL = "", PNUMFSMEVER = ""},
                 new { URN = 4, NOR = "NA", PNORG = "NA", PSENELSE = "NA",
                     PSENELK = "NA", PNUMEAL = "NA", PNUMFSMEVER = "NA"}
+            };
+
+            _data["SchoolContextualTestSkipRecords"] = new List<object>
+            {
+                new { URN = 2, NOR = 1500, PNORG = 0.52, PSENELSE = 0.01,
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
+                new { URN = 1, NOR = 1000, PNORG = 0.49, PSENELSE = 0.01,
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
+                new { URN = "NAT", NOR = 900, PNORG = 0.52, PSENELSE = 0.02,
+                    PSENELK = 0.06, PNUMEAL = 0.2, PNUMFSMEVER = 0.23}
             };
         }
 
