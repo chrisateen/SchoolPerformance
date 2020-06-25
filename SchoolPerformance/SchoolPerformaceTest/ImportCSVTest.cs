@@ -33,8 +33,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolData()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolTest.csv");
+
+            //Act
             var data = import.GetDataFromCSV<School>();
 
             //Assert
@@ -46,8 +48,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDataWithNullRecords()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolTestNullRecords.csv");
+            
+            //Act
             var data = import.GetDataFromCSV<School>();
 
             //Assert
@@ -59,8 +63,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDataIgnoreRowsWithTwoOrLessFields()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolTestDifferentRowLength.csv");
+
+            //Act
             var data = import.GetDataFromCSV<School>();
 
             //Assert
@@ -74,8 +80,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDataExcludesFieldsNotInMap()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolTestExtraFields.csv");
+
+            //Act
             var data = import.GetDataFromCSV<School>();
 
             //Assert
@@ -86,8 +94,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolResultData()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolResultTest.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
@@ -99,8 +109,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolResultDataWithNullRecords()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolResultTestNullRecords.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
@@ -112,8 +124,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolResultDataIgnoreRowsWithTwoOrLessFields()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolResultTestDifferentRowLength.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
@@ -127,8 +141,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolResultDataExcludesFieldsNotInMap()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolResultTestExtraFields.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
@@ -140,8 +156,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDetailsData()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolDetailsTest.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolDetails>();
 
             //Assert
@@ -153,8 +171,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDetailsDataWithNullRecords()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolDetailsTestNullRecords.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolDetails>();
 
             //Assert
@@ -166,8 +186,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolDetailsDataExcludesFieldsNotInMap()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolDetailsTestExtraFields.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolDetails>();
 
             //Assert
@@ -178,8 +200,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolContextualData()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolContextualTest.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolContextual>();
 
             //Assert
@@ -191,8 +215,10 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolContextualDataWithNullRecords()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolContextualTestNullRecords.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolContextual>();
 
             //Assert
@@ -204,12 +230,43 @@ namespace SchoolPerformaceTest
         [TestMethod]
         public void ImportSchoolContextualDataExcludesFieldsNotInMap()
         {
-            //Act
+            //Arrange
             var import = new ImportCSV("SchoolContextualTestExtraFields.csv");
+
+            //Act
             var data = import.GetDataFromCSV<SchoolContextual>();
 
             //Assert
             Assert.AreEqual(_data["SchoolContextualTestExtraFields"].Count(), data.Count());
+        }
+
+        //Tests that when a class other than the models for this project is supplied
+        //an exception is thrown
+        [TestMethod]
+        public void ImportWrongClassThrowsException()
+        {
+            //Arrange
+            var import = new ImportCSV("SchoolTest.csv");
+
+            //Act and Assert
+            var ex = Assert.ThrowsException<ArgumentException>(() => import.GetDataFromCSV<BlankClass>());
+
+            Assert.AreEqual("Model name does not exist", ex.Message);
+
+        }
+
+        //Tests that an exception is thrown when attempting to read a csv file that doesn't exist
+        [TestMethod]
+        public void FileDoesNotExistException()
+        {
+            //Arrange
+            var import = new ImportCSV("FileDoesNotExist.csv");
+
+
+            //Act and Assert
+            var ex = Assert.ThrowsException<FileNotFoundException>(() => import.GetDataFromCSV<School>());
+
+            Assert.AreEqual("CSV file does not exist", ex.Message);
         }
 
         //Remove any mock csv files
