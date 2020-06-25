@@ -16,6 +16,14 @@ namespace LoadData
                 return null;
             }
 
+            //Sorts out string with a percentage sign
+            if (text.Contains("%"))
+            {
+                var doubleNum = double.Parse(text.Trim().Split('%')[0])/100;
+
+                return doubleNum;
+            }
+
             return base.ConvertFromString(text, row, memberMapData);
         }
 
