@@ -13,8 +13,12 @@ namespace LoadData
         {
             Map(m => m.URN).TypeConverter<NullURNAndLAESTABConverter>();
             Map(m => m.NOR).TypeConverter<NullIntConverter>();
-
-
+            Map(m => m.PNORG).TypeConverter<NullDoubleConverter>();
+            Map(m => m.PSENELSE).TypeConverter<NullDoubleConverter>();
+            Map(m => m.PSENELK).TypeConverter<NullDoubleConverter>();
+            Map(m => m.PNUMEAL).TypeConverter<NullDoubleConverter>();
+            Map(m => m.PNUMFSMEVER).TypeConverter<NullDoubleConverter>();
+            Map(m => m.PTFSM6CLA1A).TypeConverter<NullDoubleConverter>();
         }
     }
 }
