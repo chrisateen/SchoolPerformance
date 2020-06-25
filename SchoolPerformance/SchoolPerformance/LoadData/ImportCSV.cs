@@ -8,6 +8,9 @@ using SchoolPerformance.Models;
 
 namespace LoadData
 {
+    /// <summary>
+    /// Imports data from CSV to an IEnumerable list of a model type
+    /// </summary>
     public class ImportCSV
     {
         private string _fileLocation;
@@ -18,50 +21,87 @@ namespace LoadData
             _fileLocation = fileLocation;
         }
 
+        /// <summary>
+        /// Creates a collection of model data from a CSV file
+        /// </summary>
+        /// <typeparam name="M">Type of model class data</typeparam>
+        /// <returns>IEnumerable list of specified model type </returns>
         public IEnumerable<M> GetDataFromCSV<M> ()
         {
-            using (var reader = new StreamReader(_fileLocation))
-            using (_csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            try
             {
-                var modelName = typeof(M).Name;
-
-                if (modelName == "School")
+                using (var reader = new StreamReader(_fileLocation))
+                using (_csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
-                    _csv.Configuration.RegisterClassMap<SchoolMap>();
-                    _csv.Configuration.MissingFieldFound = null;
+                    var modelName = typeof(M).Name;
 
-                    //Gets rid of bad data
-                    _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
+                    if (modelName == "School")
+                    {
+                        _csv.Configuration.RegisterClassMap<SchoolMap>();
 
-                    var data = _csv.GetRecords<School>().ToList();
+                        //No exception should be thrown if there are missing data for a field
+                        _csv.Configuration.MissingFieldFound = null;
 
-                    return (IEnumerable<M>)data;
+                        //Gets rid of bad data
+                        _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
+
+                        var data = _csv.GetRecords<School>().ToList();
+
+                        return (IEnumerable<M>)data;
+                    }
+
+                    if (modelName == "SchoolResult")
+                    {
+                        _csv.Configuration.RegisterClassMap<SchoolResultMap>();
+
+                        //No exception should be thrown if there are missing data for a field
+                        _csv.Configuration.MissingFieldFound = null;
+
+                        //Gets rid of bad data
+                        _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
+
+                        var data = _csv.GetRecords<SchoolResult>().ToList();
+
+                        return (IEnumerable<M>)data;
+                    }
+
+                    if (modelName == "SchoolDetails")
+                    {
+                        _csv.Configuration.RegisterClassMap<SchoolDetailsMap>();
+
+                        //No exception should be thrown if there are missing data for a field
+                        _csv.Configuration.MissingFieldFound = null;
+
+                        var data = _csv.GetRecords<SchoolDetails>().ToList();
+
+                        return (IEnumerable<M>)data;
+                    }
+
+                    if (modelName == "SchoolContextual")
+                    {
+                        _csv.Configuration.RegisterClassMap<SchoolContextualMap>();
+
+                        //No exception should be thrown if there are missing data for a field
+                        _csv.Configuration.MissingFieldFound = null;
+
+                        var data = _csv.GetRecords<SchoolContextual>().ToList();
+
+                        return (IEnumerable<M>)data;
+                    }
+
+                    //If the type is not one of the models defined for this project
+                    //an exception is thrown
+                    else
+                    {
+                        throw new ArgumentException($"Model name does not exist");
+                    }
+
                 }
 
-                if (modelName == "SchoolResult")
-                {
-                    _csv.Configuration.RegisterClassMap<SchoolResultMap>();
-                    _csv.Configuration.MissingFieldFound = null;
-                    //Gets rid of bad data
-                    _csv.Configuration.ShouldSkipRecord = row => row.Length < 3;
-                    var data = _csv.GetRecords<SchoolResult>().ToList();
-
-                    return (IEnumerable<M>)data;
-                }
-
-                if (modelName == "SchoolDetails")
-                {
-                    _csv.Configuration.RegisterClassMap<SchoolDetailsMap>();
-                    _csv.Configuration.MissingFieldFound = null;
-                    var data = _csv.GetRecords<SchoolDetails>().ToList();
-
-                    return (IEnumerable<M>)data;
-                }
-
-                else
-                {
-                    throw new ArgumentException($"Model name does not exist");
-                }
+            } 
+            catch (FileNotFoundException)
+            {
+                throw new FileNotFoundException("CSV file does not exist");
             }
 
         }
