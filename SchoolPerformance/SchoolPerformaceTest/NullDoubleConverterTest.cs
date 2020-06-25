@@ -52,5 +52,33 @@ namespace SchoolPerformaceTest
             //Assert
             Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
         }
+
+        //Tests NullDoubleConverter converts NP values to null
+        [TestMethod]
+        public void NullDoubleConverterConvertsNP()
+        {
+            //Arrange
+            var converter = new NullDoubleConverter();
+
+            //Act
+            var num = "NP";
+
+            //Assert
+            Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
+
+        //Tests NullDoubleConverter converts SUPP values to null
+        [TestMethod]
+        public void NullDoubleConverterConvertsSUPP()
+        {
+            //Arrange
+            var converter = new NullDoubleConverter();
+
+            //Act
+            var num = "SUPP";
+
+            //Assert
+            Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
     }
 }
