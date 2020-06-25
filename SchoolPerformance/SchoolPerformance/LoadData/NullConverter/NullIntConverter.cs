@@ -12,7 +12,7 @@ namespace LoadData
     {
         public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
         {
-            if (text == "NE" || text == "NP" || text == "SUPP" || text == "LOWCOV" || String.IsNullOrEmpty(text))
+            if (text == "NE" || text == "NA" || text == "NP" || text == "SUPP" || text == "LOWCOV" || String.IsNullOrEmpty(text))
             {
                 return null;
             }
