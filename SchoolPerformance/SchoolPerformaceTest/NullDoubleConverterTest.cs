@@ -39,6 +39,36 @@ namespace SchoolPerformaceTest
             Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
         }
 
+        //Tests NullDoubleConverter is able to handle a percentage string
+        [TestMethod]
+        public void NullDoubleConverterConvertsPercentageString()
+        {
+            //Arrange
+            var converter = new NullDoubleConverter();
+
+            //Act
+            var num = "40%";
+            var doubleNum = 0.40;
+
+            //Assert
+            Assert.AreEqual(doubleNum, converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
+
+        //Tests NullDoubleConverter is able to handle 0% string
+        [TestMethod]
+        public void NullDoubleConverterConvertsZeroPercent()
+        {
+            //Arrange
+            var converter = new NullDoubleConverter();
+
+            //Act
+            var num = "0%";
+            double doubleNum = 0;
+
+            //Assert
+            Assert.AreEqual(doubleNum, converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
+
         //Tests NullDoubleConverter converts NE values to null
         [TestMethod]
         public void NullDoubleConverterConvertsNE()

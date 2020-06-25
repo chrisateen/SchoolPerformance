@@ -1,5 +1,0 @@
-URN,STREET,LOCALITY,ADDRESS3,TOWN,POSTCODE,SCHOOLTYPE,GENDER,RELCHAR
-2,Test 1,Locality 1,Address 1,Town 1,POSTCODE 1,Type 1,Mixed,None
-1,Test 2,Locality 2,Address 2,Town 2,POSTCODE 2,Type 2,Female,None
-,,,,,,,,
-3,,,,,,Type 2,Female,None
