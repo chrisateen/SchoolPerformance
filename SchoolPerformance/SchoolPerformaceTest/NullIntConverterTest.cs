@@ -53,6 +53,20 @@ namespace SchoolPerformaceTest
             Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
         }
 
+        //Tests NullIntConverter converts NA values to null
+        [TestMethod]
+        public void NullIntConverterConvertsNA()
+        {
+            //Arrange
+            var converter = new NullIntConverter();
+
+            //Act
+            var num = "NA";
+
+            //Assert
+            Assert.IsNull(converter.ConvertFromString(num, null, new MemberMapData(null)));
+        }
+
         //Tests NullIntConverter converts NP values to null
         [TestMethod]
         public void NullIntConverterConvertsNP()
