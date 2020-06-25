@@ -317,11 +317,11 @@ namespace SchoolPerformaceTest
 
             _data["SchoolResultTest"] = new List<object>
             {
-                new { URN = 2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43, 
+                new { URN = 2, PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43, 
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6, 
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
-                new { URN = 1, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                new { URN = 1, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4}
@@ -330,12 +330,12 @@ namespace SchoolPerformaceTest
             _data["SchoolResultTestExtraFields"] = new List<object>
             {
                 new { EXTRA1 = "Extra", EXTRA2 = "Extra",
-                    URN = 2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    URN = 2, PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
                 new { EXTRA1 = "Extra", EXTRA2 = "Extra",
-                    URN = 1, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    URN = 1, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4}
@@ -343,19 +343,19 @@ namespace SchoolPerformaceTest
 
             _data["SchoolResultTestNullRecords"] = new List<object>
             {
-                new { URN = 2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = 40,
+                new { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = 40,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = 0.35},
-                new { URN = 3, ATT8SCR = "SUPP", ATT8SCR_FSM6CLA1A = "NE", ATT8SCR_NFSM6CLA1A = "NP",
+                new { URN = 3, PTFSM6CLA1A = 0.33, ATT8SCR = "SUPP", ATT8SCR_FSM6CLA1A = "NE", ATT8SCR_NFSM6CLA1A = "NP",
                     P8MEA=0.01, P8MEA_FSM6CLA1A = "NA", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = "NA", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = "NA", PTNOTFSM6CLA1ABASICS_95 = 0.35},
-                new { URN = 1, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                new { URN = 1, PTFSM6CLA1A = 0.20, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
-                new { URN = "", ATT8SCR = "", ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = "",
+                new { URN = "", PTFSM6CLA1A = "", ATT8SCR = "", ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = "",
                     P8MEA="", P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = "", PTL2BASICS_94 = "",
                     PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = "", PTL2BASICS_95 = "",
                     PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = ""},
@@ -363,11 +363,11 @@ namespace SchoolPerformaceTest
 
             _data["SchoolResultTestDifferentRowLength"] = new List<object>
             {
-                new { URN = 2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                new { URN = 2, PTFSM6CLA1A = 0.33, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
-                new { URN = 1, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                new { URN = 1, PTFSM6CLA1A = 0.33, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
@@ -413,33 +413,33 @@ namespace SchoolPerformaceTest
             _data["SchoolContextualTest"] = new List<object>
             {
                 new { URN = 2, NOR = 1500, PNORG = 0.52, PSENELSE = 0.01,
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 },
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
                 new { URN = 1, NOR = 1000, PNORG = 0.49, PSENELSE = 0.01,
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 }
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2 }
             };
 
             _data["SchoolContextualTestExtraFields"] = new List<object>
             {
                 new { URN = 2, NOR = 1500, EXTRA1 = 0, PNORG = 0.52, 
                     PSENELSE = 0.01, EXTRA2 = 0, EXTRA3 = "Extra3",
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 },
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
                 new { URN = 1, NOR = 1000, EXTRA1 = 0, PNORG = 0.49, 
                     PSENELSE = 0.01, EXTRA2 = 0, EXTRA3 = "Extra3",
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 }
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2}
             };
 
             _data["SchoolContextualTestNullRecords"] = new List<object>
             {
                 new { URN = 2, NOR = 1500, PNORG = 0.52, PSENELSE = 0.01,
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 },
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
                 new { URN = 1, NOR = 1000, PNORG = 0.49, PSENELSE = 0.01,
-                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2, PTFSM6CLA1A = 0.2 },
+                    PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},
                 new { URN = "", NOR = "", PNORG = "", PSENELSE = "",
-                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = "", PTFSM6CLA1A = "" },
+                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = ""},
                 new { URN = 3, NOR = 900, PNORG = 0.52, PSENELSE = "",
-                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = "", PTFSM6CLA1A = "" },
+                    PSENELK = "", PNUMEAL = "", PNUMFSMEVER = ""},
                 new { URN = 4, NOR = "NA", PNORG = "NA", PSENELSE = "NA",
-                    PSENELK = "NA", PNUMEAL = "NA", PNUMFSMEVER = "NA", PTFSM6CLA1A = "NA" }
+                    PSENELK = "NA", PNUMEAL = "NA", PNUMFSMEVER = "NA"}
             };
         }
 

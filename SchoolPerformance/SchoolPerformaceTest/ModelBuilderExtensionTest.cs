@@ -1,5 +1,6 @@
 ﻿using LoadData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Models;
@@ -112,6 +113,5 @@ namespace SchoolPerformaceTest
             Assert.AreEqual(0, _context.SchoolDetails.Where(x => x.School.SchoolResults == null).Count());
             Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School.SchoolDetails == null).Count());
         }
-
     }
 }
