@@ -1,0 +1,19 @@
+.main-navbar{
+    background-color:#e0dae0;
+}
+.main-sidebar{
+    background-color: #404E67;
+}
+
+.text-header{
+    font-size: 250%;
+}
+
+hr{
+    width: 30%;
+    border: 1px dashed;
+}
+
+.jumbotron-home {
+    background: none
+}
