@@ -60,7 +60,6 @@
 
   <ItemGroup>
     <Folder Include="Connected Services\" />
-    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
