@@ -274,3 +274,4 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.RazorTargetAssemblyInfo.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.Views.pdb
+D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\libman.json
