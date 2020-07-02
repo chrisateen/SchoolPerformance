@@ -3,6 +3,7 @@ using SchoolPerformance.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -14,14 +15,22 @@ namespace LoadData
         private static ModelBuilder _modelBuilder;
         private static IEnumerable<int> _urnList;
 
-        public static void Seed(this ModelBuilder modelBuilder)
+        //Get the directory of the folder where the csv files are held
+        private static string _rootDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
+        private static string _CSVRootDir = Path.Combine(_rootDir, "SchoolPerformance\\LoadData\\CSVFiles");
+
+        private static int _academicYear;
+
+        public static void Seed(this ModelBuilder modelBuilder,int academicYear)
         {
             _modelBuilder = modelBuilder;
-            addSchool("D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv");
+            _academicYear = academicYear;
 
-            _dataLocations["SchoolResult"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_ks4final.csv";
-            _dataLocations["SchoolDetails"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_school_information.csv";
-            _dataLocations["SchoolContextual"] = "D:\\Google Drive\\Bbk Computer Science\\Project\\Data\\england_census.csv";
+            addSchool(Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv"));
+
+            _dataLocations["SchoolResult"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv");
+            _dataLocations["SchoolDetails"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_school_information.csv");
+            _dataLocations["SchoolContextual"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_census.csv");
 
             foreach (KeyValuePair<string, string> kvp in _dataLocations)
             {
@@ -60,7 +69,7 @@ namespace LoadData
                 data = data.Where(x => x.URN !=0);
 
                 //Academic year to be assigned to each data
-                data.ToList().ForEach(x => x.ACADEMICYEAR = 2019);
+                data.ToList().ForEach(x => x.ACADEMICYEAR = _academicYear);
 
                 _modelBuilder.Entity<SchoolResult>().HasData(data);
 

@@ -60,8 +60,9 @@ namespace SchoolPerformance.Models
                 .HasMany<SchoolResult>(s => s.SchoolResults)
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
-
-                modelBuilder.Seed();
+                
+            //Seed data
+                modelBuilder.Seed(2019);
 
         }
 
