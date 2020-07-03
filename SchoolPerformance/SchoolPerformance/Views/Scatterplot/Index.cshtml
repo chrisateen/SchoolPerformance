@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SchoolPerformance.Models.SchoolResult>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <!-- Header -->
+    <section class="content-header">
+        <div class="container-fluid">
+
+            <!-- Header Title-->
+            <div class="row mb-2">
+                <div>
+                    <h1>Result Scatterplot</h1>
+                </div>
+
+            </div>
+            <!-- /.header title-->
+
+        </div>
+    </section>
+    <!-- /.header -->
+
+    <div class="content">
+
+        <div class="container-fluid">
+
+            <div class="chart">
+                <canvas id="lineChart"></canvas>
+            </div>
+
+            @*<table>
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.School.SCHNAME)</th>
+                            <th>@Html.DisplayNameFor(model => model.PTFSM6CLA1A)</th>
+                            <th>@Html.DisplayNameFor(model => model.P8MEA)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var result in Model)
+                        {
+                            if (result.P8MEA != null)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(r => result.School.SCHNAME)</td>
+                                    <td>@Html.DisplayFor(r => result.PTFSM6CLA1A)</td>
+                                    <td>@Html.DisplayFor(r => result.P8MEA)</td>
+                                </tr>
+
+                            }
+
+                        }
+                    </tbody>
+                </table>*@
+
+
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Scatterplot.js"></script>
