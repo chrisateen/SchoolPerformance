@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolPerformance.Models;
 using Microsoft.Extensions.Azure;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SchoolPerformance.Repository;
 
 namespace SchoolPerformance
 {
@@ -25,6 +27,9 @@ namespace SchoolPerformance
                                 _configuration.GetConnectionString("SchoolPerformanceDb")));
 
             services.AddMvc();
+
+            //Register repository
+            services.AddScoped(typeof( ISchoolResultRepository <>),typeof(SchoolResultRepository<>));
 
             //services.AddAzureClients(builder =>
             //{
