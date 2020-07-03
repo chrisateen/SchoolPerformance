@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentAssertions;
+using FluentAssertions.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Controllers;
 using System;
@@ -21,6 +23,8 @@ namespace SchoolPerformaceTest.ControllerTest
 
             // Assert
             Assert.IsNotNull(result);
+            controller.Index().Should()
+                .BeViewResult().WithDefaultViewName();
         }
     }
 }
