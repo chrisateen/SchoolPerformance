@@ -18,18 +18,23 @@ namespace SchoolPerformance.Models
         public int? NOR { get; set; }
 
         [Display(Name = "Percentage of Female Pupils")]
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PNORG { get; set; }
 
         [Display(Name = "Percentage of SEN Pupils with an EHC plan")]
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PSENELSE { get; set; }
 
         [Display(Name = "Percentage of Pupils with SEN support")]
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PSENELK { get; set; }
 
         [Display(Name = "Percentage of EAL Pupils")]
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PNUMEAL { get; set; }
 
         [Display(Name = "Percentage of FSM6 Pupils")]
+        [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PNUMFSMEVER { get; set; }
 
         public School School { get; set; }
