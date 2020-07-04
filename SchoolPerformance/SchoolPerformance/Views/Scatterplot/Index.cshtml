@@ -27,6 +27,27 @@
 
         <div class="container-fluid">
 
+            <div class="row">
+
+                <form class="form-inline col-md-6 mb-2">
+
+                    <div class="input-group col-12">
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-info">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+
+                </form>
+
+            </div>
+
             <div class="chart">
                 <canvas id="Scatterplot"></canvas>
             </div>
@@ -46,15 +67,15 @@
 
         for (let i = 0, len = results.length; i < len; i++) {
 
-            if (results[i].p8MEA !== null) {
+            if (results[i]["p8MEA"] !== null) {
 
                 data.push({
 
-                    x: results[i].ptfsM6CLA1A,
-                    y: results[i].p8MEA
+                    x: results[i]["ptfsM6CLA1A"],
+                    y: results[i]["p8MEA"]
                 });
 
-                schools.push(results[i].schname);
+                schools.push(results[i]["schname"]);
             }
 		}
 
@@ -69,7 +90,6 @@
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'Result vs Percentage Disadvataged Pupils',
                     data: data[0],
                     backgroundColor: "rgba(255, 99, 132, 0.2)",
                     borderColor: "rgba(255, 99, 132)"
@@ -77,7 +97,12 @@
                 }]
             },
             options: {
-                scales: {
+
+                legend : {
+                    display: false
+                },
+
+                scales : {
                     xAxes: [{
                         type: 'linear',
                         position: 'bottom'
