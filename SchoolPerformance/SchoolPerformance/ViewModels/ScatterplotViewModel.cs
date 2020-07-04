@@ -64,6 +64,11 @@ namespace SchoolPerformance.ViewModels
         [DisplayFormat(DataFormatString = "{0:P0}")]
         public double? PTNOTFSM6CLA1ABASICS_95 { get; set; }
 
+        /// <summary>
+        /// Converts from SchoolResult model to ScatterplotViewModel
+        /// </summary>
+        /// <param name="result">SchoolResult model object 
+        /// to be converted to ScatterplotViewModel object</param>
         public static implicit operator ScatterplotViewModel(SchoolResult result)
         {
             return new ScatterplotViewModel
