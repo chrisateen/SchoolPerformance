@@ -89,6 +89,7 @@
         var scatterChart = new Chart(ctx, {
             type: 'scatter',
             data: {
+                labels: data[1],
                 datasets: [{
                     data: data[0],
                     backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -107,6 +108,15 @@
                         type: 'linear',
                         position: 'bottom'
                     }]
+                },
+
+                tooltips: {
+                   callbacks: {
+                      label: function(tooltipItem, data) {
+                         var label = data.labels[tooltipItem.index];
+                         return label + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ')';
+                      }
+                   }
                 }
             }
         });
