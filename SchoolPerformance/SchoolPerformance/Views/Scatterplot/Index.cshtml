@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SchoolPerformance.Models.SchoolResult>
+﻿@model IEnumerable<SchoolPerformance.ViewModels.ScatterplotViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,39 +28,62 @@
         <div class="container-fluid">
 
             <div class="chart">
-                <canvas id="lineChart"></canvas>
+                <canvas id="Scatterplot"></canvas>
             </div>
-
-            @*<table>
-                    <thead>
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.School.SCHNAME)</th>
-                            <th>@Html.DisplayNameFor(model => model.PTFSM6CLA1A)</th>
-                            <th>@Html.DisplayNameFor(model => model.P8MEA)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var result in Model)
-                        {
-                            if (result.P8MEA != null)
-                            {
-                                <tr>
-                                    <td>@Html.DisplayFor(r => result.School.SCHNAME)</td>
-                                    <td>@Html.DisplayFor(r => result.PTFSM6CLA1A)</td>
-                                    <td>@Html.DisplayFor(r => result.P8MEA)</td>
-                                </tr>
-
-                            }
-
-                        }
-                    </tbody>
-                </table>*@
-
-
-
 
         </div>
     </div>
 </div>
 
-<script src="~/js/Scatterplot.js"></script>
+@*<script src="~/js/Scatterplot.js"></script>*@
+<script>
+
+    var results = @Json.Serialize(Model);
+
+    function generateData() {
+        var data = []
+
+        for (let i = 0, len = results.length; i < len; i++) {
+
+            if (results[i].p8MEA !== null) {
+                data.push({
+
+                    x: results[i].ptfsM6CLA1A,
+                    y: results[i].p8MEA
+                });
+            }
+		}
+
+		return data;
+    }
+
+    generateData();
+
+    window.onload = function () {
+        var ctx = document.getElementById('Scatterplot').getContext('2d');
+        var scatterChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: generateData()
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                }
+            }
+        });
+    };
+
+</script>
+
+
+
+
+	
+

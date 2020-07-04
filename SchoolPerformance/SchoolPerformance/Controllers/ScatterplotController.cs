@@ -22,7 +22,7 @@ namespace SchoolPerformance.Controllers
 
         public IActionResult Index()
         {
-            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME),r => r.School);
+            var result = _result.Get(r => r.PTFSM6CLA1A != null,r => r.OrderBy(s => s.School.SCHNAME),r => r.School);
 
             List<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
 

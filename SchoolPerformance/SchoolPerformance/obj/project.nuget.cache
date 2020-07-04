@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8+HteHGU8GZcVU02sKquWMJpnCWmusTDOJp3K2JuR9Do+og4zMhyaKxAp5/KSiO4ozRtZmMlze/cbnRLurK0Xw==",
+  "dgSpecHash": "D0tex+at0elLWA9a78+ir9xNIxe4Sj5EuA2tHGWmO5EkjAVon1hOcqpvHCXR2YgPQz7M6yHWePVun+94IVIXHw==",
   "success": true,
   "projectFilePath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "C:\\Users\\christine\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\csvhelper\\15.0.5\\csvhelper.15.0.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.5\\microsoft.aspnetcore.jsonpatch.3.1.5.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.5\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.5.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
@@ -61,7 +63,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\christine\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\christine\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
