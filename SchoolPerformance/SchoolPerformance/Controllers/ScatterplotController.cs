@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
+using SchoolPerformance.ViewModels;
 
 namespace SchoolPerformance.Controllers
 {
@@ -23,7 +24,15 @@ namespace SchoolPerformance.Controllers
         {
             var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME),r => r.School);
 
-            return View(result);
+            List<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
+
+            foreach(var item in result)
+            {
+                ScatterplotViewModel viewModelItem = item;
+                resultViewModel.Add(viewModelItem);
+            }
+
+            return View(resultViewModel);
         }
     }
 }

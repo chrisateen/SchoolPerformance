@@ -26,7 +26,7 @@ namespace SchoolPerformance
                     options.UseSqlServer(
                                 _configuration.GetConnectionString("SchoolPerformanceDb")));
 
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson();
 
             //Register repository
             services.AddScoped(typeof( ISchoolResultRepository <>),typeof(SchoolResultRepository<>));
@@ -35,6 +35,8 @@ namespace SchoolPerformance
             //{
             //    builder.AddBlobServiceClient(_configuration["ConnectionStrings:SchoolPerformanceDb"]);
             //});
+
+
 
         }
 
