@@ -35,29 +35,33 @@
     </div>
 </div>
 
-@*<script src="~/js/Scatterplot.js"></script>*@
 <script>
 
     var results = @Json.Serialize(Model);
 
+
     function generateData() {
         var data = []
+        var schools = []
 
         for (let i = 0, len = results.length; i < len; i++) {
 
             if (results[i].p8MEA !== null) {
+
                 data.push({
 
                     x: results[i].ptfsM6CLA1A,
                     y: results[i].p8MEA
                 });
+
+                schools.push(results[i].schname);
             }
 		}
 
-		return data;
+        return [data,schools];
     }
 
-    generateData();
+    var data = generateData();
 
     window.onload = function () {
         var ctx = document.getElementById('Scatterplot').getContext('2d');
@@ -65,8 +69,11 @@
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'Scatter Dataset',
-                    data: generateData()
+                    label: 'Result vs Percentage Disadvataged Pupils',
+                    data: data[0],
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    borderColor: "rgba(255, 99, 132)"
+
                 }]
             },
             options: {
@@ -85,5 +92,5 @@
 
 
 
-	
+
 
