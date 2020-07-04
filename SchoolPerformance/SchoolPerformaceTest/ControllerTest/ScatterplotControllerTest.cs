@@ -9,6 +9,7 @@ using SchoolPerformance.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SchoolPerformance.ViewModels;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -27,7 +28,7 @@ namespace SchoolPerformanceTest.ControllerTest
         }
 
         [TestMethod]
-        public void IndexReturnsHomePageWithResultModel()
+        public void IndexReturnsHomePageWithScatterplotViewModel()
         {
 
             // Act and Assert
@@ -38,7 +39,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
-                .BeAssignableTo<IEnumerable<SchoolResult>>().Subject;
+                .BeAssignableTo<IEnumerable<ScatterplotViewModel>>().Subject;
         }
     }
 }

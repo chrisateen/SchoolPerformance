@@ -535,3 +535,4 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.CoreCompileInputs.cache
+D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
