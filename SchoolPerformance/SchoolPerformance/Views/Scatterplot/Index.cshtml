@@ -106,7 +106,13 @@
                 scales : {
                     xAxes: [{
                         type: 'linear',
-                        position: 'bottom'
+                        position: 'bottom',
+                        ticks: {
+                            // Change x axis to percentage
+                            callback: function(value, index, values) {
+                                return Math.round(value * 100) + '%';
+                            }
+                        }
                     }]
                 },
 
@@ -114,7 +120,8 @@
                    callbacks: {
                       label: function(tooltipItem, data) {
                          var label = data.labels[tooltipItem.index];
-                         return label + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ')';
+                           return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
+                               + tooltipItem.yLabel + ')';
                       }
                    }
                 }
