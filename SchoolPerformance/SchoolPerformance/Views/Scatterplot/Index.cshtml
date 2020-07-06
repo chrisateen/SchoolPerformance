@@ -26,13 +26,13 @@
     <div class="content">
 
         <div class="container-fluid">
-
             <div class="row">
 
-                <form class="form-inline col-md-6 mb-2">
+                <div class="col-md-6 mb-2">
+
 
                     <div class="input-group col-12">
-                        <select id="inputState" class="form-control">
+                        <select id="measure" class="form-control">
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_NFSM6CLA1A)</option>
@@ -48,15 +48,17 @@
                         </select>
 
                         <span class="input-group-append">
-                            <button type="submit" class="btn btn-info">
+                            <button class="btn btn-info" onclick="getMeasure()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </span>
+
                     </div>
 
-                </form>
+                </div>
 
             </div>
+
 
             <div class="chart">
                 <canvas id="Scatterplot"></canvas>
@@ -148,6 +150,11 @@
             }
         });
     };
+
+    function getMeasure() {
+        console.log(document.getElementById("measure").value);
+    }
+    
 
 </script>
 
