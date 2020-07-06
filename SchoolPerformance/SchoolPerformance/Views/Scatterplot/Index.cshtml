@@ -33,8 +33,18 @@
 
                     <div class="input-group col-12">
                         <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
+                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_NFSM6CLA1A)</option>
+                            <option selected>@Html.DisplayNameFor(m => m.First().P8MEA)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().P8MEA_FSM6CLA1A)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().P8MEA_NFSM6CLA1A)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_94)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_94)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_94)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_95)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_95)</option>
+                            <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
                         </select>
 
                         <span class="input-group-append">
@@ -107,11 +117,21 @@
                     xAxes: [{
                         type: 'linear',
                         position: 'bottom',
+                        scaleLabel: {
+                            display: true,
+                            labelString: '% disadvantaged pupils at the end of KS4'
+                        },
                         ticks: {
                             // Change x axis to percentage
                             callback: function(value, index, values) {
                                 return Math.round(value * 100) + '%';
                             }
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Progress 8'
                         }
                     }]
                 },
