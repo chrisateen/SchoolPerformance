@@ -59,6 +59,46 @@ function getDataIndex(index) {
     return dataIndex[index];
 }
 
+//Update y axis ticks to percentage or number
+function changeTicks(yAxisLabel) {
+
+    if (yAxisLabel.includes("Percentage")) {
+
+        return function (value) {
+            return Math.round(value * 100) + '%';
+        }
+
+    } else {
+
+        return function (value) {
+            return value;
+        }
+    }
+
+}
+
+//Update point lables y value to percentage or number
+function changeLabel(yAxisLabel) {
+
+    if (yAxisLabel.includes("Percentage")) {
+
+        return function (tooltipItem, data) {
+                        var label = data.labels[tooltipItem.index];
+                        return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
+                            + Math.round(tooltipItem.yLabel * 100) + '%)';
+                    }
+
+    } else {
+
+        return function (tooltipItem, data) {
+            var label = data.labels[tooltipItem.index];
+            return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
+                + tooltipItem.yLabel + ')';
+        }
+    }
+
+}
+
 //Draws the scatterChart
 function graph(yAxisLabel, data, schools) {
 
@@ -87,26 +127,24 @@ function graph(yAxisLabel, data, schools) {
                     position: 'bottom',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Percentage disadvantaged pupils at the end of KS4'
+                        labelString: 'Percentage of disadvantaged pupils at the end of KS4'
                     },
                     ticks: {
-                        // Change x axis to percentage
-                        callback: function (value, index, values) {
-                            return Math.round(value * 100) + '%';
-                        }
+                        callback: changeTicks(yAxisLabel)
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
                         labelString: yAxisLabel,
-                    }
+                    },
+                    ticks: {}
                 }]
             },
 
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem, data) {
+                    label:  function (tooltipItem, data) {
                         var label = data.labels[tooltipItem.index];
                         return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
                             + tooltipItem.yLabel + ')';
@@ -116,3 +154,27 @@ function graph(yAxisLabel, data, schools) {
         }
     });
 };
+
+
+//Function to update chart based on user selection
+function updateChart() {
+
+    //Get the new y axis label based on option selected by user
+    var newyAxisLabel = getMeasure();
+
+    //Get the index to use to retrive data for the ScatterChart
+    var newDataIndex = getDataIndex(newyAxisLabel);
+
+    //Get the new x and y points and school names for the chart
+    var newScatterData = generateData(newDataIndex, results);
+
+    window.scatter.data.labels = newScatterData[1];
+    window.scatter.data.datasets[0].data = newScatterData[0];
+    window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
+    window.scatter.options.scales.yAxes[0].ticks.callback = changeTicks(newyAxisLabel);
+    window.scatter.options.tooltips.callbacks.label = changeLabel(newyAxisLabel);
+
+    window.scatter.update();
+}
+
+

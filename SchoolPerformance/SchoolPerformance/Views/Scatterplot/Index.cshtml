@@ -87,20 +87,6 @@
     //Create the graphs
     window.onload = graph(title,scatterData[0],scatterData[1]);
 
-    function updateChart() {
-
-        title = getMeasure();
-        dataIndex = getDataIndex(title);
-        scatterData = generateData(dataIndex, results);
-
-        window.scatter.data.labels = scatterData[1];
-        window.scatter.data.datasets[0].data = scatterData[0];
-        window.scatter.options.scales.yAxes[0].scaleLabel.labelString = title;
-
-        window.scatter.update();
-    }
-
-
 </script>
 
 
