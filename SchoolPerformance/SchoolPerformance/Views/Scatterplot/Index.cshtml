@@ -26,12 +26,13 @@
     <div class="content">
 
         <div class="container-fluid">
+
             <div class="row">
 
                 <div class="col-md-6 mb-2">
 
-
                     <div class="input-group col-12">
+
                         <select id="measure" class="form-control">
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
@@ -68,122 +69,32 @@
     </div>
 </div>
 
+<script src="~/js/ScatterChart.js"></script>
+
 <script>
 
     var results = @Json.Serialize(Model);
 
-    var dataIndex = {
-        "Progress 8 score": "p8MEA",
-        "Attainment 8 score": "atT8SCR",
-        "Attainment 8 score disadvantaged pupils": "atT8SCR_FSM6CLA1A",
-        "Attainment 8 Score non-disadvantaged pupils": "atT8SCR_NFSM6CLA1A",
-        "Progress 8 score disadvantaged Pupils": "p8MEA_FSM6CLA1A",
-        "Progress 8 score non-disadvantaged Pupils": "p8MEA_NFSM6CLA1A",
-        "Percentage of pupils achieving grade 9-4 in English and Maths": "ptL2BASICS_94",
-        "Percentage of disadvantaged pupils achieving grade 9-4 in English and Maths": "ptfsM6CLA1ABASICS_94",
-        "Percentage of non-disadvantaged pupils achieving grade 9-4 in English and Maths": "ptnotfsM6CLA1ABASICS_94",
-        "Percentage of pupils achieving grade 9-5 in English and Maths": "ptL2BASICS_95",
-        "Percentage of disadvantaged pupils achieving grade 9-5 in English and Maths": "ptfsM6CLA1ABASICS_95",
-        "Percentage of non-disadvantaged pupils achieving grade 9-5 in English and Maths": "ptnotfsM6CLA1ABASICS_95"
-    }
+    //Get the selected data to view
+    var title = getMeasure();
 
-    function getMeasure() {
+    // Label for the y axis      
+    var dataIndex = getDataIndex(title);
 
-        return document.getElementById("measure").value;
-    }
-   
+    //Get the data for the scatterplot including school names
+    var scatterData = generateData(dataIndex, results);
 
-    function generateData( index ) {
-        var data = []
-        var schools = []
-
-        for (let i = 0, len = results.length; i < len; i++) {
-
-            if (results[i][index] !== null) {
-
-                data.push({
-
-                    x: results[i]["ptfsM6CLA1A"],
-                    y: results[i][index]
-                });
-
-                schools.push(results[i]["schname"]);
-            }
-		}
-
-        return [data,schools];
-    }
-
-
-    function graph() {
-        var title = getMeasure();
-        var measure = dataIndex[title];
-        var data = generateData(measure);
-        var ctx = document.getElementById('Scatterplot').getContext('2d');
-
-        window.scatter = new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                labels: data[1],
-                datasets: [{
-                    data: data[0],
-                    backgroundColor: "rgba(255, 99, 132, 0.2)",
-                    borderColor: "rgba(255, 99, 132)"
-
-                }]
-            },
-            options: {
-
-                legend : {
-                    display: false
-                },
-
-                scales : {
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom',
-                        scaleLabel: {
-                            display: true,
-                            labelString: '% disadvantaged pupils at the end of KS4'
-                        },
-                        ticks: {
-                            // Change x axis to percentage
-                            callback: function(value, index, values) {
-                                return Math.round(value * 100) + '%';
-                            }
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: title,
-                        }
-                    }]
-                },
-
-                tooltips: {
-                   callbacks: {
-                      label: function(tooltipItem, data) {
-                         var label = data.labels[tooltipItem.index];
-                           return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
-                               + tooltipItem.yLabel + ')';
-                      }
-                   }
-                }
-            }
-        });
-    };
-
-    window.onload = graph();
+    //Create the graphs
+    window.onload = graph(title,scatterData[0],scatterData[1]);
 
     function updateChart() {
 
-        var title = getMeasure();
-        var measure = dataIndex[title];
-        var data = generateData(measure);
+        title = getMeasure();
+        dataIndex = getDataIndex(title);
+        scatterData = generateData(dataIndex, results);
 
-        window.scatter.data.labels = data[1];
-        window.scatter.data.datasets[0].data = data[0];
+        window.scatter.data.labels = scatterData[1];
+        window.scatter.data.datasets[0].data = scatterData[0];
         window.scatter.options.scales.yAxes[0].scaleLabel.labelString = title;
 
         window.scatter.update();
