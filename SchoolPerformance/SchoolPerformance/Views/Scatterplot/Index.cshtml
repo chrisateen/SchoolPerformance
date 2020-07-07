@@ -48,7 +48,7 @@
                         </select>
 
                         <span class="input-group-append">
-                            <button class="btn btn-info" onclick="getMeasure()">
+                            <button class="btn btn-info" onclick="updateChart()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </span>
@@ -72,19 +72,39 @@
 
     var results = @Json.Serialize(Model);
 
+    var dataIndex = {
+        "Progress 8 score": "p8MEA",
+        "Attainment 8 score": "atT8SCR",
+        "Attainment 8 score disadvantaged pupils": "atT8SCR_FSM6CLA1A",
+        "Attainment 8 Score non-disadvantaged pupils": "atT8SCR_NFSM6CLA1A",
+        "Progress 8 score disadvantaged Pupils": "p8MEA_FSM6CLA1A",
+        "Progress 8 score non-disadvantaged Pupils": "p8MEA_NFSM6CLA1A",
+        "Percentage of pupils achieving grade 9-4 in English and Maths": "ptL2BASICS_94",
+        "Percentage of disadvantaged pupils achieving grade 9-4 in English and Maths": "ptfsM6CLA1ABASICS_94",
+        "Percentage of non-disadvantaged pupils achieving grade 9-4 in English and Maths": "ptnotfsM6CLA1ABASICS_94",
+        "Percentage of pupils achieving grade 9-5 in English and Maths": "ptL2BASICS_95",
+        "Percentage of disadvantaged pupils achieving grade 9-5 in English and Maths": "ptfsM6CLA1ABASICS_95",
+        "Percentage of non-disadvantaged pupils achieving grade 9-5 in English and Maths": "ptnotfsM6CLA1ABASICS_95"
+    }
 
-    function generateData() {
+    function getMeasure() {
+
+        return document.getElementById("measure").value;
+    }
+   
+
+    function generateData( index ) {
         var data = []
         var schools = []
 
         for (let i = 0, len = results.length; i < len; i++) {
 
-            if (results[i]["p8MEA"] !== null) {
+            if (results[i][index] !== null) {
 
                 data.push({
 
                     x: results[i]["ptfsM6CLA1A"],
-                    y: results[i]["p8MEA"]
+                    y: results[i][index]
                 });
 
                 schools.push(results[i]["schname"]);
@@ -94,11 +114,14 @@
         return [data,schools];
     }
 
-    var data = generateData();
 
-    window.onload = function () {
+    function graph() {
+        var title = getMeasure();
+        var measure = dataIndex[title];
+        var data = generateData(measure);
         var ctx = document.getElementById('Scatterplot').getContext('2d');
-        var scatterChart = new Chart(ctx, {
+
+        window.scatter = new Chart(ctx, {
             type: 'scatter',
             data: {
                 labels: data[1],
@@ -133,7 +156,7 @@
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Progress 8'
+                            labelString: title,
                         }
                     }]
                 },
@@ -151,13 +174,23 @@
         });
     };
 
-    function getMeasure() {
-        console.log(document.getElementById("measure").value);
+    window.onload = graph();
+
+    function updateChart() {
+
+        var title = getMeasure();
+        var measure = dataIndex[title];
+        var data = generateData(measure);
+
+        window.scatter.data.labels = data[1];
+        window.scatter.data.datasets[0].data = data[0];
+        window.scatter.options.scales.yAxes[0].scaleLabel.labelString = title;
+
+        window.scatter.update();
     }
-    
+
 
 </script>
-
 
 
 
