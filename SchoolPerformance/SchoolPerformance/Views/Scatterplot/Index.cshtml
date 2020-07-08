@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<SchoolPerformance.ViewModels.ScatterplotViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Scatterplot";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,10 +29,12 @@
 
             <div class="row">
 
-                <div class="col-md-6 mb-2">
+                <!-- Performance measure dropdown-->
+                <div class="col-lg-6 mb-2">
 
                     <div class="input-group col-12">
 
+                        <!-- Dropdown list-->
                         <select id="measure" class="form-control">
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
                             <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
@@ -47,23 +49,53 @@
                             <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_95)</option>
                             <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
                         </select>
+                        <!-- /.dropdown list-->
 
+                        <!-- Search button-->
                         <span class="input-group-append">
                             <button class="btn btn-info" onclick="updateChart()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </span>
+                        <!-- /.search button-->
 
                     </div>
 
                 </div>
+                <!-- /.performance measure dropdown-->
+
+                <!-- Search school-->
+                <div class="col-lg-6 mb-2">
+
+                    <div class="input-group col-12">
+
+                        <!-- URN Search box-->
+                        <label for="inputSchool" class="col-4 mr-2 col-form-label">Search School by URN</label>
+
+                            <input type="number" class="form-control col-6" id="inputSchool">
+
+                        <!-- /.URN search box-->
+
+                        <!-- Search button-->
+                        <span class="input-group-append">
+                            <button class="btn btn-info">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </span>
+                        <!-- /.search button-->
+
+                    </div>
+
+                </div>
+                <!-- /.search school-->
 
             </div>
 
-
+            <!-- Scatter Chart-->
             <div class="chart">
                 <canvas id="Scatterplot"></canvas>
             </div>
+            <!-- /.scatter chart-->
 
         </div>
     </div>
