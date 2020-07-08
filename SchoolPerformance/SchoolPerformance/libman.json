@@ -21,6 +21,14 @@
     {
       "library": "Chart.js@2.9.3",
       "destination": "wwwroot/Chart.js/"
+    },
+    {
+      "library": "hammer.js@2.0.8",
+      "destination": "wwwroot/hammer.js/"
+    },
+    {
+      "library": "chartjs-plugin-zoom@0.7.7",
+      "destination": "wwwroot/chartjs-plugin-zoom/"
     }
   ]
 }

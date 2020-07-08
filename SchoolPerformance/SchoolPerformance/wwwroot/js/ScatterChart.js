@@ -163,6 +163,19 @@ function graph(yAxisLabel, data, schools) {
                             + tooltipItem.yLabel + ')';
                     }
                 }
+            },
+
+            plugins: {
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'xy'
+                    },
+                    zoom: {
+                        enabled: true,
+                        mode: 'xy'
+                    }
+                }
             }
         }
     });
