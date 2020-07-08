@@ -290,7 +290,6 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\b
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csprojAssemblyReference.cache
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\staticwebassets\SchoolPerformance.StaticWebAssets.Manifest.cache
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\staticwebassets\SchoolPerformance.StaticWebAssets.xml
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache

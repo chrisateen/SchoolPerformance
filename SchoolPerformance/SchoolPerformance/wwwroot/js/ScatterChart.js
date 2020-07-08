@@ -109,16 +109,27 @@ function graph(yAxisLabel, data, schools) {
         data: {
             labels: schools,
             datasets: [{
-                data: data,
+                label: "All Schools",
+                data: data.slice(1, data.length - 1),
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderColor: "rgba(255, 99, 132)"
+                borderColor: "rgba(255, 99, 132)",
+                order:2
 
-            }]
+            },
+                {
+                    label: schools[0],
+                    data: [data[0]],
+                    backgroundColor: "rgba(64, 74, 73, 2)",
+                    borderColor: "rgba(64, 74, 73)",
+                    pointRadius: 5,
+                    order: 1
+
+                }]
         },
         options: {
 
             legend: {
-                display: false
+                display: true
             },
 
             scales: {
@@ -130,7 +141,9 @@ function graph(yAxisLabel, data, schools) {
                         labelString: 'Percentage of disadvantaged pupils at the end of KS4'
                     },
                     ticks: {
-                        callback: changeTicks(yAxisLabel)
+                        callback: function (value) {
+                            return Math.round(value * 100) + "%";
+                        }
                     }
                 }],
                 yAxes: [{
@@ -144,7 +157,7 @@ function graph(yAxisLabel, data, schools) {
 
             tooltips: {
                 callbacks: {
-                    label:  function (tooltipItem, data) {
+                    label: function (tooltipItem, data) {
                         var label = data.labels[tooltipItem.index];
                         return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
                             + tooltipItem.yLabel + ')';
