@@ -50,7 +50,6 @@
                             <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
                         </select>
                         <!-- /.dropdown list-->
-
                         <!-- Search button-->
                         <span class="input-group-append">
                             <button class="btn btn-info" onclick="updateChart()">
@@ -63,7 +62,6 @@
 
                 </div>
                 <!-- /.performance measure dropdown-->
-
                 <!-- Search school-->
                 <div class="col-lg-6 mb-2">
 
@@ -72,10 +70,9 @@
                         <!-- URN Search box-->
                         <label for="inputSchool" class="col-4 mr-2 col-form-label">Search School by URN</label>
 
-                            <input type="number" class="form-control col-6" id="inputSchool">
+                        <input type="number" class="form-control col-6" id="inputSchool">
 
                         <!-- /.URN search box-->
-
                         <!-- Search button-->
                         <span class="input-group-append">
                             <button class="btn btn-info">
@@ -91,11 +88,20 @@
 
             </div>
 
+
+
             <!-- Scatter Chart-->
             <div class="chart">
                 <canvas id="Scatterplot"></canvas>
             </div>
             <!-- /.scatter chart-->
+
+            <div class="row justify-content-end">
+                <button type="button" 
+                        class="btn btn-secondary btn-sm"
+                        onclick="resetScatterZoom()">
+                Reset Zoom</button>
+            </div>
 
         </div>
     </div>

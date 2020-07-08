@@ -200,7 +200,14 @@ function updateChart() {
     window.scatter.options.scales.yAxes[0].ticks.callback = changeTicks(newyAxisLabel);
     window.scatter.options.tooltips.callbacks.label = changeLabel(newyAxisLabel);
 
+    window.scatter.resetZoom();
+
     window.scatter.update();
+
 }
 
+//Reset the scatter chart zoom
+function resetScatterZoom() {
+    window.scatter.resetZoom();
+}
 
