@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SchoolPerformance.Repository.SchoolResultRepository&lt;T&gt;">
+    <Position X="4" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAABABAAAQAIAAAAAAAAAAAAgAAAAAAAAQ=</HashCode>
+      <FileName>Repository\SchoolResultRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.132" />
+  </Class>
+  <Class Name="SchoolPerformance.Models.SchoolPerformanceContext">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAABAAEAAAAAABQAAAAAAAAEA=</HashCode>
+      <FileName>Models\SchoolPerformanceContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchoolPerformance.Controllers.HomeController">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchoolPerformance.Controllers.ScatterplotController">
+    <Position X="7.25" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ScatterplotController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_result" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="SchoolPerformance.Repository.ISchoolResultRepository&lt;T&gt;">
+    <Position X="4" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\ISchoolResultRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

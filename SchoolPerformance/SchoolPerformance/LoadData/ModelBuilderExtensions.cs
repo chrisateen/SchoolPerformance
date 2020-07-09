@@ -38,7 +38,7 @@ namespace LoadData
             }
         }
 
-        public static void addSchool(string fileLocation)
+        private static void addSchool(string fileLocation)
         {
             var import = new ImportCSV(fileLocation);
 
@@ -56,7 +56,7 @@ namespace LoadData
         }
 
  
-        public static void addData(string modelName, string fileLocation)
+        private static void addData(string modelName, string fileLocation)
         {
             var import = new ImportCSV(fileLocation);
 
