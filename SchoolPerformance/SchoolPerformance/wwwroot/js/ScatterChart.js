@@ -1,15 +1,39 @@
-﻿
+﻿//Convert string to int
+function TryParseInt(str) {
+    if (str !== null) {
+        if (str.length > 0) {
+            if (!isNaN(str)) {
+                return parseInt(str);
+            }
+        }
+    }
+    return null;
+}
+
+
+
 // Get the performance measure selected from the dropdown list
 function getMeasure() {
 
     return document.getElementById("measure").value;
 }
 
+// Get the urn the user searched for
+function getSchool() {
+
+    var urn = TryParseInt(document.getElementById("inputSchool").value);
+
+    if (urn === null) {
+        alert("Invalid urn data inputted");
+    } else {
+        return urn;
+    } 
+}
 /*
 Generates the x and y data for the scatter chart
 and generate the school names for the tooltips
 */
-function generateData(index, resultData) {
+function generateData(index, resultData, urn) {
 
     //Store all the x and y points for the ScatterChart
     var chartData = []
@@ -19,8 +43,20 @@ function generateData(index, resultData) {
 
     for (let i = 0, len = resultData.length; i < len; i++) {
 
-        //Exclude schools that do not have a result
-        if (resultData[i][index] !== null) {
+        if (resultData[i]["urn"] === urn) {
+
+            chartData.unshift({
+
+                x: resultData[i]["ptfsM6CLA1A"],
+                y: resultData[i][index]
+
+            });
+
+            schoolNames.unshift(resultData[i]["schname"]);
+
+        } 
+        //Exclude schools that do not have a result 
+        else if (resultData[i][index] !== null) {
 
             chartData.push({
 
@@ -192,15 +228,37 @@ function updateChart() {
     var newDataIndex = getDataIndex(newyAxisLabel);
 
     //Get the new x and y points and school names for the chart
-    var newScatterData = generateData(newDataIndex, results);
+    var newScatterData = generateData(newDataIndex, results,selectedSchool);
 
     window.scatter.data.labels = newScatterData[1];
-    window.scatter.data.datasets[0].data = newScatterData[0];
+    window.scatter.data.datasets[0].data = newScatterData[0].slice(1, newScatterData[0].length - 1);
+    window.scatter.data.datasets[1].data = [newScatterData[0][0]];
+    window.scatter.data.datasets[1].label = newScatterData[1][0];
     window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
     window.scatter.options.scales.yAxes[0].ticks.callback = changeTicks(newyAxisLabel);
     window.scatter.options.tooltips.callbacks.label = changeLabel(newyAxisLabel);
 
     window.scatter.resetZoom();
+
+    window.scatter.update();
+
+}
+
+//Function to update the school highligted on the chart
+function updateHighligtedSchool() {
+
+    selectedSchool = getSchool();
+
+    var yAxisLabel = window.scatter.options.scales.yAxes[0].scaleLabel.labelString;
+
+    var DataIndex = getDataIndex(yAxisLabel);
+
+    var newScatterData = generateData(DataIndex, results, selectedSchool);
+
+    window.scatter.data.labels = newScatterData[1];
+    window.scatter.data.datasets[1].data = [newScatterData[0][0]];
+    window.scatter.data.datasets[1].label = newScatterData[1][0];
+    window.scatter.data.datasets[0].data = newScatterData[0].slice(1, newScatterData[0].length - 1);
 
     window.scatter.update();
 

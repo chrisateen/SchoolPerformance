@@ -75,7 +75,7 @@
                         <!-- /.URN search box-->
                         <!-- Search button-->
                         <span class="input-group-append">
-                            <button class="btn btn-info">
+                            <button class="btn btn-info" onclick="updateHighligtedSchool()">
                                 <i class="fas fa-search"></i>
                             </button>
                         </span>
@@ -120,13 +120,14 @@
     // Label for the y axis      
     var dataIndex = getDataIndex(title);
 
-    //Get the data for the scatterplot including school names
-    var scatterData = generateData(dataIndex, results);
+    var selectedSchool = null;
 
-    console.log(results[0]);
+    //Get the data for the scatterplot including school names
+    var scatterData = generateData(dataIndex, results, selectedSchool);
 
     //Create the graphs
-    window.onload = graph(title,scatterData[0],scatterData[1]);
+    window.onload = graph(title, scatterData[0], scatterData[1]);
+
 
 </script>
 
