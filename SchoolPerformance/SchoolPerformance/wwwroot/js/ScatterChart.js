@@ -129,7 +129,7 @@ function getDataIndex(index) {
 //depending on the data being displayed
 function setTicks(yAxisLabel) {
 
-    if (yAxisLabel.includes("Percentage")) {
+    if (yAxisLabel.search("Percentage") > -1) {
 
         return function (value) {
             return Math.round(value * 100) + '%';
@@ -148,7 +148,7 @@ function setTicks(yAxisLabel) {
 //depending on the data being displayed
 function setYAxisLabel(yAxisLabel) {
 
-    if (yAxisLabel.includes("Percentage")) {
+    if (yAxisLabel.search("Percentage") > -1) {
 
         return function (tooltipItem, data) {
 
