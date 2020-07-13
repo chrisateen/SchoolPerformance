@@ -1,16 +1,22 @@
 ﻿//Convert string to int
 function TryParseInt(str) {
+
+    //checks string is not null
     if (str !== null) {
         if (str.length > 0) {
+
+             //checks if the string is an integer or not
             if (!isNaN(str)) {
+
                 return parseInt(str);
+
+            } else {
+
             }
         }
     }
     return null;
 }
-
-
 
 // Get the performance measure selected from the dropdown list
 function getMeasure() {
@@ -21,14 +27,21 @@ function getMeasure() {
 // Get the urn the user searched for
 function getSchool() {
 
+    //Attempt to convert the URN to an integer
     var urn = TryParseInt(document.getElementById("inputSchool").value);
 
+    //Display alert if user enters anything other than a number
     if (urn === null) {
+
         alert("Invalid urn data inputted");
+
     } else {
+
         return urn;
     } 
 }
+
+
 /*
 Generates the x and y data for the scatter chart
 and generate the school names for the tooltips
@@ -41,10 +54,17 @@ function generateData(index, resultData, urn) {
     //Store all the school names for the ScatterChart tooltips
     var schoolNames = []
 
+    //Stores whether the school urn is found
+    var foundSchool = false;
+
     for (let i = 0, len = resultData.length; i < len; i++) {
 
         if (resultData[i]["urn"] === urn) {
 
+            foundSchool = true;
+
+            //First item in the list will be data 
+            //for the school searched for
             chartData.unshift({
 
                 x: resultData[i]["ptfsM6CLA1A"],
@@ -69,7 +89,17 @@ function generateData(index, resultData, urn) {
         }
     }
 
-    return [chartData, schoolNames];
+    //Checks if the urn entered could be found
+    if (urn !== null && foundSchool === false) {
+
+        alert("URN could not be found");
+
+        return null;
+
+    } else {
+
+        return [chartData, schoolNames];
+    }
 }
 
 /*
@@ -95,8 +125,9 @@ function getDataIndex(index) {
     return dataIndex[index];
 }
 
-//Update y axis ticks to percentage or number
-function changeTicks(yAxisLabel) {
+//Set the y axis ticks to percentage or number
+//depending on the data being displayed
+function setTicks(yAxisLabel) {
 
     if (yAxisLabel.includes("Percentage")) {
 
@@ -113,21 +144,29 @@ function changeTicks(yAxisLabel) {
 
 }
 
-//Update point lables y value to percentage or number
-function changeLabel(yAxisLabel) {
+//Sets the point lables y value to percentage or number
+//depending on the data being displayed
+function setYAxisLabel(yAxisLabel) {
 
     if (yAxisLabel.includes("Percentage")) {
 
         return function (tooltipItem, data) {
-                        var label = data.labels[tooltipItem.index];
-                        return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
+
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var index = tooltipItem.index;
+            var label = dataset.labels[index];
+            return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
                             + Math.round(tooltipItem.yLabel * 100) + '%)';
-                    }
+        }
 
     } else {
 
         return function (tooltipItem, data) {
-            var label = data.labels[tooltipItem.index];
+
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var index = tooltipItem.index;
+            var label = dataset.labels[index];
+
             return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
                 + tooltipItem.yLabel + ')';
         }
@@ -143,9 +182,10 @@ function graph(yAxisLabel, data, schools) {
     window.scatter = new Chart(ctx, {
         type: 'scatter',
         data: {
-            labels: schools,
             datasets: [{
                 label: "All Schools",
+                //School names for tooltips
+                labels: schools.slice(1, schools.length - 1), 
                 data: data.slice(1, data.length - 1),
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgba(255, 99, 132)",
@@ -155,6 +195,7 @@ function graph(yAxisLabel, data, schools) {
                 {
                     label: schools[0],
                     data: [data[0]],
+                    labels: [schools[0]],
                     backgroundColor: "rgba(64, 74, 73, 2)",
                     borderColor: "rgba(64, 74, 73)",
                     pointRadius: 5,
@@ -193,11 +234,7 @@ function graph(yAxisLabel, data, schools) {
 
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem, data) {
-                        var label = data.labels[tooltipItem.index];
-                        return label + ': (' + Math.round(tooltipItem.xLabel * 100) + '% , '
-                            + tooltipItem.yLabel + ')';
-                    }
+                    label: setYAxisLabel(yAxisLabel)
                 }
             },
 
@@ -218,7 +255,7 @@ function graph(yAxisLabel, data, schools) {
 };
 
 
-//Function to update chart based on user selection
+//Updates chart based on what measure a user has selected
 function updateChart() {
 
     //Get the new y axis label based on option selected by user
@@ -228,17 +265,31 @@ function updateChart() {
     var newDataIndex = getDataIndex(newyAxisLabel);
 
     //Get the new x and y points and school names for the chart
-    var newScatterData = generateData(newDataIndex, results,selectedSchool);
+    var newScatterData = generateData(newDataIndex, results, selectedSchool);
 
-    window.scatter.data.labels = newScatterData[1];
-    window.scatter.data.datasets[0].data = newScatterData[0].slice(1, newScatterData[0].length - 1);
-    window.scatter.data.datasets[1].data = [newScatterData[0][0]];
-    window.scatter.data.datasets[1].label = newScatterData[1][0];
+    var newSchools = newScatterData[1];
+    var newData = newScatterData[0];
+
+    //Update the school names labels list
+    window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
+
+    //Update the x and y data for the chart
+    window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
+
+    //Update the data for the school data point to be in a different colour
+    window.scatter.data.datasets[1].data = [newData[0]];
+    window.scatter.data.datasets[1].label = newSchools[0];
+    window.scatter.data.datasets[1].labels = [newSchools[0]];
+
+    //Update the y axis label and ticks
     window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
-    window.scatter.options.scales.yAxes[0].ticks.callback = changeTicks(newyAxisLabel);
-    window.scatter.options.tooltips.callbacks.label = changeLabel(newyAxisLabel);
+    window.scatter.options.scales.yAxes[0].ticks.callback = setTicks(newyAxisLabel);
 
-    window.scatter.resetZoom();
+    //Update the tooltip labels
+    window.scatter.options.tooltips.callbacks.label = setYAxisLabel(newyAxisLabel);
+
+
+    resetScatterZoom();
 
     window.scatter.update();
 
@@ -247,20 +298,46 @@ function updateChart() {
 //Function to update the school highligted on the chart
 function updateHighligtedSchool() {
 
-    selectedSchool = getSchool();
+    //Gets the URN the user has searched for as an integer
+    var newSchool = getSchool();
 
-    var yAxisLabel = window.scatter.options.scales.yAxes[0].scaleLabel.labelString;
 
-    var DataIndex = getDataIndex(yAxisLabel);
+    if (newSchool !== undefined) {
 
-    var newScatterData = generateData(DataIndex, results, selectedSchool);
+        //Gets the y axis label of the current data been displayed
+        var yAxisLabel = window.scatter.options.scales.yAxes[0].scaleLabel.labelString;
 
-    window.scatter.data.labels = newScatterData[1];
-    window.scatter.data.datasets[1].data = [newScatterData[0][0]];
-    window.scatter.data.datasets[1].label = newScatterData[1][0];
-    window.scatter.data.datasets[0].data = newScatterData[0].slice(1, newScatterData[0].length - 1);
+        var DataIndex = getDataIndex(yAxisLabel);
 
-    window.scatter.update();
+        //Generate the new data for the chart
+        var newScatterData = generateData(DataIndex, results, newSchool);
+
+        //Only update the scatterChart if the URN could be found
+        if (newScatterData !== null) {
+
+            selectedSchool = newSchool;
+
+            var newSchools = newScatterData[1];
+            var newData = newScatterData[0];
+
+            //Update the school names labels list
+            window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
+
+            //Update the x and y data for the chart
+            window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
+
+            //Update the data for the school data point to be in a different colour
+            window.scatter.data.datasets[1].data = [newData[0]];
+            window.scatter.data.datasets[1].label = newSchools[0];
+            window.scatter.data.datasets[1].labels = [newSchools[0]];
+
+            resetScatterZoom();
+
+            window.scatter.update();
+
+        }
+
+    }
 
 }
 

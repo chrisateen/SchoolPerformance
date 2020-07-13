@@ -50,6 +50,7 @@
                             <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
                         </select>
                         <!-- /.dropdown list-->
+
                         <!-- Search button-->
                         <span class="input-group-append">
                             <button class="btn btn-info" onclick="updateChart()">
@@ -62,6 +63,7 @@
 
                 </div>
                 <!-- /.performance measure dropdown-->
+
                 <!-- Search school-->
                 <div class="col-lg-6 mb-2">
 
@@ -88,20 +90,21 @@
 
             </div>
 
-
-
             <!-- Scatter Chart-->
             <div class="chart">
                 <canvas id="Scatterplot"></canvas>
             </div>
             <!-- /.scatter chart-->
 
+            <!-- Reset Chart Zoom Button-->
             <div class="row justify-content-end">
-                <button type="button" 
+                <button type="button"
                         class="btn btn-secondary btn-sm"
                         onclick="resetScatterZoom()">
-                Reset Zoom</button>
+                    Reset Zoom
+                </button>
             </div>
+            <!-- reset chart zoom button-->
 
         </div>
     </div>
@@ -112,6 +115,8 @@
 
 <script>
 
+    //Convert the IEnumerable list of ScatterplotViewModel
+    //To a list of JSON objects
     var results = @Json.Serialize(Model);
 
     //Get the selected data to view
@@ -120,6 +125,7 @@
     // Label for the y axis      
     var dataIndex = getDataIndex(title);
 
+    //Initially the school selected is set to null
     var selectedSchool = null;
 
     //Get the data for the scatterplot including school names

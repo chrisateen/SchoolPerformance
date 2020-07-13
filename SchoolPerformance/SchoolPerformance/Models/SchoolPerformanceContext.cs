@@ -62,7 +62,7 @@ namespace SchoolPerformance.Models
                 .HasForeignKey(s => s.URN);
                 
             //Seed data
-                modelBuilder.Seed(2019);
+                //modelBuilder.Seed(2019);
 
         }
 
