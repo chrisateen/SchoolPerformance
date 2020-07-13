@@ -24,13 +24,8 @@ namespace SchoolPerformance.Controllers
         {
             var result = _result.Get(r => r.PTFSM6CLA1A != null,r => r.OrderBy(s => s.School.SCHNAME),r => r.School);
 
-            List<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
-
-            foreach(var item in result)
-            {
-                ScatterplotViewModel viewModelItem = item;
-                resultViewModel.Add(viewModelItem);
-            }
+            //Converts from list of SchoolResult to List of ScatterplotViewModel
+            List<ScatterplotViewModel> resultViewModel = result.Convert();
 
             return View(resultViewModel);
         }

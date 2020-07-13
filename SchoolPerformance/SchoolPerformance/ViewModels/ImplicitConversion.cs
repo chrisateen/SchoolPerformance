@@ -14,7 +14,7 @@ namespace SchoolPerformance.ViewModels
         /// </summary>
         /// <param name="source">A list of SchoolResult</param>
         /// <returns>A list of ScatterplotViewModel</returns>
-        public static List<ScatterplotViewModel> Convert (this List<SchoolResult> source)
+        public static List<ScatterplotViewModel> Convert (this IEnumerable<SchoolResult> source)
         {
             List<ScatterplotViewModel> output = new List<ScatterplotViewModel>();
 

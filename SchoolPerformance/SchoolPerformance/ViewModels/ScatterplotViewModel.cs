@@ -71,6 +71,7 @@ namespace SchoolPerformance.ViewModels
         /// to be converted to ScatterplotViewModel object</param>
         public static implicit operator ScatterplotViewModel(SchoolResult result)
         {
+            
             return new ScatterplotViewModel
             {
                 URN = result.URN,
@@ -92,5 +93,6 @@ namespace SchoolPerformance.ViewModels
             };
         }
 
-    }
+        }
 }
+
