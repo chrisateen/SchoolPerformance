@@ -33,7 +33,7 @@ function getSchool() {
     //Display alert if user enters anything other than a number
     if (urn === null) {
 
-        alert("Invalid urn data inputted");
+        alert("Invalid URN inputted");
 
     } else {
 
@@ -59,40 +59,49 @@ function generateData(index, resultData, urn) {
 
     for (let i = 0, len = resultData.length; i < len; i++) {
 
-        if (resultData[i]["urn"] === urn) {
-
-            foundSchool = true;
-
-            //First item in the list will be data 
-            //for the school searched for
-            chartData.unshift({
-
-                x: resultData[i]["ptfsM6CLA1A"],
-                y: resultData[i][index]
-
-            });
-
-            schoolNames.unshift(resultData[i]["schname"]);
-
-        } 
         //Exclude schools that do not have a result 
-        else if (resultData[i][index] !== null) {
+        if (resultData[i][index] !== null) {
 
-            chartData.push({
+            if (resultData[i]["urn"] === urn) {
 
-                x: resultData[i]["ptfsM6CLA1A"],
-                y: resultData[i][index]
+                foundSchool = true;
 
-            });
+                //First item in the list will be data 
+                //for the school searched for
+                chartData.unshift({
 
-            schoolNames.push(resultData[i]["schname"]);
+                    x: resultData[i]["ptfsM6CLA1A"],
+                    y: resultData[i][index]
+
+                });
+
+                schoolNames.unshift(resultData[i]["schname"]);
+
+            } else {
+
+                chartData.push({
+
+                    x: resultData[i]["ptfsM6CLA1A"],
+                    y: resultData[i][index]
+
+                });
+
+                schoolNames.push(resultData[i]["schname"]);
+            }
+
+            //alert printed if school exist but has no data for choosen measure
+        } else if (resultData[i]["urn"] === urn) {
+
+            alert("Selected data does not exist for the selected school. Please search for another school");
+
+            return null;
         }
     }
 
     //Checks if the urn entered could be found
     if (urn !== null && foundSchool === false) {
 
-        alert("URN could not be found");
+        alert("URN could not be found please try again");
 
         return null;
 
@@ -188,7 +197,7 @@ function graph(yAxisLabel, data, schools) {
                 labels: schools.slice(1, schools.length - 1), 
                 data: data.slice(1, data.length - 1),
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
-                borderColor: "rgba(255, 99, 132)",
+                borderColor: "rgb(255, 99, 132)",
                 order:2
 
             },
@@ -197,7 +206,7 @@ function graph(yAxisLabel, data, schools) {
                     data: [data[0]],
                     labels: [schools[0]],
                     backgroundColor: "rgba(64, 74, 73, 2)",
-                    borderColor: "rgba(64, 74, 73)",
+                    borderColor: "rgb(64, 74, 73)",
                     pointRadius: 5,
                     order: 1
 
@@ -267,31 +276,37 @@ function updateChart() {
     //Get the new x and y points and school names for the chart
     var newScatterData = generateData(newDataIndex, results, selectedSchool);
 
-    var newSchools = newScatterData[1];
-    var newData = newScatterData[0];
+    //Only update the chart if the highlighted school can be found and therefore 
+    // data is generated
+    if (newScatterData !== null) {
 
-    //Update the school names labels list
-    window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
+        var newSchools = newScatterData[1];
+        var newData = newScatterData[0];
 
-    //Update the x and y data for the chart
-    window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
+        //Update the school names labels list
+        window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
 
-    //Update the data for the school data point to be in a different colour
-    window.scatter.data.datasets[1].data = [newData[0]];
-    window.scatter.data.datasets[1].label = newSchools[0];
-    window.scatter.data.datasets[1].labels = [newSchools[0]];
+        //Update the x and y data for the chart
+        window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
 
-    //Update the y axis label and ticks
-    window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
-    window.scatter.options.scales.yAxes[0].ticks.callback = setTicks(newyAxisLabel);
+        //Update the data for the school data point to be in a different colour
+        window.scatter.data.datasets[1].data = [newData[0]];
+        window.scatter.data.datasets[1].label = newSchools[0];
+        window.scatter.data.datasets[1].labels = [newSchools[0]];
 
-    //Update the tooltip labels
-    window.scatter.options.tooltips.callbacks.label = setYAxisLabel(newyAxisLabel);
+        //Update the y axis label and ticks
+        window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
+        window.scatter.options.scales.yAxes[0].ticks.callback = setTicks(newyAxisLabel);
+
+        //Update the tooltip labels
+        window.scatter.options.tooltips.callbacks.label = setYAxisLabel(newyAxisLabel);
 
 
-    resetScatterZoom();
+        resetScatterZoom();
 
-    window.scatter.update();
+        window.scatter.update();
+
+    }
 
 }
 
