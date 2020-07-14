@@ -9,6 +9,9 @@ using System.Text;
 
 namespace LoadData
 {
+    /// <summary>
+    /// Seeds data from CSV files to database
+    /// </summary>
     public static class ModelBuilderExtensions
     {
         private static Dictionary<string, string> _dataLocations = new Dictionary<string, string>();
@@ -19,8 +22,14 @@ namespace LoadData
         private static string _rootDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
         private static string _CSVRootDir = Path.Combine(_rootDir, "SchoolPerformance\\LoadData\\CSVFiles");
 
+        //Academic year in which data should be loaded for
         private static int _academicYear;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        /// <param name="academicYear"></param>
         public static void Seed(this ModelBuilder modelBuilder,int academicYear)
         {
             _modelBuilder = modelBuilder;
@@ -38,6 +47,10 @@ namespace LoadData
             }
         }
 
+        /// <summary>
+        /// Gets data for entity School 
+        /// </summary>
+        /// <param name="fileLocation">Location where the CSV file is held</param>
         private static void addSchool(string fileLocation)
         {
             var import = new ImportCSV(fileLocation);
