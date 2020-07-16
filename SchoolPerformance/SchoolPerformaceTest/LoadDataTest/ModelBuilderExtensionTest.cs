@@ -26,6 +26,10 @@ namespace SchoolPerformaceTest
             var connection = new InMemorySqliteConnection();
             _context = connection._context;
 
+            _context._modelBuilder = new ModelBuilder(new ConventionSet());
+
+            //Seed with data
+            _context._modelBuilder.Seed(2019);
         }
 
         //Tests School entity has been seeded with data

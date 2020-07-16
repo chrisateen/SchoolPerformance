@@ -7,16 +7,19 @@ using LoadData;
 using System.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
+using Castle.Core.Internal;
 
 namespace SchoolPerformance.Models
 {
     public class SchoolPerformanceContext : DbContext
     {
         private DbContextOptions<SchoolPerformanceContext> _options;
+        public ModelBuilder _modelBuilder;
 
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
             _options = options;
+            
         }
 
 
@@ -60,8 +63,8 @@ namespace SchoolPerformance.Models
                 .HasMany<SchoolResult>(s => s.SchoolResults)
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
-                
-            //Seed data
+
+                //Seed data
                 modelBuilder.Seed(2019);
 
         }

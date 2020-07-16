@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using LoadData;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SchoolPerformance.Models;
 using System;
