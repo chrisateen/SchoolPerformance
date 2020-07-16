@@ -10,6 +10,8 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
     [TestClass]
     public class ImplicitConversionTest
     {
+        //Test conversion of an object
+        //from SchoolResult to ScatterplotViewModel
         [TestMethod]
         public void ResultModeltoScatterplotViewModel()
         {
@@ -53,6 +55,8 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             Assert.AreEqual(result.School.SCHNAME, resultViewModel.SCHNAME);
         }
 
+        //Test conversion of a list of objects
+        //from a list of SchoolResult to a list of ScatterplotViewModel
         [TestMethod]
         public void ListResultModeltoListScatterplotViewModel()
         {

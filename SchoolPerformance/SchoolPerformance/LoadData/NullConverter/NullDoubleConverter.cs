@@ -7,8 +7,15 @@ using System.Text;
 
 namespace LoadData
 {
+    /// <summary>
+    /// Convert from a number string or a percentage string to a double
+    /// </summary>
     public class NullDoubleConverter : DoubleConverter
     {
+        /// <summary>
+        /// Convert from a number string or a percentage string to a double
+        /// dealing with any NA type values
+        /// </summary>
         public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
         {
             if (text == "NE" || text == "NA" || text == "NP" || text == "SUPP" || text == "LOWCOV" || String.IsNullOrEmpty(text))

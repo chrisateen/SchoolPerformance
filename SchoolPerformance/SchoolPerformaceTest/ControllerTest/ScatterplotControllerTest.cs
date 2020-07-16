@@ -23,10 +23,13 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestInitialize]
         public void Setup()
         {
+            //Instantiate the controller class by mocking the repository
             _mockSchoolResult = new Mock<ISchoolResultRepository<SchoolResult>>();
             _controller = new ScatterplotController(_mockSchoolResult.Object);
         }
 
+        //Checks Scatterplot view is rendered
+        //with an IEnumerable list of data of type ScatterplotViewModel
         [TestMethod]
         public void IndexReturnsHomePageWithScatterplotViewModel()
         {

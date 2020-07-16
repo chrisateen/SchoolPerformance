@@ -105,6 +105,7 @@ namespace LoadData
             } 
             catch (FileNotFoundException)
             {
+                //Error message when file supplied cannot be found
                 throw new FileNotFoundException("CSV file does not exist");
             }
 

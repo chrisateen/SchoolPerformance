@@ -13,6 +13,7 @@ namespace SchoolPerformaceTest.ControllerTest
     [TestClass]
     public class HomeControllerTest
     {
+        //Checks Home view is rendered
         [TestMethod]
         public void IndexReturnsHomePage()
         {

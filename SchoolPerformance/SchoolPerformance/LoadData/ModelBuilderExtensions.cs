@@ -14,8 +14,11 @@ namespace LoadData
     /// </summary>
     public static class ModelBuilderExtensions
     {
+        //Stores the file locations of all the CSV files
         private static Dictionary<string, string> _dataLocations = new Dictionary<string, string>();
         private static ModelBuilder _modelBuilder;
+
+        //Stores the list of URN's so that only schools with a result are loaded
         private static IEnumerable<int> _urnList;
 
         //Get the directory of the folder where the csv files are held
@@ -26,10 +29,14 @@ namespace LoadData
         private static int _academicYear;
 
         /// <summary>
-        /// 
+        /// Seeds data from CSV files to database
         /// </summary>
-        /// <param name="modelBuilder"></param>
-        /// <param name="academicYear"></param>
+        /// <param name="modelBuilder">
+        /// modelBuilder in the context class
+        /// </param>
+        /// <param name="academicYear">
+        /// Academic year for which data should be loaded for
+        /// </param>
         public static void Seed(this ModelBuilder modelBuilder,int academicYear)
         {
             _modelBuilder = modelBuilder;
@@ -68,7 +75,16 @@ namespace LoadData
             _urnList = school.Select(x => x.URN);
         }
 
- 
+
+        /// <summary>
+        /// Gets the data for all entities except School
+        /// </summary>
+        /// <param name="modelName">
+        /// Name of the model/entity which data school be loaded for
+        /// </param>
+        /// <param name="fileLocation">
+        /// Location where the CSV file is held
+        /// </param>
         private static void addData(string modelName, string fileLocation)
         {
             var import = new ImportCSV(fileLocation);
