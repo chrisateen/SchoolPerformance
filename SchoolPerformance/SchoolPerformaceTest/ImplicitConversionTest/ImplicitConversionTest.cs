@@ -119,7 +119,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             results.Add(result2);
 
             //Act
-            List<ScatterplotViewModel> resultViewModel = results.Convert();
+            List<ScatterplotViewModel> resultViewModel = results.ConvertToScatterplotViewModel();
 
             //Assert
 
@@ -236,7 +236,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             results.Add(result2);
 
             //Act
-            List<TableViewModel> resultViewModel = results.Convert();
+            List<TableViewModel> resultViewModel = results.ConvertToTableViewModel();
 
             //Assert
 
