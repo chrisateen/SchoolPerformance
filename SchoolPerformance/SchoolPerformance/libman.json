@@ -30,5 +30,10 @@
       "library": "chartjs-plugin-zoom@0.7.7",
       "destination": "wwwroot/chartjs-plugin-zoom/"
     }
-  ]
+  ,
+{
+  "library": "bootstrap-table@1.17.1",
+  "destination": "wwwroot/bootstrap-table/"
+}
+]
 }
