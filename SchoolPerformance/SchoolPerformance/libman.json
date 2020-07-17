@@ -31,10 +31,6 @@
       "destination": "wwwroot/chartjs-plugin-zoom/"
     },
     {
-      "library": "bootstrap-table@1.17.1",
-      "destination": "wwwroot/bootstrap-table/"
-    },
-    {
       "library": "popper.js@1.16.0",
       "destination": "wwwroot/popper.js/"
     },
@@ -45,6 +41,11 @@
     {
       "library": "FileSaver.js@2.0.2",
       "destination": "wwwroot/FileSaver.js/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/datatables/"
     }
-  ]
+
+]
 }

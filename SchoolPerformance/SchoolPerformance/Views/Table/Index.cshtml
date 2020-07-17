@@ -4,46 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-<script src="~/bootstrap-table/bootstrap-table.js"></script>
+<link href="~/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="~/css/TableStyle.css" rel="stylesheet" />
 <script src="~/xlsx/xlsx.core.min.js"></script>
 <script src="~/FileSaver.js/FileSaver.js"></script>
 <script src="~/TableExport/tableExport.min.js"></script>
-<script src="~/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+<script src="~/datatables/js/jquery.dataTables.js"></script>
+<script src="~/datatables/js/dataTables.bootstrap4.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
 
 <div class="content-wrapper">
 
-    <div class="pl-5 pr-5">
+    <div class="pl-5 pr-5 pt-5">
         <div id="toolbar" class="select">
         </div>
-        <table id="resultsTable"
-               class="table table-striped table-bordered"
-               data-height="700"
-               data-sortable="true"
-               data-show-export="true"
-               data-pagination="true"
-               data-page-list="[5, 10, 25, 50, All]"
-               data-search="true"
-               data-show-fullscreen="true"
-               data-show-columns="true">
+        <table id="resultsTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th data-field="schname" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().SCHNAME)
                     </th>
-                    <th data-field="ptfsM6CLA1A" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().PTFSM6CLA1A)
                     </th>
-                    <th data-field="atT8SCR" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().ATT8SCR)
                     </th>
-                    <th data-field="p8MEA" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().P8MEA)
                     </th>
-                    <th data-field="ptL2BASICS_94" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().PTL2BASICS_94)
                     </th>
-                    <th data-field="ptL2BASICS_95" data-sortable="true">
+                    <th>
                         @Html.DisplayNameFor(m => m.First().PTL2BASICS_95)
                     </th>
                 </tr>
@@ -63,19 +57,19 @@
     var $table = $('#resultsTable');
 
     //Adds the data to the table
-    //change the default name when data is exported
     $(function () {
-            $table.bootstrapTable({
-                data: results,
-                exportOptions: {
-                    fileName: function () {
-                        return 'schoolResults'
-                    }
-                },
-                exportDataType:"All"
+        $table.DataTable({
+            data: results,
+            columns: [
+                { "data": "schname" },
+                { "data": "ptfsM6CLA1A" },
+                { "data": "atT8SCR" },
+                { "data": "p8MEA" },
+                { "data": "ptL2BASICS_94" },
+                { "data": "ptL2BASICS_95" }
+            ]
             })
     });
-
 
 </script>
 
