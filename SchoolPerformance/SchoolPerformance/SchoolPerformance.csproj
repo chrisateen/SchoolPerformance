@@ -66,6 +66,7 @@
 
   <ItemGroup>
     <Folder Include="Connected Services\" />
+    <Folder Include="wwwroot\TableExport\" />
   </ItemGroup>
 
 </Project>
