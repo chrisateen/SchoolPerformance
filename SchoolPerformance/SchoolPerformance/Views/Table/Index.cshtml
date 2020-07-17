@@ -14,10 +14,12 @@
 <div class="content-wrapper">
 
     <div class="pl-5 pr-5">
+        <div id="toolbar" class="select">
+        </div>
         <table id="resultsTable"
                class="table table-striped table-bordered"
-               data-toggle="table"
                data-height="700"
+               data-sortable="true"
                data-show-export="true"
                data-pagination="true"
                data-page-list="[5, 10, 25, 50, All]"
@@ -26,88 +28,54 @@
                data-show-columns="true">
             <thead>
                 <tr>
-                    <th>
+                    <th data-field="schname" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().SCHNAME)
                     </th>
-                    <th>
+                    <th data-field="ptfsM6CLA1A" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().PTFSM6CLA1A)
                     </th>
-                    <th>
+                    <th data-field="atT8SCR" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().ATT8SCR)
                     </th>
-                    <th>
+                    <th data-field="p8MEA" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().P8MEA)
                     </th>
-                    <th>
+                    <th data-field="ptL2BASICS_94" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().PTL2BASICS_94)
                     </th>
-                    <th>
+                    <th data-field="ptL2BASICS_95" data-sortable="true">
                         @Html.DisplayNameFor(m => m.First().PTL2BASICS_95)
                     </th>
                 </tr>
             </thead>
 
-            <tbody>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.SCHNAME)</td>
-
-                        @if (item.PTFSM6CLA1A == null)
-                        {
-                            <td>NA</td>
-                        }
-                        else
-                        {
-                            <td>@Html.DisplayFor(modelItem => item.PTFSM6CLA1A)</td>
-                        }
-
-                        @if (item.ATT8SCR == null)
-                        {
-                            <td>NA</td>
-                        }
-                        else
-                        {
-                            <td>@Html.DisplayFor(modelItem => item.ATT8SCR)</td>
-                        }
-
-
-                        @if (item.P8MEA == null)
-                        {
-                            <td>NA</td>
-                        }
-                        else
-                        {
-                            <td>@Html.DisplayFor(modelItem => item.P8MEA)</td>
-                        }
-
-                        @if (item.PTL2BASICS_94 == null)
-                        {
-                            <td>NA</td>
-                        }
-                        else
-                        {
-                            <td>@Html.DisplayFor(modelItem => item.PTL2BASICS_94)</td>
-                        }
-
-                        @if (item.PTL2BASICS_95 == null)
-                        {
-                            <td>NA</td>
-                        }
-                        else
-                        {
-                            <td>@Html.DisplayFor(modelItem => item.PTL2BASICS_95)</td>
-                        }
-
-                    </tr>
-                }
-
-
-            </tbody>
-
         </table>
-    </div>
 
+    </div>
 </div>
+
+<script>
+
+    //Convert the IEnumerable list of TableViewModel
+    //To a list of JSON objects
+    var results = @Json.Serialize(Model);
+
+    var $table = $('#resultsTable');
+
+    //Adds the data to the table
+    //change the default name when data is exported
+    $(function () {
+            $table.bootstrapTable({
+                data: results,
+                exportOptions: {
+                    fileName: function () {
+                        return 'schoolResults'
+                    }
+                },
+                exportDataType:"All"
+            })
+    });
+
+
+</script>
 
