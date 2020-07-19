@@ -22,7 +22,7 @@ namespace SchoolPerformance.Controllers
 
         public IActionResult Index()
         {
-            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME),r => r.School);
+            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 
             //Converts from list of SchoolResult to List of TableViewModel
             List<TableViewModel> resultViewModel = result.ConvertToTableViewModel();
