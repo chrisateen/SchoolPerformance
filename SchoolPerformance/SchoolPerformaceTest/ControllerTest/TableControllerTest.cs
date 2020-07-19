@@ -6,9 +6,7 @@ using Moq;
 using SchoolPerformance.Controllers;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using SchoolPerformance.ViewModels;
 
 namespace SchoolPerformanceTest.ControllerTest

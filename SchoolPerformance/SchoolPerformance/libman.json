@@ -7,10 +7,6 @@
       "destination": "wwwroot/font-awesome/"
     },
     {
-      "library": "jquery@3.4.1",
-      "destination": "wwwroot/jquery/"
-    },
-    {
       "library": "twitter-bootstrap@4.4.1",
       "destination": "wwwroot/twitter-bootstrap/"
     },
@@ -43,9 +39,12 @@
       "destination": "wwwroot/FileSaver.js/"
     },
     {
-      "library": "datatables@1.10.21",
-      "destination": "wwwroot/datatables/"
+      "library": "bootstrap-table@1.17.1",
+      "destination": "wwwroot/bootstrap-table/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
     }
-
-]
+  ]
 }
