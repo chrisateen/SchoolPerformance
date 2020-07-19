@@ -49,10 +49,6 @@
     {
       "library": "datatables@1.10.21",
       "destination": "wwwroot/datatables/"
-    },
-    {
-      "library": "datatables-buttons@1.6.2",
-      "destination": "wwwroot/datatables-buttons/"
     }
   ]
 }
