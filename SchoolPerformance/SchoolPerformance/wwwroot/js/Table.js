@@ -77,6 +77,36 @@
                 ]
             },
             {
+                extend: 'collection',
+                text: 'Export Current Page',
+                className: 'btn btn-select mb-2',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        className: 'btn btn-select-option',
+                        exportOptions: {
+                            rows: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        title: 'Data export',
+                        className: 'btn btn-select-option',
+                        exportOptions: {
+                            rows: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        title: 'Data export',
+                        className: 'btn btn-select-option',
+                        exportOptions: {
+                            rows: ':visible'
+                        }
+                    }
+                ]
+            },
+            {
                 extend: 'colvis',
                 text: 'Select Columns',
                 className: 'btn btn-select mb-2',
