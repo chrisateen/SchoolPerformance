@@ -8,36 +8,6 @@
 
     <div class="pl-5 pr-5 pt-5">
 
-        <div class="form-group row col-md-9">
-            <label class="col-sm-2">
-                Select columns
-            </label>
-
-            <div class="col-sm-9">
-                <select multiple="multiple" class="multiple-select" id="select-cols">
-                    <option value="2">
-                        @Html.DisplayNameFor(m => m.First().SCHNAME)
-                    </option>
-                    <option value="3">
-                        @Html.DisplayNameFor(m => m.First().PTFSM6CLA1A)
-                    </option>
-                    <option value="4">
-                        @Html.DisplayNameFor(m => m.First().ATT8SCR)
-                    </option>
-                    <option value="5">
-                        @Html.DisplayNameFor(m => m.First().P8MEA)
-                    </option>
-                    <option value="6">
-                        @Html.DisplayNameFor(m => m.First().PTL2BASICS_94)
-                    </option>
-                    <option value="7">
-                        @Html.DisplayNameFor(m => m.First().PTL2BASICS_95)
-                    </option>
-                </select>
-            </div>
-
-        </div>
-
         <table id="resultsTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -72,86 +42,15 @@
     </div>
 
 </div>
-
+<script src="~/js/Table.js"></script>
 <script>
     var results = @Json.Serialize(Model);
     var $table = $('#resultsTable');
 
-    //Hide all columns
-    function hideAllCols() {
-        for (var i = 2; i < 8; i++) {
-            $table.DataTable().column(i).visible(0);
-        }
-    }
-
-    //Show all columns
-    function showAllCols() {
-        for (var i = 2; i < 8; i++) {
-            $table.DataTable().column(i).visible(1);
-        }
-    }
-
-    //Show selected columns only
-    function showCol() {
-
-        //Get the columns that have been selected for viewing
-        var columnsToView = $('#select-cols').multipleSelect('getSelects');
-
-        //Hide all columns 
-        hideAllCols();
-
-        //Check if a column has been selected and if so view that column
-        for (var i = 0; i < columnsToView.length; i++) {
-
-            var colIndex = columnsToView[i];
-
-            $table.DataTable().column(colIndex).visible(1);
-        }
-    }
-
     $(function () {
 
-        $table.DataTable({
-            data: results,
-            columns: [
-                { "data": "urn" },
-                { "data": "leaestab" },
-                { "data": "schname" },
-                { "data": "ptfsM6CLA1A" },
-                { "data": "atT8SCR" },
-                { "data": "p8MEA" },
-                { "data": "ptL2BASICS_94" },
-                { "data": "ptL2BASICS_95" }
-            ],
-            "columnDefs": [
-                {
-                    //Make URN and LEAESTAB columns hidden
-                    "targets": [0, 1],
-                    "visible": false
-                }
-            ],
-            "lengthMenu": [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, "All"]
-            ],
-            //Order by school name
-            "order": [[2, "asc"]],
-            dom: 'Blfrtip',
-            buttons: ['excel', 'pdf', 'copy']
-        });
+        loadTable($table,results);
 
-        
-    });
-
-    //Controls the selection of columns
-    $(function () {
-        $('#select-cols').multipleSelect({
-            multiple: true,
-            multipleWidth: 400,
-            onUncheckAll: function () { hideAllCols(); },
-            onCheckAll: function () { showAllCols(); },
-            onClick: function () { showCol(); }
-        })
     });
 
 </script>

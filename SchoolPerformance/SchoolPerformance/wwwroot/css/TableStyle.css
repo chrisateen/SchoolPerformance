@@ -1,1 +1,14 @@
-﻿
+﻿.btn-select,
+.btn-select:hover,
+.btn-select:active:focus,
+.btn-select:visited,
+.btn-select:focus {
+    background-color: #e3827f !important;
+    border-color: #e3827f !important;
+}
+
+    .btn-select-option:hover,
+    .btn-select:active:focus {
+        background-color: #e3827f !important;
+        border-color: #e3827f !important;
+    }

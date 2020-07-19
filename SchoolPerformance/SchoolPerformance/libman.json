@@ -35,18 +35,6 @@
       "destination": "wwwroot/popper.js/"
     },
     {
-      "library": "xlsx@0.16.4",
-      "destination": "wwwroot/xlsx/"
-    },
-    {
-      "library": "FileSaver.js@2.0.2",
-      "destination": "wwwroot/FileSaver.js/"
-    },
-    {
-      "library": "multiple-select@1.2.3",
-      "destination": "wwwroot/multiple-select/"
-    },
-    {
       "library": "datatables@1.10.21",
       "destination": "wwwroot/datatables/"
     }
