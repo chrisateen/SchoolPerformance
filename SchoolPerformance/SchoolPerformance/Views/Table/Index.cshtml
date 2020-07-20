@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SchoolPerformance.ViewModels.TableViewModel>
+﻿@model SchoolPerformance.ViewModels.TableViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutTable.cshtml";
@@ -23,23 +23,22 @@
 <script src="~/js/Table.js"></script>
 
 <script>
-    var results = @Json.Serialize(Model);
     var $table = $('#resultsTable');
     var tableCols = [
-        { data: "urn", title:"@Html.DisplayNameFor(m => m.First().URN)" },
-        { data: "leaestab", title: "@Html.DisplayNameFor(m => m.First().LEAESTAB)"},
-        { data: "schname", title: "@Html.DisplayNameFor(m => m.First().SCHNAME)"},
-        { data: "ptfsM6CLA1A", title: "@Html.DisplayNameFor(m => m.First().PTFSM6CLA1A)"},
-        { data: "atT8SCR", title: "@Html.DisplayNameFor(m => m.First().ATT8SCR)"},
-        { data: "p8MEA", title: "@Html.DisplayNameFor(m => m.First().P8MEA)"},
-        { data: "ptL2BASICS_94", title: "@Html.DisplayNameFor(m => m.First().PTL2BASICS_94)"},
-        { data: "ptL2BASICS_95", title: "@Html.DisplayNameFor(m => m.First().PTL2BASICS_95)"}
+        { data: "urn", title:"@Html.DisplayNameFor(m => m.URN)" },
+        { data: "leaestab", title: "@Html.DisplayNameFor(m => m.LEAESTAB)"},
+        { data: "schname", title: "@Html.DisplayNameFor(m => m.SCHNAME)"},
+        { data: "ptfsM6CLA1A", title: "@Html.DisplayNameFor(m => m.PTFSM6CLA1A)"},
+        { data: "atT8SCR", title: "@Html.DisplayNameFor(m => m.ATT8SCR)"},
+        { data: "p8MEA", title: "@Html.DisplayNameFor(m => m.P8MEA)"},
+        { data: "ptL2BASICS_94", title: "@Html.DisplayNameFor(m => m.PTL2BASICS_94)"},
+        { data: "ptL2BASICS_95", title: "@Html.DisplayNameFor(m => m.PTL2BASICS_95)"}
     ];
 
 
     $(function () {
 
-        loadTable($table, results, tableCols);
+        loadTable($table, tableCols);
 
     });
 

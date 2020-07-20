@@ -1,6 +1,11 @@
-﻿function loadTable(table,data, columns) {
+﻿
+function loadTable(table, columns) {
     table.DataTable({
-        data: data,
+        ajax: {
+            url: "/Table/OnGet",
+            dataType: 'json',
+            type: "GET",
+        },
         columns: columns,
         "columnDefs": [
             {
@@ -62,9 +67,21 @@
                 text: 'Export Filtered Records',
                 className: 'btn btn-select mb-2',
                 buttons: [
-                    { extend: 'copy', className: 'btn btn-select-option' },
-                    { extend: 'excel', className: 'btn btn-select-option' },
-                    { extend: 'csv', className: 'btn btn-select-option' }
+                    {
+                        extend: 'copy',
+                        className: 'btn btn-select-option'
+                    },
+                    {
+                        extend: 'excel',
+                        title: 'Data export',
+                        className: 'btn btn-select-option'
+
+                    },
+                    {
+                        extend: 'csv',
+                        title: 'Data export',
+                        className: 'btn btn-select-option'
+                    }
                 ]
             },
             {
