@@ -43,7 +43,7 @@ namespace SchoolPerformance.ViewModels
         /// Converts from SchoolResult model to TableViewModel
         /// </summary>
         /// <param name="result">SchoolResult model object 
-        /// to be converted to ScatterplotViewModel object</param>
+        /// to be converted to TableResultViewModel object</param>
         public static implicit operator TableViewModel(SchoolResult result)
         {
             

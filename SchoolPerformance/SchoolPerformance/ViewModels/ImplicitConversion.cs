@@ -20,7 +20,7 @@ namespace SchoolPerformance.ViewModels
 
             foreach(var item in source)
             {
-                //implicit convertion from SchoolResult to ScatterplotViewModel
+                //Implicit conversion from SchoolResult to ScatterplotViewModel
                 ScatterplotViewModel viewModel = item;
                 output.Add(viewModel);
             }
@@ -40,7 +40,7 @@ namespace SchoolPerformance.ViewModels
 
             foreach (var item in source)
             {
-                //implicit convertion from SchoolResult to TableViewModel
+                //Implicit conversion from SchoolResult to TableViewModel
                 TableViewModel viewModel = item;
                 output.Add(viewModel);
             }

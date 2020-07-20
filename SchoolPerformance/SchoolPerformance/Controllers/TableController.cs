@@ -23,7 +23,7 @@ namespace SchoolPerformance.Controllers
         public IActionResult Index()
         {
             //Empty TableViewModel returned 
-            //to allow me to use html display name helpers
+            //to allow me to use HTML display name helpers
             return View(new TableViewModel());
         }
 

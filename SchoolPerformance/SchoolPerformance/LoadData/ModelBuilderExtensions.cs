@@ -21,7 +21,7 @@ namespace LoadData
         //Stores the list of URN's so that only schools with a result are loaded
         private static IEnumerable<int> _urnList;
 
-        //Get the directory of the folder where the csv files are held
+        //Get the directory of the folder where the CSV files are held
         private static string _rootDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
         private static string _CSVRootDir = Path.Combine(_rootDir, "SchoolPerformance\\LoadData\\CSVFiles");
 

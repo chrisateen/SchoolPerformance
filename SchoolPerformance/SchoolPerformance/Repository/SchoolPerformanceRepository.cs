@@ -30,7 +30,7 @@ namespace SchoolPerformance.Repository
             //Include/merge other DbSets into our query
             query = AddDbSets(query, includes);
 
-            //Include an orderBy query if there is an orderby condition
+            //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
@@ -56,7 +56,7 @@ namespace SchoolPerformance.Repository
         {
             IQueryable<T> query = _dbSet;
 
-            //Include an orderBy query if there is an orderby condition
+            //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
             return query.ToList();
@@ -93,7 +93,7 @@ namespace SchoolPerformance.Repository
         /// </summary>
         private IQueryable<T> AddOrderQuery(IQueryable<T> query, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
-            //Include an orderBy query if there is an orderby condition
+            //Include an orderBy query if there is an order by condition
             if (orderBy != null)
             {
                 query = orderBy(query);

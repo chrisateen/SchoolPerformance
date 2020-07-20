@@ -15,8 +15,13 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets all records from a DbSet.
         /// </summary>
-        /// <param name="orderBy">Use a func to specify how to order the records. If ordering is not need enter null</param>
-        /// <param name="includes">Specify a list of other DbSets to be included</param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null
+        /// </param>
+        /// <param name="includes">
+        /// Specify a list of other DbSets to be included
+        /// </param>
         /// <returns>Returns an IEnumerable list</returns>
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                 params Expression<Func<T, object>>[] includes);
@@ -24,7 +29,10 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets all records from a DbSet.
         /// </summary>
-        /// <param name="orderBy">Use a func to specify how to order the records. If ordering is not need enter null</param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null
+        /// </param>
         /// <returns>Returns an IEnumerable list</returns>
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
@@ -32,9 +40,16 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets records from a DbSet that meets a specified condition
         /// </summary>
-        /// <param name="filter">Use a func to specify how to filter the records. If filtering is not need enter null</param>
-        /// <param name="orderBy">Use a func to specify how to order the records. If ordering is not need enter null</param>
-        /// <param name="includes">Specify a list of other DbSets to be included</param>
+        /// <param name="filter">
+        /// Use a function to specify how to filter the records. 
+        /// If filtering is not need enter null
+        /// </param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null</param>
+        /// <param name="includes">
+        /// Specify a list of other DbSets to be included
+        /// </param>
         /// <returns>Returns an IEnumerable list</returns>
         public IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
@@ -44,8 +59,12 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets records from a DbSet that meets a condition
         /// </summary>
-        /// <param name="filter">Use a func to specify how to filter the records. If filtering is not need enter null</param>
-        /// <param name="orderBy">Use a func to specify how to order the records. If ordering is not need enter null</param>
+        /// <param name="filter">
+        /// Use a function to specify how to filter the records. 
+        /// If filtering is not need enter null</param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null</param>
         /// <returns>Returns an IEnumerable list</returns>
         public IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
