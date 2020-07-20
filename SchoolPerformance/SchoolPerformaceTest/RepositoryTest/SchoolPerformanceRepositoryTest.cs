@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 namespace SchoolPerformaceTest
 {
     [TestClass]
-    public class SchoolResultRepositoryTest
+    public class SchoolPerformanceRepositoryTest
     {
         private SchoolPerformanceContext _context;
 
