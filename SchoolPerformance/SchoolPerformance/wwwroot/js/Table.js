@@ -1,16 +1,7 @@
-﻿function loadTable(table,data) {
+﻿function loadTable(table,data, columns) {
     table.DataTable({
         data: data,
-        columns: [
-            { "data": "urn" },
-            { "data": "leaestab" },
-            { "data": "schname" },
-            { "data": "ptfsM6CLA1A" },
-            { "data": "atT8SCR" },
-            { "data": "p8MEA" },
-            { "data": "ptL2BASICS_94" },
-            { "data": "ptL2BASICS_95" }
-        ],
+        columns: columns,
         "columnDefs": [
             {
                 //Make URN and LEAESTAB columns hidden

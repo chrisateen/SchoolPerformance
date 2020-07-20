@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj": {}
+    "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj": {}
   },
   "projects": {
-    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj": {
+    "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
+        "projectUniqueName": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
         "projectName": "SchoolPerformaceTest",
-        "projectPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
-        "packagesPath": "C:\\Users\\christine\\.nuget\\packages\\",
-        "outputPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\obj\\",
+        "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
+        "packagesPath": "C:\\Users\\no_ot\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\christine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\no_ot\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
-                "projectPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj"
+              "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
+                "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj"
               }
             }
           }
@@ -116,24 +116,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
+    "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "projectUniqueName": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
         "projectName": "SchoolPerformance",
-        "projectPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
-        "packagesPath": "C:\\Users\\christine\\.nuget\\packages\\",
-        "outputPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
+        "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "packagesPath": "C:\\Users\\no_ot\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\christine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\no_ot\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -238,7 +238,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
