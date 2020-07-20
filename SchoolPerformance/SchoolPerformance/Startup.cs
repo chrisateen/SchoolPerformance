@@ -29,7 +29,7 @@ namespace SchoolPerformance
             services.AddMvc().AddNewtonsoftJson();
 
             //Register repository
-            services.AddScoped(typeof( ISchoolResultRepository <>),typeof(SchoolResultRepository<>));
+            services.AddScoped(typeof( ISchoolPerformanceRepository <>),typeof(SchoolPerformanceRepository<>));
 
             //services.AddAzureClients(builder =>
             //{

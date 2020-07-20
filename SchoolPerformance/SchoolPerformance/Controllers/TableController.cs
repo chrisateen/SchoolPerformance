@@ -12,9 +12,9 @@ namespace SchoolPerformance.Controllers
     public class TableController : Controller
     {
 
-        private ISchoolResultRepository<SchoolResult> _result;
+        private ISchoolPerformanceRepository<SchoolResult> _result;
 
-        public TableController(ISchoolResultRepository<SchoolResult> result)
+        public TableController(ISchoolPerformanceRepository<SchoolResult> result)
         {
             _result = result;
         }

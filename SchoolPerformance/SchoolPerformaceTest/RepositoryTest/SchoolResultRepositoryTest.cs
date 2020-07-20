@@ -13,8 +13,8 @@ namespace SchoolPerformaceTest
     {
         private SchoolPerformanceContext _context;
 
-        private ISchoolResultRepository<School> _repositorySchool;
-        private ISchoolResultRepository<SchoolResult> _repositorySchoolResult;
+        private ISchoolPerformanceRepository<School> _repositorySchool;
+        private ISchoolPerformanceRepository<SchoolResult> _repositorySchoolResult;
 
         private List<School> _schools;
         private List<SchoolResult> _schoolResults;
@@ -28,8 +28,8 @@ namespace SchoolPerformaceTest
             _context = connection._context;
             
             //Create the repository class that will be tested
-            _repositorySchool = new SchoolResultRepository<School>(_context);
-            _repositorySchoolResult = new SchoolResultRepository<SchoolResult>(_context);
+            _repositorySchool = new SchoolPerformanceRepository<School>(_context);
+            _repositorySchoolResult = new SchoolPerformanceRepository<SchoolResult>(_context);
 
             //Mock data
             SetData();

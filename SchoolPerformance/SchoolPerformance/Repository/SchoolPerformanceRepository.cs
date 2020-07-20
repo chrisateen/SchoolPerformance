@@ -12,12 +12,12 @@ namespace SchoolPerformance.Repository
     /// Interface for the repository class using generics
     /// Enables one to get records from the database
     /// </summary>
-    public class SchoolResultRepository<T> : ISchoolResultRepository<T> where T : class
+    public class SchoolPerformanceRepository<T> : ISchoolPerformanceRepository<T> where T : class
     {
         private SchoolPerformanceContext _context;
         private DbSet<T> _dbSet;
 
-        public SchoolResultRepository(SchoolPerformanceContext context)
+        public SchoolPerformanceRepository(SchoolPerformanceContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();

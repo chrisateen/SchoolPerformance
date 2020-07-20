@@ -10,7 +10,7 @@ namespace SchoolPerformance.Repository
     /// Interface for the repository class using generics
     /// Enables one to get records from the database
     /// </summary>
-    public interface ISchoolResultRepository<T> where T : class
+    public interface ISchoolPerformanceRepository<T> where T : class
     {
         /// <summary>
         /// Gets all records from a DbSet.

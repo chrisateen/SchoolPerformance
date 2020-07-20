@@ -16,7 +16,7 @@ namespace SchoolPerformanceTest.ControllerTest
     [TestClass]
     public class ScatterplotControllerTest
     {
-        Mock<ISchoolResultRepository<SchoolResult>> _mockSchoolResult;
+        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
         ScatterplotController _controller;
 
         //Arrange
@@ -24,7 +24,7 @@ namespace SchoolPerformanceTest.ControllerTest
         public void Setup()
         {
             //Instantiate the controller class by mocking the repository
-            _mockSchoolResult = new Mock<ISchoolResultRepository<SchoolResult>>();
+            _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
             _controller = new ScatterplotController(_mockSchoolResult.Object);
         }
 

@@ -18,7 +18,7 @@ namespace SchoolPerformanceTest.ControllerTest
     [TestClass]
     public class TableControllerTest
     {
-        Mock<ISchoolResultRepository<SchoolResult>> _mockSchoolResult;
+        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
         IEnumerable<SchoolResult> _results;
         TableController _controller;
 
@@ -27,7 +27,7 @@ namespace SchoolPerformanceTest.ControllerTest
         public void Setup()
         {
             //Instantiate the controller class by mocking the repository
-            _mockSchoolResult = new Mock<ISchoolResultRepository<SchoolResult>>();
+            _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
 
             //Mock data
             _results = new List<SchoolResult>

@@ -12,9 +12,9 @@ namespace SchoolPerformance.Controllers
     public class ScatterplotController : Controller
     {
 
-        private ISchoolResultRepository<SchoolResult> _result;
+        private ISchoolPerformanceRepository<SchoolResult> _result;
 
-        public ScatterplotController(ISchoolResultRepository<SchoolResult> result)
+        public ScatterplotController(ISchoolPerformanceRepository<SchoolResult> result)
         {
             _result = result;
         }
