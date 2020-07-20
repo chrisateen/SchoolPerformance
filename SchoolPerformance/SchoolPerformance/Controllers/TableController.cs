@@ -22,12 +22,22 @@ namespace SchoolPerformance.Controllers
 
         public IActionResult Index()
         {
+            //Empty TableViewModel returned 
+            //to allow me to use html display name helpers
+            return View(new TableViewModel());
+        }
+
+        [HttpGet]
+        public IActionResult OnGet()
+        {
             var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 
             //Converts from list of SchoolResult to List of TableViewModel
             List<TableViewModel> resultViewModel = result.ConvertToTableViewModel();
 
-            return View(resultViewModel);
+            var data = new { data = resultViewModel };
+
+            return Json(data);
         }
     }
 }
