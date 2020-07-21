@@ -14,6 +14,11 @@ namespace SchoolPerformance.LoadData
     {
         private static IEnumerable<PropertyInfo> _properties;
 
+        /// <summary>
+        /// Remove any SchoolResult object where all the attainment and progress properties are null
+        /// </summary>
+        /// <param name="results">IEnumerable list of SchoolResult object to check</param>
+        /// <returns>Returns a IEnumerable list of SchoolResult with null results removed</returns>
         public static IEnumerable<SchoolResult> removeNullResults(this IEnumerable<SchoolResult> results)
         {
             //Get all the properties
@@ -22,13 +27,11 @@ namespace SchoolPerformance.LoadData
             //Remove schools that do not have any results
             var filteredResults = results.Where(x => resultsNotEmpty(x));
 
-
             return filteredResults;
         }
 
         /// <summary>
-        /// Get all properties of SchoolResult 
-        /// excluding URN and ACADEMICYEAR and School
+        /// Get all properties of SchoolResult excluding URN and ACADEMICYEAR and School
         /// </summary>
         /// <returns>
         /// IEnumerable list of properties in SchoolResult
@@ -45,15 +48,18 @@ namespace SchoolPerformance.LoadData
             return propLst;
         }
 
-
+        /// <summary>
+        /// Checks if all properties are null
+        /// </summary>
+        /// <param name="result">SchoolResult object to check</param>
+        /// <returns>Returns if some properties are not null</returns>
         private static bool resultsNotEmpty (SchoolResult result)
         {
             var includeSchool = false;
 
             foreach (var prop in _properties)
             {
-                //If one of the result property is not null
-                //then that school should be include
+                //If one of the result property is not null then that school should be included
                 if(prop.GetValue(result) != null)
                 {
                     includeSchool = true;
