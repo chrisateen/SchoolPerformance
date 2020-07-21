@@ -131,7 +131,7 @@ namespace SchoolPerformaceTest
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
-            Assert.AreEqual(_data["SchoolResultTestAllNullRecords"].Count(), data.Count());
+            Assert.AreEqual(_data["SchoolResultTestAllNullRecords"].Count()-1, data.Count());
         }
 
         //Test ImportCSV class removes rows with less than 3 fields

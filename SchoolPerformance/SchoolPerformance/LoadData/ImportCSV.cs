@@ -5,6 +5,7 @@ using System.IO;
 using CsvHelper;
 using System.Linq;
 using SchoolPerformance.Models;
+using SchoolPerformance.LoadData;
 
 namespace LoadData
 {
@@ -62,7 +63,7 @@ namespace LoadData
 
                         var data = _csv.GetRecords<SchoolResult>().ToList();
 
-                        return (IEnumerable<M>)data;
+                        return (IEnumerable<M>)data.removeNullResults();
                     }
 
                     if (modelName == "SchoolDetails")
@@ -72,7 +73,7 @@ namespace LoadData
                         //No exception should be thrown if there are missing data for a field
                         _csv.Configuration.MissingFieldFound = null;
 
-                        var data = _csv.GetRecords<SchoolDetails>().ToList();
+                       var data = _csv.GetRecords<SchoolDetails>().ToList();
 
                         return (IEnumerable<M>)data;
                     }

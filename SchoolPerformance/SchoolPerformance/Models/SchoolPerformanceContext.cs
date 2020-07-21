@@ -14,7 +14,6 @@ namespace SchoolPerformance.Models
     public class SchoolPerformanceContext : DbContext
     {
         private DbContextOptions<SchoolPerformanceContext> _options;
-        public ModelBuilder _modelBuilder;
 
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
@@ -65,7 +64,7 @@ namespace SchoolPerformance.Models
                 .HasForeignKey(s => s.URN);
 
                 //Seed data
-                //modelBuilder.Seed(2019);
+                modelBuilder.Seed(2019);
 
         }
 
