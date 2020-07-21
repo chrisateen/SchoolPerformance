@@ -38,7 +38,7 @@ namespace SchoolPerformaceTest
                    new SchoolResult {
                     URN = 3, PTFSM6CLA1A = null, ATT8SCR = null,
                     ATT8SCR_FSM6CLA1A = null, ATT8SCR_NFSM6CLA1A = null,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = null, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = null,
+                    P8MEA = null, P8MEA_FSM6CLA1A = null, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = null,
                     PTFSM6CLA1ABASICS_94 = null, PTNOTFSM6CLA1ABASICS_94 = null, PTL2BASICS_95 = null,
                     PTFSM6CLA1ABASICS_95 = null, PTNOTFSM6CLA1ABASICS_95 = null,
                     School = new School{URN = 3, LA = 10, ESTAB = 103}
@@ -58,7 +58,7 @@ namespace SchoolPerformaceTest
                  new SchoolResult {
                     URN = 1, PTFSM6CLA1A = 0.43, ATT8SCR = 40,
                     ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = null,
-                    P8MEA=null, P8MEA_FSM6CLA1A = 0.01, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = 0.6,
+                    P8MEA = null, P8MEA_FSM6CLA1A = 0.01, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = null, PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.35, PTNOTFSM6CLA1ABASICS_95 = 0.35,
                     School = new School{URN = 1, LA = 10, ESTAB = 101}
@@ -66,7 +66,7 @@ namespace SchoolPerformaceTest
                    new SchoolResult {
                     URN = 3, PTFSM6CLA1A = null, ATT8SCR = null,
                     ATT8SCR_FSM6CLA1A = null, ATT8SCR_NFSM6CLA1A = null,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = null, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = null,
+                    P8MEA = 0.01, P8MEA_FSM6CLA1A = null, P8MEA_NFSM6CLA1A = null, PTL2BASICS_94 = null,
                     PTFSM6CLA1ABASICS_94 = null, PTNOTFSM6CLA1ABASICS_94 = null, PTL2BASICS_95 = null,
                     PTFSM6CLA1ABASICS_95 = null, PTNOTFSM6CLA1ABASICS_95 = null,
                     School = new School{URN = 3, LA = 10, ESTAB = 103}

@@ -19,7 +19,7 @@ namespace SchoolPerformaceTest
         private List<School> _schools;
         private List<SchoolResult> _schoolResults;
 
-        //Arange
+        //Arrange
         [TestInitialize]
         public void Setup()
         {

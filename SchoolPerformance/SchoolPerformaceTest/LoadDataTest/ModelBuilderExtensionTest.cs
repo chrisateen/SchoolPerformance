@@ -24,18 +24,16 @@ namespace SchoolPerformaceTest
         {
             //Create an InMemory Sqlite Database for testing
             var connection = new InMemorySqliteConnection();
+
+            //Seed method is called automatically
             _context = connection._context;
-
-            _context._modelBuilder = new ModelBuilder(new ConventionSet());
-
-            //Seed with data
-            _context._modelBuilder.Seed(2019);
         }
 
         //Tests School entity has been seeded with data
         [TestMethod]
         public void ContextSeededWithSchoolRecords()
         {
+           
             //Act and Assert
             Assert.AreNotEqual(0,_context.School.Count());
         }
