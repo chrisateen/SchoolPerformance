@@ -2,14 +2,15 @@ using SchoolPerformance.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SchoolPerformance.LoadData;
 
 namespace SchoolPerformaceTest
 {
     [TestClass]
     public class SchoolResultExtensionTest
     {
-        private List<SchoolResult> _schoolResults;
-        private List<SchoolResult> _schoolResults2;
+        private IEnumerable<SchoolResult> _schoolResults;
+        private IEnumerable<SchoolResult> _schoolResults2;
 
         //Arrange
         //Create mock data
