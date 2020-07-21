@@ -105,18 +105,33 @@ namespace SchoolPerformaceTest
         }
 
         //Test ImportCSV class can get data into SchoolResult model 
-        //even when there are rows with blank records in some or all of the fields
+        //even when there are rows with blank records in some of the fields
         [TestMethod]
-        public void ImportSchoolResultDataWithNullRecords()
+        public void ImportSchoolResultDataWithPartialcialNullRecords()
         {
             //Arrange
-            var import = new ImportCSV("SchoolResultTestNullRecords.csv");
+            var import = new ImportCSV("SchoolResultTestPartcialNullRecords.csv");
 
             //Act
             var data = import.GetDataFromCSV<SchoolResult>();
 
             //Assert
-            Assert.AreEqual(_data["SchoolResultTestNullRecords"].Count(), data.Count());
+            Assert.AreEqual(_data["SchoolResultTestPartcialNullRecords"].Count(), data.Count());
+        }
+
+        //Test ImportCSV class ignore rows where all the attainment 
+        //and progress results are null or/and N/A
+        [TestMethod]
+        public void ImportSchoolResultIgnoreRecordsWithAllNullResults()
+        {
+            //Arrange
+            var import = new ImportCSV("SchoolResultTestAllNullRecords.csv");
+
+            //Act
+            var data = import.GetDataFromCSV<SchoolResult>();
+
+            //Assert
+            Assert.AreEqual(_data["SchoolResultTestAllNullRecords"].Count(), data.Count());
         }
 
         //Test ImportCSV class removes rows with less than 3 fields
@@ -356,7 +371,23 @@ namespace SchoolPerformaceTest
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4}
             };
 
-            _data["SchoolResultTestNullRecords"] = new List<object>
+            _data["SchoolResultTestPartcialNullRecords"] = new List<object>
+            {
+                new { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = 40,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = 0.35},
+                new { URN = 3, PTFSM6CLA1A = 0.33, ATT8SCR = "SUPP", ATT8SCR_FSM6CLA1A = "NE", ATT8SCR_NFSM6CLA1A = "NP",
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = "NA", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = "NA", PTNOTFSM6CLA1ABASICS_94 = 0.6, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = "NA", PTNOTFSM6CLA1ABASICS_95 = 0.35},
+                new { URN = 1, PTFSM6CLA1A = 0.20, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4}
+            };
+
+            _data["SchoolResultTestAllNullRecords"] = new List<object>
             {
                 new { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = 40,
                     P8MEA=0.01, P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = 0.01, PTL2BASICS_94 = 0.6,
@@ -370,8 +401,8 @@ namespace SchoolPerformaceTest
                     P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
-                new { URN = "", PTFSM6CLA1A = "", ATT8SCR = "", ATT8SCR_FSM6CLA1A = "", ATT8SCR_NFSM6CLA1A = "",
-                    P8MEA="", P8MEA_FSM6CLA1A = "", P8MEA_NFSM6CLA1A = "", PTL2BASICS_94 = "",
+                new { URN = "", PTFSM6CLA1A = "", ATT8SCR = "NA", ATT8SCR_FSM6CLA1A = "NA", ATT8SCR_NFSM6CLA1A = "",
+                    P8MEA="", P8MEA_FSM6CLA1A = "SUPP", P8MEA_NFSM6CLA1A = "", PTL2BASICS_94 = "",
                     PTFSM6CLA1ABASICS_94 = "", PTNOTFSM6CLA1ABASICS_94 = "", PTL2BASICS_95 = "",
                     PTFSM6CLA1ABASICS_95 = "", PTNOTFSM6CLA1ABASICS_95 = ""},
             };
