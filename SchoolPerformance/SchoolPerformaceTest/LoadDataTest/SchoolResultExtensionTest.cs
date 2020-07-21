@@ -79,7 +79,7 @@ namespace SchoolPerformaceTest
         {
 
             //Act
-            var schoolResultsLst = _SchoolResult.removeNullResults();
+            var schoolResultsLst = _schoolResults.removeNullResults();
 
             //Assert
             Assert.AreEqual(2, schoolResultsLst.Count());
@@ -93,7 +93,7 @@ namespace SchoolPerformaceTest
         {
 
             //Act
-            var schoolResultsLst = _SchoolResult2.removeNullResults();
+            var schoolResultsLst = _schoolResults2.removeNullResults();
 
             //Assert
             Assert.AreEqual(3, schoolResultsLst.Count());
