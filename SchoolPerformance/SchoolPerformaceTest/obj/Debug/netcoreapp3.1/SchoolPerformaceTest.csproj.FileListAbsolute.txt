@@ -802,3 +802,4 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformaceTes
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.pdb
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\FluentAssertions.Json.dll
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\obj\Debug\netcoreapp3.1\SchoolPerformaceTest.csproj.CoreCompileInputs.cache
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformaceTest\bin\Debug\netcoreapp3.1\FastMember.dll
