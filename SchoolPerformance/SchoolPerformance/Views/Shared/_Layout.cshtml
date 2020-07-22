@@ -46,6 +46,7 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
             </ul>
         </nav>
         <!-- /.navbar -->
+
         <!-- Header Sidebar-->
         <aside class="main-sidebar sidebar-dark-light elevation-4">
 
@@ -59,6 +60,8 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                        <!-- Scatterplot option -->
                         <li class="nav-item">
                             <a asp-controller="Scatterplot" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-chart-area"></i>
@@ -67,6 +70,39 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                                 </p>
                             </a>
                         </li>
+                        <!-- /.scatterplot option -->
+                        <!-- Table options -->
+                        <li class="nav-item has-treeview">
+                            <!-- Table options header -->
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Result Tables
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right">2</span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="display: none;">
+                                <!-- /.table options header -->
+                                <!-- Table option all pupils -->
+                                <li class="nav-item">
+                                    <a asp-controller="Table" asp-action="Index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Results All</p>
+                                    </a>
+                                </li>
+                                <!-- /.table option all pupils-->
+                                <!-- Table option disadvantaged pupils -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Results Disadvantaged</p>
+                                    </a>
+                                </li>
+                                <!-- /.table option disadvantaged pupils -->
+                            </ul>
+                        </li>
+                        <!-- /.table options -->
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
