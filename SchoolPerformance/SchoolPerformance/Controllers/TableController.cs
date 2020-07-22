@@ -27,7 +27,7 @@ namespace SchoolPerformance.Controllers
             return View(new TableViewModel());
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult OnGet()
         {
             var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
