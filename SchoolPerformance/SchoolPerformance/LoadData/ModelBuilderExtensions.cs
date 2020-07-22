@@ -44,7 +44,7 @@ namespace LoadData
 
             addSchool(Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv"));
 
-            _dataLocations["SchoolResult"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv");
+            _dataLocations["School"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv");
             _dataLocations["SchoolDetails"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_school_information.csv");
             _dataLocations["SchoolContextual"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_census.csv");
 
@@ -55,24 +55,29 @@ namespace LoadData
         }
 
         /// <summary>
-        /// Gets data for entity School 
+        /// Gets data for entity School and School Result
         /// </summary>
         /// <param name="fileLocation">Location where the CSV file is held</param>
         private static void addSchool(string fileLocation)
         {
             var import = new ImportCSV(fileLocation);
 
-            //Gets the data for school
-            IEnumerable<School> school = import.GetDataFromCSV<School>();
+            //Gets the data for school result
+            IEnumerable<SchoolResult> schoolResults = import.GetDataFromCSV<SchoolResult>();
 
             //Remove data that do not have a URN
-            school = school.Where(x => x.URN != 0);
+            schoolResults = schoolResults.Where(x => x.URN != 0);
 
-            //Adds data to the migrations
-            _modelBuilder.Entity<School>().HasData(school);
+            //Academic year to be assigned to each data
+            schoolResults.ToList().ForEach(x => x.ACADEMICYEAR = _academicYear);
 
             //Creates a list of URN's that we need to import data for
-            _urnList = school.Select(x => x.URN);
+            _urnList = schoolResults.Select(x => x.URN);
+
+            //Adds data to the migrations
+            _modelBuilder.Entity<SchoolResult>().HasData(schoolResults);
+
+           
         }
 
 
@@ -89,18 +94,15 @@ namespace LoadData
         {
             var import = new ImportCSV(fileLocation);
 
-            if (modelName == "SchoolResult")
+            if (modelName == "School")
             {
 
-                IEnumerable<SchoolResult> data = import.GetDataFromCSV<SchoolResult>();
+                IEnumerable<School> data = import.GetDataFromCSV<School>();
 
-                //Remove data without a URN
-                data = data.Where(x => x.URN !=0);
+                //Only get data where a school has a result/in the result data
+                data = data.Where(x => _urnList.Contains(x.URN));
 
-                //Academic year to be assigned to each data
-                data.ToList().ForEach(x => x.ACADEMICYEAR = _academicYear);
-
-                _modelBuilder.Entity<SchoolResult>().HasData(data);
+                _modelBuilder.Entity<School>().HasData(data);
 
             }
 
