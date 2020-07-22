@@ -1,4 +1,5 @@
 ﻿
+
 function loadTable(table, columns) {
     table.DataTable({
         ajax: {
@@ -19,6 +20,7 @@ function loadTable(table, columns) {
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
         ],
+        serverSide: true,
         //Order by school name
         "order": [[2, "asc"]],
         dom: 'Blfrtip',
@@ -129,3 +131,45 @@ function loadTable(table, columns) {
         }
     });
 }
+
+
+//function to format percentages
+function formatPercentage() {
+    return function (data, type, row) {
+        if (data == null) {
+            return "N/A";
+        } else {
+            return Math.round(data * 100) + '%';
+        }
+    }; 
+}
+
+//function to deal with null numbers
+function formatNumber() {
+    return function (data, type, row) {
+        if (data == null) {
+            return "N/A";
+        } else {
+            return Math.round(data,2);
+        }
+    };
+}
+
+//jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+//    "signed-num-pre": function (a) {
+//        if (a == "N/A") {
+//            return -100;
+//        } else {
+//            return a;
+//        }
+        
+//    },
+
+//    "signed-num-asc": function (a, b) {
+//        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+//    },
+
+//    "signed-num-desc": function (a, b) {
+//        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+//    }
+//});
