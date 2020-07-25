@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformaceTest.LoadDataTest
 {
     [TestClass]
     public class NullURNAndLAESTABConverterTest
@@ -39,6 +39,18 @@ namespace SchoolPerformaceTest
             Assert.AreEqual(0, converter.ConvertFromString(str, null, new MemberMapData(null)));
         }
 
-        
+        //Tests NullURNAndLAESTABConverterTest converts a URN of NAT to 9
+        [TestMethod]
+        public void NullURNAndLAESTABConverterConvertsNATURN()
+        {
+            //Arrange
+            var converter = new NullURNAndLAESTABConverter();
+
+            //Act
+            var str = "NAT";
+
+            //Assert
+            Assert.AreEqual(9, converter.ConvertFromString(str, null, new MemberMapData(null)));
+        }
     }
 }

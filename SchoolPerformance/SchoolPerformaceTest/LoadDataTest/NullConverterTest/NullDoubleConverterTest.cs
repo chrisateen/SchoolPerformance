@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformaceTest.LoadDataTest
 {
     [TestClass]
     public class NullDoubleConverterTest
