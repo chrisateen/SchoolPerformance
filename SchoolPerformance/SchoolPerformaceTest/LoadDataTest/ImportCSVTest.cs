@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformaceTest.LoadDataTest
 {
     [TestClass]
     public class ImportCSVTest
@@ -37,7 +37,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolTest.csv");
 
             //Act
-            var data = import.GetDataFromCSV<School>();
+            var data = import.getDataFromCSV<School>();
 
             //Assert
             Assert.AreEqual(_data["SchoolTest"].Count(), data.Count());
@@ -52,7 +52,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolTestNullRecords.csv");
             
             //Act
-            var data = import.GetDataFromCSV<School>();
+            var data = import.getDataFromCSV<School>();
 
             //Assert
             Assert.AreEqual(_data["SchoolTestNullRecords"].Count(), data.Count());
@@ -67,7 +67,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolTestDifferentRowLength.csv");
 
             //Act
-            var data = import.GetDataFromCSV<School>();
+            var data = import.getDataFromCSV<School>();
 
             //Assert
 
@@ -84,7 +84,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolTestExtraFields.csv");
 
             //Act
-            var data = import.GetDataFromCSV<School>();
+            var data = import.getDataFromCSV<School>();
 
             //Assert
             Assert.AreEqual(_data["SchoolTestExtraFields"].Count(), data.Count());
@@ -98,7 +98,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolResultTest.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolResult>();
+            var data = import.getDataFromCSV<SchoolResult>();
 
             //Assert
             Assert.AreEqual(_data["SchoolResultTest"].Count(), data.Count());
@@ -113,7 +113,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolResultTestPartcialNullRecords.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolResult>();
+            var data = import.getDataFromCSV<SchoolResult>();
 
             //Assert
             Assert.AreEqual(_data["SchoolResultTestPartcialNullRecords"].Count(), data.Count());
@@ -128,7 +128,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolResultTestAllNullRecords.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolResult>();
+            var data = import.getDataFromCSV<SchoolResult>();
 
             //Assert
             Assert.AreEqual(_data["SchoolResultTestAllNullRecords"].Count()-1, data.Count());
@@ -143,7 +143,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolResultTestDifferentRowLength.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolResult>();
+            var data = import.getDataFromCSV<SchoolResult>();
 
             //Assert
 
@@ -160,7 +160,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolResultTestExtraFields.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolResult>();
+            var data = import.getDataFromCSV<SchoolResult>();
 
             //Assert
             Assert.AreEqual(_data["SchoolResultTestExtraFields"].Count(), data.Count());
@@ -175,7 +175,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolDetailsTest.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolDetails>();
+            var data = import.getDataFromCSV<SchoolDetails>();
 
             //Assert
             Assert.AreEqual(_data["SchoolDetailsTest"].Count(), data.Count());
@@ -190,7 +190,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolDetailsTestNullRecords.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolDetails>();
+            var data = import.getDataFromCSV<SchoolDetails>();
 
             //Assert
             Assert.AreEqual(_data["SchoolDetailsTestNullRecords"].Count(), data.Count());
@@ -205,7 +205,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolDetailsTestExtraFields.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolDetails>();
+            var data = import.getDataFromCSV<SchoolDetails>();
 
             //Assert
             Assert.AreEqual(_data["SchoolDetailsTestExtraFields"].Count(), data.Count());
@@ -219,7 +219,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolContextualTest.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolContextual>();
+            var data = import.getDataFromCSV<SchoolContextual>();
 
             //Assert
             Assert.AreEqual(_data["SchoolContextualTest"].Count(), data.Count());
@@ -234,7 +234,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolContextualTestNullRecords.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolContextual>();
+            var data = import.getDataFromCSV<SchoolContextual>();
 
             //Assert
             Assert.AreEqual(_data["SchoolContextualTestNullRecords"].Count(), data.Count());
@@ -249,25 +249,10 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolContextualTestExtraFields.csv");
 
             //Act
-            var data = import.GetDataFromCSV<SchoolContextual>();
+            var data = import.getDataFromCSV<SchoolContextual>();
 
             //Assert
             Assert.AreEqual(_data["SchoolContextualTestExtraFields"].Count(), data.Count());
-        }
-
-        //Test ImportCSV class excludes URN with value of NAT (i.e national data)
-        //when loading SchoolContextual data
-        [TestMethod]
-        public void ImportSchoolContextualDataExcludesNATData()
-        {
-            //Arrange
-            var import = new ImportCSV("SchoolContextualTestSkipRecords.csv");
-
-            //Act
-            var data = import.GetDataFromCSV<SchoolContextual>();
-
-            //Assert
-            Assert.AreEqual(_data["SchoolContextualTestSkipRecords"].Count() - 1, data.Count());
         }
 
         //Tests that when a class other than the models for this project is supplied
@@ -279,7 +264,7 @@ namespace SchoolPerformaceTest
             var import = new ImportCSV("SchoolTest.csv");
 
             //Act and Assert
-            var ex = Assert.ThrowsException<ArgumentException>(() => import.GetDataFromCSV<BlankClass>());
+            var ex = Assert.ThrowsException<ArgumentException>(() => import.getDataFromCSV<BlankClass>());
 
             Assert.AreEqual("Model name does not exist", ex.Message);
 
@@ -294,9 +279,39 @@ namespace SchoolPerformaceTest
 
 
             //Act and Assert
-            var ex = Assert.ThrowsException<FileNotFoundException>(() => import.GetDataFromCSV<School>());
+            var ex = Assert.ThrowsException<FileNotFoundException>(() => import.getDataFromCSV<School>());
 
             Assert.AreEqual("CSV file does not exist", ex.Message);
+        }
+
+        //Test ImportCSV class includes URN with value of NAT (i.e national data)
+        //when loading SchoolResult data
+        [TestMethod]
+        public void ImportNationalResult()
+        {
+            //Arrange
+            var import = new ImportCSV("SchoolResultTestNAT.csv");
+
+            //Act
+            var data = import.getDataFromCSV<SchoolResult>();
+
+            //Assert
+            Assert.AreEqual(_data["SchoolResultTestNAT"].Count(), data.Count());
+        }
+
+        //Test ImportCSV class includes URN with value of NAT (i.e national data)
+        //when loading SchoolContextual data
+        [TestMethod]
+        public void ImportSchoolContextualDataIncludesNATData()
+        {
+            //Arrange
+            var import = new ImportCSV("SchoolContextualTestNAT.csv");
+
+            //Act
+            var data = import.getDataFromCSV<SchoolContextual>();
+
+            //Assert
+            Assert.AreEqual(_data["SchoolContextualTestNAT"].Count(), data.Count());
         }
 
         //Remove any mock csv files
@@ -420,6 +435,18 @@ namespace SchoolPerformaceTest
                 new { URN = "", ATT8SCR = "" }
             };
 
+            _data["SchoolResultTestNAT"] = new List<object>
+            {
+                new { URN = "NAT", PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4},
+                new { URN = 1, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4}
+            };
+
             _data["SchoolDetailsTest"] = new List<object>
             {
                 new { URN = 2, STREET = "Test 1" , LOCALITY = "Locality 1", ADDRESS3 = "Address 1",
@@ -488,7 +515,7 @@ namespace SchoolPerformaceTest
                     PSENELK = "NA", PNUMEAL = "NA", PNUMFSMEVER = "NA"}
             };
 
-            _data["SchoolContextualTestSkipRecords"] = new List<object>
+            _data["SchoolContextualTestNAT"] = new List<object>
             {
                 new { URN = 2, NOR = 1500, PNORG = 0.52, PSENELSE = 0.01,
                     PSENELK = 0.05, PNUMEAL = 0.12, PNUMFSMEVER = 0.2},

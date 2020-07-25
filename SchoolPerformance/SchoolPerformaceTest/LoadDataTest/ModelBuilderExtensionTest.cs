@@ -11,7 +11,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformaceTest.LoadDataTest
 {
     [TestClass]
     public class ModelBuilderExtensionTest
