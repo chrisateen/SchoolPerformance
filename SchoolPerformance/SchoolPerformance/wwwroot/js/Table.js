@@ -7,6 +7,7 @@ function loadTable(table, columns) {
             dataType: 'json',
             type: "POST",
         },
+        deferRender: true,
         columns: columns,
         "columnDefs": [
             {
@@ -155,7 +156,7 @@ function formatNumber() {
 }
 
 //Sort numbers and percentages putting N/A values last
-//the datatables precentage sorting plugin was
+//the datatables percentage sorting plug-in was
 //modified for my own purposes
 //https://cdn.datatables.net/plug-ins/1.10.21/sorting/percent.js
 
@@ -225,3 +226,5 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         return ((x < y) ? 1 : ((x > y) ? -1 : 0));
     }
 });
+
+

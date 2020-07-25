@@ -42,15 +42,24 @@ namespace LoadData
             _modelBuilder = modelBuilder;
             _academicYear = academicYear;
 
-            addSchool(Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv"));
+            //addSchool(Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv"));
 
+            _dataLocations["SchoolResult"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv");
             _dataLocations["School"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_ks4final.csv");
             _dataLocations["SchoolDetails"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_school_information.csv");
             _dataLocations["SchoolContextual"] = Path.Combine(_CSVRootDir, $"{_academicYear}\\england_census.csv");
 
             foreach (KeyValuePair<string, string> kvp in _dataLocations)
             {
-                addData(kvp.Key, kvp.Value);
+                if (kvp.Key == "SchoolResult")
+                {
+                    addSchool(kvp.Value);
+                }
+                else
+                {
+                    addData(kvp.Key, kvp.Value);
+                }
+                
             }
         }
 
@@ -63,7 +72,7 @@ namespace LoadData
             var import = new ImportCSV(fileLocation);
 
             //Gets the data for school result
-            IEnumerable<SchoolResult> schoolResults = import.GetDataFromCSV<SchoolResult>();
+            IEnumerable<SchoolResult> schoolResults = import.getDataFromCSV<SchoolResult>();
 
             //Remove data that do not have a URN
             schoolResults = schoolResults.Where(x => x.URN != 0);
@@ -97,7 +106,7 @@ namespace LoadData
             if (modelName == "School")
             {
 
-                IEnumerable<School> data = import.GetDataFromCSV<School>();
+                IEnumerable<School> data = import.getDataFromCSV<School>();
 
                 //Only get data where a school has a result/in the result data
                 data = data.Where(x => _urnList.Contains(x.URN));
@@ -108,7 +117,7 @@ namespace LoadData
 
             else if (modelName == "SchoolDetails")
             {
-                IEnumerable<SchoolDetails> data = import.GetDataFromCSV<SchoolDetails>();
+                IEnumerable<SchoolDetails> data = import.getDataFromCSV<SchoolDetails>();
 
                 //Only get data where a school has a result/in the result data
                 data = data.Where(x => _urnList.Contains(x.URN));
@@ -119,7 +128,7 @@ namespace LoadData
 
             else if (modelName == "SchoolContextual")
             {
-                IEnumerable<SchoolContextual> data = import.GetDataFromCSV<SchoolContextual>();
+                IEnumerable<SchoolContextual> data = import.getDataFromCSV<SchoolContextual>();
 
                 //Only get data where a school has a result/in the result data
                 data = data.Where(x => _urnList.Contains(x.URN));
@@ -135,6 +144,11 @@ namespace LoadData
                 throw new ArgumentException($"Model name does not exist");
             }
 
+        }
+
+        public static void addNationalData()
+        {
+            var import = new ImportCSV(_dataLocations["SchoolResult"]);
         }
 
 

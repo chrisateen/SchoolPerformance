@@ -33,7 +33,8 @@ namespace SchoolPerformance.Repository
             //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
-            return query.ToList();
+            //Return result removing national data
+            return removeNational(query).ToList();
 
         }
 
@@ -49,7 +50,8 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            return query.ToList();
+            //Return result removing national data
+            return removeNational(query).ToList();
         }
 
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
@@ -59,7 +61,8 @@ namespace SchoolPerformance.Repository
             //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
-            return query.ToList();
+            //Return result removing national data
+            return removeNational(query).ToList();
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
@@ -71,7 +74,8 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            return query.ToList();
+            //Return result removing national data
+            return removeNational(query).ToList();
         }
 
         /// <summary>
@@ -117,6 +121,36 @@ namespace SchoolPerformance.Repository
             }
 
             return query;
+        }
+
+        /// <summary>
+        /// Remove any national result
+        /// </summary>
+        private IQueryable<T> removeNational(IQueryable<T> data)
+        {
+
+            //Build the expression
+            ParameterExpression pe = Expression.Parameter(typeof(T), "s");
+
+            MemberExpression me = Expression.Property(pe, "URN");
+
+            ConstantExpression constant = Expression.Constant(9, typeof(int));
+
+                
+            //Create the condition s.URN != 9
+            Expression body = Expression.NotEqual(me, constant);
+
+            //Create the expression data.where(s => s.URN !=9 )
+            MethodCallExpression callExpression = Expression.Call(
+                    typeof(Queryable),
+                    "Where",
+                    new Type[] { data.ElementType },
+                    data.Expression,
+                    Expression.Lambda<Func<T,bool>>(body, new ParameterExpression[] { pe }));
+
+            // Return an executable query from the expression tree.
+            return data.Provider.CreateQuery<T>(callExpression);
+
         }
     }
 }
