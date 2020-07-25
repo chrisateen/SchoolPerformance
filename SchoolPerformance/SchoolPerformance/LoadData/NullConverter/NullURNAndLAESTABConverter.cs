@@ -21,6 +21,11 @@ namespace LoadData
             {
                 return 0;
             }
+            if(text == "NAT")
+            {
+                return 9;
+            }
+
             return base.ConvertFromString(text, row, memberMapData);
 
         }
