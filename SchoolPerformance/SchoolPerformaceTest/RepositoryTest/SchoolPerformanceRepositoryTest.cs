@@ -62,7 +62,10 @@ namespace SchoolPerformaceTest.RepositoryTest
             schoolLst = _repositorySchool.Get();
 
             //Assert
-            Assert.AreEqual(_schools.Count(), schoolLst.Count());
+            Assert.AreEqual(
+                _schools.Where(s => s.URN != 9).Count(), 
+                schoolLst.Count()
+                );
         }
 
         //Tests Get method and GetAll method returns the expected records
