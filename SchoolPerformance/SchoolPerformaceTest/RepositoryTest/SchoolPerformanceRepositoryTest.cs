@@ -198,13 +198,13 @@ namespace SchoolPerformaceTest.RepositoryTest
 
             //Assert
             Assert.AreEqual(
-                _schools.Where(x => x.URN != 9).Count(),
+                _schools.Where(x => x.URN == 9).Count(),
                 national.Count());
 
 
             //Assert
             Assert.AreEqual(
-                _schoolResults.Where(x => x.URN != 9).Count(),
+                _schoolResults.Where(x => x.URN == 9).Count(),
                 nationalResult.Count());
 
         }
@@ -224,7 +224,7 @@ namespace SchoolPerformaceTest.RepositoryTest
 
             //Assert
             Assert.AreEqual(
-                _schoolResults.Where(x => x.URN != 9).Count(),
+                _schoolResults.Where(x => x.URN == 9).Count(),
                 resultCount);
 
         }
