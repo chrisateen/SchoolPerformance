@@ -34,7 +34,7 @@ namespace SchoolPerformance.Repository
             query = AddOrderQuery(query, orderBy);
 
             //Return result removing national data
-            return removeNational(query).ToList();
+            return National(query,false).ToList();
 
         }
 
@@ -51,7 +51,7 @@ namespace SchoolPerformance.Repository
             query = AddOrderQuery(query, orderBy);
 
             //Return result removing national data
-            return removeNational(query).ToList();
+            return National(query,false).ToList();
         }
 
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
@@ -62,7 +62,7 @@ namespace SchoolPerformance.Repository
             query = AddOrderQuery(query, orderBy);
 
             //Return result removing national data
-            return removeNational(query).ToList();
+            return National(query,false).ToList();
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
@@ -75,7 +75,26 @@ namespace SchoolPerformance.Repository
             query = AddOrderQuery(query, orderBy);
 
             //Return result removing national data
-            return removeNational(query).ToList();
+            return National(query,false).ToList();
+        }
+
+        public IEnumerable<T> GetNational(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
+
+            //Return result including national data
+            return National(query,true).ToList();
+        }
+
+        public IEnumerable<T> GetNational()
+        {
+            IQueryable<T> query = _dbSet;
+
+            //Return result including national data
+            return National(query, true).ToList();
         }
 
         /// <summary>
@@ -124,9 +143,15 @@ namespace SchoolPerformance.Repository
         }
 
         /// <summary>
-        /// Remove any national result
+        /// Get or remove national data
         /// </summary>
-        private IQueryable<T> removeNational(IQueryable<T> data)
+        /// <param name="data">
+        /// Query to include the national condition
+        /// </param>
+        /// <param name="getNational">
+        /// If one requires the national data or not
+        /// </param>
+        private IQueryable<T> National(IQueryable<T> data,Boolean getNational)
         {
 
             //Build the expression
@@ -136,21 +161,24 @@ namespace SchoolPerformance.Repository
 
             ConstantExpression constant = Expression.Constant(9, typeof(int));
 
-                
-            //Create the condition s.URN != 9
-            Expression body = Expression.NotEqual(me, constant);
+            //Create the condition URN == 9 if one requires the national data
+            //or URN != 9 if one wants to exclude the national data
+            Expression body = getNational? Expression.Equal(me, constant) : Expression.NotEqual(me, constant);
 
-            //Create the expression data.where(s => s.URN !=9 )
+
+            //Create the expression data.where(s => s.URN !=9 ) to exclude national data
+            //or the expression data.where(s => s.URN ==9 ) to only return national data
             MethodCallExpression callExpression = Expression.Call(
                     typeof(Queryable),
                     "Where",
                     new Type[] { data.ElementType },
                     data.Expression,
-                    Expression.Lambda<Func<T,bool>>(body, new ParameterExpression[] { pe }));
+                    Expression.Lambda<Func<T, bool>>(body, new ParameterExpression[] { pe }));
 
             // Return an executable query from the expression tree.
             return data.Provider.CreateQuery<T>(callExpression);
 
         }
+
     }
 }
