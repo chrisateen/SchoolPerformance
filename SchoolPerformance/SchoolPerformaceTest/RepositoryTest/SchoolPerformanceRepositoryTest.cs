@@ -79,7 +79,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             var schoolLst = _repositorySchool.GetAll(null, x => x.SchoolResults);
             
             //Count number of results for all schools in test database 
-            //to see if school results objects was included in the list
+            //to see if school results objects was included
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             //Assert
@@ -176,7 +176,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             var schoolLst = _repositorySchool.Get(x => x.SCHNAME != "Test 2",null,x => x.SchoolResults);
 
             //Count number of results for school name test 2 in the test database 
-            //to see if school results objects was included in the list
+            //to see if school results objects was included
             //National results should be excluded
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
@@ -186,6 +186,47 @@ namespace SchoolPerformaceTest.RepositoryTest
                 _schoolResults.Where(x => x.School.SCHNAME != "Test 2" && x.URN !=9).Count(), 
                 resultCount);
             
+        }
+
+        //Tests GetNational method gets the national data
+        [TestMethod]
+        public void GetNationalData()
+        {
+            //Act
+            var national = _repositorySchool.GetNational();
+            var nationalResult = _repositorySchoolResult.GetNational();
+
+            //Assert
+            Assert.AreEqual(
+                _schools.Where(x => x.URN != 9).Count(),
+                national.Count());
+
+
+            //Assert
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.URN != 9).Count(),
+                nationalResult.Count());
+
+        }
+
+        //Tests GetNational method gets the national data
+        //and another DbSet is added
+        [TestMethod]
+        public void GetNationalDataWithMultipleDbsetIncluded()
+        {
+            //Act
+            var national = _repositorySchool.GetNational(x => x.SchoolResults);
+
+            //Count number of results for national in the test database 
+            //to see if school results objects was included
+            var resultCount = national.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
+
+
+            //Assert
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.URN != 9).Count(),
+                resultCount);
+
         }
 
         //Create mock data
@@ -219,6 +260,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             _context.Database.ExecuteSqlRaw("DELETE FROM SchoolDetails");
             _context.Database.ExecuteSqlRaw("DELETE FROM School");
             _context.SaveChanges();
+
         }
     }
 }
