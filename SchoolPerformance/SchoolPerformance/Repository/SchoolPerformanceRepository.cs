@@ -23,7 +23,9 @@ namespace SchoolPerformance.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
+        public IEnumerable<T> GetAll(
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
 
@@ -38,7 +40,10 @@ namespace SchoolPerformance.Repository
 
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, params Expression<Func<T, object>>[] includes)
+        public IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null, 
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
 
@@ -65,7 +70,9 @@ namespace SchoolPerformance.Repository
             return National(query,false).ToList();
         }
 
-        public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        public IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null, 
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
             IQueryable<T> query = _dbSet;
 
@@ -78,20 +85,35 @@ namespace SchoolPerformance.Repository
             return National(query,false).ToList();
         }
 
-        public IEnumerable<T> GetNational(params Expression<Func<T, object>>[] includes)
+        public IEnumerable<T> GetNational(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
 
             //Include/merge other DbSets into our query
             query = AddDbSets(query, includes);
 
+            //Include filter and order by condition in the query
+            query = AddFilterQuery(query, filter);
+
+            query = AddOrderQuery(query, orderBy);
+
             //Return result including national data
             return National(query,true).ToList();
         }
 
-        public IEnumerable<T> GetNational()
+        public IEnumerable<T> GetNational(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
             IQueryable<T> query = _dbSet;
+
+            //Include filter and order by condition in the query
+            query = AddFilterQuery(query, filter);
+
+            query = AddOrderQuery(query, orderBy);
 
             //Return result including national data
             return National(query, true).ToList();
@@ -153,7 +175,7 @@ namespace SchoolPerformance.Repository
         /// </param>
         private IQueryable<T> National(IQueryable<T> data,Boolean getNational)
         {
-
+            
             //Build the expression
             ParameterExpression pe = Expression.Parameter(typeof(T), "s");
 

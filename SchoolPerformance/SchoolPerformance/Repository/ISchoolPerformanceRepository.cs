@@ -73,17 +73,34 @@ namespace SchoolPerformance.Repository
         /// <summary>
         /// Gets the national records from a DbSet.
         /// </summary>
+        /// <param name="filter">
+        /// Use a function to specify how to filter the records. 
+        /// If filtering is not need enter null</param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null</param>
         /// <param name="includes">
         /// Specify a list of other DbSets to be included
         /// </param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetNational(params Expression<Func<T, object>>[] includes);
+        public IEnumerable<T> GetNational(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            params Expression<Func<T, object>>[] includes);
 
         /// <summary>
         /// Gets the national records from a DbSet.
         /// </summary>
+        /// <param name="filter">
+        /// Use a function to specify how to filter the records. 
+        /// If filtering is not need enter null</param>
+        /// <param name="orderBy">
+        /// Use a function to specify how to order the records. 
+        /// If ordering is not need enter null</param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetNational();
+        public IEnumerable<T> GetNational(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
 
     }
