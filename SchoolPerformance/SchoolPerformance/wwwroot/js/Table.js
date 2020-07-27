@@ -1,4 +1,13 @@
 ﻿
+//Creates footer th tags 
+//depending on the number of cols in a table
+function createFooterHTML(cols) {
+    var thTags = "";
+    for (var col in cols) {
+        thTags += "<th></th>";
+    }
+    return thTags;
+}
 
 function loadTable(table, columns) {
     table.DataTable({
@@ -9,7 +18,7 @@ function loadTable(table, columns) {
         },
         deferRender: true,
         columns: columns,
-        "columnDefs": [
+        columnDefs: [
             {
                 //Make URN and LEAESTAB columns hidden
                 targets: [0, 1],
@@ -17,12 +26,12 @@ function loadTable(table, columns) {
                 visible: false
             }
         ],
-        "lengthMenu": [
+        lengthMenu: [
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
         ],
         //Order by school name
-        "order": [[2, "asc"]],
+        order: [[2, "asc"]],
         dom: 'Blfrtip',
         buttons: [
             {
@@ -128,10 +137,45 @@ function loadTable(table, columns) {
             buttons: {
                 colvisRestore: "Select All"
             }
-        }
+        },
+        'footerCallback': addFooterData(columns) 
+
     });
 }
 
+
+//function to add the national data to the table footer
+function addFooterData(columns) {
+
+    return function () {
+
+        var api = this.api();
+
+        var response = this.api().ajax.json();
+
+        if (response) {
+
+            //Loop through each column in the table
+            //and get the footer data
+            for (i = 0; i < columns.length; i++) {
+
+                var colName = columns[i]['data'];
+                var data = response['national'][colName];
+                
+                //Get the type to check if it is a percentage column
+                var colType = columns[i]['type'];
+
+                //Convert decimal to percentage
+                if (colType == "sort-percent") {
+                    data = Math.round(data * 100) + '%';
+                }
+                
+                $(api.column(i).footer()).html(data);
+            }
+        }
+
+    }
+}
 
 //function to format percentages
 function formatPercentage() {

@@ -24,6 +24,7 @@
 
 <script>
     var $table = $('#resultsTable');
+
     var tableCols = [
         {
             data: "urn",
@@ -71,7 +72,7 @@
 
 
     $(function () {
-
+        $table.append('<tfoot><tr>' + createFooterHTML(tableCols)+'</tr></tfoot>');
         loadTable($table, tableCols);
 
     });
