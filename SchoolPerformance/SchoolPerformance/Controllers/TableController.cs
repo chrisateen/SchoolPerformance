@@ -28,7 +28,7 @@ namespace SchoolPerformance.Controllers
         }
 
         [HttpPost]
-        public IActionResult OnGet()
+        public IActionResult GetResultsAll()
         {
             var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 

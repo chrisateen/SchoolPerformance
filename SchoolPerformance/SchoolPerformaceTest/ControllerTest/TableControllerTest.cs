@@ -43,15 +43,31 @@ namespace SchoolPerformanceTest.ControllerTest
                     PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
                     PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
                     School = new School{URN=2, SCHNAME = "Test 2"}
+                },
+                new SchoolResult { URN = 9, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
+                    School = new School{URN=2, SCHNAME = ""}
                 }
             };
 
-            //When the get all method is called return _results
+            //When the GetAll method is called return _results 
+            //excluding national data
             _mockSchoolResult.Setup(m => m.GetAll(
                 It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
                 It.IsAny<Expression<Func<SchoolResult, object>>[]>()
                 ))
-                .Returns(_results).Verifiable();
+                .Returns(_results.Where(r => r.URN !=9)).Verifiable();
+
+            //When the GetNational method is called return _results 
+            //with national data only
+            _mockSchoolResult.Setup(m => m.GetNational(
+                It.IsAny<Expression<Func<SchoolResult, bool>>>(),
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
+                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+                ))
+                .Returns(_results.Where(r => r.URN == 9)).Verifiable();
 
             _controller = new TableController(_mockSchoolResult.Object);
         }
@@ -73,22 +89,22 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeAssignableTo<TableViewModel>().Subject;
         }
 
-        //Checks when OnGet is called a JSON object is returned
+        //Checks when GetResultsAll is called a JSON object is returned
         [TestMethod]
-        public void OnGetReturnsJSONObject()
+        public void GetResultsAllReturnsJSONObject()
         {
             // Act and Assert
-           var data = _controller.OnGet().Should()
+           var data = _controller.GetResultsAll().Should()
                 .BeJsonResult().Value;
 
         }
 
-        //Checks when OnGet is called a JSON object is returned
+        //Checks when GetResultsAll is called a JSON object is returned
         //with data from a list of TableViewModel
         [TestMethod]
-        public void OnGetContainsListOfTableViewModel()
+        public void GetResultsAllContainsListOfTableViewModel()
         {
-            var data = _controller.OnGet().Should()
+            var data = _controller.GetResultsAll().Should()
                 .BeJsonResult().Value;
 
             //Get the data property from the JSON object 
@@ -99,7 +115,39 @@ namespace SchoolPerformanceTest.ControllerTest
 
             //Check the JSON object returned
             //contains the mock data
-           Assert.AreEqual(_results.Count(), dataList.Count());
+           Assert.AreEqual(_results.Where(x => x.URN != 9).Count(), dataList.Count());
+
+        }
+
+        //Checks when GetResultsNational is called a JSON object is returned
+        [TestMethod]
+        public void GetResultsNationalReturnsJSONObject()
+        {
+            // Act and Assert
+            var data = _controller.GetResultsNational().Should()
+                 .BeJsonResult().Value;
+
+        }
+
+        //Checks when GetResultsNational is called a JSON object is returned
+        //with data from a list of TableViewModel
+        [TestMethod]
+        public void GetResultsNationalContainsListOfTableViewModel()
+        {
+            var data = _controller.GetResultsNational().Should()
+                .BeJsonResult().Value;
+
+            //Get the data property from the JSON object 
+            //which contains the list of TableViewModels
+            var dataList = (List<TableViewModel>)data
+                .GetType().GetProperty("data")
+                .GetValue(data, null);
+
+            //Check the JSON object returned
+            //contains the mock data
+            Assert.AreEqual(
+                _results.Where(x => x.URN ==9).Count(), 
+                dataList.Count());
 
         }
     }
