@@ -64,8 +64,7 @@ namespace SchoolPerformanceTest.ControllerTest
             //with national data only
             _mockSchoolResult.Setup(m => m.GetNational(
                 It.IsAny<Expression<Func<SchoolResult, bool>>>(),
-                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
-                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>()
                 ))
                 .Returns(_results.Where(r => r.URN == 9)).Verifiable();
 
@@ -113,42 +112,18 @@ namespace SchoolPerformanceTest.ControllerTest
                 .GetType().GetProperty("data")
                 .GetValue(data, null);
 
-            //Check the JSON object returned
-            //contains the mock data
-           Assert.AreEqual(_results.Where(x => x.URN != 9).Count(), dataList.Count());
-
-        }
-
-        //Checks when GetResultsNational is called a JSON object is returned
-        [TestMethod]
-        public void GetResultsNationalReturnsJSONObject()
-        {
-            // Act and Assert
-            var data = _controller.GetResultsNational().Should()
-                 .BeJsonResult().Value;
-
-        }
-
-        //Checks when GetResultsNational is called a JSON object is returned
-        //with data from a list of TableViewModel
-        [TestMethod]
-        public void GetResultsNationalContainsListOfTableViewModel()
-        {
-            var data = _controller.GetResultsNational().Should()
-                .BeJsonResult().Value;
-
             //Get the data property from the JSON object 
-            //which contains the list of TableViewModels
-            var dataList = (List<TableViewModel>)data
-                .GetType().GetProperty("data")
+            //which contains the national result
+            var natResults = (TableViewModel)data
+                .GetType().GetProperty("national")
                 .GetValue(data, null);
 
             //Check the JSON object returned
             //contains the mock data
-            Assert.AreEqual(
-                _results.Where(x => x.URN ==9).Count(), 
-                dataList.Count());
+            Assert.AreEqual(_results.Where(x => x.URN != 9).Count(), dataList.Count());
+            Assert.IsNotNull(natResults);
 
         }
+
     }
 }
