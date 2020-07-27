@@ -6,107 +6,97 @@
 
 <div class="content-wrapper">
 
-    <!-- Header -->
-    <section class="content-header">
-        <div class="container-fluid">
-
-            <!-- Header Title-->
-            <div class="row mb-2">
-                <div>
-                    <h1>Result Scatterplot</h1>
-                </div>
-
-            </div>
-            <!-- /.header title-->
-
-        </div>
-    </section>
-    <!-- /.header -->
-
     <div class="content">
 
         <div class="container-fluid">
 
-            <div class="row">
-
-                <!-- Performance measure dropdown-->
-                <div class="col-lg-6 mb-2">
-
-                    <div class="input-group col-12">
-
-                        <!-- Dropdown list-->
-                        <select id="measure" class="form-control">
-                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_NFSM6CLA1A)</option>
-                            <option selected>@Html.DisplayNameFor(m => m.First().P8MEA)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().P8MEA_FSM6CLA1A)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().P8MEA_NFSM6CLA1A)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_94)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_94)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_94)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_95)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_95)</option>
-                            <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
-                        </select>
-                        <!-- /.dropdown list-->
-
-                        <!-- Search button-->
-                        <span class="input-group-append">
-                            <button class="btn btn-info" onclick="updateChart()">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </span>
-                        <!-- /.search button-->
-
+            <div class="pl-2 pr-2 pt-2 pb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Result Scatterplot</h3>
                     </div>
+                    <div class="card-body">
+                        <div class="row">
 
-                </div>
-                <!-- /.performance measure dropdown-->
+                            <!-- Performance measure dropdown-->
+                            <div class="col-lg-6 mb-2">
 
-                <!-- Search school-->
-                <div class="col-lg-6 mb-2">
+                                <div class="input-group col-12">
 
-                    <div class="input-group col-12">
+                                    <!-- Dropdown list-->
+                                    <select id="measure" class="form-control">
+                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_NFSM6CLA1A)</option>
+                                        <option selected>@Html.DisplayNameFor(m => m.First().P8MEA)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().P8MEA_FSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().P8MEA_NFSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_95)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_95)</option>
+                                        <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
+                                    </select>
+                                    <!-- /.dropdown list-->
+                                    <!-- Search button-->
+                                    <span class="input-group-append">
+                                        <button class="btn btn-info" onclick="updateChart()">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <!-- /.search button-->
 
-                        <!-- URN Search box-->
-                        <label for="inputSchool" class="mr-2 col-form-label">Search School by URN</label>
+                                </div>
 
-                        <input type="number" class="form-control" id="inputSchool">
+                            </div>
+                            <!-- /.performance measure dropdown-->
+                            <!-- Search school-->
+                            <div class="col-lg-6 mb-2">
 
-                        <!-- /.URN search box-->
+                                <div class="input-group col-12">
 
-                        <!-- Search button-->
-                        <span class="input-group-append">
-                            <button class="btn btn-info" onclick="updateHighligtedSchool()">
-                                <i class="fas fa-search"></i>
+                                    <!-- URN Search box-->
+                                    <label for="inputSchool" class="mr-2 col-form-label">Search School by URN</label>
+
+                                    <input type="number" class="form-control" id="inputSchool">
+
+                                    <!-- /.URN search box-->
+                                    <!-- Search button-->
+                                    <span class="input-group-append">
+                                        <button class="btn btn-info" onclick="updateHighligtedSchool()">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <!-- /.search button-->
+
+                                </div>
+
+                            </div>
+                            <!-- /.search school-->
+
+                        </div>
+
+                        <!-- Scatter Chart-->
+                        <div class="chart">
+                            <canvas id="Scatterplot"></canvas>
+                        </div>
+                        <!-- /.scatter chart-->
+                        <!-- Reset Chart Zoom Button-->
+                        <div class="row justify-content-end">
+                            <button type="button"
+                                    class="btn btn-secondary btn-sm"
+                                    onclick="resetScatterZoom()">
+                                Reset Zoom
                             </button>
-                        </span>
-                        <!-- /.search button-->
-
+                        </div>
+                        <!-- reset chart zoom button-->
                     </div>
-
                 </div>
-                <!-- /.search school-->
+
+
 
             </div>
-
-            <!-- Scatter Chart-->
-            <div class="chart">
-                <canvas id="Scatterplot"></canvas>
-            </div>
-            <!-- /.scatter chart-->
-
-            <!-- Reset Chart Zoom Button-->
-            <div class="row justify-content-end">
-                <button type="button"
-                        class="btn btn-secondary btn-sm"
-                        onclick="resetScatterZoom()">
-                    Reset Zoom
-                </button>
-            </div>
-            <!-- reset chart zoom button-->
-
         </div>
     </div>
 </div>
