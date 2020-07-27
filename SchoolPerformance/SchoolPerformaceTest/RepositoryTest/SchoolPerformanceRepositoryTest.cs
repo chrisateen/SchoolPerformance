@@ -215,7 +215,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         public void GetNationalDataWithMultipleDbsetIncluded()
         {
             //Act
-            var national = _repositorySchool.GetNational(x => x.SchoolResults);
+            var national = _repositorySchool.GetNational(null,null,x => x.SchoolResults);
 
             //Count number of results for national in the test database 
             //to see if school results objects was included
@@ -226,6 +226,31 @@ namespace SchoolPerformaceTest.RepositoryTest
             Assert.AreEqual(
                 _schoolResults.Where(x => x.URN == 9).Count(),
                 resultCount);
+
+        }
+
+        //Tests GetNational method gets the national data
+        //when a filter and order condition is included
+        [TestMethod]
+        public void GetNationalDataFilterandOrder()
+        {
+            //Act
+
+            //Gets the first academic year of the national result
+            //when data is filtered by PTL2BASICS_94 above 0.6 
+            //and ordered by academic year
+            var nationalResult = _repositorySchoolResult.GetNational(
+                x => x.PTL2BASICS_94 > 0.6,
+                x => x.OrderBy(x => x.ACADEMICYEAR))
+                .First().ACADEMICYEAR;
+
+
+            //Assert
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.URN == 9 && x.PTL2BASICS_94 > 0.6)
+                    .OrderBy(x => x.ACADEMICYEAR).First().ACADEMICYEAR,
+                nationalResult
+                );
 
         }
 
@@ -246,6 +271,7 @@ namespace SchoolPerformaceTest.RepositoryTest
                 new SchoolResult{ URN = 2, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.51 },
                 new SchoolResult { URN = 1, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.62 },
                 new SchoolResult { URN = 1, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.68 },
+                new SchoolResult { URN = 9, ACADEMICYEAR = 2017, PTL2BASICS_94 = 0.60 },
                 new SchoolResult { URN = 9, ACADEMICYEAR = 2018, PTL2BASICS_94 = 0.62 },
                 new SchoolResult { URN = 9, ACADEMICYEAR = 2019, PTL2BASICS_94 = 0.68 }
             };
