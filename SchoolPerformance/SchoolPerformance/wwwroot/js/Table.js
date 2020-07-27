@@ -3,7 +3,7 @@
 function loadTable(table, columns) {
     table.DataTable({
         ajax: {
-            url: "/Table/OnGet",
+            url: "/Table/GetResultsAll",
             dataType: 'json',
             type: "POST",
         },

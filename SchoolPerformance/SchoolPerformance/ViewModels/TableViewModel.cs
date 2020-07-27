@@ -46,7 +46,22 @@ namespace SchoolPerformance.ViewModels
         /// to be converted to TableResultViewModel object</param>
         public static implicit operator TableViewModel(SchoolResult result)
         {
-            
+            //Conversion for national SchoolResult
+            if (result.School == null)
+            {
+                return new TableViewModel
+                {
+                    URN = result.URN,
+                    LEAESTAB = result.URN,
+                    SCHNAME = "National",
+                    PTFSM6CLA1A = result.PTFSM6CLA1A,
+                    ATT8SCR = result.ATT8SCR,
+                    P8MEA = result.P8MEA,
+                    PTL2BASICS_94 = result.PTL2BASICS_94,
+                    PTL2BASICS_95 = result.PTL2BASICS_95
+                };
+            }
+
             return new TableViewModel
             {
                 URN = result.URN,
@@ -58,8 +73,10 @@ namespace SchoolPerformance.ViewModels
                 PTL2BASICS_94 = result.PTL2BASICS_94,
                 PTL2BASICS_95 = result.PTL2BASICS_95
             };
-        }
 
         }
+    }
+
 }
+
 

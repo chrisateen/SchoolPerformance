@@ -30,12 +30,19 @@ namespace SchoolPerformance.Controllers
         [HttpPost]
         public IActionResult GetResultsAll()
         {
+            //Get results for all schools
             var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
+
+            //Get the national data
+            var nationalResult = _result.GetNational().First();
 
             //Converts from list of SchoolResult to List of TableViewModel
             List<TableViewModel> resultViewModel = result.ConvertToTableViewModel();
 
-            var data = new { data = resultViewModel };
+            //Convert national SchoolResult object to a TableViewModel object
+            TableViewModel resultNatViewModel = nationalResult;
+
+            var data = new { data = resultViewModel, national = resultNatViewModel };
 
             return Json(data);
         }
