@@ -113,7 +113,9 @@ namespace SchoolPerformaceTest.LoadDataTest
         {
             //Act and Assert
             Assert.AreEqual(0, _context.SchoolDetails.Where(x => x.School.SchoolResults == null).Count());
-            Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School.SchoolDetails == null).Count());
+
+            //Ignore national result as national result will not have any SchoolDetails
+            Assert.AreEqual(0, _context.SchoolResult.Where(x => x.School.SchoolDetails == null && x.URN != 9).Count());
         }
     }
 }
