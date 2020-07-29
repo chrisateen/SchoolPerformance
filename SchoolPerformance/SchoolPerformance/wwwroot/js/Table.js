@@ -147,7 +147,7 @@ function loadTable(table, columns, url) {
 }
 
 
-//function to add the national data to the table footer
+//Function to add the national data to the table footer
 function addFooterData(columns) {
 
     return function () {
@@ -168,11 +168,12 @@ function addFooterData(columns) {
                 //Get the type to check if it is a percentage column
                 var colType = columns[i]['type'];
 
-                //Convert decimal to percentage
-                if (colType && colType.search('percent') != -1) {
-                    data = Math.round(data * 100) + '%';
+                //Format data depending on if it is a percentage column
+                if (colType) {
+                    data = dataFormat(data, colType);
                 }
-                
+
+                //Add data to footer
                 $(api.column(i).footer()).html(data);
             }
         }
@@ -180,38 +181,26 @@ function addFooterData(columns) {
     }
 }
 
-//Format data depending on data type
-function dataFormat(data, colType) {
-    if (data != null && colType == "highlight-sort-percent") {
+
+//Function to format percentages and null types
+function dataFormat(data, type) {
+
+    if (data == null) {
+        return "N/A";
+    }
+
+    if (type.search('percent') != -1) {
         return Math.round(data * 100) + '%';
-    } else {
+    }
+
+    else {
         return data;
     }
+
 }
 
-//function to format percentages
-function formatPercentage() {
-    return function (data) {
-        if (data == null) {
-            return "N/A";
-        } else {
-            return Math.round(data * 100) + '%';
-        }
-    }; 
-}
 
-//function to deal with null numbers
-function formatNumber() {
-    return function (data) {
-        if (data == null) {
-            return "N/A";
-        } else {
-            return data;
-        }
-    };
-}
-
-//function to highlight a cell value 
+//Function to highlight a cell value 
 //that is greater than the national figures
 function highlightCell(columns) {
 
@@ -219,10 +208,12 @@ function highlightCell(columns) {
 
         var response = this.api().ajax.json();
 
+        //Loop through each column in a row
         for (var index in columns) {
 
             var colType = columns[index]['type'];
 
+            //Check if it is a column that requires highlighting
             if (colType && colType.search('highlight') != -1) {
 
                 var colName = columns[index]['data'];
@@ -233,12 +224,13 @@ function highlightCell(columns) {
                 var htmlText;
 
                 //Compare data to national and if the data is above national
-                //Include a green star icon
+                //include a green star icon
                 if (data[colName] > national) {
 
                     //Format number to a percentage if column type is a percentage
                     htmlText = dataFormat(data[colName], colType);
 
+                    //Include star in element. index - 2 as the first two columns are hidden
                     $('td:eq(' + (index - 2) + ')', row)
                         .html(htmlText + " " + '<span class="fas fa-star"></span> ');
                 }
@@ -250,68 +242,33 @@ function highlightCell(columns) {
 
 
 //Sort numbers and percentages putting N/A values last
+jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+
+    "sort-num-asc": sortCol('asc', 'num'),
+
+    "highlight-sort-num-asc": sortCol('asc', 'num'),
+
+    "sort-num-desc": sortCol('desc', 'num'),
+
+    "highlight-sort-num-desc": sortCol('desc', 'num'),
+
+    "sort-percent-asc": sortCol('asc', 'percent'),
+
+    "highlight-sort-percent-asc": sortCol('asc', 'percent'),
+
+    "sort-percent-desc": sortCol('desc', 'percent'),
+
+    "highlight-sort-percent-desc": sortCol('desc', 'percent')
+});
+
+
+//Function to sort columns in ascending or descending order
 //the datatables percentage sorting plug-in was
 //modified for my own purposes
 //https://cdn.datatables.net/plug-ins/1.10.21/sorting/percent.js
-jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+function sortCol(order, type) {
 
-    "sort-num-asc": function (a, b) {
-
-        //if the first row is N/A the second row b should come first
-        if (a == "N/A") {
-
-            return 1
-        }
-
-        //if the second row is N/A it should appear after the previous row
-        if (b == "N/A") {
-            return -1;
-        }
-
-        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-    },
-
-    "highlight-sort-num-asc": function (a, b) {
-
-        //if the first row is N/A the second row b should come first
-        if (a == "N/A") {
-
-            return 1
-        }
-
-        //if the second row is N/A it should appear after the previous row
-        if (b == "N/A") {
-            return -1;
-        }
-
-        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-    },
-
-    "sort-num-desc": function (a, b) {
-        if (a == "N/A") {
-
-            return 1;
-        }
-
-        if (b == "N/A") {
-            return -1;
-        }
-        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-    },
-
-    "highlight-sort-num-desc": function (a, b) {
-        if (a == "N/A") {
-
-            return 1;
-        }
-
-        if (b == "N/A") {
-            return -1;
-        }
-        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-    },
-
-    "sort-percent-asc": function (a, b) {
+    return function (a,b) {
 
         //if the first row is N/A the second row b should come first
         if (a == "N/A") {
@@ -319,70 +276,36 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
             return 1;
         }
 
-        //if the second row is N/A it should appear after the previous row
+        //if the second row is N/A the first row a should come first
         if (b == "N/A") {
             return -1;
         }
 
-        //Remove percentage sign from text
-        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
-        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
+        var x;
+        var y;
 
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    },
-
-    "highlight-sort-percent-asc": function (a, b) {
-
-        //if the first row is N/A the second row b should come first
-        if (a == "N/A") {
-
-            return 1;
+        //Remove percentage sign if the data type is a string with a percentage sign
+        if (type == 'percent') {
+            x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
+            y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
+        }
+        else {
+            x = a;
+            y = b;
         }
 
-        //if the second row is N/A it should appear after the previous row
-        if (b == "N/A") {
-            return -1;
+        if (order == 'asc') {
+
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+
         }
 
-        //Remove percentage sign from text
-        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
-        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
+        if (order == 'desc') {
 
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    },
-
-    "sort-percent-desc": function (a, b) {
-        if (a == "N/A") {
-
-            return 1;
+            return ((x < y) ? 1 : ((x > y) ? -1 : 0));
         }
-
-        if (b == "N/A") {
-            return -1;
-        }
-
-        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
-        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
-
-        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-    },
-
-    "highlight-sort-percent-desc": function (a, b) {
-        if (a == "N/A") {
-
-            return 1;
-        }
-
-        if (b == "N/A") {
-            return -1;
-        }
-
-        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
-        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
-
-        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-    }
-});
+    };
+}
 
 
 

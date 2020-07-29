@@ -41,31 +41,31 @@
         {
             data: "ptfsM6CLA1A",
             title: "@Html.DisplayNameFor(m => m.PTFSM6CLA1A)",
-            render: formatPercentage(),
-            type: "highlight-sort-percent"
+            type: "highlight-sort-percent",
+            render: function (data) {return dataFormat(data, "sort-percent")}
         },
         {
             data: "atT8SCR",
             title: "@Html.DisplayNameFor(m => m.ATT8SCR)",
-            render: formatNumber(),
+            render: function (data) {return dataFormat(data, "sort-num")},
             type: "sort-num"
         },
         {
             data: "p8MEA",
             title: "@Html.DisplayNameFor(m => m.P8MEA)",
-            render: formatNumber(),
+            render: function (data) {return dataFormat(data, "sort-num")},
             type: "sort-num"
         },
         {
             data: "ptL2BASICS_94",
             title: "@Html.DisplayNameFor(m => m.PTL2BASICS_94)",
-            render: formatPercentage(),
+            render: function (data) {return dataFormat(data, "sort-percent")},
             type: "sort-percent"
         },
         {
             data: "ptL2BASICS_95",
             title: "@Html.DisplayNameFor(m => m.PTL2BASICS_95)",
-            render: formatPercentage(),
+            render: function (data) {return dataFormat(data, "sort-percent")},
             type: "sort-percent"
         }
     ];
