@@ -9,10 +9,12 @@ function createFooterHTML(cols) {
     return thTags;
 }
 
-function loadTable(table, columns) {
+
+//Create the table include url of where to get the data
+function loadTable(table, columns, url) {
     table.DataTable({
         ajax: {
-            url: "/Tables/GetResultsAll",
+            url: url,
             dataType: 'json',
             type: "POST",
         },
@@ -139,7 +141,7 @@ function loadTable(table, columns) {
             }
         },
         footerCallback: addFooterData(columns),
-        rowCallback: highlightCell("ptfsM6CLA1A")
+        rowCallback: highlightCell(columns)
 
     });
 }
@@ -167,7 +169,7 @@ function addFooterData(columns) {
                 var colType = columns[i]['type'];
 
                 //Convert decimal to percentage
-                if (colType == "sort-percent") {
+                if (colType && colType.search('percent') != -1) {
                     data = Math.round(data * 100) + '%';
                 }
                 
@@ -175,6 +177,15 @@ function addFooterData(columns) {
             }
         }
 
+    }
+}
+
+//Format data depending on data type
+function dataFormat(data, colType) {
+    if (data != null && colType == "highlight-sort-percent") {
+        return Math.round(data * 100) + '%';
+    } else {
+        return data;
     }
 }
 
@@ -200,34 +211,67 @@ function formatNumber() {
     };
 }
 
-//function to highlight a cell value that is greater than or equal to the national figures
-function highlightCell(colName) {
+//function to highlight a cell value 
+//that is greater than the national figures
+function highlightCell(columns) {
 
     return function (row, data) {
 
         var response = this.api().ajax.json();
 
-        //Get the national figure
-        var national = response['national'][colName];
+        for (var index in columns) {
 
-        //Compare data to national
-        if (data[colName] >= national) {
+            var colType = columns[index]['type'];
 
-            $('td:eq(1)', row)
-                .html(Math.round(data[colName] * 100)
-                    + "% " + '<span class="fas fa-star"></span> ');
+            if (colType && colType.search('highlight') != -1) {
+
+                var colName = columns[index]['data'];
+
+                //Get the national figure
+                var national = response['national'][colName];
+
+                var htmlText;
+
+                //Compare data to national and if the data is above national
+                //Include a green star icon
+                if (data[colName] > national) {
+
+                    //Format number to a percentage if column type is a percentage
+                    htmlText = dataFormat(data[colName], colType);
+
+                    $('td:eq(' + (index - 2) + ')', row)
+                        .html(htmlText + " " + '<span class="fas fa-star"></span> ');
+                }
+            }
         }
+ 
     }
 }
+
 
 //Sort numbers and percentages putting N/A values last
 //the datatables percentage sorting plug-in was
 //modified for my own purposes
 //https://cdn.datatables.net/plug-ins/1.10.21/sorting/percent.js
-
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
     "sort-num-asc": function (a, b) {
+
+        //if the first row is N/A the second row b should come first
+        if (a == "N/A") {
+
+            return 1
+        }
+
+        //if the second row is N/A it should appear after the previous row
+        if (b == "N/A") {
+            return -1;
+        }
+
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+
+    "highlight-sort-num-asc": function (a, b) {
 
         //if the first row is N/A the second row b should come first
         if (a == "N/A") {
@@ -255,7 +299,39 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
     },
 
+    "highlight-sort-num-desc": function (a, b) {
+        if (a == "N/A") {
+
+            return 1;
+        }
+
+        if (b == "N/A") {
+            return -1;
+        }
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    },
+
     "sort-percent-asc": function (a, b) {
+
+        //if the first row is N/A the second row b should come first
+        if (a == "N/A") {
+
+            return 1;
+        }
+
+        //if the second row is N/A it should appear after the previous row
+        if (b == "N/A") {
+            return -1;
+        }
+
+        //Remove percentage sign from text
+        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
+        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
+
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    },
+
+    "highlight-sort-percent-asc": function (a, b) {
 
         //if the first row is N/A the second row b should come first
         if (a == "N/A") {
@@ -289,7 +365,27 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
 
         return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    },
+
+    "highlight-sort-percent-desc": function (a, b) {
+        if (a == "N/A") {
+
+            return 1;
+        }
+
+        if (b == "N/A") {
+            return -1;
+        }
+
+        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
+        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
+
+        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
     }
 });
+
+
+
+
 
 

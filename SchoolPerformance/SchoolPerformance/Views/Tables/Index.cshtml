@@ -42,7 +42,7 @@
             data: "ptfsM6CLA1A",
             title: "@Html.DisplayNameFor(m => m.PTFSM6CLA1A)",
             render: formatPercentage(),
-            type: "sort-percent"
+            type: "highlight-sort-percent"
         },
         {
             data: "atT8SCR",
@@ -73,7 +73,7 @@
 
     $(function () {
         $table.append('<tfoot><tr>' + createFooterHTML(tableCols)+'</tr></tfoot>');
-        loadTable($table, tableCols);
+        loadTable($table, tableCols, "/Tables/GetResultsAll");
 
     });
 
