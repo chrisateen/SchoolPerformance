@@ -24,19 +24,12 @@ namespace SchoolPerformance
         {
             services.AddDbContextPool<SchoolPerformanceContext>(options =>
                     options.UseSqlServer(
-                                _configuration.GetConnectionString("SchoolPerformanceDb")));
+                                _configuration.GetConnectionString("SchoolPerformanceRDS")));
 
             services.AddMvc().AddNewtonsoftJson();
 
             //Register repository
             services.AddScoped(typeof( ISchoolPerformanceRepository <>),typeof(SchoolPerformanceRepository<>));
-
-            //services.AddAzureClients(builder =>
-            //{
-            //    builder.AddBlobServiceClient(_configuration["ConnectionStrings:SchoolPerformanceDb"]);
-            //});
-
-
 
         }
 

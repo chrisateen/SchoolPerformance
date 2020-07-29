@@ -12,7 +12,7 @@ function createFooterHTML(cols) {
 function loadTable(table, columns) {
     table.DataTable({
         ajax: {
-            url: "/Table/GetResultsAll",
+            url: "/Tables/GetResultsAll",
             dataType: 'json',
             type: "POST",
         },
@@ -138,7 +138,8 @@ function loadTable(table, columns) {
                 colvisRestore: "Select All"
             }
         },
-        'footerCallback': addFooterData(columns) 
+        footerCallback: addFooterData(columns),
+        rowCallback: highlightCell("ptfsM6CLA1A")
 
     });
 }
@@ -199,6 +200,26 @@ function formatNumber() {
     };
 }
 
+//function to highlight a cell value that is greater than or equal to the national figures
+function highlightCell(colName) {
+
+    return function (row, data) {
+
+        var response = this.api().ajax.json();
+
+        //Get the national figure
+        var national = response['national'][colName];
+
+        //Compare data to national
+        if (data[colName] >= national) {
+
+            $('td:eq(1)', row)
+                .html(Math.round(data[colName] * 100)
+                    + "% " + '<span class="fas fa-star"></span> ');
+        }
+    }
+}
+
 //Sort numbers and percentages putting N/A values last
 //the datatables percentage sorting plug-in was
 //modified for my own purposes
@@ -248,8 +269,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         }
 
         //Remove percentage sign from text
-        var x = (a == "100%") ? 100 : a.replace(/%/, "");
-        var y = (b == "100%") ? 100 : b.replace(/%/, "");
+        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
+        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
 
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     },
@@ -264,8 +285,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
             return -1;
         }
 
-        var x = (a == "100%") ? 100 : a.replace(/%/, "");
-        var y = (b == "100%") ? 100 : b.replace(/%/, "");
+        var x = parseInt((a == "100%") ? 100 : a.replace(/%/, ""));
+        var y = parseInt((b == "100%") ? 100 : b.replace(/%/, ""));
 
         return ((x < y) ? 1 : ((x > y) ? -1 : 0));
     }

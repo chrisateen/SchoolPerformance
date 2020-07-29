@@ -441,7 +441,8 @@ D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Table\Index.cshtml.g.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutTable.cshtml.g.cs
-C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutTable.cshtml.g.cs
-C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Table\Index.cshtml.g.cs
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\FastMember.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Tables\Index.cshtml.g.cs
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutTables.cshtml.g.cs

@@ -20,7 +20,7 @@ namespace SchoolPerformanceTest.ControllerTest
     {
         Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
         IEnumerable<SchoolResult> _results;
-        TableController _controller;
+        TablesController _controller;
 
         //Arrange
         [TestInitialize]
@@ -68,7 +68,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 ))
                 .Returns(_results.Where(r => r.URN == 9)).Verifiable();
 
-            _controller = new TableController(_mockSchoolResult.Object);
+            _controller = new TablesController(_mockSchoolResult.Object);
         }
 
         //Checks Table view is rendered
