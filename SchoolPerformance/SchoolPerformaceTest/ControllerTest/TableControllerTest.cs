@@ -85,7 +85,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
-                .BeAssignableTo<TableViewModel>().Subject;
+                .BeAssignableTo<TableViewModelAll>().Subject;
         }
 
         //Checks when GetResultsAll is called a JSON object is returned
@@ -108,13 +108,13 @@ namespace SchoolPerformanceTest.ControllerTest
 
             //Get the data property from the JSON object 
             //which contains the list of TableViewModels
-            var dataList = (List<TableViewModel>)data
+            var dataList = (List<TableViewModelAll>)data
                 .GetType().GetProperty("data")
                 .GetValue(data, null);
 
             //Get the data property from the JSON object 
             //which contains the national result
-            var natResults = (TableViewModel)data
+            var natResults = (TableViewModelAll)data
                 .GetType().GetProperty("national")
                 .GetValue(data, null);
 
@@ -125,5 +125,65 @@ namespace SchoolPerformanceTest.ControllerTest
 
         }
 
+        //Checks that the All action method redirects to index
+        [TestMethod]
+        public void AllRedirectsToIndex()
+        {
+            _controller.All().Should().BeRedirectToActionResult(nameof(Index));
+        }
+
+        //Checks disadvantaged view is rendered
+        //with an object of type TableViewModel
+        [TestMethod]
+        public void DisadvantagedReturnsPageWithTableViewModel()
+        {
+
+            // Act and Assert
+            _controller.Disadvantaged().Should()
+                .BeViewResult().WithDefaultViewName();
+
+            var res = _controller.Disadvantaged().Should()
+                .BeOfType<ViewResult>().Subject;
+
+            var test = res.Model.Should()
+                .BeAssignableTo<TableViewModelDisadvantaged>().Subject;
+        }
+
+        //Checks when GetResultsDisadvantaged is called a JSON object is returned
+        [TestMethod]
+        public void GetResultsDisadvantagedReturnsJSONObject()
+        {
+            // Act and Assert
+            var data = _controller.GetResultsDisadvantaged().Should()
+                 .BeJsonResult().Value;
+
+        }
+
+        //Checks when GetResultsDisadvantaged is called a JSON object is returned
+        //with data from a list of TableViewModel
+        [TestMethod]
+        public void GetResultsDisadvantagedContainsListOfTableViewModel()
+        {
+            var data = _controller.GetResultsAll().Should()
+                .BeJsonResult().Value;
+
+            //Get the data property from the JSON object 
+            //which contains the list of TableViewModels
+            var dataList = (List<TableViewModelDisadvantaged>)data
+                .GetType().GetProperty("data")
+                .GetValue(data, null);
+
+            //Get the data property from the JSON object 
+            //which contains the national result
+            var natResults = (TableViewModelDisadvantaged)data
+                .GetType().GetProperty("national")
+                .GetValue(data, null);
+
+            //Check the JSON object returned
+            //contains the mock data
+            Assert.AreEqual(_results.Where(x => x.URN != 9).Count(), dataList.Count());
+            Assert.IsNotNull(natResults);
+
+        }
     }
 }
