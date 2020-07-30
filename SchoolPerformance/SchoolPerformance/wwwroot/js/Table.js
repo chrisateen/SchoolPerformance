@@ -225,7 +225,7 @@ function highlightCell(columns) {
 
                 //Compare data to national and if the data is above national
                 //include a green star icon
-                if (data[colName] > national) {
+                if (data[colName] > national && data[colName] != null) {
 
                     //Format number to a percentage if column type is a percentage
                     htmlText = dataFormat(data[colName], colType);

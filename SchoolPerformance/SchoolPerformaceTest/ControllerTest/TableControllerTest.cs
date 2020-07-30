@@ -60,6 +60,13 @@ namespace SchoolPerformanceTest.ControllerTest
                 ))
                 .Returns(_results.Where(r => r.URN !=9)).Verifiable();
 
+            _mockSchoolResult.Setup(m => m.Get(
+                It.IsAny< Expression < Func<SchoolResult, bool> >> (),
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
+                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+                ))
+                .Returns(_results.Where(r => r.URN != 9)).Verifiable();
+
             //When the GetNational method is called return _results 
             //with national data only
             _mockSchoolResult.Setup(m => m.GetNational(

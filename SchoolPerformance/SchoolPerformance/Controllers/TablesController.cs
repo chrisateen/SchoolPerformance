@@ -63,8 +63,12 @@ namespace SchoolPerformance.Controllers
         [HttpPost]
         public IActionResult GetResultsDisadvantaged()
         {
-            //Get results for all schools
-            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
+            //Get results for all schools 
+            //if the percentage of disadvantaged pupils is not null
+            var result = _result.Get(
+                r => r.PTFSM6CLA1A != null,
+                r => r.OrderBy(s => s.School.SCHNAME), 
+                r => r.School);
 
             //Get the national data
             var nationalResult = _result.GetNational().First();
