@@ -51,8 +51,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         {
               
             //Act
-            var schoolLstTask = _repositorySchool.GetAll();
-            var schoolLst = await schoolLstTask;
+            var schoolLst = await _repositorySchool.GetAll();
 
             //Assert
             Assert.AreEqual(
@@ -61,8 +60,7 @@ namespace SchoolPerformaceTest.RepositoryTest
                 );
 
             //Act
-            schoolLstTask = _repositorySchool.Get();
-            schoolLst = await schoolLstTask;
+            schoolLst = await _repositorySchool.GetAll();
 
             //Assert
             Assert.AreEqual(
@@ -79,10 +77,8 @@ namespace SchoolPerformaceTest.RepositoryTest
         {
 
             //Act
-            var schoolLstTask = _repositorySchool.GetAll(null, x => x.SchoolResults);
+            var schoolLst = await _repositorySchool.GetAll(null, x => x.SchoolResults);
 
-            var schoolLst = await schoolLstTask;
-            
             //Count number of results for all schools in test database 
             //to see if school results objects was included
             var resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
@@ -91,8 +87,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             Assert.AreEqual(_schoolResults.Where(s => s.URN != 9).Count(), resultCount);
 
             //Act
-            schoolLstTask = _repositorySchool.Get(null, null, x => x.SchoolResults);
-            schoolLst = await schoolLstTask;
+            schoolLst = await _repositorySchool.Get(null, null, x => x.SchoolResults);
             resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             //Assert
@@ -109,8 +104,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             //Act
 
             //Gets the first school name in school using GetAll method when school is ordered by name
-            var schoolTask = _repositorySchool.GetAll(x => x.OrderBy(n => n.SCHNAME));
-            var school = await schoolTask;
+            var school = await _repositorySchool.GetAll(x => x.OrderBy(n => n.SCHNAME));
             var schoolName = school.First().SCHNAME;
 
             //Assert
@@ -125,8 +119,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             //Act
 
             //Gets the first school name in school using Get method when school is ordered by name
-            schoolTask = _repositorySchool.Get(null, x => x.OrderBy(n => n.SCHNAME));
-            school = await schoolTask;
+            school = await _repositorySchool.Get(null, x => x.OrderBy(n => n.SCHNAME));
             schoolName = school.First().SCHNAME;
 
             //Assert
@@ -144,8 +137,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         {
 
             //Act
-            var schoolLstTask = _repositorySchool.Get(x => x.SCHNAME != "Test 2");
-            var schoolLst = await schoolLstTask;
+            var schoolLst = await _repositorySchool.Get(x => x.SCHNAME != "Test 2");
 
             //Assert
             Assert.AreEqual(
@@ -165,9 +157,11 @@ namespace SchoolPerformaceTest.RepositoryTest
 
             //Gets the first school name in school using Get method
             //when data is filtered by PTL2BASICS_94 above 0.6 and ordered by PTL2BASICS_94
-            //National results should be excluded
-            var schoolLstTask = _repositorySchoolResult.Get(x => x.PTL2BASICS_94 >= 0.60, x => x.OrderBy(n => n.PTL2BASICS_94));
-            var schoolLst = await schoolLstTask;
+            //National results should be excluded 
+            var schoolLst = await _repositorySchoolResult.Get(
+                x => x.PTL2BASICS_94 >= 0.60, 
+                x => x.OrderBy(n => n.PTL2BASICS_94));
+
             var schoolName = schoolLst.First().School.SCHNAME;
 
             //Assert
@@ -185,8 +179,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         public async Task FilterRecordsFromADbsetWithMultipleDbsetIncluded()
         {
             //Act
-            var schoolLstTask = _repositorySchool.Get(x => x.SCHNAME != "Test 2", null, x => x.SchoolResults);
-            var schoolLst = await schoolLstTask;
+            var schoolLst = await _repositorySchool.Get(x => x.SCHNAME != "Test 2", null, x => x.SchoolResults);
 
             //Count number of results for school name test 2 in the test database 
             //to see if school results objects was included
@@ -206,10 +199,8 @@ namespace SchoolPerformaceTest.RepositoryTest
         public async Task GetNationalData()
         {
             //Act
-            var nationalTask = _repositorySchool.GetNational();
-            var nationalResultTask = _repositorySchoolResult.GetNational();
-            var national = await nationalTask;
-            var nationalResult = await nationalResultTask;
+            var national = await _repositorySchool.GetNational();
+            var nationalResult = await _repositorySchoolResult.GetNational();
 
             //Assert
             Assert.AreEqual(
@@ -230,8 +221,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         public async Task GetNationalDataWithMultipleDbsetIncluded()
         {
             //Act
-            var nationalTask = _repositorySchool.GetNational(null, null, x => x.SchoolResults);
-            var national = await nationalTask;
+            var national = await _repositorySchool.GetNational(null, null, x => x.SchoolResults);
 
             //Count number of results for national in the test database 
             //to see if school results objects was included
@@ -255,11 +245,9 @@ namespace SchoolPerformaceTest.RepositoryTest
             //Gets the first academic year of the national result
             //when data is filtered by PTL2BASICS_94 above 0.6 
             //and ordered by academic year
-            var nationalResultTask = _repositorySchoolResult.GetNational(
+            var nationalResult = await _repositorySchoolResult.GetNational(
                 x => x.PTL2BASICS_94 > 0.6,
                 x => x.OrderBy(x => x.ACADEMICYEAR));
-             
-            var nationalResult = await nationalResultTask;
 
             var year = nationalResult.First().ACADEMICYEAR;
 
