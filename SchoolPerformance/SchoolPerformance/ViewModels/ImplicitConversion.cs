@@ -34,14 +34,14 @@ namespace SchoolPerformance.ViewModels
         /// </summary>
         /// <param name="source">A list of SchoolResult</param>
         /// <returns>A list of TableViewModel</returns>
-        public static List<TableViewModel> ConvertToTableViewModel (this IEnumerable<SchoolResult> source)
+        public static List<TableViewModelAll> ConvertToTableViewModel (this IEnumerable<SchoolResult> source)
         {
-            List<TableViewModel> output = new List<TableViewModel>();
+            List<TableViewModelAll> output = new List<TableViewModelAll>();
 
             foreach (var item in source)
             {
                 //Implicit conversion from SchoolResult to TableViewModel
-                TableViewModel viewModel = item;
+                TableViewModelAll viewModel = item;
                 output.Add(viewModel);
             }
 

@@ -160,7 +160,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             };
 
             //Act
-            TableViewModel resultViewModel = result;
+            TableViewModelAll resultViewModel = result;
 
             //Assert
 
@@ -199,7 +199,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             };
 
             //Act
-            TableViewModel resultViewModel = result;
+            TableViewModelAll resultViewModel = result;
 
             //Assert
 
@@ -271,7 +271,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             results.Add(result2);
 
             //Act
-            List<TableViewModel> resultViewModel = results.ConvertToTableViewModel();
+            List<TableViewModelAll> resultViewModel = results.ConvertToTableViewModel();
 
             //Assert
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolPerformance.ViewModels
 {
-    public class TableViewModel
+    public class TableViewModelAll
     {
         [Display(Name="Unique Reference Number")]
         public int URN { get; set; }
@@ -44,12 +44,12 @@ namespace SchoolPerformance.ViewModels
         /// </summary>
         /// <param name="result">SchoolResult model object 
         /// to be converted to TableResultViewModel object</param>
-        public static implicit operator TableViewModel(SchoolResult result)
+        public static implicit operator TableViewModelAll(SchoolResult result)
         {
             //Conversion for national SchoolResult
             if (result.School == null)
             {
-                return new TableViewModel
+                return new TableViewModelAll
                 {
                     URN = result.URN,
                     LEAESTAB = result.URN,
@@ -62,7 +62,7 @@ namespace SchoolPerformance.ViewModels
                 };
             }
 
-            return new TableViewModel
+            return new TableViewModelAll
             {
                 URN = result.URN,
                 LEAESTAB = result.School.LAESTAB,
