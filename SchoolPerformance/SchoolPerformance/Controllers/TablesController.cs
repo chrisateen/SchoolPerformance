@@ -36,7 +36,7 @@ namespace SchoolPerformance.Controllers
         {
             //Empty TableViewModel returned 
             //to allow me to use HTML display name helpers
-            return View(new TableViewModelAll());
+            return View(new TableViewModelDisadvantaged());
         }
 
         [HttpPost]
@@ -59,6 +59,7 @@ namespace SchoolPerformance.Controllers
             return Json(data);
         }
 
+
         [HttpPost]
         public IActionResult GetResultsDisadvantaged()
         {
@@ -72,7 +73,7 @@ namespace SchoolPerformance.Controllers
             List<TableViewModelDisadvantaged> resultViewModel = result.ConvertToTableViewModelDisadvantaged();
 
             //Convert national SchoolResult object to a TableViewModel object
-            TableViewModelAll resultNatViewModel = nationalResult;
+            TableViewModelDisadvantaged resultNatViewModel = nationalResult;
 
             var data = new { data = resultViewModel, national = resultNatViewModel };
 

@@ -164,7 +164,7 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestMethod]
         public void GetResultsDisadvantagedContainsListOfTableViewModel()
         {
-            var data = _controller.GetResultsAll().Should()
+            var data = _controller.GetResultsDisadvantaged().Should()
                 .BeJsonResult().Value;
 
             //Get the data property from the JSON object 
