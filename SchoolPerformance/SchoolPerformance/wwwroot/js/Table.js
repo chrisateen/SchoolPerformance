@@ -174,7 +174,7 @@ function addFooterData(columns) {
                 }
 
                 //Add data to footer
-                $(api.column(i).footer()).html(data);
+                $(api.column(i).footer()).css("background-color", "#e0dae0").html(data);
             }
         }
 
