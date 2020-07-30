@@ -35,10 +35,10 @@ namespace SchoolPerformanceTest.ControllerTest
         {
 
             // Act and Assert
-            _controller.Index().Should()
+            _controller.IndexAsync().Should()
                 .BeViewResult().WithDefaultViewName();
 
-            var res = _controller.Index().Should()
+            var res = _controller.IndexAsync().Should()
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
