@@ -436,7 +436,6 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\b
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Scatterplot\Index.cshtml.g.cs
-C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csprojAssemblyReference.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.csproj.CoreCompileInputs.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Table\Index.cshtml.g.cs

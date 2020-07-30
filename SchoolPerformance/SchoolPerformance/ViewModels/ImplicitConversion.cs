@@ -30,18 +30,38 @@ namespace SchoolPerformance.ViewModels
 
         /// <summary>
         /// Converts a list of SchoolResult to
-        /// a list of TableViewModel
+        /// a list of TableViewModelAll
         /// </summary>
         /// <param name="source">A list of SchoolResult</param>
-        /// <returns>A list of TableViewModel</returns>
-        public static List<TableViewModelAll> ConvertToTableViewModel (this IEnumerable<SchoolResult> source)
+        /// <returns>A list of TableViewModelAll</returns>
+        public static List<TableViewModelAll> ConvertToTableViewModelAll (this IEnumerable<SchoolResult> source)
         {
             List<TableViewModelAll> output = new List<TableViewModelAll>();
 
             foreach (var item in source)
             {
-                //Implicit conversion from SchoolResult to TableViewModel
+                //Implicit conversion from SchoolResult to TableViewModelAll
                 TableViewModelAll viewModel = item;
+                output.Add(viewModel);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Converts a list of SchoolResult to
+        /// a list of TableViewModelDisadvantaged
+        /// </summary>
+        /// <param name="source">A list of SchoolResult</param>
+        /// <returns>A list of TableViewModelDisadvantaged</returns>
+        public static List<TableViewModelDisadvantaged> ConvertToTableViewModelDisadvantaged(this IEnumerable<SchoolResult> source)
+        {
+            List<TableViewModelDisadvantaged> output = new List<TableViewModelDisadvantaged>();
+
+            foreach (var item in source)
+            {
+                //Implicit conversion from SchoolResult to TableViewModelAll
+                TableViewModelDisadvantaged viewModel = item;
                 output.Add(viewModel);
             }
 

@@ -24,7 +24,19 @@ namespace SchoolPerformance.Controllers
         {
             //Empty TableViewModel returned 
             //to allow me to use HTML display name helpers
-            return View(new TableViewModel());
+            return View(new TableViewModelAll());
+        }
+
+        public IActionResult All()
+        {
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Disadvantaged()
+        {
+            //Empty TableViewModel returned 
+            //to allow me to use HTML display name helpers
+            return View(new TableViewModelAll());
         }
 
         [HttpPost]
@@ -37,14 +49,35 @@ namespace SchoolPerformance.Controllers
             var nationalResult = _result.GetNational().First();
 
             //Converts from list of SchoolResult to List of TableViewModel
-            List<TableViewModel> resultViewModel = result.ConvertToTableViewModel();
+            List<TableViewModelAll> resultViewModel = result.ConvertToTableViewModelAll();
 
             //Convert national SchoolResult object to a TableViewModel object
-            TableViewModel resultNatViewModel = nationalResult;
+            TableViewModelAll resultNatViewModel = nationalResult;
 
             var data = new { data = resultViewModel, national = resultNatViewModel };
 
             return Json(data);
         }
+
+        [HttpPost]
+        public IActionResult GetResultsDisadvantaged()
+        {
+            //Get results for all schools
+            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
+
+            //Get the national data
+            var nationalResult = _result.GetNational().First();
+
+            //Converts from list of SchoolResult to List of TableViewModel
+            List<TableViewModelDisadvantaged> resultViewModel = result.ConvertToTableViewModelDisadvantaged();
+
+            //Convert national SchoolResult object to a TableViewModel object
+            TableViewModelAll resultNatViewModel = nationalResult;
+
+            var data = new { data = resultViewModel, national = resultNatViewModel };
+
+            return Json(data);
+        }
+
     }
 }

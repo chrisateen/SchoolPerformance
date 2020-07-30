@@ -271,7 +271,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             results.Add(result2);
 
             //Act
-            List<TableViewModelAll> resultViewModel = results.ConvertToTableViewModel();
+            List<TableViewModelAll> resultViewModel = results.ConvertToTableViewModelAll();
 
             //Assert
 
@@ -423,7 +423,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
             results.Add(result2);
 
             //Act
-            List<TableViewModelDisadvantaged> resultViewModel = results.ConvertToTableViewModel();
+            List<TableViewModelDisadvantaged> resultViewModel = results.ConvertToTableViewModelDisadvantaged();
 
             //Assert
 
