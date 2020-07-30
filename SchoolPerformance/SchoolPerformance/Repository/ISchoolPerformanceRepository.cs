@@ -23,7 +23,7 @@ namespace SchoolPerformance.Repository
         /// Specify a list of other DbSets to be included
         /// </param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+        public Task<IEnumerable<T>> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                 params Expression<Func<T, object>>[] includes);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace SchoolPerformance.Repository
         /// If ordering is not need enter null
         /// </param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+        public Task<IEnumerable<T>> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SchoolPerformance.Repository
         /// Specify a list of other DbSets to be included
         /// </param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> Get(
+        public Task<IEnumerable<T>> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             params Expression<Func<T, object>>[] includes);
@@ -66,7 +66,7 @@ namespace SchoolPerformance.Repository
         /// Use a function to specify how to order the records. 
         /// If ordering is not need enter null</param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> Get(
+        public Task<IEnumerable<T>> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
@@ -83,7 +83,7 @@ namespace SchoolPerformance.Repository
         /// Specify a list of other DbSets to be included
         /// </param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetNational(
+        public Task<IEnumerable<T>> GetNational(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             params Expression<Func<T, object>>[] includes);
@@ -98,7 +98,7 @@ namespace SchoolPerformance.Repository
         /// Use a function to specify how to order the records. 
         /// If ordering is not need enter null</param>
         /// <returns>Returns an IEnumerable list</returns>
-        public IEnumerable<T> GetNational(
+        public Task<IEnumerable<T>> GetNational(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 

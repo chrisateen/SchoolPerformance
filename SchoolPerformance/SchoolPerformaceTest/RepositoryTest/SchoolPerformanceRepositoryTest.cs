@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Threading.Tasks;
 
 namespace SchoolPerformaceTest.RepositoryTest
 {
@@ -46,11 +47,12 @@ namespace SchoolPerformaceTest.RepositoryTest
         //Tests Get method and GetAll method returns the expected records
         //and exclude the national data
         [TestMethod] 
-        public void GetAllRecordsFromADbsetExcludingNational()
+        public async Task GetAllRecordsFromADbsetExcludingNational()
         {
               
             //Act
-            var schoolLst = _repositorySchool.GetAll();
+            var schoolLstTask = _repositorySchool.GetAll();
+            var schoolLst = await schoolLstTask;
 
             //Assert
             Assert.AreEqual(
@@ -59,7 +61,8 @@ namespace SchoolPerformaceTest.RepositoryTest
                 );
 
             //Act
-            schoolLst = _repositorySchool.Get();
+            schoolLstTask = _repositorySchool.Get();
+            schoolLst = await schoolLstTask;
 
             //Assert
             Assert.AreEqual(
@@ -72,11 +75,13 @@ namespace SchoolPerformaceTest.RepositoryTest
         //when another DbSet is included
         //National data should be excluded
         [TestMethod]
-        public void GetAllRecordsFromMultipleDbset()
+        public async Task GetAllRecordsFromMultipleDbset()
         {
 
             //Act
-            var schoolLst = _repositorySchool.GetAll(null, x => x.SchoolResults);
+            var schoolLstTask = _repositorySchool.GetAll(null, x => x.SchoolResults);
+
+            var schoolLst = await schoolLstTask;
             
             //Count number of results for all schools in test database 
             //to see if school results objects was included
@@ -86,7 +91,8 @@ namespace SchoolPerformaceTest.RepositoryTest
             Assert.AreEqual(_schoolResults.Where(s => s.URN != 9).Count(), resultCount);
 
             //Act
-            schoolLst = _repositorySchool.Get(null, null, x => x.SchoolResults);
+            schoolLstTask = _repositorySchool.Get(null, null, x => x.SchoolResults);
+            schoolLst = await schoolLstTask;
             resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             //Assert
@@ -97,13 +103,15 @@ namespace SchoolPerformaceTest.RepositoryTest
         //it returns the data in order
         //National data should be excluded
         [TestMethod]
-        public void GetAllRecordsFromADbsetinOrder()
+        public async Task GetAllRecordsFromADbsetinOrder()
         {
 
             //Act
 
             //Gets the first school name in school using GetAll method when school is ordered by name
-            var school = _repositorySchool.GetAll(x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
+            var schoolTask = _repositorySchool.GetAll(x => x.OrderBy(n => n.SCHNAME));
+            var school = await schoolTask;
+            var schoolName = school.First().SCHNAME;
 
             //Assert
 
@@ -111,18 +119,20 @@ namespace SchoolPerformaceTest.RepositoryTest
             //when _school ordered by name, excluding national
             Assert.AreEqual(
                 _schools.Where(s => s.URN != 9).OrderBy(n => n.SCHNAME).First().SCHNAME, 
-                school
+                schoolName
                 );
 
             //Act
 
             //Gets the first school name in school using Get method when school is ordered by name
-            school = _repositorySchool.Get(null,x => x.OrderBy(n => n.SCHNAME)).First().SCHNAME;
+            schoolTask = _repositorySchool.Get(null, x => x.OrderBy(n => n.SCHNAME));
+            school = await schoolTask;
+            schoolName = school.First().SCHNAME;
 
             //Assert
             Assert.AreEqual(
                 _schools.Where(s => s.URN != 9).OrderBy(n => n.SCHNAME).First().SCHNAME, 
-                school
+                schoolName
                 );
         }
 
@@ -130,16 +140,17 @@ namespace SchoolPerformaceTest.RepositoryTest
         //when a filter condition is specified
         //National data should be excluded
         [TestMethod]
-        public void FilterRecordsFromADbset()
+        public async Task FilterRecordsFromADbset()
         {
-            
+
             //Act
-            var schoolLst = _repositorySchool.Get(x => x.SCHNAME != "Test 2").Count();
+            var schoolLstTask = _repositorySchool.Get(x => x.SCHNAME != "Test 2");
+            var schoolLst = await schoolLstTask;
 
             //Assert
             Assert.AreEqual(
                 _schools.Where(x => x.SCHNAME != "Test 2" && x.URN != 9).Count(), 
-                schoolLst
+                schoolLst.Count()
                 );
         }
 
@@ -148,21 +159,22 @@ namespace SchoolPerformaceTest.RepositoryTest
         //and returns data in order when orderBy is specified
         //National data should be excluded
         [TestMethod]
-        public void FilterRecordsFromADbsetAndOrder()
+        public async Task FilterRecordsFromADbsetAndOrder()
         {
             //Act
 
             //Gets the first school name in school using Get method
             //when data is filtered by PTL2BASICS_94 above 0.6 and ordered by PTL2BASICS_94
             //National results should be excluded
-            var school = _repositorySchoolResult.Get(x => x.PTL2BASICS_94 >= 0.60, x => x.OrderBy(n => n.PTL2BASICS_94))
-                                                .First().School.SCHNAME;
+            var schoolLstTask = _repositorySchoolResult.Get(x => x.PTL2BASICS_94 >= 0.60, x => x.OrderBy(n => n.PTL2BASICS_94));
+            var schoolLst = await schoolLstTask;
+            var schoolName = schoolLst.First().School.SCHNAME;
 
             //Assert
             Assert.AreEqual(
                 _schoolResults.Where(x => x.PTL2BASICS_94 >= 0.60 && x.URN != 9)
                     .OrderBy(n => n.PTL2BASICS_94).First().School.SCHNAME, 
-                school);
+                schoolName);
         }
 
         //Tests Get method returns the expected records
@@ -170,10 +182,11 @@ namespace SchoolPerformaceTest.RepositoryTest
         //and another DbSet is added
         //National data should be excluded
         [TestMethod]
-        public void FilterRecordsFromADbsetWithMultipleDbsetIncluded()
+        public async Task FilterRecordsFromADbsetWithMultipleDbsetIncluded()
         {
             //Act
-            var schoolLst = _repositorySchool.Get(x => x.SCHNAME != "Test 2",null,x => x.SchoolResults);
+            var schoolLstTask = _repositorySchool.Get(x => x.SCHNAME != "Test 2", null, x => x.SchoolResults);
+            var schoolLst = await schoolLstTask;
 
             //Count number of results for school name test 2 in the test database 
             //to see if school results objects was included
@@ -190,11 +203,13 @@ namespace SchoolPerformaceTest.RepositoryTest
 
         //Tests GetNational method gets the national data
         [TestMethod]
-        public void GetNationalData()
+        public async Task GetNationalData()
         {
             //Act
-            var national = _repositorySchool.GetNational();
-            var nationalResult = _repositorySchoolResult.GetNational();
+            var nationalTask = _repositorySchool.GetNational();
+            var nationalResultTask = _repositorySchoolResult.GetNational();
+            var national = await nationalTask;
+            var nationalResult = await nationalResultTask;
 
             //Assert
             Assert.AreEqual(
@@ -212,10 +227,11 @@ namespace SchoolPerformaceTest.RepositoryTest
         //Tests GetNational method gets the national data
         //and another DbSet is added
         [TestMethod]
-        public void GetNationalDataWithMultipleDbsetIncluded()
+        public async Task GetNationalDataWithMultipleDbsetIncluded()
         {
             //Act
-            var national = _repositorySchool.GetNational(null,null,x => x.SchoolResults);
+            var nationalTask = _repositorySchool.GetNational(null, null, x => x.SchoolResults);
+            var national = await nationalTask;
 
             //Count number of results for national in the test database 
             //to see if school results objects was included
@@ -232,24 +248,27 @@ namespace SchoolPerformaceTest.RepositoryTest
         //Tests GetNational method gets the national data
         //when a filter and order condition is included
         [TestMethod]
-        public void GetNationalDataFilterandOrder()
+        public async Task GetNationalDataFilterandOrder()
         {
             //Act
 
             //Gets the first academic year of the national result
             //when data is filtered by PTL2BASICS_94 above 0.6 
             //and ordered by academic year
-            var nationalResult = _repositorySchoolResult.GetNational(
+            var nationalResultTask = _repositorySchoolResult.GetNational(
                 x => x.PTL2BASICS_94 > 0.6,
-                x => x.OrderBy(x => x.ACADEMICYEAR))
-                .First().ACADEMICYEAR;
+                x => x.OrderBy(x => x.ACADEMICYEAR));
+             
+            var nationalResult = await nationalResultTask;
+
+            var year = nationalResult.First().ACADEMICYEAR;
 
 
             //Assert
             Assert.AreEqual(
                 _schoolResults.Where(x => x.URN == 9 && x.PTL2BASICS_94 > 0.6)
                     .OrderBy(x => x.ACADEMICYEAR).First().ACADEMICYEAR,
-                nationalResult
+                year
                 );
 
         }

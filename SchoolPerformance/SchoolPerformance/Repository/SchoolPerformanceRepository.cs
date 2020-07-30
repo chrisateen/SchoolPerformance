@@ -23,7 +23,7 @@ namespace SchoolPerformance.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll(
+        public async Task<IEnumerable<T>> GetAll(
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
             params Expression<Func<T, object>>[] includes)
         {
@@ -35,12 +35,14 @@ namespace SchoolPerformance.Repository
             //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
-            //Return result removing national data
-            return National(query,false).ToList();
+            //Remove national data
+            var result = National(query, false);
+
+            return await result.ToListAsync();
 
         }
 
-        public IEnumerable<T> Get(
+        public async Task<IEnumerable<T>> Get(
             Expression<Func<T, bool>> filter = null, 
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
             params Expression<Func<T, object>>[] includes)
@@ -55,22 +57,26 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            //Return result removing national data
-            return National(query,false).ToList();
+            //Remove national data
+            var result = National(query, false);
+
+            return await result.ToListAsync();
         }
 
-        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        public async Task<IEnumerable<T>> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
             IQueryable<T> query = _dbSet;
 
             //Include an orderBy query if there is an order by condition
             query = AddOrderQuery(query, orderBy);
 
-            //Return result removing national data
-            return National(query,false).ToList();
+            //Remove national data
+            var result = National(query, false);
+
+            return await result.ToListAsync();
         }
 
-        public IEnumerable<T> Get(
+        public async Task<IEnumerable<T>> Get(
             Expression<Func<T, bool>> filter = null, 
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
@@ -81,11 +87,13 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            //Return result removing national data
-            return National(query,false).ToList();
+            //Remove national data
+            var result = National(query, false);
+
+            return await result.ToListAsync();
         }
 
-        public IEnumerable<T> GetNational(
+        public async Task<IEnumerable<T>> GetNational(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             params Expression<Func<T, object>>[] includes)
@@ -100,11 +108,13 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            //Return result including national data
-            return National(query,true).ToList();
+            //Remove national data
+            var result = National(query, false);
+
+            return await result.ToListAsync();
         }
 
-        public IEnumerable<T> GetNational(
+        public async Task<IEnumerable<T>> GetNational(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
@@ -115,8 +125,11 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
+            //Remove national data
+            var result = National(query, false);
+
             //Return result including national data
-            return National(query, true).ToList();
+            return await result.ToListAsync();
         }
 
         /// <summary>
