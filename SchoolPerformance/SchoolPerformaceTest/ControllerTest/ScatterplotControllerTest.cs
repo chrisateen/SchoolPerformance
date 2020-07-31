@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SchoolPerformance.ViewModels;
+using System.Threading.Tasks;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -31,14 +32,15 @@ namespace SchoolPerformanceTest.ControllerTest
         //Checks Scatterplot view is rendered
         //with an IEnumerable list of data of type ScatterplotViewModel
         [TestMethod]
-        public void IndexReturnsHomePageWithScatterplotViewModel()
+        public async Task IndexReturnsHomePageWithScatterplotViewModel()
         {
 
             // Act and Assert
-            _controller.IndexAsync().Should()
+            var controller = await _controller.Index();
+            controller.Should()
                 .BeViewResult().WithDefaultViewName();
 
-            var res = _controller.IndexAsync().Should()
+            var res = controller.Should()
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()

@@ -20,7 +20,7 @@ namespace SchoolPerformance.Controllers
         }
 
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var result = await _result.Get(r => r.PTFSM6CLA1A != null,
                     r => r.OrderBy(s => s.School.SCHNAME),
