@@ -12,6 +12,7 @@ using System.Linq;
 using System;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -58,14 +59,14 @@ namespace SchoolPerformanceTest.ControllerTest
                 It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
                 It.IsAny<Expression<Func<SchoolResult, object>>[]>()
                 ))
-                .Returns(_results.Where(r => r.URN !=9)).Verifiable();
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
 
             _mockSchoolResult.Setup(m => m.Get(
                 It.IsAny< Expression < Func<SchoolResult, bool> >> (),
                 It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
                 It.IsAny<Expression<Func<SchoolResult, object>>[]>()
                 ))
-                .Returns(_results.Where(r => r.URN != 9)).Verifiable();
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
 
             //When the GetNational method is called return _results 
             //with national data only
@@ -73,7 +74,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 It.IsAny<Expression<Func<SchoolResult, bool>>>(),
                 It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>()
                 ))
-                .Returns(_results.Where(r => r.URN == 9)).Verifiable();
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN == 9)));
 
             _controller = new TablesController(_mockSchoolResult.Object);
         }
@@ -83,7 +84,6 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestMethod]
         public void IndexReturnsHomePageWithTableViewModel()
         {
-
             // Act and Assert
             _controller.Index().Should()
                 .BeViewResult().WithDefaultViewName();
@@ -97,10 +97,11 @@ namespace SchoolPerformanceTest.ControllerTest
 
         //Checks when GetResultsAll is called a JSON object is returned
         [TestMethod]
-        public void GetResultsAllReturnsJSONObject()
+        public async Task GetResultsAllReturnsJSONObject()
         {
             // Act and Assert
-           var data = _controller.GetResultsAll().Should()
+           var controller = await _controller.GetResultsAll();
+           var data = controller.Should()
                 .BeJsonResult().Value;
 
         }
@@ -108,9 +109,11 @@ namespace SchoolPerformanceTest.ControllerTest
         //Checks when GetResultsAll is called a JSON object is returned
         //with data from a list of TableViewModel
         [TestMethod]
-        public void GetResultsAllContainsListOfTableViewModel()
+        public async Task GetResultsAllContainsListOfTableViewModel()
         {
-            var data = _controller.GetResultsAll().Should()
+            // Act and Assert
+            var controller = await _controller.GetResultsAll();
+            var data = controller.Should()
                 .BeJsonResult().Value;
 
             //Get the data property from the JSON object 
@@ -158,10 +161,11 @@ namespace SchoolPerformanceTest.ControllerTest
 
         //Checks when GetResultsDisadvantaged is called a JSON object is returned
         [TestMethod]
-        public void GetResultsDisadvantagedReturnsJSONObject()
+        public async Task GetResultsDisadvantagedReturnsJSONObject()
         {
             // Act and Assert
-            var data = _controller.GetResultsDisadvantaged().Should()
+            var controller = await _controller.GetResultsDisadvantaged();
+            var data = controller.Should()
                  .BeJsonResult().Value;
 
         }
@@ -169,9 +173,10 @@ namespace SchoolPerformanceTest.ControllerTest
         //Checks when GetResultsDisadvantaged is called a JSON object is returned
         //with data from a list of TableViewModel
         [TestMethod]
-        public void GetResultsDisadvantagedContainsListOfTableViewModel()
+        public async Task GetResultsDisadvantagedContainsListOfTableViewModel()
         {
-            var data = _controller.GetResultsDisadvantaged().Should()
+            var controller = await _controller.GetResultsDisadvantaged();
+            var data = controller.Should()
                 .BeJsonResult().Value;
 
             //Get the data property from the JSON object 
