@@ -108,8 +108,8 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            //Remove national data
-            var result = National(query, false);
+            //Get national data only
+            var result = National(query, true);
 
             return await result.ToListAsync();
         }
@@ -125,10 +125,9 @@ namespace SchoolPerformance.Repository
 
             query = AddOrderQuery(query, orderBy);
 
-            //Remove national data
-            var result = National(query, false);
+            //Get national data only
+            var result = National(query, true);
 
-            //Return result including national data
             return await result.ToListAsync();
         }
 
