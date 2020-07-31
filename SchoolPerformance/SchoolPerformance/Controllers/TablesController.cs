@@ -40,13 +40,15 @@ namespace SchoolPerformance.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetResultsAll()
+        public async Task<IActionResult> GetResultsAll()
         {
             //Get results for all schools
-            var result = _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
+            var result = await _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 
             //Get the national data
-            var nationalResult = _result.GetNational().First();
+            var nationalResultLst = await _result.GetNational();
+
+            var nationalResult = nationalResultLst.First();
 
             //Converts from list of SchoolResult to List of TableViewModel
             List<TableViewModelAll> resultViewModel = result.ConvertToTableViewModelAll();
@@ -61,17 +63,18 @@ namespace SchoolPerformance.Controllers
 
 
         [HttpPost]
-        public IActionResult GetResultsDisadvantaged()
+        public async Task<IActionResult> GetResultsDisadvantaged()
         {
             //Get results for all schools 
             //if the percentage of disadvantaged pupils is not null
-            var result = _result.Get(
+            var result = await _result.Get(
                 r => r.PTFSM6CLA1A != null,
                 r => r.OrderBy(s => s.School.SCHNAME), 
                 r => r.School);
 
             //Get the national data
-            var nationalResult = _result.GetNational().First();
+            var nationalResultLst = await _result.GetNational();
+            var nationalResult = nationalResultLst.First();
 
             //Converts from list of SchoolResult to List of TableViewModel
             List<TableViewModelDisadvantaged> resultViewModel = result.ConvertToTableViewModelDisadvantaged();
