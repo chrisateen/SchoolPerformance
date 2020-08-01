@@ -21,7 +21,7 @@ namespace SchoolPerformance.LoadData
         /// </summary>
         /// <param name="results">IEnumerable list of SchoolResult object to check</param>
         /// <returns>Returns a IEnumerable list of SchoolResult with null results removed</returns>
-        public static IEnumerable<SchoolResult> removeNullResults(this IEnumerable<SchoolResult> results)
+        public static IEnumerable<SchoolResult> RemoveNullResults(this IEnumerable<SchoolResult> results)
         {
 
             return results.Where(

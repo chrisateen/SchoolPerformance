@@ -63,7 +63,7 @@ namespace LoadData
 
                         var data = _csv.GetRecords<SchoolResult>().ToList();
 
-                        return (IEnumerable<M>)data.removeNullResults();
+                        return (IEnumerable<M>)data.RemoveNullResults();
                     }
 
                     if (modelName == "SchoolDetails")
