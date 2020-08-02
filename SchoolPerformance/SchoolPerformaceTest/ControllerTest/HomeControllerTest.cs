@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolPerformaceTest.ControllerTest
+namespace SchoolPerformanceTest.ControllerTest
 {
     [TestClass]
     public class HomeControllerTest
