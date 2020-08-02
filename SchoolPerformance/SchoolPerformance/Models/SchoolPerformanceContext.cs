@@ -21,8 +21,6 @@ namespace SchoolPerformance.Models
             
         }
 
-
-
         public virtual DbSet<School> School { get; set; }
         public virtual DbSet<SchoolContextual> SchoolContextual { get; set; }
         public virtual DbSet<SchoolDetails> SchoolDetails { get; set; }

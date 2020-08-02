@@ -48,6 +48,7 @@ namespace SchoolPerformance.Controllers
             //Get the national data
             var nationalResultLst = await _result.GetNational();
 
+            //Because there is only currently national data for 2019 there should only be 1 result
             var nationalResult = nationalResultLst.First();
 
             //Converts from list of SchoolResult to List of TableViewModel
@@ -74,6 +75,8 @@ namespace SchoolPerformance.Controllers
 
             //Get the national data
             var nationalResultLst = await _result.GetNational();
+
+            //Because there is only currently national data for 2019 there should only be 1 result
             var nationalResult = nationalResultLst.First();
 
             //Converts from list of SchoolResult to List of TableViewModel
