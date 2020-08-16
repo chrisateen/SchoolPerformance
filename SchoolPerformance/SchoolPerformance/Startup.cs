@@ -6,9 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolPerformance.Models;
-using Microsoft.Extensions.Azure;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using StackExchange.Redis;
 using SchoolPerformance.Repository;
+using StackExchange.Redis.Extensions.Core.Configuration;
+using StackExchange.Redis.Extensions.Newtonsoft;
 
 namespace SchoolPerformance
 {
@@ -27,6 +28,10 @@ namespace SchoolPerformance
                                 _configuration.GetConnectionString("SchoolPerformanceRDS")));
 
             services.AddMvc().AddNewtonsoftJson();
+
+            //Register Redis services
+            var redisConfiguration = _configuration.GetSection("Redis").Get<RedisConfiguration>();
+            services.AddStackExchangeRedisExtensions<NewtonsoftSerializer>(redisConfiguration);
 
             //Register repository
             services.AddScoped(typeof( ISchoolPerformanceRepository <>),typeof(SchoolPerformanceRepository<>));
