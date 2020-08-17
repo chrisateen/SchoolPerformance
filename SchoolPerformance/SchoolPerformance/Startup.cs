@@ -10,6 +10,7 @@ using StackExchange.Redis;
 using SchoolPerformance.Repository;
 using StackExchange.Redis.Extensions.Core.Configuration;
 using StackExchange.Redis.Extensions.Newtonsoft;
+using SchoolPerformance.Cache;
 
 namespace SchoolPerformance
 {
@@ -35,6 +36,9 @@ namespace SchoolPerformance
 
             //Register repository
             services.AddScoped(typeof( ISchoolPerformanceRepository <>),typeof(SchoolPerformanceRepository<>));
+
+            //Register RedisCache Class
+            services.AddSingleton<RedisCache>();
 
         }
 
