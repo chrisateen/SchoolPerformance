@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Text;
 using SchoolPerformance.ViewModels;
 using System.Threading.Tasks;
+using SchoolPerformance.Cache;
+using StackExchange.Redis.Extensions.Core.Abstractions;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -18,7 +20,9 @@ namespace SchoolPerformanceTest.ControllerTest
     public class ScatterplotControllerTest
     {
         Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        Mock<IRedisCache> _mockRedisCache;
         ScatterplotController _controller;
+        Task<IEnumerable<ScatterplotViewModel>> _scatterplotViewModelLst;
 
         //Arrange
         [TestInitialize]
@@ -26,7 +30,14 @@ namespace SchoolPerformanceTest.ControllerTest
         {
             //Instantiate the controller class by mocking the repository
             _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
-            _controller = new ScatterplotController(_mockSchoolResult.Object);
+
+            _mockRedisCache = new Mock<IRedisCache>();
+
+            _scatterplotViewModelLst = Task.FromResult<IEnumerable<ScatterplotViewModel>>(new List<ScatterplotViewModel>());
+
+            _mockRedisCache.Setup(m => m.getScatterplotData()).Returns(_scatterplotViewModelLst);
+           
+            _controller = new ScatterplotController(_mockSchoolResult.Object, _mockRedisCache.Object);
         }
 
         //Checks Scatterplot view is rendered
@@ -46,5 +57,6 @@ namespace SchoolPerformanceTest.ControllerTest
             var test = res.Model.Should()
                 .BeAssignableTo<IEnumerable<ScatterplotViewModel>>().Subject;
         }
+
     }
 }
