@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolPerformance.Cache
 {
-    public class RedisCache
+    public class RedisCache : IRedisCache
     {
         private readonly IRedisCacheClient _redisCacheClient;
 
@@ -17,13 +17,21 @@ namespace SchoolPerformance.Cache
             _redisCacheClient = redisCacheClient;
         }
 
-        public async Task<IEnumerable<ScatterplotViewModel>> getScatterplotData ()
+        /// <summary>
+        /// Checks and gets ScatterplotViewModel data from the cache
+        /// </summary>
+        /// <returns>
+        /// List of ScatterplotViewModel object if data is in cache
+        /// or an empty ScatterplotViewModel List if data is not in cache
+        /// </returns>
+        public async Task<IEnumerable<ScatterplotViewModel>> getScatterplotData()
         {
-            // Get all the scatterplot data from the cache
+            // Searches and gets all the ScatterplotViewModel keys in the cache
             var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("ScatterplotViewModel*");
 
             IEnumerable<ScatterplotViewModel> scatterplotDataLst = new List<ScatterplotViewModel>();
 
+            //Get ScatterplotViewModel data from cache if it's in the cache
             if (listofkeys != null)
             {
                 var results = await _redisCacheClient
@@ -35,17 +43,26 @@ namespace SchoolPerformance.Cache
             }
 
             return scatterplotDataLst.OrderBy(s => s.SCHNAME);
-            
+
         }
 
+
+        /// <summary>
+        /// Adds a list of ScatterplotViewModel objects to the cache
+        /// </summary>
+        /// <param name="scatterplotDataLst">
+        /// List of ScatterplotViewModel objects to be added to the cache
+        /// </param>
         public async Task saveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
         {
             var items = new List<Tuple<string, ScatterplotViewModel>>();
 
             foreach (var item in scatterplotDataLst)
             {
+                //A key is created which included the unique reference number of the school
+                //before the object is added to the cache
                 var key = "ScatterplotViewModel" + item.URN;
-                items.Add(new Tuple<string, ScatterplotViewModel> (key, item));
+                items.Add(new Tuple<string, ScatterplotViewModel>(key, item));
             }
 
             await _redisCacheClient

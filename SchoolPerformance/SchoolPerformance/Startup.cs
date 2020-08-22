@@ -38,7 +38,7 @@ namespace SchoolPerformance
             services.AddScoped(typeof( ISchoolPerformanceRepository <>),typeof(SchoolPerformanceRepository<>));
 
             //Register RedisCache Class
-            services.AddSingleton<RedisCache>();
+            services.AddSingleton<IRedisCache,RedisCache>();
 
         }
 

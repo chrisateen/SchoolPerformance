@@ -16,32 +16,19 @@ namespace SchoolPerformance.Controllers
     {
 
         private ISchoolPerformanceRepository<SchoolResult> _result;
-        private RedisCache _cache;
-        private IMemoryCache _cacheInMemory;
+        private IRedisCache _cache;
 
-        public ScatterplotController(ISchoolPerformanceRepository<SchoolResult> result, RedisCache cache, IMemoryCache memoryCache)
+        public ScatterplotController(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache)
         {
             _result = result;
             _cache = cache;
-            _cacheInMemory = memoryCache;
+
         }
 
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
 
-            if (!_cacheInMemory.TryGetValue("ScatterplotViewModel", out resultViewModel))
-            {
-                var result = await _result.Get(r => r.PTFSM6CLA1A != null,
-                    r => r.OrderBy(s => s.School.SCHNAME),
-                    r => r.School);
-
-                resultViewModel = result.ConvertToScatterplotViewModel();
-
-                _cacheInMemory.Set("ScatterplotViewModel", resultViewModel);
-
-            }
             //var result = await _result.Get(r => r.PTFSM6CLA1A != null,
             //        r => r.OrderBy(s => s.School.SCHNAME),
             //        r => r.School);
@@ -49,19 +36,19 @@ namespace SchoolPerformance.Controllers
             ////Converts from list of SchoolResult to List of ScatterplotViewModel
             //var resultViewModel = result.ConvertToScatterplotViewModel();
 
-            //var resultViewModel = await _cache.getScatterplotData();
+            var resultViewModel = await _cache.getScatterplotData();
 
-            //if (resultViewModel.Count() == 0)
-            //{
-            //    var result = await _result.Get(r => r.PTFSM6CLA1A != null,
-            //        r => r.OrderBy(s => s.School.SCHNAME),
-            //        r => r.School);
+            if (resultViewModel.Count() == 0)
+            {
+                var result = await _result.Get(r => r.PTFSM6CLA1A != null,
+                    r => r.OrderBy(s => s.School.SCHNAME),
+                    r => r.School);
 
-            //    //Converts from list of SchoolResult to List of ScatterplotViewModel
-            //    resultViewModel = result.ConvertToScatterplotViewModel();
+                //Converts from list of SchoolResult to List of ScatterplotViewModel
+                resultViewModel = result.ConvertToScatterplotViewModel();
 
-            //    await _cache.saveScatterplotData(resultViewModel);
-            //}
+                await _cache.saveScatterplotData(resultViewModel);
+            }
 
 
             return View(resultViewModel);
