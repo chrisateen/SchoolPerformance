@@ -28,16 +28,12 @@ namespace SchoolPerformance.Controllers
 
         public async Task<IActionResult> Index()
         {
+            IEnumerable<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
 
-            //var result = await _result.Get(r => r.PTFSM6CLA1A != null,
-            //        r => r.OrderBy(s => s.School.SCHNAME),
-            //        r => r.School);
+            //Check if data is in cache and if so get the data from cache
+            resultViewModel = await _cache.getScatterplotData();
 
-            ////Converts from list of SchoolResult to List of ScatterplotViewModel
-            //var resultViewModel = result.ConvertToScatterplotViewModel();
-
-            var resultViewModel = await _cache.getScatterplotData();
-
+            //if data is not in cache get data from database and save data in cache
             if (resultViewModel.Count() == 0)
             {
                 var result = await _result.Get(r => r.PTFSM6CLA1A != null,
@@ -47,9 +43,9 @@ namespace SchoolPerformance.Controllers
                 //Converts from list of SchoolResult to List of ScatterplotViewModel
                 resultViewModel = result.ConvertToScatterplotViewModel();
 
+                
                 await _cache.saveScatterplotData(resultViewModel);
             }
-
 
             return View(resultViewModel);
         }

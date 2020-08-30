@@ -26,21 +26,25 @@ namespace SchoolPerformance.Cache
         /// </returns>
         public async Task<IEnumerable<ScatterplotViewModel>> getScatterplotData()
         {
-            // Searches and gets all the ScatterplotViewModel keys in the cache
-            var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("ScatterplotViewModel*");
-
             IEnumerable<ScatterplotViewModel> scatterplotDataLst = new List<ScatterplotViewModel>();
 
-            //Get ScatterplotViewModel data from cache if it's in the cache
-            if (listofkeys != null)
+            try
             {
-                var results = await _redisCacheClient
-                                .Db0
-                                .GetAllAsync<ScatterplotViewModel>(listofkeys);
+                // Searches and gets all the ScatterplotViewModel keys in the cache
+                var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("ScatterplotViewModel*");
 
-                scatterplotDataLst = new List<ScatterplotViewModel>(results.Values);
+                //Get ScatterplotViewModel data from cache if it's in the cache
+                if (listofkeys != null)
+                {
+                    var results = await _redisCacheClient
+                                    .Db0
+                                    .GetAllAsync<ScatterplotViewModel>(listofkeys);
 
+                    scatterplotDataLst = new List<ScatterplotViewModel>(results.Values);
+
+                }
             }
+            catch (Exception) { }
 
             return scatterplotDataLst.OrderBy(s => s.SCHNAME);
 
@@ -65,9 +69,15 @@ namespace SchoolPerformance.Cache
                 items.Add(new Tuple<string, ScatterplotViewModel>(key, item));
             }
 
-            await _redisCacheClient
+            try
+            {
+                await _redisCacheClient
                 .Db0
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
+            }
+
+            catch (Exception) { }
+            
         }
 
 
