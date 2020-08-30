@@ -2,6 +2,7 @@
 using Moq;
 using SchoolPerformance.Cache;
 using SchoolPerformance.ViewModels;
+using StackExchange.Redis;
 using StackExchange.Redis.Extensions.Core.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -198,6 +199,73 @@ namespace SchoolPerformaceTest.CacheTest
         }
 
 
+        //Tests that GetNationalTableDataAll returns a null object
+        //if national data is not in the redis database (i.e key could not be found)
+        [TestMethod]
+        public async Task GetNationalTableDataAllReturnsEmptyObjectIfDataIsNotInCache()
+        {
+            //Arrange
+            SetupRedisCacheClient();
+
+            //Act
+            TableViewModelAll result = await _redisCache.GetNationalTableDataAll();
+
+            //Assert
+            Assert.IsNull(result);
+
+        }
+
+        //Tests that GetNationalTableDataAll
+        //returns an TableViewModelAll object
+        //if national data is in the redis database
+        [TestMethod]
+        public async Task GetNationalTableDataAllReturnsDataInCache()
+        {
+            //Arrange
+            SetupNationalMockCache();
+
+            //Act
+            var result = await _redisCache.GetNationalTableDataAll();
+
+            //Assert
+            Assert.IsNotNull(result);
+
+        }
+
+        //Tests that GetNationalTableDataDisadvantaged returns a null object
+        //if national data is not in the redis database (i.e key could not be found)
+        [TestMethod]
+        public async Task GetNationalTableDataDisadvantagedReturnsEmptyObjectIfDataIsNotInCache()
+        {
+            //Arrange
+            SetupEmptyMockCache();
+
+            //Act
+            TableViewModelDisadvantaged result = await _redisCache.GetNationalTableDataDisadvantaged();
+
+            //Assert
+            Assert.IsNull(result);
+
+        }
+
+        //Tests that GetNationalTableDataDisadvantaged
+        //returns an TableViewModelDisadvantaged object
+        //if national data is in the redis database
+        [TestMethod]
+        public async Task GetNationalTableDataDisadvantagedReturnsDataInCache()
+        {
+            //Arrange
+            SetupNationalMockCache();
+
+            //Act
+            var result = await _redisCache.GetNationalTableDataDisadvantaged();
+
+            //Assert
+            Assert.IsNotNull(result);
+
+        }
+
+
         //Create and return an empty list of keys
         //when SearchKeysAsync is called
         //in the get methods
@@ -205,11 +273,16 @@ namespace SchoolPerformaceTest.CacheTest
         public void SetupEmptyMockCache()
         {
             //Arrange
-           
+
+            //When SearchKeysAsync is called it should return an empty list of keys
             var emptyLstOfKeys = Task.FromResult<IEnumerable<String>>(null);
             _redisDatabase.Setup(m => m.SearchKeysAsync(It.IsAny<string>())).Returns(emptyLstOfKeys);
-            SetupRedisCacheClient();
 
+            //When ExistsAsync is called it should return false
+            var taskFalse = Task.FromResult<bool>(false);
+            _redisDatabase.Setup(m => m.ExistsAsync(It.IsAny<string>(), It.IsAny<CommandFlags>())).Returns(taskFalse);
+            SetupRedisCacheClient();
+            
         }
 
         //Setup Mock redisCacheClient
@@ -240,5 +313,32 @@ namespace SchoolPerformaceTest.CacheTest
             _redisDatabase.Setup(m => m.SearchKeysAsync(It.IsAny<string>())).Returns(taskLstOfKeys);
         }
 
+
+        //Setup ExistsAsync and GetAsync 
+        //when the GetNational methods are called
+        [Ignore]
+        public void SetupNationalMockCache()
+        {
+            //Arrange
+
+            //When ExistsAsync is called it should return true
+            var taskFalse = Task.FromResult<bool>(true);
+            _redisDatabase.Setup(m => m.ExistsAsync(It.IsAny<string>(), It.IsAny<CommandFlags>()))
+                .Returns(taskFalse);
+
+            //When GetAsync is called it should return TableViewModelAll object
+            var tableViewModelAll = Task.FromResult<TableViewModelAll>( new TableViewModelAll());
+            _redisDatabase.Setup(m => m.GetAsync<TableViewModelAll>(It.IsAny<string>(), It.IsAny<CommandFlags>()))
+                           .Returns(tableViewModelAll);
+
+            //When GetAsync is called it should return TableViewModelDisadvantaged object
+            var tableViewModelDisadvantaged = Task.FromResult<TableViewModelDisadvantaged>(new TableViewModelDisadvantaged());
+            _redisDatabase.Setup(m => m.GetAsync<TableViewModelDisadvantaged>(It.IsAny<string>(), It.IsAny<CommandFlags>()))
+                           .Returns(tableViewModelDisadvantaged);
+
+
+            SetupRedisCacheClient();
+
+        }
     }
 }

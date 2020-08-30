@@ -35,7 +35,7 @@ namespace SchoolPerformanceTest.ControllerTest
 
             _scatterplotViewModelLst = Task.FromResult<IEnumerable<ScatterplotViewModel>>(new List<ScatterplotViewModel>());
 
-            _mockRedisCache.Setup(m => m.getScatterplotData()).Returns(_scatterplotViewModelLst);
+            _mockRedisCache.Setup(m => m.GetScatterplotData()).Returns(_scatterplotViewModelLst);
            
             _controller = new ScatterplotController(_mockSchoolResult.Object, _mockRedisCache.Object);
         }
