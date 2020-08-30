@@ -17,14 +17,51 @@ namespace SchoolPerformance.Cache
             _redisCacheClient = redisCacheClient;
         }
 
-        /// <summary>
-        /// Checks and gets ScatterplotViewModel data from the cache
-        /// </summary>
-        /// <returns>
-        /// List of ScatterplotViewModel object if data is in cache
-        /// or an empty ScatterplotViewModel List if data is not in cache
-        /// </returns>
-        public async Task<IEnumerable<ScatterplotViewModel>> getScatterplotData()
+        public async Task<TableViewModelAll> GetNationalTableDataAll()
+        {
+            TableViewModelAll nationalData = null;
+            bool dataInCache = false;
+
+            try
+            {
+                //Check if National TableViewModelAll data is in cache
+                dataInCache = await _redisCacheClient.Db0.ExistsAsync("NationalTableViewModelAll");
+
+                if (dataInCache)
+                {
+                    nationalData = await _redisCacheClient
+                                .Db0.GetAsync<TableViewModelAll>("NationalTableViewModelAll");
+                }
+                
+            }
+            catch (Exception) { }
+
+            return nationalData;
+        }
+
+        public async Task<TableViewModelDisadvantaged> GetNationalTableDataDisadvantaged()
+        {
+            TableViewModelDisadvantaged nationalData = null;
+            bool dataInCache = false;
+
+            try
+            {
+                //Check if National TableViewModelDisadvantaged data is in cache
+                dataInCache = await _redisCacheClient.Db0.ExistsAsync("NationalTableViewModelDisadvantaged");
+
+                if (dataInCache)
+                {
+                    nationalData = await _redisCacheClient
+                                    .Db0
+                                    .GetAsync<TableViewModelDisadvantaged>("NationalTableViewModelDisadvantaged");
+                }
+            }
+            catch (Exception) { }
+
+            return nationalData;
+        }
+
+        public async Task<IEnumerable<ScatterplotViewModel>> GetScatterplotData()
         {
             IEnumerable<ScatterplotViewModel> scatterplotDataLst = new List<ScatterplotViewModel>();
 
@@ -50,14 +87,67 @@ namespace SchoolPerformance.Cache
 
         }
 
+        public async Task<IEnumerable<TableViewModelAll>> GetTableDataAll()
+        {
+            IEnumerable<TableViewModelAll> tableDataLst = new List<TableViewModelAll>();
 
-        /// <summary>
-        /// Adds a list of ScatterplotViewModel objects to the cache
-        /// </summary>
-        /// <param name="scatterplotDataLst">
-        /// List of ScatterplotViewModel objects to be added to the cache
-        /// </param>
-        public async Task saveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
+            try
+            {
+                // Searches and gets all the TableViewModelAll keys in the cache
+                var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("TableViewModelAll*");
+
+                //Get TableViewModelAll data from cache if it's in the cache
+                if (listofkeys != null)
+                {
+                    var results = await _redisCacheClient
+                                    .Db0
+                                    .GetAllAsync<TableViewModelAll>(listofkeys);
+
+                    tableDataLst = new List<TableViewModelAll>(results.Values);
+
+                }
+            }
+            catch (Exception) { }
+
+            return tableDataLst.OrderBy(s => s.SCHNAME);
+        }
+
+        public async Task<IEnumerable<TableViewModelDisadvantaged>> GetTableDataDisadvantaged()
+        {
+            IEnumerable<TableViewModelDisadvantaged> tableDataLst = new List<TableViewModelDisadvantaged>();
+
+            try
+            {
+                // Searches and gets all the TableViewModelDisadvantaged keys in the cache
+                var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("TableViewModelDisadvantaged*");
+
+                //Get TableViewModelDisadvantaged data from cache if it's in the cache
+                if (listofkeys != null)
+                {
+                    var results = await _redisCacheClient
+                                    .Db0
+                                    .GetAllAsync<TableViewModelDisadvantaged>(listofkeys);
+
+                    tableDataLst = new List<TableViewModelDisadvantaged>(results.Values);
+
+                }
+            }
+            catch (Exception) { }
+
+            return tableDataLst.OrderBy(s => s.SCHNAME);
+        }
+
+        public Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task SaveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
         {
             var items = new List<Tuple<string, ScatterplotViewModel>>();
 
@@ -80,7 +170,19 @@ namespace SchoolPerformance.Cache
             
         }
 
+        public Task SaveTableDataAll(IEnumerable<TableViewModelAll> tableDataLst)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelAll> tableDataLst)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelDisadvantaged> tableDataLst)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
