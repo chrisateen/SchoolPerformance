@@ -93,7 +93,7 @@ namespace SchoolPerformance.Controllers
             var resultViewModel = await _cache.GetTableDataDisadvantaged();
 
             //Get results for all schools if data is not in cache
-            if (resultViewModel == null)
+            if (resultViewModel.Count() == 0)
             {
                 //Get results for all schools 
                 //where the percentage of disadvantaged pupils is not null
