@@ -31,7 +31,7 @@ namespace SchoolPerformance.Controllers
             IEnumerable<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
 
             //Check if data is in cache and if so get the data from cache
-            resultViewModel = await _cache.getScatterplotData();
+            resultViewModel = await _cache.GetScatterplotData();
 
             //if data is not in cache get data from database and save data in cache
             if (resultViewModel.Count() == 0)
@@ -44,7 +44,7 @@ namespace SchoolPerformance.Controllers
                 resultViewModel = result.ConvertToScatterplotViewModel();
 
                 
-                await _cache.saveScatterplotData(resultViewModel);
+                await _cache.SaveScatterplotData(resultViewModel);
             }
 
             return View(resultViewModel);
