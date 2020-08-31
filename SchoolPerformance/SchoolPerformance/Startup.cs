@@ -24,7 +24,7 @@ namespace SchoolPerformance
         {
             services.AddDbContextPool<SchoolPerformanceContext>(options =>
                     options.UseSqlServer(
-                                _configuration.GetConnectionString("SchoolPerformanceRDS")));
+                                _configuration.GetConnectionString("SchoolPerformanceAzure")));
 
             services.AddMvc().AddNewtonsoftJson();
 
