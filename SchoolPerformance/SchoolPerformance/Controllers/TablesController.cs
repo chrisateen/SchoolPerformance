@@ -51,14 +51,14 @@ namespace SchoolPerformance.Controllers
             //Get results for all schools from database if data is not in cache
             if (resultViewModel.Count() == 0)
             {
-                
+
                 var result = await _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 
                 //Converts from list of SchoolResult to List of TableViewModel
                 resultViewModel = result.ConvertToTableViewModelAll();
 
                 //Save list of TableViewModel data to cache
-                await _cache.SaveTableDataAll(resultViewModel);
+                //await _cache.SaveTableDataAll(resultViewModel);
             }
 
             //Check if data is in cache
@@ -76,7 +76,7 @@ namespace SchoolPerformance.Controllers
                 resultNatViewModel = nationalResult;
 
                 //Save National TableViewModel data to cache
-                await _cache.SaveNationalTableDataAll(resultNatViewModel);
+                //await _cache.SaveNationalTableDataAll(resultNatViewModel);
             }
 
 
@@ -106,7 +106,7 @@ namespace SchoolPerformance.Controllers
                 resultViewModel = result.ConvertToTableViewModelDisadvantaged();
 
                 //Save list of TableViewModel data to cache
-                await _cache.SaveTableDataDisadvantaged(resultViewModel);
+                //await _cache.SaveTableDataDisadvantaged(resultViewModel);
 
             }
 
@@ -116,7 +116,7 @@ namespace SchoolPerformance.Controllers
             //Get the national data from database if not in cache
             if (resultNatViewModel == null)
             {
-                
+
                 var nationalResultLst = await _result.GetNational();
 
                 //Because there is only currently national data for 2019 there should only be 1 result
@@ -126,14 +126,16 @@ namespace SchoolPerformance.Controllers
                 resultNatViewModel = nationalResult;
 
                 //Save National TableViewModel data to cache
-                await _cache.SaveNationalTableDataDisadvantaged(resultNatViewModel);
+                // await _cache.SaveNationalTableDataDisadvantaged(resultNatViewModel);
             }
 
-            
+
             var data = new { data = resultViewModel, national = resultNatViewModel };
 
             return Json(data);
         }
+
+       
 
     }
 }
