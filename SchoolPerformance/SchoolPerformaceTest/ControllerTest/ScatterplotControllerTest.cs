@@ -31,6 +31,7 @@ namespace SchoolPerformanceTest.ControllerTest
             //Instantiate the controller class by mocking the repository
             _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
 
+            //Mock the redis cache
             _mockRedisCache = new Mock<IRedisCache>();
 
             _scatterplotViewModelLst = Task.FromResult<IEnumerable<ScatterplotViewModel>>(new List<ScatterplotViewModel>());

@@ -13,6 +13,7 @@ using System;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using SchoolPerformance.Cache;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -20,6 +21,7 @@ namespace SchoolPerformanceTest.ControllerTest
     public class TableControllerTest
     {
         Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        Mock<IRedisCache> _mockRedisCache;
         IEnumerable<SchoolResult> _results;
         TablesController _controller;
 
@@ -27,56 +29,11 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestInitialize]
         public void Setup()
         {
-            //Instantiate the controller class by mocking the repository
-            _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
+            SetupRedisCache();
 
-            //Mock data
-            _results = new List<SchoolResult>
-            {
-                new SchoolResult { URN = 1, PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=1, SCHNAME = "Test 1"}
-                },
-                new SchoolResult { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=2, SCHNAME = "Test 2"}
-                },
-                new SchoolResult { URN = 9, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=2, SCHNAME = ""}
-                }
-            };
+            SetupRepository();
 
-            //When the GetAll method is called return _results 
-            //excluding national data
-            _mockSchoolResult.Setup(m => m.GetAll(
-                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
-                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
-                ))
-                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
-
-            _mockSchoolResult.Setup(m => m.Get(
-                It.IsAny< Expression < Func<SchoolResult, bool> >> (),
-                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
-                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
-                ))
-                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
-
-            //When the GetNational method is called return _results 
-            //with national data only
-            _mockSchoolResult.Setup(m => m.GetNational(
-                It.IsAny<Expression<Func<SchoolResult, bool>>>(),
-                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>()
-                ))
-                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN == 9)));
-
-            _controller = new TablesController(_mockSchoolResult.Object);
+            _controller = new TablesController(_mockSchoolResult.Object, _mockRedisCache.Object);
         }
 
         //Checks Table view is rendered
@@ -196,6 +153,102 @@ namespace SchoolPerformanceTest.ControllerTest
             Assert.AreEqual(_results.Where(x => x.URN != 9).Count(), dataList.Count());
             Assert.IsNotNull(natResults);
 
+        }
+
+
+        //Setup mock objects to be returned 
+        //when methods from IRedisCache is called
+        [Ignore]
+        public void SetupRedisCache()
+        {
+            //Mock the redis cache
+            _mockRedisCache = new Mock<IRedisCache>();
+
+            //Setup empty mock objects
+            Task<IEnumerable<TableViewModelAll>> tableViewModelLstAll = 
+                Task.FromResult<IEnumerable<TableViewModelAll>>(new List<TableViewModelAll>());
+
+            Task<IEnumerable<TableViewModelDisadvantaged>> tableViewModelLstDisadvantaged =
+                Task.FromResult<IEnumerable<TableViewModelDisadvantaged>>(new List<TableViewModelDisadvantaged>());
+
+            Task<TableViewModelAll> tableViewModelNationalAll = 
+                Task.FromResult<TableViewModelAll>(null);
+
+            Task<TableViewModelDisadvantaged> tableViewModelNationalDisadvantaged = 
+                Task.FromResult<TableViewModelDisadvantaged>(null);
+
+            //Return empty objects/null when methods from IRedisCache
+            //is called
+            _mockRedisCache.Setup(m => m.GetTableDataAll())
+                .Returns(tableViewModelLstAll);
+
+            _mockRedisCache.Setup(m => m.GetTableDataDisadvantaged())
+                .Returns(tableViewModelLstDisadvantaged);
+
+            _mockRedisCache.Setup(m => m.GetNationalTableDataAll())
+                .Returns(tableViewModelNationalAll);
+
+            _mockRedisCache.Setup(m => m.GetNationalTableDataDisadvantaged())
+                .Returns(tableViewModelNationalDisadvantaged);
+        }
+
+
+        //Setup mock objects to be returned 
+        //when methods from Repository is called
+        [Ignore]
+        public void SetupRepository()
+        {
+            //Mock SchoolPerformanceRepository
+            _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
+
+            //Mock data
+            _results = new List<SchoolResult>
+            {
+                new SchoolResult { URN = 1, PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
+                    School = new School{URN=1, SCHNAME = "Test 1"}
+                },
+                new SchoolResult { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
+                    School = new School{URN=2, SCHNAME = "Test 2"}
+                },
+                new SchoolResult { URN = 9, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
+                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
+                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
+                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
+                    School = new School{URN=2, SCHNAME = ""}
+                }
+            };
+
+            //When the GetAll method is called return _results 
+            //excluding national data
+            _mockSchoolResult.Setup(m => m.GetAll(
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
+                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+                ))
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
+
+
+            //When the Get method is called return _results 
+            //excluding national data
+            _mockSchoolResult.Setup(m => m.Get(
+                It.IsAny<Expression<Func<SchoolResult, bool>>>(),
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
+                It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+                ))
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN != 9)));
+
+            //When the GetNational method is called return _results 
+            //with national data only
+            _mockSchoolResult.Setup(m => m.GetNational(
+                It.IsAny<Expression<Func<SchoolResult, bool>>>(),
+                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>()
+                ))
+                .Returns(Task.FromResult<IEnumerable<SchoolResult>>(_results.Where(r => r.URN == 9)));
         }
     }
 }
