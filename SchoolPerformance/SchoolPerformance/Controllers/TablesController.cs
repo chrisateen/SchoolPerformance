@@ -109,7 +109,7 @@ namespace SchoolPerformance.Controllers
                 resultViewModel = result.ConvertToTableViewModelAll();
 
                 //Save list of TableViewModel data to cache
-                //await _cache.SaveTableDataAll(resultViewModel);
+                await _cache.SaveTableDataAll(resultViewModel);
             }
 
             //Check if data is in cache
@@ -127,7 +127,7 @@ namespace SchoolPerformance.Controllers
                 resultNatViewModel = nationalResult;
 
                 //Save National TableViewModel data to cache
-                //await _cache.SaveNationalTableDataAll(resultNatViewModel);
+                await _cache.SaveNationalTableDataAll(resultNatViewModel);
             }
 
 
@@ -157,7 +157,7 @@ namespace SchoolPerformance.Controllers
                 resultViewModel = result.ConvertToTableViewModelDisadvantaged();
 
                 //Save list of TableViewModel data to cache
-                //await _cache.SaveTableDataDisadvantaged(resultViewModel);
+                await _cache.SaveTableDataDisadvantaged(resultViewModel);
 
             }
 
@@ -177,7 +177,7 @@ namespace SchoolPerformance.Controllers
                 resultNatViewModel = nationalResult;
 
                 //Save National TableViewModel data to cache
-                // await _cache.SaveNationalTableDataDisadvantaged(resultNatViewModel);
+                await _cache.SaveNationalTableDataDisadvantaged(resultNatViewModel);
             }
 
 
