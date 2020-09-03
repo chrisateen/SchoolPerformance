@@ -137,14 +137,18 @@ namespace SchoolPerformance.Cache
             return tableDataLst.OrderBy(s => s.SCHNAME);
         }
 
-        public Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
+        public async Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
         {
-            throw new NotImplementedException();
+            await _redisCacheClient
+                .Db0
+                .AddAsync("NationalTableViewModelAll", nationalTableData, DateTimeOffset.Now.AddMinutes(30));
         }
 
-        public Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData)
+        public async Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData)
         {
-            throw new NotImplementedException();
+            await _redisCacheClient
+                .Db0
+                .AddAsync("NationalTableViewModelDisadvantaged", nationalTableData, DateTimeOffset.Now.AddMinutes(30));
         }
 
         public async Task SaveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
@@ -170,19 +174,48 @@ namespace SchoolPerformance.Cache
             
         }
 
-        public Task SaveTableDataAll(IEnumerable<TableViewModelAll> tableDataLst)
+        public async Task SaveTableDataAll(IEnumerable<TableViewModelAll> tableDataLst)
         {
-            throw new NotImplementedException();
+            var items = new List<Tuple<string, TableViewModelAll>>();
+
+            foreach (var item in tableDataLst)
+            {
+                //A key is created which included the unique reference number of the school
+                //before the object is added to the cache
+                var key = "TableViewModelAll" + item.URN;
+                items.Add(new Tuple<string, TableViewModelAll>(key, item));
+            }
+
+            try
+            {
+                await _redisCacheClient
+                .Db0
+                .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
+            }
+
+            catch (Exception) { }
         }
 
-        public Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelAll> tableDataLst)
+        public async Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelDisadvantaged> tableDataLst)
         {
-            throw new NotImplementedException();
-        }
+            var items = new List<Tuple<string, TableViewModelDisadvantaged>>();
 
-        public Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelDisadvantaged> tableDataLst)
-        {
-            throw new NotImplementedException();
+            foreach (var item in tableDataLst)
+            {
+                //A key is created which included the unique reference number of the school
+                //before the object is added to the cache
+                var key = "TableViewModelDisadvantaged" + item.URN;
+                items.Add(new Tuple<string, TableViewModelDisadvantaged>(key, item));
+            }
+
+            try
+            {
+                await _redisCacheClient
+                .Db0
+                .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
+            }
+
+            catch (Exception) { }
         }
     }
 }
