@@ -89,7 +89,7 @@ namespace SchoolPerformance.ViewModels
                 PTNOTFSM6CLA1ABASICS_94 = result.PTNOTFSM6CLA1ABASICS_94,
                 PTL2BASICS_95 = result.PTL2BASICS_95,
                 PTFSM6CLA1ABASICS_95 = result.PTFSM6CLA1ABASICS_95,
-                PTNOTFSM6CLA1ABASICS_95 = result.PTFSM6CLA1ABASICS_95
+                PTNOTFSM6CLA1ABASICS_95 = result.PTNOTFSM6CLA1ABASICS_95
             };
         }
 
