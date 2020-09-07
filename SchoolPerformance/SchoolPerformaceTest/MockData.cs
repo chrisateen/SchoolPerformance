@@ -53,6 +53,7 @@ namespace SchoolPerformaceTest
         /// <summary>
         /// Create a mock list of SchoolResult objects
         /// </summary>
+        /// <param name="national">If mock object representing national data should be included </param>
         /// <returns>A list of mock SchoolResult objects</returns>
         public static List<SchoolResult> GetSchoolResultList(bool national)
         {
@@ -103,8 +104,8 @@ namespace SchoolPerformaceTest
                 School = new School
                 {
                     URN = 2,
-                    LA = 100,
-                    ESTAB = 1001,
+                    LA = 200,
+                    ESTAB = 2000,
                     SCHNAME = "Test School 2"
                 }
             };
@@ -143,6 +144,66 @@ namespace SchoolPerformaceTest
             }
 
             return results;
+        }
+
+        /// <summary>
+        /// Create a mock list of SchoolContextual objects
+        /// </summary>
+        /// <param name="national">If mock object representing national data should be included </param>
+        /// <returns>A list of mock SchoolContextual objects</returns>
+        public static List<SchoolContextual> GetSchoolContextualList(bool national)
+        {
+            List<SchoolContextual> contextuals = new List<SchoolContextual>();
+
+            SchoolContextual school1 = new SchoolContextual
+            {
+                URN = 1,
+                ACADEMICYEAR = 2019,
+                School = new School
+                {
+                    URN = 1,
+                    LA = 100,
+                    ESTAB = 1000,
+                    SCHNAME = "Test School 1"
+                }
+            };
+
+            SchoolContextual school2 = new SchoolContextual
+            {
+                URN = 2,
+                ACADEMICYEAR = 2019,
+                School = new School
+                {
+                    URN = 2,
+                    LA = 200,
+                    ESTAB = 2000,
+                    SCHNAME = "Test School 2"
+                }
+            };
+
+            SchoolContextual nationalContextual = new SchoolContextual
+            {
+                URN = 9,
+                ACADEMICYEAR = 2019,
+                School = new School
+                {
+                    URN = 9,
+                    SCHNAME = ""
+                }
+            };
+
+            contextuals.Add(school1);
+            contextuals.Add(school2);
+
+            //Include mock object representing national data if required
+            if (national == true)
+            {
+                contextuals.Add(nationalContextual);
+            }
+
+
+            return contextuals;
+
         }
     }
 }
