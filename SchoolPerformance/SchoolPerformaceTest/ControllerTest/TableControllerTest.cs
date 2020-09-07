@@ -40,7 +40,7 @@ namespace SchoolPerformanceTest.ControllerTest
         //Checks Table view is rendered
         //with an object of type TableViewModel
         [TestMethod]
-        public void IndexReturnsHomePageWithTableViewModel()
+        public void IndexReturnsPageWithTableViewModel()
         {
             // Act and Assert
             _controller.Index().Should()
