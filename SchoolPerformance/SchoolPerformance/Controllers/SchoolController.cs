@@ -25,7 +25,24 @@ namespace SchoolPerformance.Controllers
 
         public async Task<IActionResult> Index(int id)
         {
-            var schoolViewModel = new SchoolViewModel();
+            //Get the school data 
+            var schoolResult = await _result.Get(s => s.URN == id, null, s => s.School);
+            var schoolContextual = await _contextual.Get(s => s.URN == id && s.ACADEMICYEAR == 2019);
+
+
+            //Get the national data
+            var nationalResult = await _result.GetNational(null, null, s => s.School);
+            var nationalContextual = await _contextual.GetNational(s => s.ACADEMICYEAR == 2019);
+
+
+            var schoolViewModel = new SchoolViewModel()
+            {
+                ResultSchool = schoolResult.First(),
+                ResultNational = nationalResult.First(),
+                ContextualSchool = schoolContextual.First(),
+                ContextualNational = nationalContextual.First()
+            };
+
             return View(schoolViewModel);
         }
 
