@@ -23,6 +23,8 @@ namespace SchoolPerformance.Controllers
             _contextual = contextual;
         }
 
+        [Route("{id:int}")]
+        [Route("/[controller]/{id:int}")]
         public async Task<IActionResult> Index(int id)
         {
             //Get the school data 
