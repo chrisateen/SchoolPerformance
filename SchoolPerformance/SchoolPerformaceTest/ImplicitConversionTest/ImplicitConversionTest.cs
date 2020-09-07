@@ -16,31 +16,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelToScatterplotViewModel()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School 
-                { 
-                    URN = 1 , 
-                    LA = 100, 
-                    ESTAB = 1000,
-                    SCHNAME = "Test School"
-                }
-            };
+            SchoolResult result = MockData.GetSchoolResult(true);
 
             //Act
             ScatterplotViewModel resultViewModel = result;
@@ -61,32 +37,8 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelToResultViewModel()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School"
-                }
-            };
-
+            SchoolResult result = MockData.GetSchoolResult(true);
+           
             //Act
             ResultViewModel resultViewModel = result;
 
@@ -107,61 +59,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         {
 
             //Arrange
-            List<SchoolResult> results = new List<SchoolResult>();
-            SchoolResult result1 = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School 1"
-                }
-            };
-
-            SchoolResult result2 = new SchoolResult
-            {
-                URN = 2,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 2,
-                    LA = 100,
-                    ESTAB = 1001,
-                    SCHNAME = "Test School 2"
-                }
-            };
-
-            results.Add(result1);
-            results.Add(result2);
+            List<SchoolResult> results = MockData.GetSchoolResultList(false);
 
             //Act
             List<ScatterplotViewModel> resultViewModel = results.ConvertToScatterplotViewModel();
@@ -178,31 +76,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelToTableViewModelAll()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School"
-                }
-            };
+            SchoolResult result = MockData.GetSchoolResult(true);
 
             //Act
             TableViewModelAll resultViewModel = result;
@@ -224,24 +98,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelWithNoSchoolObjectToTableViewModelAll()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 9,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28
-            };
+            SchoolResult result = MockData.GetSchoolResult(false);
 
             //Act
             TableViewModelAll resultViewModel = result;
@@ -259,61 +116,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         {
 
             //Arrange
-            List<SchoolResult> results = new List<SchoolResult>();
-            SchoolResult result1 = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School 1"
-                }
-            };
-
-            SchoolResult result2 = new SchoolResult
-            {
-                URN = 2,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 2,
-                    LA = 100,
-                    ESTAB = 1001,
-                    SCHNAME = "Test School 2"
-                }
-            };
-
-            results.Add(result1);
-            results.Add(result2);
+            List<SchoolResult> results = MockData.GetSchoolResultList(false);
 
             //Act
             List<TableViewModelAll> resultViewModel = results.ConvertToTableViewModelAll();
@@ -330,32 +133,8 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelToTableViewModelDisadvantaged()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School"
-                }
-            };
 
+            SchoolResult result = MockData.GetSchoolResult(true);
             //Act
             TableViewModelDisadvantaged resultViewModel = result;
 
@@ -376,24 +155,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         public void ResultModelWithNoSchoolObjectToTableViewModelDisadvantaged()
         {
             //Arrange
-            SchoolResult result = new SchoolResult
-            {
-                URN = 9,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28
-            };
+            SchoolResult result = MockData.GetSchoolResult(false);
 
             //Act
             TableViewModelDisadvantaged resultViewModel = result;
@@ -411,61 +173,7 @@ namespace SchoolPerformaceTest.ImplicitConversionTest
         {
 
             //Arrange
-            List<SchoolResult> results = new List<SchoolResult>();
-            SchoolResult result1 = new SchoolResult
-            {
-                URN = 1,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 1,
-                    LA = 100,
-                    ESTAB = 1000,
-                    SCHNAME = "Test School 1"
-                }
-            };
-
-            SchoolResult result2 = new SchoolResult
-            {
-                URN = 2,
-                ACADEMICYEAR = 2019,
-                PTFSM6CLA1A = 0.5,
-                ATT8SCR = 40,
-                ATT8SCR_FSM6CLA1A = 38,
-                ATT8SCR_NFSM6CLA1A = 42,
-                P8MEA = 0.00,
-                P8MEA_FSM6CLA1A = -0.01,
-                P8MEA_NFSM6CLA1A = 0.00,
-                PTL2BASICS_94 = 0.55,
-                PTFSM6CLA1ABASICS_94 = 0.54,
-                PTNOTFSM6CLA1ABASICS_94 = 0.56,
-                PTL2BASICS_95 = 0.25,
-                PTFSM6CLA1ABASICS_95 = 0.22,
-                PTNOTFSM6CLA1ABASICS_95 = 0.28,
-                School = new School
-                {
-                    URN = 2,
-                    LA = 100,
-                    ESTAB = 1001,
-                    SCHNAME = "Test School 2"
-                }
-            };
-
-            results.Add(result1);
-            results.Add(result2);
+            List<SchoolResult> results = MockData.GetSchoolResultList(false);
 
             //Act
             List<TableViewModelDisadvantaged> resultViewModel = results.ConvertToTableViewModelDisadvantaged();

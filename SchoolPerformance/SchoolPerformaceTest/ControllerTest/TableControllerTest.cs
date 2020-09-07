@@ -14,6 +14,7 @@ using System.Linq.Expressions;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using SchoolPerformance.Cache;
+using SchoolPerformaceTest;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
@@ -202,27 +203,7 @@ namespace SchoolPerformanceTest.ControllerTest
             _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
 
             //Mock data
-            _results = new List<SchoolResult>
-            {
-                new SchoolResult { URN = 1, PTFSM6CLA1A = 0.2, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=1, SCHNAME = "Test 1"}
-                },
-                new SchoolResult { URN = 2, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=2, SCHNAME = "Test 2"}
-                },
-                new SchoolResult { URN = 9, PTFSM6CLA1A = 0.43, ATT8SCR = 40, ATT8SCR_FSM6CLA1A = 38, ATT8SCR_NFSM6CLA1A = 43,
-                    P8MEA=0.01, P8MEA_FSM6CLA1A = -0.05, P8MEA_NFSM6CLA1A = 0.05, PTL2BASICS_94 = 0.6,
-                    PTFSM6CLA1ABASICS_94 = 0.57, PTNOTFSM6CLA1ABASICS_94 = 0.63, PTL2BASICS_95 = 0.35,
-                    PTFSM6CLA1ABASICS_95 = 0.32, PTNOTFSM6CLA1ABASICS_95 = 0.4,
-                    School = new School{URN=2, SCHNAME = ""}
-                }
-            };
+            _results = MockData.GetSchoolResultList(true);
 
             //When the GetAll method is called return _results 
             //excluding national data
