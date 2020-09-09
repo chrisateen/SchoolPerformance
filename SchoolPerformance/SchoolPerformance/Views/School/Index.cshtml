@@ -550,3 +550,72 @@
             </div>
             <!-- /. main content -->
         </div>
+
+<script>
+    var schoolres = @Json.Serialize(Model.ResultSchool);
+    var nationalres = @Json.Serialize(Model.ResultNational);
+
+
+/*
+ * Get the index to use to retrive data for the Charts
+*/ 
+    function getDataIndex(index) {
+
+        var dataIndex = {
+            "Progress8": ["p8MEA","p8MEA_FSM6CLA1A","p8MEA_NFSM6CLA1A"],
+            "Attainment8": ["atT8SCR","atT8SCR_FSM6CLA1A","atT8SCR_NFSM6CLA1A"],
+            "Above4": ["ptL2BASICS_94", "ptfsM6CLA1ABASICS_94", "ptnotfsM6CLA1ABASICS_94"],
+            "Above5": ["ptL2BASICS_95", "ptfsM6CLA1ABASICS_95", "ptnotfsM6CLA1ABASICS_95"]
+        };
+
+        return dataIndex[index];
+    }
+
+    /*
+ * Get all the chart elements on the page and generate the charts 
+*/ 
+    var ctxLst = document.getElementsByClassName('charts');
+
+    if (ctxLst.length > 0) {
+
+            for (var i = 0; i < ctxLst.length; i++) {
+
+                ctx = ctxLst[i].getContext('2d');
+
+                var dataId = ctxLst[i].id;
+
+                var index = getDataIndex(dataId);
+
+                var schoolData = [schoolres[index[0]], schoolres[index[1]], schoolres[index[2]]];
+
+                var nationalData = [nationalres[index[0]], nationalres[index[1]], nationalres[index[2]]];
+
+                getChart(schoolData,nationalData,ctx);
+            }
+    }
+
+    
+    function getChart(schoolData,nationalData,ctx) {
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    label: 'School',
+                    data: schoolData,
+                    backgroundColor: "rgb(0, 123, 255)",
+                    borderColor: "rgb(0, 123, 255)"
+                },
+                {
+                    label: 'National',
+                    data: nationalData,
+                    backgroundColor: 'rgb(206,212,218)',
+                    borderColor: 'rgb(206,212,218)'
+                }],
+                labels: ["All","Disadvantaged","Non Disadvantaged"]
+            },
+
+        });
+
+    }
+</script>
