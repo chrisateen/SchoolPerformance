@@ -6,550 +6,585 @@
 }
 
 <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
 
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
+            <h1 class="m-0 text-dark">@Model.ResultSchool.SCHNAME</h1>
 
-                <h1 class="m-0 text-dark">@Model.ResultSchool.SCHNAME</h1>
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card col-12">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    <th>Context</th>
+                                    <th>School</th>
+                                    <th>National</th>
+                                    <th>Difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Percentage disadvantaged at the end of KS4 -->
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.ResultSchool.PTFSM6CLA1A)
+                                    </td>
+                                    @{
+                                        if (Model.ResultSchool.PTFSM6CLA1A == null)
+                                        {
+                                            <!-- Render if no data is available -->
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
+                                            </td>
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <!--/. render if no data is available -->
+                                        }
+                                        else
+                                        {
+                                            <!-- Calculate if school is above or below average -->
+                                            var dif = Math.Round((decimal)Model.ResultSchool.PTFSM6CLA1A - (decimal)Model.ResultNational.PTFSM6CLA1A, 2);
 
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <!-- Row with contextual data table -->
-                <div class="row">
-                    <div class="card col-12">
-                        <div class="card-body table-responsive p-0">
-                            <!--Contextual table-->
-                            <table class="table table-striped table-valign-middle">
-                                <thead>
-                                    <tr>
-                                        <th>Context</th>
-                                        <th>School</th>
-                                        <th>National</th>
-                                        <th>Difference</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Percentage disadvantaged at the end of KS4 -->
-                                    <tr>
-                                        <td>
-                                            @Html.LabelFor(m => m.ResultSchool.PTFSM6CLA1A)
-                                        </td>
-                                        @{
-                                            if (Model.ResultSchool.PTFSM6CLA1A == null)
+                                            if (dif > 0)
                                             {
-                                                <!-- Render if no data is available -->
+                                                <!-- Render if school is above average -->
+                                                var difPercent = $"{Math.Round(dif * 100)}%";
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        @Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)
+                                                    </span>
+
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
                                                 </td>
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                        @difPercent Above Average
+                                                    </span>
+
                                                 </td>
-                                                <!--/. render if no data is available -->
+                                                <!--/. render if is school above average -->
+
+                                            }
+                                            else if (dif == 0)
+                                            {
+                                                <!-- Render if school is in line with average -->
+                                                <td>
+                                                    <span>@Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)</span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        In line with Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is in line with average -->
                                             }
                                             else
                                             {
-                                                <!-- Calculate if school is above or below average -->
-                                                var dif = Math.Round((decimal)Model.ResultSchool.PTFSM6CLA1A - (decimal)Model.ResultNational.PTFSM6CLA1A, 2);
-
-                                                if (dif > 0)
-                                                {
-                                                    <!-- Render if school is above average -->
-                                                    var difPercent = $"{Math.Round(dif * 100)}%";
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            @Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)
-                                                        </span>
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            @difPercent Above Average
-                                                        </span>
-
-                                                    </td>
-                                                    <!--/. render if is school above average -->
-
-                                                }
-                                                else if (dif == 0)
-                                                {
-                                                    <!-- Render if school is in line with average -->
-                                                    <td>
-                                                        <span>@Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)</span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            In line with Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is in line with average -->
-                                                }
-                                                else
-                                                {
-                                                    <!-- Render if school is below average -->
-                                                    var difPercent = $"{Math.Round(dif * -100)}%";
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            @Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-arrow-down"></i>
-                                                            @difPercent Below Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is below average -->
-                                                }
-
+                                                <!-- Render if school is below average -->
+                                                var difPercent = $"{Math.Round(dif * -100)}%";
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        @Html.DisplayFor(m => m.ResultSchool.PTFSM6CLA1A)
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ResultNational.PTFSM6CLA1A)
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                        @difPercent Below Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is below average -->
                                             }
+
+                                        }
+                                    }
+
+                                </tr>
+                                <!-- /.percentage disadvantaged at the end of KS4 -->
+                                <!-- Percentage FSM6 -->
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.ContextualSchool.PNUMFSMEVER)
+                                    </td>
+                                    @{
+                                        if (Model.ContextualSchool.PNUMFSMEVER == null)
+                                        {
+                                            <!-- Render if no data is available -->
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
+                                            </td>
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <!--/. render if no data is available -->
                                         }
 
-                                    </tr>
-                                    <!-- /.percentage disadvantaged at the end of KS4 -->
-                                    <!-- Percentage FSM6 -->
-                                    <tr>
-                                        <td>
-                                            @Html.LabelFor(m => m.ContextualSchool.PNUMFSMEVER)
-                                        </td>
-                                        @{
-                                            if (Model.ContextualSchool.PNUMFSMEVER == null)
+                                        else
+                                        {
+                                            var dif = Math.Round((decimal)Model.ContextualSchool.PNUMFSMEVER - (decimal)Model.ContextualNational.PNUMFSMEVER);
+
+                                            if (dif > 0)
                                             {
-                                                <!-- Render if no data is available -->
+                                                <!-- Render if school is above average -->
+                                                var difPercent = dif + "%";
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)
+                                                    </span>
+
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
                                                 </td>
                                                 <td>
-                                                    <span>N/A</span>
-                                                </td>
-                                                <!--/. render if no data is available -->
-                                            }
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                        @difPercent Above Average
+                                                    </span>
 
+                                                </td>
+                                                <!--/. render if school is above average -->
+                                            }
+                                            else if (dif == 0)
+                                            {
+                                                <!-- Render if school is in line with average -->
+                                                <td>
+                                                    <span>@Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)</span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        In line with Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is in line with average -->
+                                            }
                                             else
                                             {
-                                                var dif = Math.Round((decimal)Model.ContextualSchool.PNUMFSMEVER - (decimal)Model.ContextualNational.PNUMFSMEVER);
-
-                                                if (dif > 0)
-                                                {
-                                                    <!-- Render if school is above average -->
-                                                    var difPercent = dif + "%";
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)
-                                                        </span>
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            @difPercent Above Average
-                                                        </span>
-
-                                                    </td>
-                                                    <!--/. render if school is above average -->
-                                                }
-                                                else if (dif == 0)
-                                                {
-                                                    <!-- Render if school is in line with average -->
-                                                    <td>
-                                                        <span>@Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)</span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            In line with Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is in line with average -->
-                                                }
-                                                else
-                                                {
-                                                    <!-- Render if school is below average -->
-                                                    var difPercent = $"{dif * -1}%";
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-arrow-down"></i>
-                                                            @difPercent Below Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is below average -->
-                                                }
+                                                <!-- Render if school is below average -->
+                                                var difPercent = $"{dif * -1}%";
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PNUMFSMEVER)
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PNUMFSMEVER)
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                        @difPercent Below Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is below average -->
                                             }
                                         }
+                                    }
 
-                                    </tr>
-                                    <!-- /.percentage FSM6 -->
-                                    <!-- Percentage SEN support -->
-                                    <tr>
-                                        <td>
-                                            @Html.LabelFor(m => m.ContextualSchool.PSENELK)
-                                        </td>
-                                        @{
-                                            if (Model.ContextualSchool.PSENELK == null)
+                                </tr>
+                                <!-- /.percentage FSM6 -->
+                                <!-- Percentage SEN support -->
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.ContextualSchool.PSENELK)
+                                    </td>
+                                    @{
+                                        if (Model.ContextualSchool.PSENELK == null)
+                                        {
+                                            <!-- Render if no data is available -->
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => m.ContextualNational.PSENELK)
+                                            </td>
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <!--/. render if no data is available -->
+                                        }
+
+                                        else
+                                        {
+                                            var dif = Math.Round((decimal)Model.ContextualSchool.PSENELK - (decimal)Model.ContextualNational.PSENELK);
+
+                                            if (dif > 0)
                                             {
-                                                <!-- Render if no data is available -->
+                                                <!-- Render if school is above average -->
+                                                var difPercent = dif + "%";
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PSENELK)
+                                                    </span>
+
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(m => m.ContextualNational.PSENELK)
                                                 </td>
                                                 <td>
-                                                    <span>N/A</span>
-                                                </td>
-                                                <!--/. render if no data is available -->
-                                            }
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                        @difPercent Above Average
+                                                    </span>
 
+                                                </td>
+                                                <!--/. render if school is above average -->
+                                            }
+                                            else if (dif == 0)
+                                            {
+                                                <!-- Render if school is in line with average -->
+                                                <td>
+                                                    <span>@Html.DisplayFor(m => m.ContextualSchool.PSENELK)</span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PSENELK)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        In line with Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is in line with average -->
+                                            }
                                             else
                                             {
-                                                var dif = Math.Round((decimal)Model.ContextualSchool.PSENELK - (decimal)Model.ContextualNational.PSENELK);
-
-                                                if (dif > 0)
-                                                {
-                                                    <!-- Render if school is above average -->
-                                                    var difPercent = dif + "%";
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PSENELK)
-                                                        </span>
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELK)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            @difPercent Above Average
-                                                        </span>
-
-                                                    </td>
-                                                    <!--/. render if school is above average -->
-                                                }
-                                                else if (dif == 0)
-                                                {
-                                                    <!-- Render if school is in line with average -->
-                                                    <td>
-                                                        <span>@Html.DisplayFor(m => m.ContextualSchool.PSENELK)</span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELK)
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            In line with Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is in line with average -->
-                                                }
-                                                else
-                                                {
-                                                    <!--/ Render if school is below average -->
-                                                    var difPercent = $"{dif * -1}%";
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PSENELK)
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELK)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-arrow-down"></i>
-                                                            @difPercent Below Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is below average -->
-                                                }
-
-                                            }
-                                        }
-                                    </tr>
-                                    <!-- /.percentage SEN support -->
-                                    <!-- Percentage SEN EHC plan -->
-                                    <tr>
-                                        <td>
-                                            @Html.LabelFor(m => m.ContextualSchool.PSENELSE)
-                                        </td>
-
-                                        @{
-                                            <!-- Render if no data is available -->
-                                            if (Model.ContextualSchool.PSENELSE == null)
-                                            {
+                                                <!--/ Render if school is below average -->
+                                                var difPercent = $"{dif * -1}%";
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-secondary">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PSENELK)
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PSENELK)
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                        @difPercent Below Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is below average -->
+                                            }
+
+                                        }
+                                    }
+                                </tr>
+                                <!-- /.percentage SEN support -->
+                                <!-- Percentage SEN EHC plan -->
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.ContextualSchool.PSENELSE)
+                                    </td>
+
+                                    @{
+                                        <!-- Render if no data is available -->
+                                        if (Model.ContextualSchool.PSENELSE == null)
+                                        {
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
+                                            </td>
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <!--/. render if no data is available -->
+                                        }
+
+                                        else
+                                        {
+                                            var dif = Math.Round((decimal)Model.ContextualSchool.PSENELSE - (decimal)Model.ContextualNational.PSENELSE);
+
+                                            if (dif > 0)
+                                            {
+                                                <!-- Render if school is above average -->
+                                                var difPercent = dif + "%";
+                                                <td>
+                                                    <span class="badge badge-success">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PSENELSE)
+                                                    </span>
+
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
                                                 </td>
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                        @difPercent Above Average
+                                                    </span>
+
                                                 </td>
-                                                <!--/. render if no data is available -->
+                                                <!--/. render if school is above average -->
                                             }
 
+
+                                            else if (dif == 0)
+                                            {
+                                                <!-- Render if school is in line with average -->
+                                                <td>
+                                                    <span>@Html.DisplayFor(m => m.ContextualSchool.PSENELSE)</span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        In line with Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is in line with average -->
+                                            }
                                             else
                                             {
-                                                var dif = Math.Round((decimal)Model.ContextualSchool.PSENELSE - (decimal)Model.ContextualNational.PSENELSE);
-
-                                                if (dif > 0)
-                                                {
-                                                    <!-- Render if school is above average -->
-                                                    var difPercent = dif + "%";
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PSENELSE)
-                                                        </span>
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            @difPercent Above Average
-                                                        </span>
-
-                                                    </td>
-                                                    <!--/. render if school is above average -->
-                                                }
-
-
-                                                else if (dif == 0)
-                                                {
-                                                    <!-- Render if school is in line with average -->
-                                                    <td>
-                                                        <span>@Html.DisplayFor(m => m.ContextualSchool.PSENELSE)</span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            In line with Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is in line with average -->
-                                                }
-                                                else
-                                                {
-                                                    <!-- Render if school is below average -->
-                                                    var difPercent = $"{dif * -1}%";
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PSENELSE)
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-arrow-down"></i>
-                                                            @difPercent Below Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is below average -->
-                                                }
-
+                                                <!-- Render if school is below average -->
+                                                var difPercent = $"{dif * -1}%";
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PSENELSE)
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PSENELSE)
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                        @difPercent Below Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is below average -->
                                             }
-
 
                                         }
 
-                                    </tr>
-                                    <!-- /.percentage SEN EHC plan -->
-                                    <!-- Percentage EAL -->
-                                    <tr>
-                                        <td>
-                                            @Html.LabelFor(m => m.ContextualSchool.PNUMEAL)
-                                        </td>
-                                        @{
-                                            if (Model.ContextualSchool.PNUMEAL == null)
+
+                                    }
+
+                                </tr>
+                                <!-- /.percentage SEN EHC plan -->
+                                <!-- Percentage EAL -->
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(m => m.ContextualSchool.PNUMEAL)
+                                    </td>
+                                    @{
+                                        if (Model.ContextualSchool.PNUMEAL == null)
+                                        {
+                                            <!-- Render if no data is available -->
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
+                                            </td>
+                                            <td>
+                                                <span>N/A</span>
+                                            </td>
+                                            <!--/. render if no data is available -->
+                                        }
+                                        else
+                                        {
+                                            var dif = Math.Round((decimal)Model.ContextualSchool.PNUMEAL - (decimal)Model.ContextualNational.PNUMEAL);
+                                            if (dif > 0)
                                             {
-                                                <!-- Render if no data is available -->
+                                                <!-- Render if school is above average -->
+                                                var difPercent = dif + "%";
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)
+                                                    </span>
+
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
                                                 </td>
                                                 <td>
-                                                    <span>N/A</span>
+                                                    <span class="badge badge-success">
+                                                        <i class="fas fa-arrow-up"></i>
+                                                        @difPercent Above Average
+                                                    </span>
+
                                                 </td>
-                                                <!--/. render if no data is available -->
+                                                <!--/. render if school is above average -->
+                                            }
+                                            else if (dif == 0)
+                                            {
+                                                <!-- Render if school is in line with average -->
+                                                <td>
+                                                    <span>@Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)</span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        In line with Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is in line with average -->
                                             }
                                             else
                                             {
-                                                var dif = Math.Round((decimal)Model.ContextualSchool.PNUMEAL - (decimal)Model.ContextualNational.PNUMEAL);
-                                                if (dif > 0)
-                                                {
-                                                    <!-- Render if school is above average -->
-                                                    var difPercent = dif + "%";
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)
-                                                        </span>
-
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-success">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            @difPercent Above Average
-                                                        </span>
-
-                                                    </td>
-                                                    <!--/. render if school is above average -->
-                                                }
-                                                else if (dif == 0)
-                                                {
-                                                    <!-- Render if school is in line with average -->
-                                                    <td>
-                                                        <span>@Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)</span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            In line with Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is in line with average -->
-                                                }
-                                                else
-                                                {
-                                                    <!-- Render if school is below average -->
-                                                    var difPercent = $"{dif * -1}%";
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            @Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-arrow-down"></i>
-                                                            @difPercent Below Average
-                                                        </span>
-                                                    </td>
-                                                    <!--/. render if school is below average -->
-                                                }
-
+                                                <!-- Render if school is below average -->
+                                                var difPercent = $"{dif * -1}%";
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        @Html.DisplayFor(m => m.ContextualSchool.PNUMEAL)
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m.ContextualNational.PNUMEAL)
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-secondary">
+                                                        <i class="fas fa-arrow-down"></i>
+                                                        @difPercent Below Average
+                                                    </span>
+                                                </td>
+                                                <!--/. render if school is below average -->
                                             }
+
                                         }
+                                    }
 
-                                    </tr>
-                                    <!-- /.percentage EAL -->
-                                </tbody>
-
-                            </table>
-                            <!-- /.contextual table -->
-                        </div>
+                                </tr>
+                                <!-- /.percentage EAL -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <!--/.row with contextual data table -->
-                <!--Row with Attainment and Progress 8 charts -->
-                <div class="row">
-                    <!--Progress 8 chart -->
-                    <div class="col-12 col-sm-6">
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Progress 8</h3>
-                            </div>
-                                <div class="card-body">
-                                    <canvas id="Progress8" class="charts"></canvas>
-                                </div>
+            </div>
+
+            <!--Row with Attainment and Progress 8 charts -->
+            <div class="row">
+                <!-- Progress 8 chart -->
+                <div class="col-12 col-sm-6">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Progress 8</h3>
                         </div>
-                    </div>
-                    <!--/. progress 8 chart -->
-                    <!--Attainment 8 chart -->
-                    <div class="col-12 col-sm-6">
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Attainment 8</h3>
+                        @if (Model.ResultSchool.P8MEA == null)
+                        {
+                            <div class="card-body">
+                                <p>This school has no Progress 8 result</p>
                             </div>
-                                <div class="card-body">
-                                    <canvas id="Attainment8" class="charts"></canvas>
-                                </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="card-body">
+                                <canvas id="Progress8" class="charts"></canvas>
+                            </div>
+                        }
                     </div>
-                    <!--/. attainment 8 chart -->
                 </div>
-                <!--/. row with attainment and progress 8 charts -->
-                <!--Row with English and Maths charts -->
-                <div class="row">
-                    <!--4 to 9 English and Maths chart -->
-                    <div class="col-12 col-sm-6">
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">9 to 4 English and Maths</h3>
+                <!--/. progress 8 chart -->
+                <!--/. Attainment 8 chart -->
+                <div class="col-12 col-sm-6">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Attainment 8</h3>
+                        </div>
+                        @if (Model.ResultSchool.ATT8SCR == null)
+                        {
+                            <div class="card-body">
+                                <p>This school has no Attainment 8 result</p>
                             </div>
+                        }
+                        else
+                        {
+                            <div class="card-body">
+                                <canvas id="Attainment8" class="charts"></canvas>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!--/. attainment 8 chart -->
+            </div>
+            <!--/. row with attainment and progress 8 charts -->
+            <!--Row with English and Maths charts -->
+            <div class="row">
+                <!--9 to 4 English and Maths chart -->
+                <div class="col-12 col-sm-6">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">9 to 4 English and Maths</h3>
+                        </div>
+                        @if (Model.ResultSchool.PTL2BASICS_94 == null)
+                        {
+                            <div class="card-body">
+                                <p>This school has no 9 to 4 English and Maths result</p>
+                            </div>
+
+                        }
+                        else
+                        {
                             <div class="card-body">
                                 <canvas id="Above4" class="charts"></canvas>
                             </div>
-                        </div>
+                        }
                     </div>
-                    <!--/. 4 to 9 English and Maths chart -->
-                    <!--5 to 9 English and Maths chart -->
-                    <div class="col-12 col-sm-6">
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">9 to 5 English and Maths</h3>
+                </div>
+                <!--/. 9 to 4 english and maths chart -->
+                <!--/. 9 to 5 english and maths chart -->
+                <div class="col-12 col-sm-6">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">9 to 5 English and Maths</h3>
+                        </div>
+                        @if (Model.ResultSchool.PTL2BASICS_95 == null)
+                        {
+                            <div class="card-body">
+                                <p>This school has no 9 to 5 English and Maths result</p>
                             </div>
+
+                        }
+                        else
+                        {
                             <div class="card-body">
                                 <canvas id="Above5" class="charts"></canvas>
                             </div>
-                        </div>
+                        }
                     </div>
-                    <!--/. 5 to 9 English and Maths chart -->
                 </div>
-                <!--/. row with english and maths charts -->
+                <!--/. 9 to 5 english and maths chart -->
             </div>
-            <!-- /. main content -->
-        </div>
+            <!--/. row with English and Maths charts -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
 <script>
     var schoolres = @Json.Serialize(Model.ResultSchool);
@@ -558,7 +593,7 @@
 
 /*
  * Get the index to use to retrive data for the Charts
-*/ 
+*/
     function getDataIndex(index) {
 
         var dataIndex = {
@@ -572,8 +607,8 @@
     }
 
     /*
- * Get all the chart elements on the page and generate the charts 
-*/ 
+ * Get all the chart elements on the page and generate the charts
+*/
     var ctxLst = document.getElementsByClassName('charts');
 
     if (ctxLst.length > 0) {
@@ -594,7 +629,9 @@
             }
     }
 
-    
+        /*
+ * Create the chart
+*/
     function getChart(schoolData,nationalData,ctx) {
 
         new Chart(ctx, {
