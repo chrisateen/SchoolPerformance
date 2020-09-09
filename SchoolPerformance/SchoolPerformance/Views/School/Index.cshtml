@@ -606,6 +606,50 @@
         return dataIndex[index];
     }
 
+/*
+ * Function to convert decimal to percentage
+*/ 
+    function convertToPercent(index, val) {
+
+        if (index == "Above4" || index == "Above5") {
+
+            return Math.round(val * 100) + "%";
+
+        }
+
+        return val;
+        
+    }
+    /*
+ * Create the data and labels to be used for the chart
+ * any null result is ignored
+*/
+    function dataForChart(schoolData, nationalData) {
+
+        var possibleLables = ['All', 'Disadvantaged', 'Non Disadvantaged'];
+
+        //Data to be used for the chart
+        res = {
+            school:[],
+            national: [],
+            labels: []
+        }
+
+        //Loop thorugh the data and null result should be ignored
+        for (var i = 0; i < schoolData.length; i++) {
+
+            if (schoolData[i] != null) {
+
+                res["school"].push(schoolData[i]);
+                res["national"].push(nationalData[i]);
+                res["labels"].push(possibleLables[i]);
+            }
+
+        }
+
+        return res;
+    }
+
     /*
  * Get all the chart elements on the page and generate the charts
 */
@@ -625,32 +669,49 @@
 
                 var nationalData = [nationalres[index[0]], nationalres[index[1]], nationalres[index[2]]];
 
-                getChart(schoolData,nationalData,ctx);
+                var chartData = dataForChart(schoolData,nationalData)
+
+                getChart(dataId,chartData,ctx);
             }
     }
 
         /*
  * Create the chart
 */
-    function getChart(schoolData,nationalData,ctx) {
+    function getChart(dataId,chartData,ctx) {
 
         new Chart(ctx, {
             type: 'bar',
             data: {
                 datasets: [{
                     label: 'School',
-                    data: schoolData,
+                    data: chartData['school'],
                     backgroundColor: "rgb(0, 123, 255)",
                     borderColor: "rgb(0, 123, 255)"
                 },
                 {
                     label: 'National',
-                    data: nationalData,
+                    data: chartData['national'],
                     backgroundColor: 'rgb(206,212,218)',
                     borderColor: 'rgb(206,212,218)'
-                }],
-                labels: ["All","Disadvantaged","Non Disadvantaged"]
+                    }],
+                labels: chartData['lables']
             },
+            options: {
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                return convertToPercent(dataId, value);
+                            }
+                        }
+                    }]
+                }
+            }
+
 
         });
 
