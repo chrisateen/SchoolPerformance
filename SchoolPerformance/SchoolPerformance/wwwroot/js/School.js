@@ -74,6 +74,9 @@ function setMaxYValue(dataId) {
     }
 }
 
+/*
+ * Function that creates an individual chart
+*/
 function getChart(dataId, chartData, ctx) {
 
     new Chart(ctx, {
@@ -139,6 +142,42 @@ function getChart(dataId, chartData, ctx) {
             }
         }]
     });
+
+}
+
+/*
+ * Function that generates all the charts in a view
+*/
+function generateCharts(schoolData, nationalData) {
+
+    //Get all the chart elements
+    var ctxLst = document.getElementsByClassName('charts');
+
+    if (ctxLst.length > 0) {
+
+        for (var i = 0; i < ctxLst.length; i++) {
+
+            ctx = ctxLst[i].getContext('2d');
+
+            //Get the id name of each of the chart elements
+            var dataId = ctxLst[i].id;
+
+            //Get the index in order to retrieve the list of data
+            //required for a specific chart
+            var index = getDataIndex(dataId);
+
+            //Get the school and national data need for a specific chart
+            var schoolChartData = [schoolData[index[0]], schoolData[index[1]], schoolData[index[2]]];
+
+            var nationalChartData = [nationalData[index[0]], nationalData[index[1]], nationalData[index[2]]];
+
+            //Remove any null result 
+            var chartData = dataForChart(schoolChartData, nationalChartData);
+
+            //Generate the charts
+            getChart(dataId, chartData, ctx);
+        }
+    }
 
 }
 

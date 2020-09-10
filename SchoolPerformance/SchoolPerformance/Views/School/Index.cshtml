@@ -589,33 +589,12 @@
 <script src="~/js/School.js"></script>
 
 <script>
-    var schoolres = @Json.Serialize(Model.ResultSchool);
-    var nationalres = @Json.Serialize(Model.ResultNational);
+    var schoolData = @Json.Serialize(Model.ResultSchool);
+    var nationalData = @Json.Serialize(Model.ResultNational);
 
-    /*
- * Get all the chart elements on the page and generate the charts 
-*/ 
-    var ctxLst = document.getElementsByClassName('charts');
+    generateCharts(schoolData, nationalData);
 
-    if (ctxLst.length > 0) {
-
-            for (var i = 0; i < ctxLst.length; i++) {
-
-                ctx = ctxLst[i].getContext('2d');
-
-                var dataId = ctxLst[i].id;
-
-                var index = getDataIndex(dataId);
-
-                var schoolData = [schoolres[index[0]], schoolres[index[1]], schoolres[index[2]]];
-
-                var nationalData = [nationalres[index[0]], nationalres[index[1]], nationalres[index[2]]];
-
-                var chartData = dataForChart(schoolData, nationalData);
-
-                getChart(dataId,chartData,ctx);
-            }
-    }
+    
 
 
 </script>
