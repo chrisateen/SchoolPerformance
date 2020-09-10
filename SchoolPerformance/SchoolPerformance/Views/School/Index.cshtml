@@ -650,6 +650,21 @@
         return res;
     }
 
+        /*
+ * Function that returns a suggested min and max Y axis value
+ * depending on the chart being rendered
+*/
+    function setMaxYValue(dataId) {
+
+        if (dataId == "Above5" || dataId == "Above4") {
+            return 1;
+        } else if (dataId == "Attainment8") {
+            return 90;
+        } else {
+            return 0.5;
+        }
+    }
+
     /*
  * Get all the chart elements on the page and generate the charts
 */
@@ -704,6 +719,8 @@
                             display: true
                         },
                         ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: setMaxYValue(dataId),
                             callback: function (value) {
                                 return convertToPercent(dataId, value);
                             }
