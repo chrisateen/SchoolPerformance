@@ -719,6 +719,16 @@
                             return label + " " + convertToPercent(dataId, tooltipItem.yLabel);
                         }
                     }
+                },
+                plugins: {
+                    datalabels: {
+                        color: 'rgb(0,0,0)',
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function (value) {
+                            return convertToPercent(dataId, value);
+                        }
+                    }
                 }
             }
 
