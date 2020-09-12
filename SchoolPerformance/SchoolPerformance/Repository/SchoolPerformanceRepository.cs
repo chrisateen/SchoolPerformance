@@ -63,12 +63,12 @@ namespace SchoolPerformance.Repository
             return await result.ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        public async Task<IEnumerable<T>> GetAll(params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
 
-            //Include an orderBy query if there is an order by condition
-            query = AddOrderQuery(query, orderBy);
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
 
             //Remove national data
             var result = National(query, false);
@@ -77,15 +77,16 @@ namespace SchoolPerformance.Repository
         }
 
         public async Task<IEnumerable<T>> Get(
-            Expression<Func<T, bool>> filter = null, 
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+            Expression<Func<T, bool>> filter = null,
+            params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
 
-            //Include filter and order by condition in the query
+            //Include filter condition in the query
             query = AddFilterQuery(query, filter);
 
-            query = AddOrderQuery(query, orderBy);
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
 
             //Remove national data
             var result = National(query, false);
@@ -124,6 +125,57 @@ namespace SchoolPerformance.Repository
             query = AddFilterQuery(query, filter);
 
             query = AddOrderQuery(query, orderBy);
+
+            //Get national data only
+            var result = National(query, true);
+
+            return await result.ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetNational(
+            Expression<Func<T, bool>> filter = null,
+            params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
+
+            //Include filter condition in the query
+            query = AddFilterQuery(query, filter);
+
+            //Get national data only
+            var result = National(query, true);
+
+            return await result.ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetNational(
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
+
+            //Include order by condition in the query
+            query = AddOrderQuery(query, orderBy);
+
+            //Get national data only
+            var result = National(query, true);
+
+            return await result.ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<T>> GetNational(
+            params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet;
+
+            //Include/merge other DbSets into our query
+            query = AddDbSets(query, includes);
 
             //Get national data only
             var result = National(query, true);
@@ -213,6 +265,5 @@ namespace SchoolPerformance.Repository
             return data.Provider.CreateQuery<T>(callExpression);
 
         }
-
     }
 }

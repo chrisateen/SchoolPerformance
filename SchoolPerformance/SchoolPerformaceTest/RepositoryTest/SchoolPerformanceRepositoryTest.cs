@@ -77,7 +77,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         {
 
             //Act
-            var schoolLst = await _repositorySchool.GetAll(null, x => x.SchoolResults);
+            var schoolLst = await _repositorySchool.GetAll(x => x.SchoolResults);
 
             //Count number of results for all schools in test database 
             //to see if school results objects was included
@@ -87,7 +87,7 @@ namespace SchoolPerformaceTest.RepositoryTest
             Assert.AreEqual(_schoolResults.Where(s => s.URN != 9).Count(), resultCount);
 
             //Act
-            schoolLst = await _repositorySchool.Get(null, null, x => x.SchoolResults);
+            schoolLst = await _repositorySchool.Get(null, x => x.SchoolResults);
             resultCount = schoolLst.SelectMany(s => s.SchoolResults.Select(x => x.URN)).Count();
 
             //Assert
@@ -221,7 +221,7 @@ namespace SchoolPerformaceTest.RepositoryTest
         public async Task GetNationalDataWithMultipleDbsetIncluded()
         {
             //Act
-            var national = await _repositorySchool.GetNational(null, null, x => x.SchoolResults);
+            var national = await _repositorySchool.GetNational(x => x.SchoolResults);
 
             //Count number of results for national in the test database 
             //to see if school results objects was included
