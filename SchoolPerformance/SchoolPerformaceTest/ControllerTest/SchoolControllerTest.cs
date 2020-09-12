@@ -49,6 +49,7 @@ namespace SchoolPerformaceTest.ControllerTest
         {
             //Mock SchoolPerformanceRepository
             _mockSchoolResult = new Mock<ISchoolPerformanceRepository<SchoolResult>>();
+            _mockSchoolContextual = new Mock<ISchoolPerformanceRepository<SchoolContextual>>();
 
             //Mock data
             var results = MockData.GetSchoolResultList(true);
