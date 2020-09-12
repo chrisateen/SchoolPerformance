@@ -261,14 +261,105 @@ namespace SchoolPerformaceTest.RepositoryTest
 
         }
 
+        //Tests GetByUrnOrLAESATB method gets a school by it's URN
+        public async Task GetByUrnOrLAESATBGetsSchoolByURN()
+        {
+            //Act
+
+            //Gets the first School object
+            //where URN or LAESATB == 2
+            var schoolLst = await _repositorySchoolResult.GetByUrnOrLAESATB(2);
+
+            var schoolURN = schoolLst.First().URN;
+
+            //Assert
+            Assert.AreEqual(
+                _schools.Where(x => x.URN == 2).First().URN,
+                schoolURN);
+        }
+
+        //Tests GetByUrnOrLAESATB method gets a list of results for a school by it's URN
+        public async Task GetByUrnOrLAESATBGetsSchoolResultByURN()
+        {
+            //Act
+
+            //Gets all results where URN or LAESATB == 2
+            var schoolResults = await _repositorySchoolResult.GetByUrnOrLAESATB(2, x => x.School);
+
+            //Assert
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.URN == 2).Count(),
+                schoolResults.Count());
+
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.URN == 2).First().URN,
+                schoolResults.First().URN);
+        }
+
+        //Tests GetByUrnOrLAESATB method gets a school by it's LAESTAB number
+        public async Task GetByUrnOrLAESATBGetsSchoolByLAESTAB()
+        {
+            //Act
+
+            //Gets the first School object
+            //where URN or LAESATB == 1022000
+            var schoolLst = await _repositorySchool.GetByUrnOrLAESATB(1022000);
+
+            var schoolURN = schoolLst.First().URN;
+
+            //Assert
+            Assert.AreEqual(
+                _schools.Where(x => x.LA == 102 && x.ESTAB == 2000).First().URN,
+                schoolURN);
+        }
+
+        //Tests GetByUrnOrLAESATB method gets a school result by a school's LAESTAB number
+        public async Task GetByUrnOrLAESATBGetsSchoolResultByLAESTAB()
+        {
+            //Act
+
+            //Gets the first School object
+            //where URN or LAESATB == 1022000
+            var schoolResults = await _repositorySchoolResult.GetByUrnOrLAESATB(1022000);
+
+
+            //Assert
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.School.LA == 102 && x.School.ESTAB == 2000).Count(),
+                schoolResults.Count());
+
+            Assert.AreEqual(
+                _schoolResults.Where(x => x.School.LA == 102 && x.School.ESTAB == 2000).First().URN,
+                schoolResults.First().URN);
+        }
+
+        //Tests GetByUrnOrLAESATB method returns null if the URN or LAESTAB cannot be found
+        public async Task GetByUrnOrLAESATBReturnsNullWhenIdDoesNotExist()
+        {
+            //Act
+
+            //Gets any school object where URN == 500
+            var schoolLst = await _repositorySchool.GetByUrnOrLAESATB(500);
+
+            //Assert
+            Assert.AreEqual(0,schoolLst.Count());
+
+            //Gets any school object where LEAESTAB == 5001111
+            schoolLst = await _repositorySchool.GetByUrnOrLAESATB(5001111);
+
+            //Assert
+            Assert.AreEqual(0, schoolLst.Count());
+        }
+
+
         //Create mock data
         [Ignore]
         public void SetData()
         {
             _schools = new List<School>
             {
-                new School { URN = 2, SCHNAME = "Test 1" },
-                new School { URN = 1, SCHNAME = "Test 2" },
+                new School { URN = 2, LA = 102, ESTAB = 2000 ,SCHNAME = "Test 1" },
+                new School { URN = 1, LA = 101, ESTAB = 1000, SCHNAME = "Test 2" },
                 new School { URN = 9, SCHNAME = ""}
             };
 
