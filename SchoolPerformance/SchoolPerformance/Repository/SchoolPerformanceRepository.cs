@@ -277,14 +277,8 @@ namespace SchoolPerformance.Repository
 
             //Distinguish between LAESTAB and URN
             //as LAESTAB is 7 digits 
-            if (id.ToString().Length == 7)
-            {
-                query = LAESTABxpression(query, id);
-            }
-            else
-            {
-                query = URNExpression(query, id);
-            }
+            query = id.ToString().Length == 7 ? LAESTABxpression(query, id) : URNExpression(query, id);
+            
             //Include/merge other DbSets into our query
             query = AddDbSets(query, includes);
 
@@ -306,14 +300,8 @@ namespace SchoolPerformance.Repository
 
             //Distinguish between LAESTAB and URN
             //as LAESTAB is 7 digits 
-            if (id.ToString().Length == 7)
-            {
-                query = LAESTABxpression(query, id);
-            }
-            else
-            {
-                query = URNExpression(query, id);
-            }
+            query = id.ToString().Length == 7 ? LAESTABxpression(query, id) : URNExpression(query, id);
+
             //Include/merge other DbSets into our query
             query = AddDbSets(query, includes);
 
@@ -332,14 +320,8 @@ namespace SchoolPerformance.Repository
 
             //Distinguish between LAESTAB and URN
             //as LAESTAB is 7 digits 
-            if (id.ToString().Length == 7)
-            {
-                query = LAESTABxpression(query, id);
-            }
-            else
-            {
-                query = URNExpression(query, id);
-            }
+            query = id.ToString().Length == 7 ? LAESTABxpression(query, id) : URNExpression(query, id);
+
             //Include/merge other DbSets into our query
             query = AddDbSets(query, includes);
 
