@@ -10,7 +10,42 @@
 
             <div class="container-fluid">
 
-                <h1>SchoolNotFound</h1>
+                <div class="content-header">
+
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>School cannot be found</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="error-page">
+                    
+                    <div>
+                        <h3><i class="fas fa-exclamation-triangle text-danger"></i> Oops! Page not found.</h3>
+                        <p>
+                            We could not find the school you were looking for.
+                            You may want to  
+                            <a asp-controller="Home" asp-action="Index">return to the homepage</a> 
+                            or try searching for a school using the search box below.
+                        </p>
+
+                        <form class="search-form">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" name="submit" class="btn btn-danger">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.input-group -->
+                        </form>
+                    </div>
+                    <!-- /.error-content -->
+                </div>
+
             </div>
         </div>
     </div>
