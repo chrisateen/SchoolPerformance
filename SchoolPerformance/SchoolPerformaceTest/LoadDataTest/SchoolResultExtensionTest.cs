@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.LoadData;
 
-namespace SchoolPerformaceTest.LoadDataTest
+namespace SchoolPerformanceTest.LoadDataTest
 {
     [TestClass]
     public class SchoolResultExtensionTest

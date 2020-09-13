@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformanceTest
 {
     static class MockData
     {

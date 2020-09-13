@@ -6,6 +6,7 @@ using SchoolPerformance.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System.Threading.Tasks;
+using SchoolPerformanceTest;
 
 namespace SchoolPerformaceTest.RepositoryTest
 {

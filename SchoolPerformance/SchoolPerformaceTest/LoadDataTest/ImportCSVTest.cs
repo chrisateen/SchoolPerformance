@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SchoolPerformaceTest.LoadDataTest
+namespace SchoolPerformanceTest.LoadDataTest
 {
     [TestClass]
     public class ImportCSVTest

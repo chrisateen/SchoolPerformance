@@ -5,13 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
+using SchoolPerformanceTest;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace SchoolPerformaceTest.LoadDataTest
+namespace SchoolPerformanceTest.LoadDataTest
 {
     [TestClass]
     public class ModelBuilderExtensionTest

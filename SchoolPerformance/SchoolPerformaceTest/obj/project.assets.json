@@ -12094,9 +12094,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
-      "projectName": "SchoolPerformaceTest",
-      "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformaceTest.csproj",
+      "projectUniqueName": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformanceTest.csproj",
+      "projectName": "SchoolPerformanceTest",
+      "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\SchoolPerformanceTest.csproj",
       "packagesPath": "C:\\Users\\no_ot\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformaceTest\\obj\\",
       "projectStyle": "PackageReference",

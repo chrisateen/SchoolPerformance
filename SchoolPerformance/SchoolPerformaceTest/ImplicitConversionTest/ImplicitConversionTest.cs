@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SchoolPerformaceTest.ImplicitConversionTest
+namespace SchoolPerformanceTest.ImplicitConversionTest
 {
     [TestClass]
     public class ImplicitConversionTest
