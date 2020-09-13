@@ -20,13 +20,14 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <link href="~/jqueryui/jquery-ui.css" rel="stylesheet" />
     <!-- Link to required JS files-->
     <script src="~/jquery/jquery.js"></script>
     <script src="~/popper.js/umd/popper.js"></script>
     <script src="~/twitter-bootstrap/js/bootstrap.js"></script>
     <script src="~/admin-lte/js/adminlte.js"></script>
     <script src="~/Chart.js/Chart.js"></script>
+    <script src="~/jqueryui/jquery-ui.js"></script>
     
 
 </head>
@@ -59,7 +60,6 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
             <!--/.search school -->
         </nav>
         <!-- /.navbar -->
-
         <!-- Header Sidebar-->
         <aside class="main-sidebar sidebar-dark-light elevation-4">
 
@@ -107,7 +107,7 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                                 <!-- /.table option all pupils-->
                                 <!-- Table option disadvantaged pupils -->
                                 <li class="nav-item">
-                                    <a asp-controller="Tables" asp-action="Disadvantaged"  class="nav-link">
+                                    <a asp-controller="Tables" asp-action="Disadvantaged" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Results Disadvantaged</p>
                                     </a>
