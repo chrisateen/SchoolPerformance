@@ -183,5 +183,46 @@ namespace SchoolPerformanceTest.ImplicitConversionTest
             //Checks the list of SchoolResults gets converted to a list of ScatterplotViewModel
             Assert.AreEqual(results.Count, resultViewModel.Count);
         }
+
+        //Test conversion of an object
+        //from SchoolResult to AutocompleteViewModel
+        [TestMethod]
+        public void ResultModelToAutocompleteViewModel()
+        {
+            //Arrange
+            SchoolResult result = MockData.GetSchoolResult(true);
+
+            //Act
+            AutocompleteViewModel autoCompleteViewModel = result;
+
+            //Assert
+
+            //Checks the Schoolresult object gets converted to AutocompleteViewModel
+            Assert.IsNotNull(autoCompleteViewModel);
+
+            //Checks the School name in the school model is included
+            //when converting from SchoolResult to AutocompleteViewModel
+            Assert.AreEqual(result.School.SCHNAME, autoCompleteViewModel.SCHNAME);
+        }
+
+
+        //Test conversion of a list of objects
+        //from a list of SchoolResult to a list of AutocompleteViewModel
+        [TestMethod]
+        public void ListResultModelToAutocompleteViewModel()
+        {
+
+            //Arrange
+            List<SchoolResult> results = MockData.GetSchoolResultList(false);
+
+            //Act
+            List<AutocompleteViewModel> autoCompleteViewModel = results.ConvertToAutocompleteViewModel();
+
+            //Assert
+
+            //Checks the list of SchoolResults gets converted to a list of ScatterplotViewModel
+            Assert.AreEqual(results.Count, autoCompleteViewModel.Count);
+        }
+
     }
 }
