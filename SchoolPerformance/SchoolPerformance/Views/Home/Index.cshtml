@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="content-wrapper">
 
     <!-- Header -->
@@ -37,8 +36,6 @@
 
     </div>
     <!-- /.header -->
-
-
     <!-- Main content -->
     <div class="content">
 
@@ -78,9 +75,9 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">Search School by Unique Reference Number (URN)</p>
-                            <form action="#" method="post">
+                            <form asp-controller="School" asp-action="School" method="post">
                                 <div class="input-group">
-                                    <input type="search" placeholder="Search" class="form-control">
+                                    <input type="text" class="form-control" id="schoolSearch" autocomplete="off" name="id">
                                     <span class="input-group-append">
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fas fa-search"></i>
@@ -101,4 +98,8 @@
     <!-- /.content -->
 
 </div>
+
+
+
+
 
