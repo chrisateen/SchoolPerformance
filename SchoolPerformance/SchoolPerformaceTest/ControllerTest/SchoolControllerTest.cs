@@ -11,12 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolPerformaceTest.ControllerTest
+namespace SchoolPerformanceTest.ControllerTest
 {
-    class SchoolControllerTest
+    [TestClass]
+    public class SchoolControllerTest
     {
         Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
         Mock<ISchoolPerformanceRepository<SchoolContextual>> _mockSchoolContextual;
@@ -32,14 +34,34 @@ namespace SchoolPerformaceTest.ControllerTest
         //Checks School view is rendered
         //with an object of type SchoolViewModel
         [TestMethod]
-        public void IndexReturnsPageWithSchoolViewModel()
+        public async Task IndexReturnsPageWithSchoolViewModel()
         {
             // Act and Assert
-            var res = _controller.Index(1).Should()
+            var controller = await _controller.Index(1);
+
+            controller.Should()
+                .BeViewResult().WithDefaultViewName();
+
+            var res = controller.Should()
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
                 .BeAssignableTo<SchoolViewModel>().Subject;
+        }
+
+        //Checks error page is displayed if the user enters a school id 
+        //that does not exist
+        [TestMethod]
+        public async Task IndexReturnsPageErrorIfSchoolDoesNotExist()
+        {
+            // Act and Assert
+            var controller = await _controller.Index(3);
+
+            controller.Should()
+                .BeViewResult().WithViewName("SchoolNotFound");
+
+            var res = controller.Should()
+                .BeOfType<ViewResult>().Subject;
         }
 
         //Setup mock objects to be returned 
@@ -69,10 +91,17 @@ namespace SchoolPerformaceTest.ControllerTest
             //with national data only
             _mockSchoolResult.Setup(m => m.GetNational(
                 It.IsAny<Expression<Func<SchoolResult, bool>>>(),
-                It.IsAny<Func<IQueryable<SchoolResult>, IOrderedQueryable<SchoolResult>>>(),
                 It.IsAny<Expression<Func<SchoolResult, object>>[]>()
                 ))
                 .Returns(Task.FromResult<IEnumerable<SchoolResult>>(results.Where(r => r.URN == 9)));
+
+            //When the GetNational is called return contextuals 
+            //with national data only
+            _mockSchoolContextual.Setup(m => m.GetNational(
+                It.IsAny<Expression<Func<SchoolContextual, bool>>>(),
+                It.IsAny<Func<IQueryable<SchoolContextual>, IOrderedQueryable<SchoolContextual>>>()
+                ))
+                .Returns(Task.FromResult<IEnumerable<SchoolContextual>>(contextuals.Where(r => r.URN == 9)));
 
             //When the Get method is called return contextuals
             //excluding national data
@@ -83,15 +112,28 @@ namespace SchoolPerformaceTest.ControllerTest
                 ))
                 .Returns(Task.FromResult<IEnumerable<SchoolContextual>>(contextuals.Where(r => r.URN != 9)));
 
-
-            //When the GetNational is called return contextuals 
-            //with national data only
-            _mockSchoolContextual.Setup(m => m.GetNational(
+            //When the GetByUrnOrLAESATB is called return get data where URN matches
+            _mockSchoolContextual.Setup(m => m.GetByUrnOrLAESATB(
+                It.IsAny<int>(),
                 It.IsAny<Expression<Func<SchoolContextual, bool>>>(),
-                It.IsAny<Func<IQueryable<SchoolContextual>, IOrderedQueryable<SchoolContextual>>>(),
                 It.IsAny<Expression<Func<SchoolContextual, object>>[]>()
                 ))
-                .Returns(Task.FromResult<IEnumerable<SchoolContextual>>(contextuals.Where(r => r.URN == 9)));
+                .Returns(
+                (int x,
+                Expression<Func<SchoolContextual, bool>> y, 
+                Expression<Func<SchoolContextual, object>>[] z) =>
+                Task.FromResult<IEnumerable<SchoolContextual>>(contextuals.Where(r => r.URN == x)));
+
+            _mockSchoolResult.Setup(m => m.GetByUrnOrLAESATB(
+               It.IsAny<int>(),
+               It.IsAny<Expression<Func<SchoolResult, bool>>>(),
+               It.IsAny<Expression<Func<SchoolResult, object>>[]>()
+               ))
+               .Returns(
+                (int x, 
+                Expression<Func<SchoolResult, bool>> y, 
+                Expression<Func<SchoolResult, object>>[] z) => 
+               Task.FromResult<IEnumerable<SchoolResult>>(results.Where(r => r.URN == x)));
 
             _controller = new SchoolController(_mockSchoolResult.Object, _mockSchoolContextual.Object);
 
