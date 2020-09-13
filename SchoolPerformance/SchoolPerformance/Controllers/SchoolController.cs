@@ -27,16 +27,25 @@ namespace SchoolPerformance.Controllers
         [Route("/[controller]/{id:int}")]
         public async Task<IActionResult> Index(int id)
         {
-            //Get the school data 
-            var schoolResult = await _result.Get(s => s.URN == id, null, s => s.School);
-            var schoolContextual = await _contextual.Get(s => s.URN == id && s.ACADEMICYEAR == 2019);
+            //Get the school data for the 2019 academic year
+            var schoolResult = await _result
+                .GetByUrnOrLAESATB(id, s => s.ACADEMICYEAR == 2019, s => s.School);
 
+            var schoolContextual = await _contextual
+                .GetByUrnOrLAESATB(id ,s => s.ACADEMICYEAR == 2019);
+
+            //Return a page letting the user know the id cannot be found
+            //If the school id does not exist
+            if (schoolResult.Count() == 0)
+            {
+                return View("SchoolNotFound", id);
+            }
 
             //Get the national data
-            var nationalResult = await _result.GetNational(null, null, s => s.School);
+            var nationalResult = await _result.GetNational(s => s.ACADEMICYEAR == 2019, s => s.School);
             var nationalContextual = await _contextual.GetNational(s => s.ACADEMICYEAR == 2019);
 
-
+            //Add School and National data to the SchoolViewModel
             var schoolViewModel = new SchoolViewModel()
             {
                 ResultSchool = schoolResult.First(),
