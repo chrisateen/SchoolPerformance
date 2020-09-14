@@ -1,6 +1,7 @@
-﻿
+﻿@inject SchoolPerformance.AutoCompleteService autoComplete
 @{
     ViewData["Title"] = "_Layout";
+    var searchData = autoComplete.Get().Result.ToList();
 }
 <!DOCTYPE html>
 <!--
@@ -135,6 +136,37 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
         <!-- /.footer -->
 
     </div>
+
+    <script>
+
+        var data = @Json.Serialize(searchData);
+
+        $('#schoolSearch').autocomplete({
+
+            source: function (request, response) {
+
+                response($.map(data, function (item) {
+
+                    var searchLabel = item.urn + " - " + item.laestab + " - " + item.schname;
+
+                    if (searchLabel.toUpperCase().indexOf(request.term.toUpperCase()) != -1) {
+
+                        return {
+                            label: searchLabel,
+                            value: item.urn
+                        }
+                    }
+                    else {
+                        return null;
+                    }
+                }))
+                
+            },
+            minLength: 3
+
+        });
+    </script>
+
 
 </body>
 
