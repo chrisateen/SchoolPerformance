@@ -23,6 +23,13 @@ namespace SchoolPerformance.Controllers
             _contextual = contextual;
         }
 
+        [HttpPost]
+        public IActionResult School(int id)
+        {
+            //Action method added due to search box
+            return RedirectToAction("Index", new { id = id });
+        }
+
         [Route("{id:int}")]
         [Route("/[controller]/{id:int}")]
         public async Task<IActionResult> Index(int id)
