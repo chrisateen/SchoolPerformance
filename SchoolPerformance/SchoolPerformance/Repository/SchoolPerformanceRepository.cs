@@ -389,12 +389,10 @@ namespace SchoolPerformance.Repository
 
         private IQueryable<T> LAESTABxpression(IQueryable<T> data, int id)
         {
-            //Get the first 3 digits of the 
-            //Id which is the LA number
+            //Get the first 3 digits of the id which is the LA number
             var LA = id / 10000;
 
-            //Get the last 4 digits of the 
-            //Id which is the ESTAB number
+            //Get the last 4 digits of the id which is the ESTAB number
             var ESTAB = id - (LA * 10000);
 
             ParameterExpression pe = Expression.Parameter(typeof(T), "s");
@@ -406,25 +404,19 @@ namespace SchoolPerformance.Repository
             if (typeof(T) == typeof(School))
             {
                 //Build a basic expression property where type is School
-
                 meLEA = Expression.Property(pe, "LA");
-
                 meESTAB = Expression.Property(pe, "ESTAB");
             }
 
             else
             {
                 //Build a nested property expression of type T.School
-
                 Expression school = Expression.Property(pe, typeof(T).GetProperty("School"));
-
                 meLEA = Expression.Property(school, typeof(School).GetProperty("LA"));
-
                 meESTAB = Expression.Property(school, typeof(School).GetProperty("ESTAB"));
             }
 
             ConstantExpression constantLEA = Expression.Constant(LA, typeof(int));
-
             ConstantExpression constantESTAB = Expression.Constant(ESTAB, typeof(int));
 
             //Create the condition  
