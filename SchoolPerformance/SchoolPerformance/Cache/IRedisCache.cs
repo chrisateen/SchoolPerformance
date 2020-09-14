@@ -7,6 +7,23 @@ namespace SchoolPerformance.Cache
     public interface IRedisCache
     {
         /// <summary>
+        /// Checks and gets AutoCompleteViewModel data from the cache
+        /// </summary>
+        /// <returns>
+        /// List of AutoCompleteViewModel object if data is in cache
+        /// or an empty AutoCompleteViewModel List if data is not in cache
+        /// </returns>
+        Task<IEnumerable<ScatterplotViewModel>> GetAutoCompleteData();
+
+        /// <summary>
+        /// Adds a list of AutoCompleteViewModel data to the cache
+        /// </summary>
+        /// <param name="autoCompleteDataLst">
+        /// List of AutoCompleteViewModel data to be added to the cache
+        /// </param>
+        Task SaveAutoCompleteData(IEnumerable<ScatterplotViewModel> autoCompleteDataLst);
+
+        /// <summary>
         /// Checks and gets ScatterplotViewModel data from the cache
         /// </summary>
         /// <returns>
