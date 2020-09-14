@@ -64,6 +64,18 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeOfType<ViewResult>().Subject;
         }
 
+        //Check that call to school action method redirects to index action method
+        [TestMethod]
+        public void SchoolActionMethodRedirectsToIndex()
+        {
+            //Act
+            var controller = _controller.School(1);
+
+            //Assert
+            controller.Should()
+                .BeRedirectToActionResult().WithActionName("Index");
+        }
+
         //Setup mock objects to be returned 
         //when methods from Repository is called
         [Ignore]
