@@ -265,6 +265,62 @@ namespace SchoolPerformanceTest.CacheTest
 
         }
 
+        //Tests that if the AutoCompleteViewModel data 
+        //are not in the redis database (i.e keys could not be found)
+        //an empty list is returned
+        [TestMethod]
+        public async Task GetAutoCompleteDataReturnsEmptyListIfItemsAreNotInCache()
+        {
+            //Arrange
+            SetupEmptyMockCache();
+
+            //Act
+            IEnumerable<AutocompleteViewModel> result = await _redisCache.GetAutoCompleteData();
+
+            //Assert
+            Assert.AreEqual(0, result.Count());
+
+        }
+
+
+        //Tests that if the AutoCompleteViewModel data 
+        //is in the redis database (i.e keys could not be found)
+        //the list of AutoCompleteViewModel data is returned
+        [TestMethod]
+        public async Task GetAutoCompleteDataReturnsDataInCache()
+        {
+            //Arrange
+            SetupListOfKeys("ScatterplotViewModel", 3);
+
+
+            //Create and return a list of AutoCompleteViewModel
+            //when GetAllAsync is called
+            var lstAutoCompleteViewModel = new Dictionary<String, AutocompleteViewModel>
+            {
+                {"AutoCompleteViewModel2", new AutocompleteViewModel{URN = 2 , SCHNAME = "Test 2"} },
+                {"AutoCompleteViewModel3", new AutocompleteViewModel{URN = 3, SCHNAME = "Test 3"} },
+                {"AutoCompleteViewModel1", new AutocompleteViewModel{URN = 1 , SCHNAME = "Test 1"} }
+            };
+
+            //Gets first school name when list is sorted in alphabetical order
+            var firstSchoolinLst = lstAutoCompleteViewModel.OrderBy(s => s.Value.SCHNAME).First().Value.SCHNAME;
+
+            var taskLstAutoCompleteViewModel = Task.FromResult<IDictionary<String, AutocompleteViewModel>>(lstAutoCompleteViewModel);
+            _redisDatabase.Setup(m => m.GetAllAsync<AutocompleteViewModel>(It.IsAny<List<string>>()))
+                           .Returns(taskLstAutoCompleteViewModel);
+
+            SetupRedisCacheClient();
+
+            //Act
+            IEnumerable<AutocompleteViewModel> result = await _redisCache.GetAutoCompleteData();
+
+            //Assert
+            //Number of items retrieved from cache is correct
+            Assert.AreEqual(lstAutoCompleteViewModel.Count(), result.Count());
+
+            //List returned from cache is sorted in order
+            Assert.AreEqual(firstSchoolinLst, result.First().SCHNAME);
+        }
 
         //Create and return an empty list of keys
         //when SearchKeysAsync is called
