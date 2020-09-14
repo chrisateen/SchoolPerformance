@@ -13,7 +13,7 @@ namespace SchoolPerformance.Cache
         /// List of AutoCompleteViewModel object if data is in cache
         /// or an empty AutoCompleteViewModel List if data is not in cache
         /// </returns>
-        Task<IEnumerable<ScatterplotViewModel>> GetAutoCompleteData();
+        Task<IEnumerable<AutocompleteViewModel>> GetAutoCompleteData();
 
         /// <summary>
         /// Adds a list of AutoCompleteViewModel data to the cache
@@ -21,7 +21,7 @@ namespace SchoolPerformance.Cache
         /// <param name="autoCompleteDataLst">
         /// List of AutoCompleteViewModel data to be added to the cache
         /// </param>
-        Task SaveAutoCompleteData(IEnumerable<ScatterplotViewModel> autoCompleteDataLst);
+        Task SaveAutoCompleteData(IEnumerable<AutocompleteViewModel> autoCompleteDataLst);
 
         /// <summary>
         /// Checks and gets ScatterplotViewModel data from the cache
