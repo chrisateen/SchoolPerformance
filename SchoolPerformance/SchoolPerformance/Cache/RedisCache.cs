@@ -17,6 +17,31 @@ namespace SchoolPerformance.Cache
             _redisCacheClient = redisCacheClient;
         }
 
+        public async Task<IEnumerable<AutocompleteViewModel>> GetAutoCompleteData()
+        {
+            IEnumerable<AutocompleteViewModel> autoCompleteDataLst = new List<AutocompleteViewModel>();
+
+            try
+            {
+                // Searches and gets all the AutocompleteViewModel keys in the cache
+                var listofkeys = await _redisCacheClient.Db0.SearchKeysAsync("AutocompleteViewModel*");
+
+                //Get ScatterplotViewModel data from cache if it's in the cache
+                if (listofkeys != null)
+                {
+                    var results = await _redisCacheClient
+                                    .Db0
+                                    .GetAllAsync<AutocompleteViewModel>(listofkeys);
+
+                    autoCompleteDataLst = new List<AutocompleteViewModel>(results.Values);
+
+                }
+            }
+            catch (Exception) { }
+
+            return autoCompleteDataLst.OrderBy(s => s.SCHNAME);
+        }
+
         public async Task<TableViewModelAll> GetNationalTableDataAll()
         {
             TableViewModelAll nationalData = null;
@@ -135,6 +160,28 @@ namespace SchoolPerformance.Cache
             catch (Exception) { }
 
             return tableDataLst.OrderBy(s => s.SCHNAME);
+        }
+
+        public async Task SaveAutoCompleteData(IEnumerable<AutocompleteViewModel> autoCompleteDataLst)
+        {
+            var items = new List<Tuple<string, AutocompleteViewModel>>();
+
+            foreach (var item in autoCompleteDataLst)
+            {
+                //A key is created which included the unique reference number of the school
+                //before the object is added to the cache
+                var key = "AutocompleteViewModel" + item.URN;
+                items.Add(new Tuple<string, AutocompleteViewModel>(key, item));
+            }
+
+            try
+            {
+                await _redisCacheClient
+                .Db0
+                .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
+            }
+
+            catch (Exception) { }
         }
 
         public async Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
