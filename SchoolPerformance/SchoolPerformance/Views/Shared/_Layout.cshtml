@@ -29,7 +29,7 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
     <script src="~/admin-lte/js/adminlte.js"></script>
     <script src="~/Chart.js/Chart.js"></script>
     <script src="~/jqueryui/jquery-ui.js"></script>
-    
+    <script src="~/js/AutoComplete.js"></script>
 
 </head>
 
@@ -48,9 +48,10 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                 </li>
             </ul>
             <!-- Search School -->
-            <form class="form-inline ml-3">
+            <form class="form-inline ml-3" asp-controller="School" asp-action="School" method="post">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search School" aria-label="Search">
+                    <input class="form-control form-control-navbar school-search" type="text" placeholder="Search School" 
+                           aria-label="Search" autocomplete="off" id="nav-search" name="id">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -141,30 +142,23 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
 
         var data = @Json.Serialize(searchData);
 
-        $('#schoolSearch').autocomplete({
+        
 
-            source: function (request, response) {
+        //Get all the search elements
+        var ctxLst = document.getElementsByClassName('school-search');
 
-                response($.map(data, function (item) {
+            if (ctxLst.length > 0) {
 
-                    var searchLabel = item.urn + " - " + item.laestab + " - " + item.schname;
+        for (var i = 0; i < ctxLst.length; i++) {
 
-                    if (searchLabel.toUpperCase().indexOf(request.term.toUpperCase()) != -1) {
+            //Get the id name of each of the chart elements
+            var dataId = ctxLst[i].id;
 
-                        return {
-                            label: searchLabel,
-                            value: item.urn
-                        }
-                    }
-                    else {
-                        return null;
-                    }
-                }))
-                
-            },
-            minLength: 3
+            getAutoCompleteData(dataId, data);
+        }
+    }
 
-        });
+
     </script>
 
 

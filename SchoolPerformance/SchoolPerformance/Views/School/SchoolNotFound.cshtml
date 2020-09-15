@@ -30,9 +30,10 @@
                             or try searching for a school using the search box below.
                         </p>
 
-                        <form class="search-form">
+                        <form class="search-form" asp-controller="School" asp-action="School" method="post">
                             <div class="input-group">
-                                <input type="text" name="search" class="form-control" placeholder="Search">
+                                <input type="text" name="id" class="form-control school-search" 
+                                       placeholder="Search" autocomplete="off" id="error-search">
 
                                 <div class="input-group-append">
                                     <button type="submit" name="submit" class="btn btn-danger">
