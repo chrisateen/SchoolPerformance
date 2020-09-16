@@ -36,7 +36,10 @@
         },
         {
             data: "schname",
-            title: "@Html.DisplayNameFor(m => m.SCHNAME)"
+            title: "@Html.DisplayNameFor(m => m.SCHNAME)",
+            render: function (data, type, row, meta) {          
+                return '<a href="/School/' + row.urn + '">' + data + '</a>';
+            }
         },
         {
             data: "ptfsM6CLA1A",
