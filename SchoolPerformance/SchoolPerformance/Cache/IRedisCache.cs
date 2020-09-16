@@ -123,6 +123,6 @@ namespace SchoolPerformance.Cache
         /// National ScatterplotViewModel data if data is in cache
         /// or an empty ScatterplotViewModel object if data is not in cache
         /// </returns>
-        Task<TableViewModelDisadvantaged> GetNationalScatterplotData();
+        Task<ScatterplotViewModel> GetNationalScatterplotData();
     }
 }
