@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolPerformance.Models;
 using System;
 
-namespace SchoolPerformaceTest
+namespace SchoolPerformanceTest
 {
     /// <summary>
     /// Creates connection to sqlite database for testing

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {}
+    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {}
   },
   "projects": {
-    "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
+    "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "projectUniqueName": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
         "projectName": "SchoolPerformance",
-        "projectPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
-        "packagesPath": "C:\\Users\\no_ot\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\no_ot\\Documents\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
+        "projectPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance.csproj",
+        "packagesPath": "C:\\Users\\christine\\.nuget\\packages\\",
+        "outputPath": "D:\\SchoolPerformance\\SchoolPerformance\\SchoolPerformance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\no_ot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\christine\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,25 +41,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Azure.Storage.Blobs": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "Azure.Storage.Files.Shares": {
-              "target": "Package",
-              "version": "[12.0.0-preview.5, )"
-            },
-            "Azure.Storage.Queues": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
             "CsvHelper": {
               "target": "Package",
               "version": "[15.0.5, )"
-            },
-            "FastMember": {
-              "target": "Package",
-              "version": "[1.5.0, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
@@ -99,9 +83,25 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[3.1.7, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[3.1.4, )"
+            },
+            "StackExchange.Redis.Extensions.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.4, )"
+            },
+            "StackExchange.Redis.Extensions.Core": {
+              "target": "Package",
+              "version": "[6.3.4, )"
+            },
+            "StackExchange.Redis.Extensions.Newtonsoft": {
+              "target": "Package",
+              "version": "[6.3.4, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
@@ -126,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

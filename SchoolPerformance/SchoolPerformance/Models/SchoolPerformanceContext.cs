@@ -15,10 +15,13 @@ namespace SchoolPerformance.Models
     {
         private DbContextOptions<SchoolPerformanceContext> _options;
 
+        private bool _isRunningInUnitTest = false;
+
+
         public SchoolPerformanceContext(DbContextOptions<SchoolPerformanceContext> options) : base(options)
         {
             _options = options;
-            
+            _isRunningInUnitTest = isInTest();
         }
 
         public virtual DbSet<School> School { get; set; }
@@ -28,6 +31,7 @@ namespace SchoolPerformance.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             //Specify primary key in School
             modelBuilder.Entity<School>()
                 .HasKey(c => new { c.URN });
@@ -61,13 +65,27 @@ namespace SchoolPerformance.Models
                 .WithOne(s => s.School)
                 .HasForeignKey(s => s.URN);
 
+            //Only seed data if application is running via a unit test
+            if (_isRunningInUnitTest)
+            {
                 //Seed data
-                //modelBuilder.Seed(2019);
-
+                modelBuilder.Seed(2019);
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+        }
+
+        /// <summary>
+        /// Check if application is running via a unit test
+        /// </summary>
+        public static bool isInTest()
+        {
+            var testingFramework = "Microsoft.VisualStudio.TestPlatform.TestFramework";
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            return assemblies.Any(n => n.FullName.StartsWith(testingFramework));
         }
 
     }

@@ -1,6 +1,7 @@
-﻿
+﻿@inject SchoolPerformance.AutoCompleteService autoComplete
 @{
     ViewData["Title"] = "_Layout";
+    var searchData = autoComplete.Get().Result.ToList();
 }
 <!DOCTYPE html>
 <!--
@@ -20,13 +21,15 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <link href="~/jqueryui/jquery-ui.css" rel="stylesheet" />
     <!-- Link to required JS files-->
     <script src="~/jquery/jquery.js"></script>
     <script src="~/popper.js/umd/popper.js"></script>
     <script src="~/twitter-bootstrap/js/bootstrap.js"></script>
     <script src="~/admin-lte/js/adminlte.js"></script>
     <script src="~/Chart.js/Chart.js"></script>
+    <script src="~/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/AutoComplete.js"></script>
 
 </head>
 
@@ -44,9 +47,21 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                     <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
                 </li>
             </ul>
+            <!-- Search School -->
+            <form asp-controller="School" asp-action="School" method="post" class="col-lg-2 col-md-4 col-sm-6">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control form-control-navbar school-search" id="nav-search" autocomplete="off" name="id" placeholder="Search School" aria-label="Search">
+                    <span class="input-group-append">
+                        <button type="submit" class="btn btn-navbar" id="nav-search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <!--/.search school -->
+
         </nav>
         <!-- /.navbar -->
-
         <!-- Header Sidebar-->
         <aside class="main-sidebar sidebar-dark-light elevation-4">
 
@@ -94,7 +109,7 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                                 <!-- /.table option all pupils-->
                                 <!-- Table option disadvantaged pupils -->
                                 <li class="nav-item">
-                                    <a asp-controller="Tables" asp-action="Disadvantaged"  class="nav-link">
+                                    <a asp-controller="Tables" asp-action="Disadvantaged" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Results Disadvantaged</p>
                                     </a>
@@ -122,6 +137,30 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
         <!-- /.footer -->
 
     </div>
+
+    <script>
+
+        var data = @Json.Serialize(searchData);
+
+        
+
+        //Get all the search elements
+        var ctxLst = document.getElementsByClassName('school-search');
+
+            if (ctxLst.length > 0) {
+
+        for (var i = 0; i < ctxLst.length; i++) {
+
+            //Get the id name of each of the chart elements
+            var dataId = ctxLst[i].id;
+
+            getAutoCompleteData(dataId, data);
+        }
+    }
+
+
+    </script>
+
 
 </body>
 

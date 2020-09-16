@@ -16,7 +16,7 @@ function loadTable(table, columns, url) {
         ajax: {
             url: url,
             dataType: 'json',
-            type: "POST",
+            type: "POST"
         },
         deferRender: true,
         columns: columns,

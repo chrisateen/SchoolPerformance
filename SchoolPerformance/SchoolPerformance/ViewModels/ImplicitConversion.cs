@@ -67,6 +67,20 @@ namespace SchoolPerformance.ViewModels
 
             return output;
         }
+
+        public static List<AutocompleteViewModel> ConvertToAutocompleteViewModel (this IEnumerable<SchoolResult> source)
+        {
+            List<AutocompleteViewModel> output = new List<AutocompleteViewModel>();
+
+            foreach (var item in source)
+            {
+                //Implicit conversion from SchoolResult to AutocompleteViewModel
+                AutocompleteViewModel viewModel = item;
+                output.Add(viewModel);
+            }
+
+            return output;
+        }
     }
 
 }

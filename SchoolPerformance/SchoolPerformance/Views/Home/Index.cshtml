@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="content-wrapper">
 
     <!-- Header -->
@@ -37,8 +36,6 @@
 
     </div>
     <!-- /.header -->
-
-
     <!-- Main content -->
     <div class="content">
 
@@ -70,7 +67,28 @@
                     </div>
                 </div>
                 <!-- /.card -->
-
+                <!--Card (Search School) -->
+                <div class="col-sm-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h5 class="m-0">Search Individual School Result</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Search School by Unique Reference Number (URN), School Name or DfE Number</p>
+                            <form asp-controller="School" asp-action="School" method="post">
+                                <div class="input-group">
+                                    <input type="text" class="form-control school-search" id="homepage-search" autocomplete="off" name="id">
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
             </div>
             <!-- /.row -->
 
@@ -80,4 +98,10 @@
     <!-- /.content -->
 
 </div>
+
+
+
+
+
+
 
