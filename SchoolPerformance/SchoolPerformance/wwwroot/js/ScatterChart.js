@@ -18,7 +18,7 @@ function TryParseInt(str) {
     return null;
 }
 
-// Get the performance measure selected from the dropdown list
+// Get the performance measure selected from the drop down list
 function getMeasure() {
 
     return document.getElementById("measure").value;
@@ -89,7 +89,7 @@ function generateData(index, resultData, urn) {
                 schoolNames.push(resultData[i]["schname"]);
             }
 
-            //alert printed if school exist but has no data for choosen measure
+            //alert printed if school exist but has no data for chosen measure
         } else if (resultData[i]["urn"] === urn) {
 
             alert("Selected data does not exist for the selected school. Please search for another school");
@@ -101,7 +101,7 @@ function generateData(index, resultData, urn) {
     //Checks if the urn entered could be found
     if (urn !== null && foundSchool === false) {
 
-        alert("URN could not be found please try again");
+        alert("School could not be found or school has no disadvantaged pupil data available. Please try another school");
 
         return null;
 
@@ -112,7 +112,7 @@ function generateData(index, resultData, urn) {
 }
 
 /*
- * Get the index to use to retrive data for the ScatterChart
+ * Get the index to use to retrieve data for the ScatterChart
 */ 
 function getDataIndex(index) {
 
@@ -270,7 +270,7 @@ function updateChart() {
     //Get the new y axis label based on option selected by user
     var newyAxisLabel = getMeasure();
 
-    //Get the index to use to retrive data for the ScatterChart
+    //Get the index to use to retrieve data for the ScatterChart
     var newDataIndex = getDataIndex(newyAxisLabel);
 
     //Get the new x and y points and school names for the chart
@@ -310,7 +310,7 @@ function updateChart() {
 
 }
 
-//Function to update the school highligted on the chart
+//Function to update the school highlighted on the chart
 function updateHighligtedSchool() {
 
     //Gets the URN the user has searched for as an integer
