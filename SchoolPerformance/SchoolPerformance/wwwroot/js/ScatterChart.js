@@ -202,6 +202,18 @@ function graph(yAxisLabel, data, schools, nationalData) {
         
         data: {
             datasets: [{
+                label: schools[0],
+                data: [data[0]],
+                labels: [schools[0]],
+                backgroundColor: "rgba(64, 74, 73, 2)",
+                borderColor: "rgb(64, 74, 73)",
+                pointRadius: 5,
+                order: 1,
+                showLine: false,
+                fill: false
+
+            },
+                {
                 label: "All Schools",
                 //School names for tooltips
                 labels: schools.slice(1, schools.length - 1), 
@@ -212,19 +224,8 @@ function graph(yAxisLabel, data, schools, nationalData) {
                 showLine: false,
                 fill: false
 
-            },
-                {
-                    label: schools[0],
-                    data: [data[0]],
-                    labels: [schools[0]],
-                    backgroundColor: "rgba(64, 74, 73, 2)",
-                    borderColor: "rgb(64, 74, 73)",
-                    pointRadius: 5,
-                    order: 1,
-                    showLine: false,
-                    fill: false
-
-                }]
+                }
+            ]
         },
         options: {
 
@@ -264,6 +265,7 @@ function graph(yAxisLabel, data, schools, nationalData) {
             },
 
             annotation: {
+                events: ['click'],
                 drawTime: 'beforeDatasetsDraw',
                 annotations: [
                     {
@@ -285,6 +287,10 @@ function graph(yAxisLabel, data, schools, nationalData) {
                             enabled: false,
                             position: 'top',
                             content: "National " + Math.round(nationalData['ptfsM6CLA1A'] * 100) + "%"
+                        },
+                        onClick: function (e) {
+                            this.options.label.enabled = true;
+                            this.chartInstance.update();
                         }
                     }
                 ]
