@@ -23,6 +23,7 @@ namespace SchoolPerformanceTest.ControllerTest
         Mock<IRedisCache> _mockRedisCache;
         ScatterplotController _controller;
         Task<IEnumerable<ScatterplotViewModel>> _scatterplotViewModelLst;
+        Task<ScatterplotViewModel> _nationalScatterplotViewModel;
 
         //Arrange
         [TestInitialize]
@@ -36,8 +37,12 @@ namespace SchoolPerformanceTest.ControllerTest
 
             _scatterplotViewModelLst = Task.FromResult<IEnumerable<ScatterplotViewModel>>(new List<ScatterplotViewModel>());
 
+            _nationalScatterplotViewModel = Task.FromResult<ScatterplotViewModel>(new ScatterplotViewModel());
+
             _mockRedisCache.Setup(m => m.GetScatterplotData()).Returns(_scatterplotViewModelLst);
-           
+
+            _mockRedisCache.Setup(m => m.GetNationalScatterplotData()).Returns(_nationalScatterplotViewModel);
+
             _controller = new ScatterplotController(_mockSchoolResult.Object, _mockRedisCache.Object);
         }
 
@@ -56,7 +61,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
-                .BeAssignableTo<IEnumerable<ScatterplotViewModel>>().Subject;
+                .BeAssignableTo<IEnumerable<ScatterplotListViewModel>>().Subject;
         }
 
     }
