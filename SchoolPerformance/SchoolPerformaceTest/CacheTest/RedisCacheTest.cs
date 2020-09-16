@@ -322,6 +322,22 @@ namespace SchoolPerformanceTest.CacheTest
             Assert.AreEqual(firstSchoolinLst, result.First().SCHNAME);
         }
 
+        //Tests that GetNationalScatterplotData returns a null object
+        //if national data is not in the redis database (i.e key could not be found)
+        [TestMethod]
+        public async Task GetNationalScatterplotDataReturnsEmptyObjectIfDataIsNotInCache()
+        {
+            //Arrange
+            SetupRedisCacheClient();
+
+            //Act
+            ScatterplotViewModel result = await _redisCache.GetNationalScatterplotData();
+
+            //Assert
+            Assert.IsNull(result);
+
+        }
+
         //Create and return an empty list of keys
         //when SearchKeysAsync is called
         //in the get methods
@@ -350,6 +366,24 @@ namespace SchoolPerformanceTest.CacheTest
             _redisCacheClient.Setup(m => m.Db0).Returns(_redisDatabase.Object);
 
             _redisCache = new RedisCache(_redisCacheClient.Object);
+        }
+
+
+        //Tests that GetNationalScatterplotData
+        //returns a ScatterplotViewModel object
+        //if national data is in the redis database
+        [TestMethod]
+        public async Task GetNationalScatterplotDataReturnsDataInCache()
+        {
+            //Arrange
+            SetupNationalMockCache();
+
+            //Act
+            var result = await _redisCache.GetNationalScatterplotData();
+
+            //Assert
+            Assert.IsNotNull(result);
+
         }
 
         //Create and return a mock list of keys
@@ -392,6 +426,11 @@ namespace SchoolPerformanceTest.CacheTest
             _redisDatabase.Setup(m => m.GetAsync<TableViewModelDisadvantaged>(It.IsAny<string>(), It.IsAny<CommandFlags>()))
                            .Returns(tableViewModelDisadvantaged);
 
+
+            //When GetAsync is called it should return ScatterplotViewModel object
+            var scatterplotViewModel = Task.FromResult<ScatterplotViewModel>(new ScatterplotViewModel());
+            _redisDatabase.Setup(m => m.GetAsync<ScatterplotViewModel>(It.IsAny<string>(), It.IsAny<CommandFlags>()))
+                           .Returns(scatterplotViewModel);
 
             SetupRedisCacheClient();
 
