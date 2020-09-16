@@ -28,24 +28,39 @@ namespace SchoolPerformance.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<ScatterplotViewModel> resultViewModel = new List<ScatterplotViewModel>();
 
             //Check if data is in cache and if so get the data from cache
-            resultViewModel = await _cache.GetScatterplotData();
+            IEnumerable<ScatterplotViewModel> schoolLst = await _cache.GetScatterplotData();
+            ScatterplotViewModel national = await _cache.GetNationalScatterplotData();
 
             //if data is not in cache get data from database and save data in cache
-            if (resultViewModel.Count() == 0)
+            if (schoolLst.Count() == 0)
             {
                 var result = await _result.Get(r => r.PTFSM6CLA1A != null,
                     r => r.OrderBy(s => s.School.SCHNAME),
                     r => r.School);
 
                 //Converts from list of SchoolResult to List of ScatterplotViewModel
-                resultViewModel = result.ConvertToScatterplotViewModel();
+                schoolLst = result.ConvertToScatterplotViewModel();
 
-                
-                await _cache.SaveScatterplotData(resultViewModel);
+                await _cache.SaveScatterplotData(schoolLst);
             }
+
+            //if national data is not in cache get data from database and save data in cache
+            if(national == null)
+            {
+                var result = await _result.GetNational(r => r.School);
+
+                national = result.First();
+
+                await _cache.SaveNationalScatterplotData(national);
+            }
+
+            var resultViewModel = new ScatterplotListViewModel()
+            {
+                schoolData = schoolLst,
+                nationalData = national,
+            };
 
             return View(resultViewModel);
         }
