@@ -61,7 +61,7 @@ namespace SchoolPerformanceTest.ControllerTest
                 .BeOfType<ViewResult>().Subject;
 
             var test = res.Model.Should()
-                .BeAssignableTo<IEnumerable<ScatterplotListViewModel>>().Subject;
+                .BeAssignableTo<ScatterplotListViewModel>().Subject;
         }
 
     }
