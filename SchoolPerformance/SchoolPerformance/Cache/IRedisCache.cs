@@ -107,5 +107,22 @@ namespace SchoolPerformance.Cache
         /// National TableViewModelDisadvantaged data to be added to the cache
         /// </param>
         Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData);
+
+        /// <summary>
+        /// Adds National ScatterplotViewModel data to the cache
+        /// </summary>
+        /// <param name=" nationalScatterplotData">
+        /// National ScatterplotViewModel data to be added to the cache
+        /// </param>
+        Task SaveNationalScatterplotData(ScatterplotViewModel nationalScatterplotData);
+
+        /// <summary>
+        /// Checks and gets National ScatterplotViewModel data from the cache
+        /// </summary>
+        /// <returns>
+        /// National ScatterplotViewModel data if data is in cache
+        /// or an empty ScatterplotViewModel object if data is not in cache
+        /// </returns>
+        Task<TableViewModelDisadvantaged> GetNationalScatterplotData();
     }
 }
