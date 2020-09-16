@@ -24,7 +24,7 @@ function getMeasure() {
     return document.getElementById("measure").value;
 }
 
-// Get the urn the user searched for
+// Get the URN the user searched for
 function getSchool() {
 
     //Attempt to convert the URN to an integer
@@ -134,6 +134,9 @@ function getDataIndex(index) {
     return dataIndex[index];
 }
 
+/*
+ * Get the national data required for the ScatterChart
+*/
 function getNationalData(index, national) {
     var res = new Object();
 
@@ -162,7 +165,7 @@ function setTicks(yAxisLabel) {
 
 }
 
-//Sets the point lables y value to percentage or number
+//Sets the point labels y value to percentage or number
 //depending on the data being displayed
 function setYAxisLabel(yAxisLabel) {
 
@@ -191,6 +194,21 @@ function setYAxisLabel(yAxisLabel) {
     }
 
 }
+
+//Returns a number or percentage label for the national lines
+//depending on the data being displayed
+function setNationalLabel(label, nationalData) {
+
+    if (label.search("Percentage") > -1) {
+
+        return "National " + Math.round(nationalData * 100) + "%";
+    }
+
+    else {
+        return "National " + nationalData;
+    }
+}
+
 
 //Draws the scatterChart
 function graph(yAxisLabel, data, schools, nationalData) {
@@ -265,7 +283,7 @@ function graph(yAxisLabel, data, schools, nationalData) {
             },
 
             annotation: {
-                events: ['click'],
+                events: ['dblclick'],
                 drawTime: 'beforeDatasetsDraw',
                 annotations: [
                     {
@@ -274,7 +292,17 @@ function graph(yAxisLabel, data, schools, nationalData) {
                         scaleID: 'Result',
                         value: nationalData['data'],
                         borderColor: 'rgb(2, 117, 216,0.4)',
-                        borderWidth: 2
+                        borderWidth: 4,
+                        label: {
+                            enabled: false,
+                            position: 'right',
+                            content: setNationalLabel(yAxisLabel, nationalData['data'])
+                        },
+                        onDblclick: function (e) {
+
+                            this.options.label.enabled = !this.options.label.enabled;
+                            this.chartInstance.update();
+                        }
                     },
                     {
                         type: 'line',
@@ -282,14 +310,15 @@ function graph(yAxisLabel, data, schools, nationalData) {
                         scaleID: 'Disadvantaged',
                         value: nationalData['ptfsM6CLA1A'],
                         borderColor: 'rgb(2, 117, 216,0.4)',
-                        borderWidth: 2,
+                        borderWidth: 4,
                         label: {
                             enabled: false,
                             position: 'top',
-                            content: "National " + Math.round(nationalData['ptfsM6CLA1A'] * 100) + "%"
+                            content: setNationalLabel("Percentage disadvantaged", nationalData['ptfsM6CLA1A'])
                         },
-                        onClick: function (e) {
-                            this.options.label.enabled = true;
+                        onDblclick: function (e) {
+
+                            this.options.label.enabled = !this.options.label.enabled;
                             this.chartInstance.update();
                         }
                     }
@@ -302,19 +331,6 @@ function graph(yAxisLabel, data, schools, nationalData) {
             zoom: {
                 enabled: true,
                 mode: 'xy'
-            },
-            plugins: {
-                zoom: {
-                    pan: {
-                        enabled: true,
-                        mode: 'xy'
-                    },
-                    zoom: {
-                        enabled: true,
-                        mode: 'xy'
-                    }
-                }
-
             }
         }
     });
@@ -344,15 +360,15 @@ function updateChart() {
         var newData = newScatterData[0];
 
         //Update the school names labels list
-        window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
+        window.scatter.data.datasets[1].labels = newSchools.slice(1, newSchools.length - 1);
 
         //Update the x and y data for the chart
-        window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
+        window.scatter.data.datasets[1].data = newData.slice(1, newData.length - 1);
 
         //Update the data for the school data point to be in a different colour
-        window.scatter.data.datasets[1].data = [newData[0]];
-        window.scatter.data.datasets[1].label = newSchools[0];
-        window.scatter.data.datasets[1].labels = [newSchools[0]];
+        window.scatter.data.datasets[0].data = [newData[0]];
+        window.scatter.data.datasets[0].label = newSchools[0];
+        window.scatter.data.datasets[0].labels = [newSchools[0]];
 
         //Update the y axis label and ticks
         window.scatter.options.scales.yAxes[0].scaleLabel.labelString = newyAxisLabel;
@@ -364,6 +380,12 @@ function updateChart() {
         //Update the national data
         window.scatter.options.annotation.annotations[0].value = newNationalData['data'];
 
+        //Update the national data label
+        window.scatter.options.annotation.annotations[0].label.content = setNationalLabel(newyAxisLabel, newNationalData['data']);
+
+        //Reset the visibility of the national data label back to being hidden
+        window.scatter.options.annotation.annotations[0].label.enabled = false;
+        window.scatter.options.annotation.annotations[1].label.enabled = false;
 
         resetScatterZoom();
 
@@ -399,15 +421,15 @@ function updateHighligtedSchool() {
             var newData = newScatterData[0];
 
             //Update the school names labels list
-            window.scatter.data.datasets[0].labels = newSchools.slice(1, newSchools.length - 1);
+            window.scatter.data.datasets[1].labels = newSchools.slice(1, newSchools.length - 1);
 
             //Update the x and y data for the chart
-            window.scatter.data.datasets[0].data = newData.slice(1, newData.length - 1);
+            window.scatter.data.datasets[1].data = newData.slice(1, newData.length - 1);
 
             //Update the data for the school data point to be in a different colour
-            window.scatter.data.datasets[1].data = [newData[0]];
-            window.scatter.data.datasets[1].label = newSchools[0];
-            window.scatter.data.datasets[1].labels = [newSchools[0]];
+            window.scatter.data.datasets[0].data = [newData[0]];
+            window.scatter.data.datasets[0].label = newSchools[0];
+            window.scatter.data.datasets[0].labels = [newSchools[0]];
 
             resetScatterZoom();
 

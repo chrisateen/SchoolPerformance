@@ -45,6 +45,10 @@
     {
       "library": "chartjs-plugin-zoom@0.6.0",
       "destination": "wwwroot/chartjs-plugin-zoom/"
+    },
+    {
+      "library": "Chart.js@2.9.3",
+      "destination": "wwwroot/Chart.js/"
     }
   ]
 }
