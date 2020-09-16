@@ -19,16 +19,8 @@
       "destination": "wwwroot/admin-lte/"
     },
     {
-      "library": "Chart.js@2.9.3",
-      "destination": "wwwroot/Chart.js/"
-    },
-    {
       "library": "hammer.js@2.0.8",
       "destination": "wwwroot/hammer.js/"
-    },
-    {
-      "library": "chartjs-plugin-zoom@0.7.7",
-      "destination": "wwwroot/chartjs-plugin-zoom/"
     },
     {
       "library": "popper.js@1.16.0",
@@ -41,6 +33,18 @@
     {
       "library": "jqueryui@1.12.1",
       "destination": "wwwroot/jqueryui/"
+    },
+    {
+      "library": "chartjs-plugin-annotation@0.5.7",
+      "destination": "wwwroot/chartjs-plugin-annotation/"
+    },
+    {
+      "library": "Chart.js@2.6.0",
+      "destination": "wwwroot/Chart.js/"
+    },
+    {
+      "library": "chartjs-plugin-zoom@0.6.0",
+      "destination": "wwwroot/chartjs-plugin-zoom/"
     }
   ]
 }

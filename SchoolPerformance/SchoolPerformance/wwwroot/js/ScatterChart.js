@@ -134,6 +134,15 @@ function getDataIndex(index) {
     return dataIndex[index];
 }
 
+function getNationalData(index, national) {
+    var res = new Object();
+
+    res["ptfsM6CLA1A"] = national["ptfsM6CLA1A"];
+    res["data"] = national[index];
+
+    return res;
+}
+
 //Set the y axis ticks to percentage or number
 //depending on the data being displayed
 function setTicks(yAxisLabel) {
@@ -184,12 +193,13 @@ function setYAxisLabel(yAxisLabel) {
 }
 
 //Draws the scatterChart
-function graph(yAxisLabel, data, schools) {
+function graph(yAxisLabel, data, schools, nationalData) {
 
     var ctx = document.getElementById('Scatterplot').getContext('2d');
 
     window.scatter = new Chart(ctx, {
         type: 'scatter',
+        
         data: {
             datasets: [{
                 label: "All Schools",
@@ -198,7 +208,9 @@ function graph(yAxisLabel, data, schools) {
                 data: data.slice(1, data.length - 1),
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgb(255, 99, 132)",
-                order:2
+                order: 2,
+                showLine: false,
+                fill: false
 
             },
                 {
@@ -208,7 +220,9 @@ function graph(yAxisLabel, data, schools) {
                     backgroundColor: "rgba(64, 74, 73, 2)",
                     borderColor: "rgb(64, 74, 73)",
                     pointRadius: 5,
-                    order: 1
+                    order: 1,
+                    showLine: false,
+                    fill: false
 
                 }]
         },
@@ -220,6 +234,7 @@ function graph(yAxisLabel, data, schools) {
 
             scales: {
                 xAxes: [{
+                    id: 'Disadvantaged',
                     type: 'linear',
                     position: 'bottom',
                     scaleLabel: {
@@ -233,6 +248,7 @@ function graph(yAxisLabel, data, schools) {
                     }
                 }],
                 yAxes: [{
+                    id: 'Result',
                     scaleLabel: {
                         display: true,
                         labelString: yAxisLabel,
@@ -247,6 +263,40 @@ function graph(yAxisLabel, data, schools) {
                 }
             },
 
+            annotation: {
+                drawTime: 'beforeDatasetsDraw',
+                annotations: [
+                    {
+                        type: 'line',
+                        mode: 'horizontal',
+                        scaleID: 'Result',
+                        value: nationalData['data'],
+                        borderColor: 'rgb(2, 117, 216,0.4)',
+                        borderWidth: 2
+                    },
+                    {
+                        type: 'line',
+                        mode: 'vertical',
+                        scaleID: 'Disadvantaged',
+                        value: nationalData['ptfsM6CLA1A'],
+                        borderColor: 'rgb(2, 117, 216,0.4)',
+                        borderWidth: 2,
+                        label: {
+                            enabled: false,
+                            position: 'top',
+                            content: "National " + Math.round(nationalData['ptfsM6CLA1A'] * 100) + "%"
+                        }
+                    }
+                ]
+            },
+            pan: {
+                enabled: true,
+                mode: 'xy'
+            },
+            zoom: {
+                enabled: true,
+                mode: 'xy'
+            },
             plugins: {
                 zoom: {
                     pan: {
@@ -258,6 +308,7 @@ function graph(yAxisLabel, data, schools) {
                         mode: 'xy'
                     }
                 }
+
             }
         }
     });
@@ -274,7 +325,10 @@ function updateChart() {
     var newDataIndex = getDataIndex(newyAxisLabel);
 
     //Get the new x and y points and school names for the chart
-    var newScatterData = generateData(newDataIndex, results, selectedSchool);
+    var newScatterData = generateData(newDataIndex, schoolResults, selectedSchool);
+
+    //Get the new national data
+    var newNationalData = getNationalData(newDataIndex, nationalResult);
 
     //Only update the chart if the highlighted school can be found and therefore 
     // data is generated
@@ -301,6 +355,9 @@ function updateChart() {
         //Update the tooltip labels
         window.scatter.options.tooltips.callbacks.label = setYAxisLabel(newyAxisLabel);
 
+        //Update the national data
+        window.scatter.options.annotation.annotations[0].value = newNationalData['data'];
+
 
         resetScatterZoom();
 
@@ -325,7 +382,7 @@ function updateHighligtedSchool() {
         var DataIndex = getDataIndex(yAxisLabel);
 
         //Generate the new data for the chart
-        var newScatterData = generateData(DataIndex, results, newSchool);
+        var newScatterData = generateData(DataIndex, schoolResults, newSchool);
 
         //Only update the scatterChart if the URN could be found
         if (newScatterData !== null) {

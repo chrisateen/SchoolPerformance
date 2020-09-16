@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SchoolPerformance.ViewModels.ScatterplotViewModel>
+﻿@model SchoolPerformance.ViewModels.ScatterplotListViewModel
 @{
     ViewData["Title"] = "Scatterplot";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,18 +25,18 @@
 
                                     <!-- Dropdown list-->
                                     <select id="measure" class="form-control">
-                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_FSM6CLA1A)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().ATT8SCR_NFSM6CLA1A)</option>
-                                        <option selected>@Html.DisplayNameFor(m => m.First().P8MEA)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().P8MEA_FSM6CLA1A)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().P8MEA_NFSM6CLA1A)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_94)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_94)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_94)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTL2BASICS_95)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTFSM6CLA1ABASICS_95)</option>
-                                        <option>@Html.DisplayNameFor(m => m.First().PTNOTFSM6CLA1ABASICS_95)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().ATT8SCR)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().ATT8SCR_FSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().ATT8SCR_NFSM6CLA1A)</option>
+                                        <option selected>@Html.DisplayNameFor(m => m.schoolData.First().P8MEA)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().P8MEA_FSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().P8MEA_NFSM6CLA1A)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTL2BASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTFSM6CLA1ABASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTNOTFSM6CLA1ABASICS_94)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTL2BASICS_95)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTFSM6CLA1ABASICS_95)</option>
+                                        <option>@Html.DisplayNameFor(m => m.schoolData.First().PTNOTFSM6CLA1ABASICS_95)</option>
                                     </select>
                                     <!-- /.dropdown list-->
                                     <!-- Search button-->
@@ -102,29 +102,34 @@
 </div>
 <script src="~/hammer.js/hammer.js"></script>
 <script src="~/chartjs-plugin-zoom/chartjs-plugin-zoom.js"></script>
+<script src="~/chartjs-plugin-annotation/chartjs-plugin-annotation.js"></script>
 <script src="~/js/ScatterChart.js"></script>
 
 <script>
 
     //Convert the IEnumerable list of ScatterplotViewModel
     //To a list of JSON objects
-    var results = @Json.Serialize(Model);
+    var schoolResults = @Json.Serialize(Model.schoolData);
+
+    //Get the national data
+    var nationalResult = @Json.Serialize(Model.nationalData);
 
     //Get the selected data to view
     var title = getMeasure();
 
-    // Label for the y axis      
+    // Label for the y axis
     var dataIndex = getDataIndex(title);
 
     //Initially the school selected is set to null
     var selectedSchool = null;
 
     //Get the data for the scatterplot including school names
-    var scatterData = generateData(dataIndex, results, selectedSchool);
+    var scatterData = generateData(dataIndex, schoolResults, selectedSchool);
+
+    var nationalData = getNationalData(dataIndex, nationalResult);
 
     //Create the graphs
-    window.onload = graph(title, scatterData[0], scatterData[1]);
-
+    window.onload = graph(title, scatterData[0], scatterData[1], nationalData);
 
 </script>
 
