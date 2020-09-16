@@ -198,6 +198,13 @@ namespace SchoolPerformance.Cache
                 .AddAsync("NationalTableViewModelDisadvantaged", nationalTableData, DateTimeOffset.Now.AddMinutes(30));
         }
 
+        public async Task SaveNationalScatterplotData(ScatterplotViewModel nationalScatterplotData)
+        {
+            await _redisCacheClient
+                .Db0
+                .AddAsync("NationalScatterplotData", nationalScatterplotData, DateTimeOffset.Now.AddMinutes(30));
+        }
+
         public async Task SaveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
         {
             var items = new List<Tuple<string, ScatterplotViewModel>>();
@@ -263,6 +270,28 @@ namespace SchoolPerformance.Cache
             }
 
             catch (Exception) { }
+        }
+
+        public async Task<ScatterplotViewModel> GetNationalScatterplotData()
+        {
+            ScatterplotViewModel nationalData = null;
+            bool dataInCache = false;
+
+            try
+            {
+                //Check if National ScatterplotViewModel data is in cache
+                dataInCache = await _redisCacheClient.Db0.ExistsAsync("NationalScatterplotViewModel");
+
+                if (dataInCache)
+                {
+                    nationalData = await _redisCacheClient
+                                    .Db0
+                                    .GetAsync<ScatterplotViewModel>("NationalScatterplotViewModel");
+                }
+            }
+            catch (Exception) { }
+
+            return nationalData;
         }
     }
 }
