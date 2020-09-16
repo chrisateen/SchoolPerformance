@@ -176,7 +176,7 @@ namespace SchoolPerformance.Cache
 
             try
             {
-                await _redisCacheClient
+                 await _redisCacheClient
                 .Db0
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
             }
