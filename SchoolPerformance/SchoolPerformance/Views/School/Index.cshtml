@@ -4,7 +4,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<link href="~/css/SchoolChart.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -488,20 +489,20 @@
             <!--Row with Attainment and Progress 8 charts -->
             <div class="row">
                 <!-- Progress 8 chart -->
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">Progress 8</h3>
                         </div>
                         @if (Model.ResultSchool.P8MEA == null)
                         {
-                            <div class="card-body">
+                            <div class="card-body card-chart">
                                 <p>This school has no Progress 8 result</p>
                             </div>
                         }
                         else
                         {
-                            <div class="card-body">
+                            <div class="card-body card-chart">
                                 <canvas id="Progress8" class="charts"></canvas>
                             </div>
                         }
@@ -509,7 +510,7 @@
                 </div>
                 <!--/. progress 8 chart -->
                 <!--/. Attainment 8 chart -->
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">Attainment 8</h3>
@@ -522,7 +523,7 @@
                         }
                         else
                         {
-                            <div class="card-body">
+                            <div class="card-body card-chart">
                                 <canvas id="Attainment8" class="charts"></canvas>
                             </div>
                         }
@@ -534,7 +535,7 @@
             <!--Row with English and Maths charts -->
             <div class="row">
                 <!--9 to 4 English and Maths chart -->
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">9 to 4 English and Maths</h3>
@@ -548,7 +549,7 @@
                         }
                         else
                         {
-                            <div class="card-body">
+                            <div class="card-body card-chart">
                                 <canvas id="Above4" class="charts"></canvas>
                             </div>
                         }
@@ -556,7 +557,7 @@
                 </div>
                 <!--/. 9 to 4 english and maths chart -->
                 <!--/. 9 to 5 english and maths chart -->
-                <div class="col-12 col-sm-6">
+                <div class="col-12 col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">9 to 5 English and Maths</h3>
@@ -570,7 +571,7 @@
                         }
                         else
                         {
-                            <div class="card-body">
+                            <div class="card-body card-chart">
                                 <canvas id="Above5" class="charts"></canvas>
                             </div>
                         }
@@ -594,7 +595,7 @@
 
     generateCharts(schoolData, nationalData);
 
-    
+
 
 
 </script>

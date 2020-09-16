@@ -48,18 +48,18 @@ AdminLTE version 3 Bootstrap Admin Dashboard Template used to create the views f
                 </li>
             </ul>
             <!-- Search School -->
-            <form class="form-inline ml-3" asp-controller="School" asp-action="School" method="post">
+            <form asp-controller="School" asp-action="School" method="post" class="col-lg-2 col-md-4 col-sm-6">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar school-search" type="text" placeholder="Search School" 
-                           aria-label="Search" autocomplete="off" id="nav-search" name="id">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
+                    <input type="text" class="form-control form-control-navbar school-search" id="nav-search" autocomplete="off" name="id" placeholder="Search School" aria-label="Search">
+                    <span class="input-group-append">
+                        <button type="submit" class="btn btn-navbar" id="nav-search">
                             <i class="fas fa-search"></i>
                         </button>
-                    </div>
+                    </span>
                 </div>
             </form>
             <!--/.search school -->
+
         </nav>
         <!-- /.navbar -->
         <!-- Header Sidebar-->
