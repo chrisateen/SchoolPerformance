@@ -17,5 +17,15 @@ namespace SchoolPerformance.Controllers
         {
             return View();
         }
+
+        public IActionResult FAQ()
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }
