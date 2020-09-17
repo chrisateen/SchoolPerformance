@@ -20,7 +20,8 @@
             <div class="pl-2 pr-2 pt-2 pb-2">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Result Scatterplot</h3>
+                        <h3 class="card-title pr-2">Result Scatterplot</h3>
+                        
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -76,12 +77,9 @@
                                         </button>
                                     </span>
                                     <!-- /.search button-->
-
                                 </div>
-
                             </div>
                             <!-- /.search school-->
-
                         </div>
 
                         <!-- Scatter Chart-->
@@ -92,9 +90,15 @@
                         <!-- Reset Chart Zoom Button-->
                         <div class="row justify-content-end">
                             <button type="button"
-                                    class="btn btn-secondary btn-sm"
+                                    class="btn btn-secondary btn-sm mr-2"
                                     onclick="resetScatterZoom()">
                                 Reset Zoom
+                            </button>
+                            <button type="button" id="toogleNationalLabel"
+                                    class="btn btn-secondary btn-sm"
+                                    onclick="toggleNationalLabel()"
+                                    value="Show National Label">
+                                Show National Label
                             </button>
                         </div>
                         <!-- reset chart zoom button-->

@@ -387,6 +387,11 @@ function updateChart() {
         window.scatter.options.annotation.annotations[0].label.enabled = false;
         window.scatter.options.annotation.annotations[1].label.enabled = false;
 
+        var btnElement = document.getElementById("toogleNationalLabel");
+
+        btnElement.innerHTML = "Show National Label";
+        btnElement.value = "Show National Label";
+
         resetScatterZoom();
 
         window.scatter.update();
@@ -438,6 +443,32 @@ function updateHighligtedSchool() {
         }
 
     }
+
+}
+
+//Function to enable/disable national annotations
+function toggleNationalLabel() {
+
+    //Toggle between showing and hiding the national label
+    window.scatter.options.annotation.annotations[0].label.enabled = !window.scatter.options.annotation.annotations[0].label.enabled;
+    window.scatter.options.annotation.annotations[1].label.enabled = !window.scatter.options.annotation.annotations[1].label.enabled;
+
+    //Change the toggle button text
+    var btnElement = document.getElementById("toogleNationalLabel");
+
+    if (btnElement.value == "Show National Label") {
+        btnElement.value = "Hide National Label";
+        btnElement.innerHTML = "Hide National Label";
+    }
+    else
+    {
+        btnElement.value = "Show National Label";
+        btnElement.innerHTML = "Show National Label";
+    }
+        
+    resetScatterZoom();
+
+    window.scatter.update();
 
 }
 
