@@ -24,5 +24,29 @@ namespace SchoolPerformanceTest.ControllerTest
             controller.Index().Should()
                 .BeViewResult().WithDefaultViewName();
         }
+
+        //Checks FAQ view is rendered
+        [TestMethod]
+        public void FAQReturnsFAQPage()
+        {
+            //Arrange
+            var controller = new HomeController();
+
+            // Act and Assert
+            controller.FAQ().Should()
+                .BeViewResult().WithDefaultViewName();
+        }
+
+        //Checks About view is rendered
+        [TestMethod]
+        public void AboutReturnsAboutPage()
+        {
+            //Arrange
+            var controller = new HomeController();
+
+            // Act and Assert
+            controller.About().Should()
+                .BeViewResult().WithDefaultViewName();
+        }
     }
 }
