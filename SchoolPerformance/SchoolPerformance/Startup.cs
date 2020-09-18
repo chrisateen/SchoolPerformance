@@ -28,6 +28,10 @@ namespace SchoolPerformance
                     options.UseSqlServer(
                                 _configuration.GetConnectionString("SchoolPerformanceAzure")));
 
+            services.AddHttpContextAccessor();
+
+            
+
             services.AddMvc().AddNewtonsoftJson();
 
             //Register Redis services
@@ -53,7 +57,7 @@ namespace SchoolPerformance
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
             }
             app.UseStaticFiles();
 
