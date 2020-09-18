@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SchoolPerformance.Cache;
 using SchoolPerformance.ViewModels;
@@ -364,8 +365,9 @@ namespace SchoolPerformanceTest.CacheTest
             //Arrange
             _redisCacheClient = new Mock<IRedisCacheClient>();
             _redisCacheClient.Setup(m => m.Db0).Returns(_redisDatabase.Object);
+            var logger = new NullLogger<RedisCache>();
 
-            _redisCache = new RedisCache(_redisCacheClient.Object);
+            _redisCache = new RedisCache(_redisCacheClient.Object,logger);
         }
 
 

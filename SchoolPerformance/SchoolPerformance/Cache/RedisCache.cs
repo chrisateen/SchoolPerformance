@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using SchoolPerformance.ViewModels;
 using StackExchange.Redis.Extensions.Core.Abstractions;
 using System;
@@ -11,10 +12,12 @@ namespace SchoolPerformance.Cache
     public class RedisCache : IRedisCache
     {
         private readonly IRedisCacheClient _redisCacheClient;
+        private readonly ILogger<RedisCache> _logger;
 
-        public RedisCache(IRedisCacheClient redisCacheClient)
+        public RedisCache(IRedisCacheClient redisCacheClient, ILogger<RedisCache> logger)
         {
             _redisCacheClient = redisCacheClient;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<AutocompleteViewModel>> GetAutoCompleteData()
@@ -37,7 +40,12 @@ namespace SchoolPerformance.Cache
 
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to get AutocompleteViewModel data from cache." + 
+                    " Stack trace: " + e.StackTrace);
+            
+            }
 
             return autoCompleteDataLst.OrderBy(s => s.SCHNAME);
         }
@@ -59,7 +67,12 @@ namespace SchoolPerformance.Cache
                 }
                 
             }
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to get NationalTableViewModelAll data from cache." +
+                    " Stack trace: " + e.StackTrace);
+
+            }
 
             return nationalData;
         }
@@ -81,7 +94,11 @@ namespace SchoolPerformance.Cache
                                     .GetAsync<TableViewModelDisadvantaged>("NationalTableViewModelDisadvantaged");
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to get NationalTableViewModelDisadvantaged data from cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
 
             return nationalData;
         }
@@ -106,7 +123,11 @@ namespace SchoolPerformance.Cache
 
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to get ScatterplotViewModel data from cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
 
             return scatterplotDataLst.OrderBy(s => s.SCHNAME);
 
@@ -132,7 +153,12 @@ namespace SchoolPerformance.Cache
 
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to get TableViewModelAll data from cache." +
+                    " Stack trace: " + e.StackTrace);
+
+            }
 
             return tableDataLst.OrderBy(s => s.SCHNAME);
         }
@@ -157,7 +183,11 @@ namespace SchoolPerformance.Cache
 
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to get TableViewModelDisadvantaged data from cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
 
             return tableDataLst.OrderBy(s => s.SCHNAME);
         }
@@ -181,28 +211,58 @@ namespace SchoolPerformance.Cache
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
             }
 
-            catch (Exception) { }
+            catch (Exception e) {
+
+                _logger.LogError("An error occurred when attempting to save AutocompleteViewModel data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
         }
 
         public async Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
         {
-            await _redisCacheClient
+            try
+            {
+                await _redisCacheClient
                 .Db0
                 .AddAsync("NationalTableViewModelAll", nationalTableData, DateTimeOffset.Now.AddMinutes(30));
+            }
+            catch(Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to save NationalTableViewModelAll data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
+            
         }
 
         public async Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData)
         {
-            await _redisCacheClient
+            try
+            {
+                await _redisCacheClient
                 .Db0
                 .AddAsync("NationalTableViewModelDisadvantaged", nationalTableData, DateTimeOffset.Now.AddMinutes(30));
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("An error occurred when attempting to save NationalTableViewModelDisadvantaged data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
         }
 
         public async Task SaveNationalScatterplotData(ScatterplotViewModel nationalScatterplotData)
         {
-            await _redisCacheClient
+            try
+            {
+                await _redisCacheClient
                 .Db0
                 .AddAsync("NationalScatterplotData", nationalScatterplotData, DateTimeOffset.Now.AddMinutes(30));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("An error occurred when attempting to save NationalScatterplotData data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
         }
 
         public async Task SaveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
@@ -224,7 +284,11 @@ namespace SchoolPerformance.Cache
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
             }
 
-            catch (Exception) { }
+            catch (Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to save ScatterplotViewModel data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
             
         }
 
@@ -247,7 +311,11 @@ namespace SchoolPerformance.Cache
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
             }
 
-            catch (Exception) { }
+            catch (Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to save TableViewModelAll data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
         }
 
         public async Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelDisadvantaged> tableDataLst)
@@ -269,7 +337,11 @@ namespace SchoolPerformance.Cache
                 .AddAllAsync(items, DateTimeOffset.Now.AddMinutes(30));
             }
 
-            catch (Exception) { }
+            catch (Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to save TableViewModelDisadvantaged data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
         }
 
         public async Task<ScatterplotViewModel> GetNationalScatterplotData()
@@ -289,7 +361,11 @@ namespace SchoolPerformance.Cache
                                     .GetAsync<ScatterplotViewModel>("NationalScatterplotViewModel");
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) 
+            {
+                _logger.LogError("An error occurred when attempting to save NationalScatterplotViewModel data to cache." +
+                    " Stack trace: " + e.StackTrace);
+            }
 
             return nationalData;
         }
