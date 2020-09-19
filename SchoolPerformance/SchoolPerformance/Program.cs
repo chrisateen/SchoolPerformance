@@ -24,6 +24,8 @@ namespace SchoolPerformance
             //Set up logger using configuration
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .WriteTo.Console()
+                .WriteTo.Debug()
                 .CreateLogger();
 
             try

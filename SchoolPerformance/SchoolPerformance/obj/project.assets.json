@@ -1485,6 +1485,19 @@
           "lib/netcoreapp1.1/Serilog.Sinks.Console.dll": {}
         }
       },
+      "Serilog.Sinks.Debug/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.5.0",
+          "System.Diagnostics.Debug": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Serilog.Sinks.Debug.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Sinks.Debug.dll": {}
+        }
+      },
       "Serilog.Sinks.MSSqlServer/5.5.1": {
         "type": "package",
         "dependencies": {
@@ -5492,6 +5505,25 @@
         "lib/netstandard1.3/Serilog.Sinks.Console.xml",
         "serilog.sinks.console.3.1.1.nupkg.sha512",
         "serilog.sinks.console.nuspec"
+      ]
+    },
+    "Serilog.Sinks.Debug/1.0.1": {
+      "sha512": "nE5wvw9+J/V4lA+rEkFUETGjBabK8IlLQY5Z9KDzoo5LvILC4vhTOXLs7DGYs8h5juIf2nLZnVxHDXf404FqEQ==",
+      "type": "package",
+      "path": "serilog.sinks.debug/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Serilog.Sinks.Debug.dll",
+        "lib/net45/Serilog.Sinks.Debug.xml",
+        "lib/net46/Serilog.Sinks.Debug.dll",
+        "lib/net46/Serilog.Sinks.Debug.xml",
+        "lib/netstandard1.0/Serilog.Sinks.Debug.dll",
+        "lib/netstandard1.0/Serilog.Sinks.Debug.xml",
+        "lib/netstandard2.0/Serilog.Sinks.Debug.dll",
+        "lib/netstandard2.0/Serilog.Sinks.Debug.xml",
+        "serilog.sinks.debug.1.0.1.nupkg.sha512",
+        "serilog.sinks.debug.nuspec"
       ]
     },
     "Serilog.Sinks.MSSqlServer/5.5.1": {
@@ -10191,6 +10223,7 @@
       "Serilog.Extensions.Logging >= 3.0.1",
       "Serilog.Settings.Configuration >= 3.1.0",
       "Serilog.Sinks.Console >= 3.1.1",
+      "Serilog.Sinks.Debug >= 1.0.1",
       "Serilog.Sinks.MSSqlServer >= 5.5.1",
       "StackExchange.Redis.Extensions.AspNetCore >= 6.3.4",
       "StackExchange.Redis.Extensions.Core >= 6.3.4",
@@ -10312,6 +10345,10 @@
           "Serilog.Sinks.Console": {
             "target": "Package",
             "version": "[3.1.1, )"
+          },
+          "Serilog.Sinks.Debug": {
+            "target": "Package",
+            "version": "[1.0.1, )"
           },
           "Serilog.Sinks.MSSqlServer": {
             "target": "Package",

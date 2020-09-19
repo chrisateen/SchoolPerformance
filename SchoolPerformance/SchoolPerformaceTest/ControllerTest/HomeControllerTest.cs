@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SchoolPerformance.Controllers;
 using SchoolPerformance.Models;
@@ -13,15 +15,23 @@ namespace SchoolPerformanceTest.ControllerTest
     [TestClass]
     public class HomeControllerTest
     {
+        private ILogger<HomeController> _logger;
+        public HomeController _controller;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            //Arrange
+            _logger = new NullLogger<HomeController>();
+            _controller = new HomeController(_logger);
+        }
+
         //Checks Home view is rendered
         [TestMethod]
         public void IndexReturnsHomePage()
         {
-            //Arrange
-            var controller = new HomeController();
-
             // Act and Assert
-            controller.Index().Should()
+            _controller.Index().Should()
                 .BeViewResult().WithDefaultViewName();
         }
 
@@ -29,11 +39,8 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestMethod]
         public void FAQReturnsFAQPage()
         {
-            //Arrange
-            var controller = new HomeController();
-
             // Act and Assert
-            controller.FAQ().Should()
+            _controller.FAQ().Should()
                 .BeViewResult().WithDefaultViewName();
         }
 
@@ -41,11 +48,8 @@ namespace SchoolPerformanceTest.ControllerTest
         [TestMethod]
         public void AboutReturnsAboutPage()
         {
-            //Arrange
-            var controller = new HomeController();
-
             // Act and Assert
-            controller.About().Should()
+            _controller.About().Should()
                 .BeViewResult().WithDefaultViewName();
         }
     }

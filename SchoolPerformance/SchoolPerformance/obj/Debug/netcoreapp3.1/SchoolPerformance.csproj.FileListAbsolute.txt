@@ -494,4 +494,5 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\b
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
