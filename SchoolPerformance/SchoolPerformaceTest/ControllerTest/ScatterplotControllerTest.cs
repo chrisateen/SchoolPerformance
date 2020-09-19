@@ -21,11 +21,11 @@ namespace SchoolPerformanceTest.ControllerTest
     [TestClass]
     public class ScatterplotControllerTest
     {
-        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
-        Mock<IRedisCache> _mockRedisCache;
-        ScatterplotController _controller;
-        Task<IEnumerable<ScatterplotViewModel>> _scatterplotViewModelLst;
-        Task<ScatterplotViewModel> _nationalScatterplotViewModel;
+        private Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        private Mock<IRedisCache> _mockRedisCache;
+        private ScatterplotController _controller;
+        private Task<IEnumerable<ScatterplotViewModel>> _scatterplotViewModelLst;
+        private Task<ScatterplotViewModel> _nationalScatterplotViewModel;
         private ILogger<ScatterplotController> _logger;
 
         //Arrange

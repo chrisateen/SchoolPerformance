@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using FluentAssertions.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SchoolPerformance.Controllers;
@@ -20,9 +22,10 @@ namespace SchoolPerformanceTest.ControllerTest
     [TestClass]
     public class SchoolControllerTest
     {
-        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
-        Mock<ISchoolPerformanceRepository<SchoolContextual>> _mockSchoolContextual;
-        SchoolController _controller;
+        private Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        private Mock<ISchoolPerformanceRepository<SchoolContextual>> _mockSchoolContextual;
+        private SchoolController _controller;
+        private ILogger<SchoolController> _logger;
 
         //Arrange
         [TestInitialize]
@@ -147,7 +150,9 @@ namespace SchoolPerformanceTest.ControllerTest
                 Expression<Func<SchoolResult, object>>[] z) => 
                Task.FromResult<IEnumerable<SchoolResult>>(results.Where(r => r.URN == x)));
 
-            _controller = new SchoolController(_mockSchoolResult.Object, _mockSchoolContextual.Object);
+            _logger = new NullLogger<SchoolController>();
+
+            _controller = new SchoolController(_mockSchoolResult.Object, _mockSchoolContextual.Object, _logger);
 
         }
     }

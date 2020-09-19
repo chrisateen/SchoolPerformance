@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
 using SchoolPerformance.ViewModels;
@@ -13,14 +14,15 @@ namespace SchoolPerformance.Controllers
     {
         private ISchoolPerformanceRepository<SchoolResult> _result;
         private ISchoolPerformanceRepository<SchoolContextual> _contextual;
-
+        private ILogger<SchoolController> _logger;
 
 
         public SchoolController(ISchoolPerformanceRepository<SchoolResult>result, 
-            ISchoolPerformanceRepository<SchoolContextual>contextual)
+            ISchoolPerformanceRepository<SchoolContextual>contextual, ILogger<SchoolController> logger)
         {
             _result = result;
             _contextual = contextual;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -34,6 +36,10 @@ namespace SchoolPerformance.Controllers
         [Route("/[controller]/{id:int}")]
         public async Task<IActionResult> Index(int id)
         {
+            _logger.LogInformation($"Request made to view School page with id: {id}");
+
+            _logger.LogInformation($"Data for {id} is being retrieved from the database");
+
             //Get the school data for the 2019 academic year
             var schoolResult = await _result
                 .GetByUrnOrLAESATB(id, s => s.ACADEMICYEAR == 2019, s => s.School);
@@ -47,6 +53,8 @@ namespace SchoolPerformance.Controllers
             {
                 return View("SchoolNotFound", id);
             }
+
+            _logger.LogInformation($"National data is being retrieved from the database");
 
             //Get the national data
             var nationalResult = await _result.GetNational(s => s.ACADEMICYEAR == 2019, s => s.School);

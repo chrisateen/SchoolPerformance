@@ -16,7 +16,7 @@ namespace SchoolPerformanceTest.ControllerTest
     public class HomeControllerTest
     {
         private ILogger<HomeController> _logger;
-        public HomeController _controller;
+        private HomeController _controller;
 
         [TestInitialize]
         public void Setup()
