@@ -31,7 +31,7 @@ namespace SchoolPerformance.Controllers
             var exception = _httpContextAccessor.HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
 
             //Get the exception path
-            string? routeWhereExceptionOccurred = exception?.OriginalPath;
+            string routeWhereExceptionOccurred = exception.OriginalPath;
 
             //Log the exception
             _logger.LogError($"{statusCode} error occurred at path: {routeWhereExceptionOccurred} ");

@@ -22,6 +22,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<IEnumerable<AutocompleteViewModel>> GetAutoCompleteData()
         {
+            _logger.LogInformation("Executing GetAutoCompleteData method in RedisCache class.");
+
             IEnumerable<AutocompleteViewModel> autoCompleteDataLst = new List<AutocompleteViewModel>();
 
             try
@@ -42,7 +44,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to get AutocompleteViewModel data from cache." + 
+                _logger.LogError("An exception occurred when attempting to get AutocompleteViewModel data from cache." + 
                     " Stack trace: " + e.StackTrace);
             
             }
@@ -52,6 +54,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<TableViewModelAll> GetNationalTableDataAll()
         {
+            _logger.LogInformation("Executing GetNationalTableDataAll method in RedisCache class.");
+
             TableViewModelAll nationalData = null;
             bool dataInCache = false;
 
@@ -69,7 +73,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to get NationalTableViewModelAll data from cache." +
+                _logger.LogError("An exception occurred when attempting to get NationalTableViewModelAll data from cache." +
                     " Stack trace: " + e.StackTrace);
 
             }
@@ -79,6 +83,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<TableViewModelDisadvantaged> GetNationalTableDataDisadvantaged()
         {
+            _logger.LogInformation("Executing GetNationalTableDataDisadvantaged method in RedisCache class.");
+
             TableViewModelDisadvantaged nationalData = null;
             bool dataInCache = false;
 
@@ -96,7 +102,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to get NationalTableViewModelDisadvantaged data from cache." +
+                _logger.LogError("An exception occurred when attempting to get NationalTableViewModelDisadvantaged data from cache." +
                     " Stack trace: " + e.StackTrace);
             }
 
@@ -105,6 +111,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<IEnumerable<ScatterplotViewModel>> GetScatterplotData()
         {
+            _logger.LogInformation("Executing GetScatterplotData method in RedisCache class.");
+
             IEnumerable<ScatterplotViewModel> scatterplotDataLst = new List<ScatterplotViewModel>();
 
             try
@@ -125,7 +133,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to get ScatterplotViewModel data from cache." +
+                _logger.LogError("An exception occurred when attempting to get ScatterplotViewModel data from cache." +
                     " Stack trace: " + e.StackTrace);
             }
 
@@ -135,6 +143,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<IEnumerable<TableViewModelAll>> GetTableDataAll()
         {
+            _logger.LogInformation("Executing GetTableDataAll method in RedisCache class.");
+
             IEnumerable<TableViewModelAll> tableDataLst = new List<TableViewModelAll>();
 
             try
@@ -155,7 +165,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to get TableViewModelAll data from cache." +
+                _logger.LogError("An exception occurred when attempting to get TableViewModelAll data from cache." +
                     " Stack trace: " + e.StackTrace);
 
             }
@@ -165,6 +175,8 @@ namespace SchoolPerformance.Cache
 
         public async Task<IEnumerable<TableViewModelDisadvantaged>> GetTableDataDisadvantaged()
         {
+            _logger.LogInformation("Executing GetTableDataDisadvantaged method in RedisCache class.");
+
             IEnumerable<TableViewModelDisadvantaged> tableDataLst = new List<TableViewModelDisadvantaged>();
 
             try
@@ -185,7 +197,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to get TableViewModelDisadvantaged data from cache." +
+                _logger.LogError("An exception occurred when attempting to get TableViewModelDisadvantaged data from cache." +
                     " Stack trace: " + e.StackTrace);
             }
 
@@ -194,6 +206,8 @@ namespace SchoolPerformance.Cache
 
         public async Task SaveAutoCompleteData(IEnumerable<AutocompleteViewModel> autoCompleteDataLst)
         {
+            _logger.LogInformation("Executing SaveAutoCompleteData method in RedisCache class.");
+
             var items = new List<Tuple<string, AutocompleteViewModel>>();
 
             foreach (var item in autoCompleteDataLst)
@@ -213,13 +227,15 @@ namespace SchoolPerformance.Cache
 
             catch (Exception e) {
 
-                _logger.LogError("An error occurred when attempting to save AutocompleteViewModel data to cache." +
+                _logger.LogError("An exception occurred when attempting to save AutocompleteViewModel data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
         }
 
         public async Task SaveNationalTableDataAll(TableViewModelAll nationalTableData)
         {
+            _logger.LogInformation("Executing SaveNationalTableDataAll method in RedisCache class.");
+
             try
             {
                 await _redisCacheClient
@@ -228,7 +244,7 @@ namespace SchoolPerformance.Cache
             }
             catch(Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to save NationalTableViewModelAll data to cache." +
+                _logger.LogError("An exception occurred when attempting to save NationalTableViewModelAll data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
             
@@ -236,6 +252,8 @@ namespace SchoolPerformance.Cache
 
         public async Task SaveNationalTableDataDisadvantaged(TableViewModelDisadvantaged nationalTableData)
         {
+            _logger.LogInformation("Executing SaveNationalTableDataDisadvantaged method in RedisCache class.");
+
             try
             {
                 await _redisCacheClient
@@ -245,13 +263,15 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e)
             {
-                _logger.LogError("An error occurred when attempting to save NationalTableViewModelDisadvantaged data to cache." +
+                _logger.LogError("An exception occurred when attempting to save NationalTableViewModelDisadvantaged data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
         }
 
         public async Task SaveNationalScatterplotData(ScatterplotViewModel nationalScatterplotData)
         {
+            _logger.LogInformation("Executing SaveNationalScatterplotData method in RedisCache class.");
+
             try
             {
                 await _redisCacheClient
@@ -260,13 +280,15 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e)
             {
-                _logger.LogError("An error occurred when attempting to save NationalScatterplotData data to cache." +
+                _logger.LogError("An exception occurred when attempting to save NationalScatterplotData data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
         }
 
         public async Task SaveScatterplotData(IEnumerable<ScatterplotViewModel> scatterplotDataLst)
         {
+            _logger.LogInformation("Executing SaveScatterplotData method in RedisCache class.");
+
             var items = new List<Tuple<string, ScatterplotViewModel>>();
 
             foreach (var item in scatterplotDataLst)
@@ -286,7 +308,7 @@ namespace SchoolPerformance.Cache
 
             catch (Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to save ScatterplotViewModel data to cache." +
+                _logger.LogError("An exception occurred when attempting to save ScatterplotViewModel data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
             
@@ -294,6 +316,8 @@ namespace SchoolPerformance.Cache
 
         public async Task SaveTableDataAll(IEnumerable<TableViewModelAll> tableDataLst)
         {
+            _logger.LogInformation("Executing SaveTableDataAll method in RedisCache class.");
+
             var items = new List<Tuple<string, TableViewModelAll>>();
 
             foreach (var item in tableDataLst)
@@ -313,13 +337,15 @@ namespace SchoolPerformance.Cache
 
             catch (Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to save TableViewModelAll data to cache." +
+                _logger.LogError("An exception occurred when attempting to save TableViewModelAll data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
         }
 
         public async Task SaveTableDataDisadvantaged(IEnumerable<TableViewModelDisadvantaged> tableDataLst)
         {
+            _logger.LogInformation("Executing SaveTableDataDisadvantaged method in RedisCache class.");
+
             var items = new List<Tuple<string, TableViewModelDisadvantaged>>();
 
             foreach (var item in tableDataLst)
@@ -339,13 +365,15 @@ namespace SchoolPerformance.Cache
 
             catch (Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to save TableViewModelDisadvantaged data to cache." +
+                _logger.LogError("An exception occurred when attempting to save TableViewModelDisadvantaged data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
         }
 
         public async Task<ScatterplotViewModel> GetNationalScatterplotData()
         {
+            _logger.LogInformation("Executing GetNationalScatterplotData method in RedisCache class.");
+
             ScatterplotViewModel nationalData = null;
             bool dataInCache = false;
 
@@ -363,7 +391,7 @@ namespace SchoolPerformance.Cache
             }
             catch (Exception e) 
             {
-                _logger.LogError("An error occurred when attempting to save NationalScatterplotViewModel data to cache." +
+                _logger.LogError("An exception occurred when attempting to save NationalScatterplotViewModel data to cache." +
                     " Stack trace: " + e.StackTrace);
             }
 

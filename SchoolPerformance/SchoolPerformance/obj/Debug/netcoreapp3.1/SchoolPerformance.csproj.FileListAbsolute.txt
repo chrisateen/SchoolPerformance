@@ -450,7 +450,6 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\b
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\StackExchange.Redis.Extensions.AspNetCore.dll
-C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\School\Index.cshtml.g.cs
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\School\SchoolNotFound.cshtml.g.cs
 D:\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json
@@ -478,3 +477,15 @@ C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\o
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Error\PageNotFound.cshtml.g.cs
 C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\Razor\Views\Error\Error.cshtml.g.cs
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.Azure.Services.AppAuthentication.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.Sinks.MSSqlServer.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\Serilog.Sinks.PeriodicBatching.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\no_ot\Documents\SchoolPerformance\SchoolPerformance\SchoolPerformance\obj\Debug\netcoreapp3.1\SchoolPerformance.MvcApplicationPartsAssemblyInfo.cache

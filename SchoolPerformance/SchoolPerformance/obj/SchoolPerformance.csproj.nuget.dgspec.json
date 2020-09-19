@@ -87,9 +87,21 @@
               "target": "Package",
               "version": "[3.1.7, )"
             },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[5.5.1, )"
             },
             "StackExchange.Redis.Extensions.AspNetCore": {
               "target": "Package",
