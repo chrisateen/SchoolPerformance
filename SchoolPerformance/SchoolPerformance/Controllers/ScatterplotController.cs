@@ -39,6 +39,8 @@ namespace SchoolPerformance.Controllers
             //if data is not in cache get data from database and save data in cache
             if (schoolLst.Count() == 0)
             {
+                _logger.LogInformation("Scatterplot data is being retrieved from the database");
+
                 var result = await _result.Get(r => r.PTFSM6CLA1A != null,
                     r => r.OrderBy(s => s.School.SCHNAME),
                     r => r.School);
@@ -52,6 +54,8 @@ namespace SchoolPerformance.Controllers
             //if national data is not in cache get data from database and save data in cache
             if(national == null)
             {
+                _logger.LogInformation("National Scatterplot data is being retrieved from the database");
+
                 var result = await _result.GetNational(r => r.School);
 
                 national = result.First();
