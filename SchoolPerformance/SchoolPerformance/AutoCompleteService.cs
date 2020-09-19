@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using SchoolPerformance.Cache;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
@@ -14,12 +15,15 @@ namespace SchoolPerformance
         private ISchoolPerformanceRepository<SchoolResult> _result;
         private static IEnumerable<AutocompleteViewModel> _schools;
         private IRedisCache _cache;
+        private ILogger<AutoCompleteService> _logger;
 
-        public AutoCompleteService(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache)
+        public AutoCompleteService(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache,
+            ILogger<AutoCompleteService> logger)
         {
             _result = result;
             _schools = new List<AutocompleteViewModel>();
             _cache = cache;
+            _logger = logger;
         }
 
         /// <summary>
@@ -30,6 +34,8 @@ namespace SchoolPerformance
         /// </returns>
         public async Task<IEnumerable<AutocompleteViewModel>> Get()
         {
+            _logger.LogInformation("Executing Get method in AutoCompleteService class.");
+
             //Get data if the _schools list is empty
             if (_schools.Count() == 0)
             {
@@ -39,6 +45,9 @@ namespace SchoolPerformance
                 //Get data from database if it is not in cache
                 if (cacheData.Count() == 0)
                 {
+
+                    _logger.LogInformation("Autocomplete data is being retrieved from the database");
+
                     var schoolLst = await _result.GetAll(r => r.School);
 
                     _schools = schoolLst.ConvertToAutocompleteViewModel();

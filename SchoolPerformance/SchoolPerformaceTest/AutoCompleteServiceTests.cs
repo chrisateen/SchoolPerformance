@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SchoolPerformance;
 using SchoolPerformance.Cache;
@@ -17,10 +19,11 @@ namespace SchoolPerformanceTest
     [TestClass]
     public class AutoCompleteServiceTests
     {
-        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
-        Mock<IRedisCache> _mockRedisCache;
-        AutoCompleteService _autoCompleteService;
-        Task<IEnumerable<SchoolResult>> _schoolResults;
+        private Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        private Mock<IRedisCache> _mockRedisCache;
+        private AutoCompleteService _autoCompleteService;
+        private Task<IEnumerable<SchoolResult>> _schoolResults;
+        private ILogger<AutoCompleteService> _logger;
 
         //Arrange
         [TestInitialize]
@@ -34,6 +37,8 @@ namespace SchoolPerformanceTest
 
             //Get mock school result data
             _schoolResults = Task.FromResult<IEnumerable<SchoolResult>>(MockData.GetSchoolResultList(false));
+
+            _logger = new NullLogger<AutoCompleteService>();
 
         }
 
@@ -53,7 +58,7 @@ namespace SchoolPerformanceTest
             _mockSchoolResult.Setup(m => m.GetAll(It.IsAny<Expression<Func<SchoolResult, object>>[]>()))
                 .Returns(_schoolResults);
 
-            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object);
+            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object, _logger);
 
             //Act
             var results = await _autoCompleteService.Get();
@@ -82,7 +87,7 @@ namespace SchoolPerformanceTest
             _mockSchoolResult.Setup(m => m.GetAll(It.IsAny<Expression<Func<SchoolResult, object>>[]>()))
                 .Returns(Task.FromResult<IEnumerable<SchoolResult>>(new List<SchoolResult>()));
 
-            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object);
+            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object, _logger);
 
             //Act
             var results = await _autoCompleteService.Get();
@@ -109,7 +114,7 @@ namespace SchoolPerformanceTest
             _mockSchoolResult.Setup(m => m.GetAll(It.IsAny<Expression<Func<SchoolResult, object>>[]>()))
                 .Returns(Task.FromResult<IEnumerable<SchoolResult>>(new List<SchoolResult>()));
 
-            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object);
+            _autoCompleteService = new AutoCompleteService(_mockSchoolResult.Object, _mockRedisCache.Object, _logger);
 
             var autoCompleteLst = MockData.GetSchoolResultList(false).ConvertToAutocompleteViewModel();
 
