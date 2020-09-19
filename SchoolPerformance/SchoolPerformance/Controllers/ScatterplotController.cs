@@ -9,6 +9,7 @@ using SchoolPerformance.ViewModels;
 using StackExchange.Redis.Extensions.Core.Abstractions;
 using SchoolPerformance.Cache;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace SchoolPerformance.Controllers
 {
@@ -17,17 +18,19 @@ namespace SchoolPerformance.Controllers
 
         private ISchoolPerformanceRepository<SchoolResult> _result;
         private IRedisCache _cache;
+        private ILogger<ScatterplotController> _logger;
 
-        public ScatterplotController(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache)
+        public ScatterplotController(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache, ILogger<ScatterplotController> logger)
         {
             _result = result;
             _cache = cache;
-
+            _logger = logger;
         }
 
 
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Request made to view Scatterplot page");
 
             //Check if data is in cache and if so get the data from cache
             IEnumerable<ScatterplotViewModel> schoolLst = await _cache.GetScatterplotData();
