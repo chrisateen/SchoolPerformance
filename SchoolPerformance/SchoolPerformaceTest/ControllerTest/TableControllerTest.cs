@@ -15,16 +15,19 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using SchoolPerformance.Cache;
 using SchoolPerformaceTest;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace SchoolPerformanceTest.ControllerTest
 {
     [TestClass]
     public class TableControllerTest
     {
-        Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
-        Mock<IRedisCache> _mockRedisCache;
-        IEnumerable<SchoolResult> _results;
-        TablesController _controller;
+        private Mock<ISchoolPerformanceRepository<SchoolResult>> _mockSchoolResult;
+        private Mock<IRedisCache> _mockRedisCache;
+        private IEnumerable<SchoolResult> _results;
+        private TablesController _controller;
+        private ILogger<TablesController> _logger;
 
         //Arrange
         [TestInitialize]
@@ -34,7 +37,9 @@ namespace SchoolPerformanceTest.ControllerTest
 
             SetupRepository();
 
-            _controller = new TablesController(_mockSchoolResult.Object, _mockRedisCache.Object);
+            _logger = new NullLogger<TablesController>();
+
+            _controller = new TablesController(_mockSchoolResult.Object, _mockRedisCache.Object, _logger);
         }
 
         //Checks Table view is rendered

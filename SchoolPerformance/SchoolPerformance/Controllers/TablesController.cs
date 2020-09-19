@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SchoolPerformance.Cache;
 using SchoolPerformance.Models;
 using SchoolPerformance.Repository;
@@ -15,16 +16,21 @@ namespace SchoolPerformance.Controllers
 
         private ISchoolPerformanceRepository<SchoolResult> _result;
         private IRedisCache _cache;
+        private ILogger<TablesController> _logger;
 
-        public TablesController(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache)
+        public TablesController(ISchoolPerformanceRepository<SchoolResult> result, IRedisCache cache,
+            ILogger<TablesController> logger)
         {
             _result = result;
             _cache = cache;
+            _logger = logger;
         }
 
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Request made to view Results Table All page");
+
             //Empty TableViewModel returned 
             //to allow me to use HTML display name helpers
             return View(new TableViewModelAll());
@@ -37,6 +43,8 @@ namespace SchoolPerformance.Controllers
 
         public IActionResult Disadvantaged()
         {
+            _logger.LogInformation("Request made to view Results Table Disadvantaged page");
+
             //Empty TableViewModel returned 
             //to allow me to use HTML display name helpers
             return View(new TableViewModelDisadvantaged());
@@ -45,12 +53,15 @@ namespace SchoolPerformance.Controllers
         [HttpPost]
         public async Task<IActionResult> GetResultsAll()
         {
+            _logger.LogInformation("Request made to get JSON object with data for Table All page");
+
             //Check if data is in cache
             var resultViewModel = await _cache.GetTableDataAll();
 
             //Get results for all schools from database if data is not in cache
             if (resultViewModel.Count() == 0)
             {
+                _logger.LogInformation("Table all data is being retrieved from the database");
 
                 var result = await _result.GetAll(r => r.OrderBy(s => s.School.SCHNAME), r => r.School);
 
@@ -67,6 +78,8 @@ namespace SchoolPerformance.Controllers
             //Get the national data from database if data is not in cache
             if (resultNatViewModel == null)
             {
+                _logger.LogInformation("Table national all data is being retrieved from the database");
+
                 var nationalResultLst = await _result.GetNational();
 
                 //Because there is only currently national data for 2019 there should only be 1 result
@@ -89,12 +102,16 @@ namespace SchoolPerformance.Controllers
         [HttpPost]
         public async Task<IActionResult> GetResultsDisadvantaged()
         {
+            _logger.LogInformation("Request made to get JSON object with data for Table All page");
+
             //Check if data is in cache
             var resultViewModel = await _cache.GetTableDataDisadvantaged();
 
             //Get results for all schools if data is not in cache
             if (resultViewModel.Count() == 0)
             {
+                _logger.LogInformation("Table disadvantaged data is being retrieved from the database");
+
                 //Get results for all schools 
                 //where the percentage of disadvantaged pupils is not null
                 var result = await _result.Get(
@@ -116,6 +133,7 @@ namespace SchoolPerformance.Controllers
             //Get the national data from database if not in cache
             if (resultNatViewModel == null)
             {
+                _logger.LogInformation("Table national disadvantaged data is being retrieved from the database");
 
                 var nationalResultLst = await _result.GetNational();
 
