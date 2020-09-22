@@ -40,5 +40,50 @@ namespace SchoolPerformaceTestSelenium
 
             Assert.AreEqual("https://localhost:44382/School/146255", Url);
         }
+
+        [TestMethod]
+        public void LinktoScatterplotPageIsWorking()
+        {
+            //Go to the homepage
+            _driver.Navigate().GoToUrl("https://localhost:44382");
+
+            //Click on the Scatterplot link
+            _driver.FindElement(By.Id("scatterplot-home-link"))
+                    .Click();
+
+            string Url = _driver.Url;
+
+            Assert.AreEqual("https://localhost:44382/Scatterplot", Url);
+        }
+
+        [TestMethod]
+        public void LinktoTableAllPageIsWorking()
+        {
+            //Go to the homepage
+            _driver.Navigate().GoToUrl("https://localhost:44382");
+
+            //Click on the results table all
+            _driver.FindElement(By.Id("results-all-home-link"))
+                    .Click();
+
+            string Url = _driver.Url;
+
+            Assert.AreEqual("https://localhost:44382/Tables", Url);
+        }
+
+        [TestMethod]
+        public void LinktoTableDisadvantagedPageIsWorking()
+        {
+            //Go to the homepage
+            _driver.Navigate().GoToUrl("https://localhost:44382");
+
+            //Click on the results table disadvantaged
+            _driver.FindElement(By.Id("results-disadvantaged-home-link"))
+                    .Click();
+
+            string Url = _driver.Url;
+
+            Assert.AreEqual("https://localhost:44382/Tables/Disadvantaged", Url);
+        }
     }
 }
