@@ -47,7 +47,7 @@ namespace SchoolPerformaceTestSelenium
             //Go to the homepage
             _driver.Navigate().GoToUrl("https://localhost:44382");
 
-            //Click on the Scatterplot link
+            //Click on the Scatterplot page link
             _driver.FindElement(By.Id("scatterplot-home-link"))
                     .Click();
 
@@ -62,7 +62,7 @@ namespace SchoolPerformaceTestSelenium
             //Go to the homepage
             _driver.Navigate().GoToUrl("https://localhost:44382");
 
-            //Click on the results table all
+            //Click on the results table all link
             _driver.FindElement(By.Id("results-all-home-link"))
                     .Click();
 
@@ -77,7 +77,7 @@ namespace SchoolPerformaceTestSelenium
             //Go to the homepage
             _driver.Navigate().GoToUrl("https://localhost:44382");
 
-            //Click on the results table disadvantaged
+            //Click on the results table disadvantaged link
             _driver.FindElement(By.Id("results-disadvantaged-home-link"))
                     .Click();
 
