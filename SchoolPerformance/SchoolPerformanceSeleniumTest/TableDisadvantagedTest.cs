@@ -13,7 +13,7 @@ using System.Threading;
 namespace SchoolPerformanceTestSelenium
 {
     [TestClass]
-    public class TableAllTestSelenium
+    public class TableDisadvantagedTest
     {
         private IWebDriver _driver;
         private WebDriverWait _wait;
@@ -29,7 +29,7 @@ namespace SchoolPerformanceTestSelenium
             _driver.Navigate().GoToUrl("https://localhost:44382");
 
             //Go to the Table page
-            _driver.Navigate().GoToUrl("https://localhost:44382/Tables");
+            _driver.Navigate().GoToUrl("https://localhost:44382/Tables/Disadvantaged");
 
         }
 
