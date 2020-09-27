@@ -9,7 +9,6 @@
 <script src="~/chartjs-plugin-datalabels/chartjs-plugin-datalabels@0.7.js"></script>
 <script src="~/js/School.js"></script>
 
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -41,6 +40,14 @@
                                 <tr>
                                     <td>
                                         @Html.LabelFor(m => m.ResultSchool.PTFSM6CLA1A)
+                                        <span class="explanation ml-1">
+
+                                            <a href="#" data-toggle="popover"
+                                               data-content="Disadvantaged pupils are those who have been on free school meals in the last 6 years or/and is in care or has been in care">
+                                                <i class="fas fa-question-circle"></i>
+                                            </a>
+
+                                        </span>
                                     </td>
                                     @{
                                         if (Model.ResultSchool.PTFSM6CLA1A == null)
@@ -131,6 +138,14 @@
                                 <tr>
                                     <td>
                                         @Html.LabelFor(m => m.ContextualSchool.PNUMFSMEVER)
+                                        <span class="explanation ml-1">
+
+                                            <a href="#" data-toggle="popover"
+                                               data-content="FSM6 pupils are those who have been on free school meals in the last 6 years">
+                                                <i class="fas fa-question-circle"></i>
+                                            </a>
+
+                                        </span>
                                     </td>
                                     @{
                                         if (Model.ContextualSchool.PNUMFSMEVER == null)
@@ -219,6 +234,14 @@
                                 <tr>
                                     <td>
                                         @Html.LabelFor(m => m.ContextualSchool.PSENELK)
+                                        <span class="explanation ml-1">
+
+                                            <a href="#" data-toggle="popover"
+                                               data-content="Special Educational Needs (SEN) pupils are those who have been identified as having learning difficulties or/and a disability">
+                                                <i class="fas fa-question-circle"></i>
+                                            </a>
+
+                                        </span>
                                     </td>
                                     @{
                                         if (Model.ContextualSchool.PSENELK == null)
@@ -307,6 +330,14 @@
                                 <tr>
                                     <td>
                                         @Html.LabelFor(m => m.ContextualSchool.PSENELSE)
+                                        <span class="explanation ml-1">
+
+                                            <a href="#" data-toggle="popover"
+                                               data-content="Special Educational Needs EHC plan (SEN EHC) pupils are those who have special educational needs and require more support than what would normally be provided by schools to pupils with special educational needs">
+                                                <i class="fas fa-question-circle"></i>
+                                            </a>
+
+                                        </span>
                                     </td>
 
                                     @{
@@ -401,6 +432,14 @@
                                 <tr>
                                     <td>
                                         @Html.LabelFor(m => m.ContextualSchool.PNUMEAL)
+                                        <span class="explanation ml-1">
+
+                                            <a href="#" data-toggle="popover"
+                                               data-content="English as an additional language (EAL) pupils are those where English is not thier first language">
+                                                <i class="fas fa-question-circle"></i>
+                                            </a>
+
+                                        </span>
                                     </td>
                                     @{
                                         if (Model.ContextualSchool.PNUMEAL == null)
@@ -592,13 +631,13 @@
 <!-- /.content-wrapper -->
 
 
+
 <script>
     var schoolData = @Json.Serialize(Model.ResultSchool);
     var nationalData = @Json.Serialize(Model.ResultNational);
 
     generateCharts(schoolData, nationalData);
 
-
-
+    $('[data-toggle="popover"]').popover();
 
 </script>
