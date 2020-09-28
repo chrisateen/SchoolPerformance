@@ -3,7 +3,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.Chrome;
 
-namespace SchoolPerformaceTestSelenium
+namespace SchoolPerformanceTestSelenium
 {
     [TestClass]
     public class HomePageTest

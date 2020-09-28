@@ -26,7 +26,7 @@ namespace SchoolPerformance
         {
             services.AddDbContextPool<SchoolPerformanceContext>(options =>
                     options.UseSqlServer(
-                                _configuration.GetConnectionString("SchoolPerformanceDb")));
+                                _configuration.GetConnectionString("SchoolPerformanceAzure")));
 
             services.AddHttpContextAccessor();
 

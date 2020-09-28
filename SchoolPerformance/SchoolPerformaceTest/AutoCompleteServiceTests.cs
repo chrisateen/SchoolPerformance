@@ -45,7 +45,7 @@ namespace SchoolPerformanceTest
         //Test that if AutoComplete data is not in cache data is retrieved 
         //from the database via the repository class
         [TestMethod]
-        public async Task autoCompleteDataReturnedIfNoDataIsInCache()
+        public async Task AutoCompleteDataReturnedIfNoDataIsInCache()
         {
             //Arrange
             Task<IEnumerable<AutocompleteViewModel>> autocompleteLst = 
@@ -69,7 +69,7 @@ namespace SchoolPerformanceTest
 
         //Test that if AutoComplete data is in cache the cache data is returned
         [TestMethod]
-        public async Task autoCompleteDataReturnsCacheData()
+        public async Task AutoCompleteDataReturnsCacheData()
         {
             //Arrange
 
@@ -99,7 +99,7 @@ namespace SchoolPerformanceTest
         //Test that the _schools field in the AutoCompleteService test is returned
         // if _school field list is not empty
         [TestMethod]
-        public async Task autoCompleteDataReturnsStaticList()
+        public async Task AutoCompleteDataReturnsStaticList()
         {
             //Arrange
             Task<IEnumerable<AutocompleteViewModel>> autocompleteLstEmpty =

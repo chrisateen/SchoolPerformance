@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using OpenQA.Selenium.Support.Extensions;
 
-namespace SchoolPerformaceTestSelenium
+namespace SchoolPerformanceTestSelenium
 {
     [TestClass]
     public class ScatterplotPageTest
